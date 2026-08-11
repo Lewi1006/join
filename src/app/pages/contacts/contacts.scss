@@ -1,4 +1,16 @@
-.flex{
-display: flex;
+.flex {
+    display: flex;
 }
 
+.wrapper{
+width: 100%;
+border: 10px solid pink;
+}
+
+app-footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 5000;
+    width: 100%;
+}

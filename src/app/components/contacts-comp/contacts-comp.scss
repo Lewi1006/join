@@ -1,8 +1,17 @@
 @use '../../../../public/styles/main' as *;
 
-
-div{
+div {
     width: calc(1440px - 230px);
     height: 100dvh;
     background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .test {
+        width: 200px;
+        height: 100px;
+        background-color: black;
+        z-index: 4000px;
+    }
 }
