@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../public/styles/main' as *;
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +10,7 @@
     list-style: none;
     font-size: inherit;
     color: inherit;
-    font-family: inherit;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     background: initial;
     border: initial;
 }
