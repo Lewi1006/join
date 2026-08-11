@@ -1,7 +1,14 @@
-div {
+.aside-nav {
     height: 100dvh;
     width: 230px;
     background-color: black;
     z-index: 400;
 }
 
+app-footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 5000;
+    width: 100%;
+}
