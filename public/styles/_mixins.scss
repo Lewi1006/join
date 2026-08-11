@@ -1,0 +1,37 @@
+@mixin d-flex($direction: row, $align: center, $justify: center, $gap: 0px) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+
+
+//#region responsive
+$breakpoints: (
+  zero: 0px,
+  sm: 480px,
+  m: 768px,
+  l: 1024px,
+  desktop: 1440px,
+);
+
+@mixin respond($minsize: zero, $maxsize: desktop) {
+  @media screen and (min-width: map-get($breakpoints, $minsize)) and (max-width: map-get($breakpoints, $maxsize)) {
+    @content;
+  }
+}
+
+@mixin respond-min($size) {
+  @media screen and (min-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+@mixin respond-max($size) {
+  @media screen and (max-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+//#endregion
