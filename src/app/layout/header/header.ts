@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  imports: [],
-  templateUrl: './header.html',
-  styleUrl: './header.scss',
+    selector: 'app-header',
+    imports: [],
+    templateUrl: './header.html',
+    styleUrl: './header.scss',
 })
 export class Header {
-menuOpen = false;
+    menuOpen = false;
 
-openMenu(){
-  this.menuOpen = true;
-}
+    toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+    }
 
-closeMenu(){
-  this.menuOpen = false;
-}
-
-
+    closeMenu() {
+        this.menuOpen = false;
+    }
 }
