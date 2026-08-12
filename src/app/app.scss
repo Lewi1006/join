@@ -1,0 +1,29 @@
+@use '../../public/styles/main' as *;
+
+.wrapper {
+    display: flex;
+    max-width: $content-rest;
+    width: 100%;
+}
+
+main {
+    height: 100dvh;
+    flex: 1;
+    border: solid 3px black;
+    padding-top: $height-header;
+}
+
+app-header {
+    width: calc(100dvw - $width-aside);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: $width-aside;
+    border: solid 3px red;
+}
+
+aside {
+    border: 3px solid blue;
+    height: 100dvh;
+    width: $width-aside;
+}
