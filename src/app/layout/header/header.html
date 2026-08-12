@@ -1,1 +1,27 @@
-<header></header>
+<header>
+    <p class="header-title">Kanban Project Management Tool</p>
+
+    <div class="header-actions">
+        <button class="help-btn">&#63;</button>
+
+        <button class="profile-btn" (click)="openMenu()">WM</button>
+    </div>
+</header>
+
+@if (menuOpen) {
+    <div class="overlay-menu">
+        <nav class="overlay-nav">
+            <ul>
+                <li>
+                    <a href="/" class="nav-link" (click)="closeMenu()">Legal Notice</a>
+                </li>
+                <li>
+                    <a href="/" class="nav-link" (click)="closeMenu()">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="/" class="nav-link" (click)="closeMenu()">Log out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}

@@ -1,5 +1,72 @@
 @use '../../../../public/styles/main' as *;
 
-header{
-    height: $height-header;
+header {
+    height: 100%;
+    background: $white;
+    @include drop-shadow;
+    padding: 0 60px;
+
+    @include d-flex(row, center, space-between);
+
+    .header-title {
+        @include font(20px, 400, 120%);
+        // font-size: 20px;
+        // line-height: 120%;
+    }
+
+    .header-actions {
+        @include d-flex(row, center, space-between, 40px);
+        width: fit-content;
+
+        .help-btn {
+            @include font(16px, 600);
+            // font-size: 16px;
+            // font-weight: 600;
+            width: 25px;
+            height: 25px;
+            color: $grey-medium;
+            border: 3px solid $grey-medium;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.15);
+            }
+        }
+
+        .profile-btn {
+            @include d-flex;
+            @include font(18px, 800);
+            width: 56px;
+            height: 56px;
+            color: $blue-main;
+            border: 4px solid $blue-main;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba($grey-hover, 0.12);
+            }
+        }
+    }
+}
+
+.overlay-menu {
+    width: 150px;
+    height: fit-content;
+    @include d-flex(column, center, center);
+    background: $blue-main;
+    color: $grey-light;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 30px 10px;
+    position: absolute;
+    top: $height-header;
+    right: 30px;
+
+
+    .overlay-nav ul{
+        @include d-flex(column, flex-start, center, 30px);
+    }
 }
