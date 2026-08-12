@@ -1,6 +1,8 @@
+@use '../../../../public/styles/main' as *;
+
 nav{
     height: 100dvh;
-    width: 230px;
+    width: $width-aside;
     background: black;
     z-index: 3;
 }

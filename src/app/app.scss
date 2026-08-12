@@ -1,3 +1,24 @@
+@use '../../public/styles/main' as *;
+
 .wrapper{
     display: flex;
+    max-width: $content-rest;
+    width: 100%;
+}
+
+main{
+    height: 100dvh;
+    width: 100%;
+    background: yellow;
+    padding-top: $height-header;
+}
+
+app-header {
+    
+    width: calc(100dvw - $width-aside);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: $width-aside;
+    border: solid 3px red;
 }
