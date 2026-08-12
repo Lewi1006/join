@@ -4,7 +4,7 @@ import { HelpComp } from './components/help-comp/help-comp';
 
 export const routes: Routes = [
     {
-        path: "",
+        path: 'contacts',
         component: ContactsComp,
     },
     {

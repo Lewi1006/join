@@ -2,7 +2,8 @@
     <p class="header-title">Kanban Project Management Tool</p>
 
     <div class="header-actions">
-        @if (!helpActive) {
+        @if (!helpActive) 
+        {
             <button class="help-btn" aria-label="Help" routerLink="/help" (click)="openHelp()">
                 &#63;
             </button>
