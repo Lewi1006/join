@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Header {
     menuOpen = false;
+    helpActive = false;
 
     toggleMenu() {
         this.menuOpen = !this.menuOpen;
@@ -16,5 +17,9 @@ export class Header {
 
     closeMenu() {
         this.menuOpen = false;
+    }
+
+    openHelp(){
+      this.helpActive = true;
     }
 }
