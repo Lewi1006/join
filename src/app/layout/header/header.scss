@@ -15,7 +15,7 @@ header {
     }
 
     .header-actions {
-        @include d-flex(row, center, space-between, 40px);
+        @include d-flex(row, center, center, 40px);
         width: fit-content;
 
         .help-btn {
@@ -68,5 +68,9 @@ header {
 
     .overlay-nav ul{
         @include d-flex(column, flex-start, center, 30px);
+
+        li{
+            cursor: pointer;
+        }
     }
 }
