@@ -1,3 +1,8 @@
 @use '../../../../public/styles/main' as *;
 
 
+section{
+    height: 100dvh;
+    width: calc(1440px - 230px);
+    background: yellow;
+}
