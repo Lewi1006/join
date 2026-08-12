@@ -1,5 +1,10 @@
-header{
+header {
     height: 100px;
     width: calc(100dvw - 230px);
     background: blue;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 230px;
+    border: solid 3px red;
 }
