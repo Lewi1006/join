@@ -1,16 +1,59 @@
 @use '../../../../public/styles/main' as *;
 
-div {
+.help-section {
     width: 100%;
     height: 100%;
-    @include d-flex(row, flex-start, flex-end);
+    padding: 80px 80px;
+    overflow-y: auto;
+}
 
-    .close-btn-help {
-        width: fit-content;
-        height: fit-content;
-        font-size: 40px;
+.help-wrapper {
+    @include d-flex(column, center, center, 30px);
+
+    .brand-name{
+        color: $blue-light;
     }
 
+    .help-heading {
+        width: 100%;
+        @include d-flex(column, space-between, center, 30px);
 
+        div {
+            @include d-flex(row, center, space-between);
 
+            .close-btn-help {
+                width: fit-content;
+                height: fit-content;
+                font-size: 40px;
+            }
+        }
+    }
+
+    .help-content {
+        @include d-flex(column, space-between, center, 30px);
+        .help-paragraph {
+            h2 {
+                @include font(28px, 700, 120%);
+            }
+
+            .guide {
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            #help-list {
+                list-style-type: decimal;
+                padding-left: 40px;
+                @include d-flex(column, flex-start, center, 10px);
+
+                li {
+                    @include d-flex(column, flex-start, center, 5px);
+
+                    h3 {
+                        @include font(20px, 700, 120%);
+                    }
+                }
+            }
+        }
+    }
 }
