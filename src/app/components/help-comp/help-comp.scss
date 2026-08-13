@@ -10,7 +10,7 @@
 .help-wrapper {
     @include d-flex(column, center, center, 30px);
 
-    .brand-name{
+    .brand-name {
         color: $blue-light;
     }
 
@@ -38,19 +38,28 @@
 
             .guide {
                 margin-top: 20px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
 
             #help-list {
-                list-style-type: decimal;
-                padding-left: 40px;
-                @include d-flex(column, flex-start, center, 10px);
+                list-style: decimal;
+                padding-left: 30px;
+                @include d-flex(column, flex-start, flex-start, 10px);
 
+                
                 li {
-                    @include d-flex(column, flex-start, center, 5px);
-
+                    padding-left: 20px;
+                        
+                    
+                    &::marker{
+                      @include font(25px, 700);
+    
+                    }
+                    
                     h3 {
                         @include font(20px, 700, 120%);
+                        margin-bottom: 5px;
+                    
                     }
                 }
             }
