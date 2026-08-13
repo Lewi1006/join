@@ -53,6 +53,7 @@ app-footer {
 @include respond-max(m) {
     .navigation {
         position: fixed;
+        z-index: 1;
         bottom: 0;
         padding: 0;
         height: 80px;
