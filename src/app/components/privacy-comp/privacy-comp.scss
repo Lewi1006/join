@@ -10,8 +10,9 @@
         @include d-flex(column, flex-start, center, 30px);
     
         .privacy-content {
-            @include d-flex(column, space-between, center, 30px);
+            @include d-flex(column, flex-start, center, 30px);
             .privacy-paragraph {
+                @include d-flex(column, flex-start, center, 10px);
                 .subtitle {
                     @include font(28px, 700, 120%);
                 }
@@ -20,4 +21,3 @@
     }
 
 }
-
