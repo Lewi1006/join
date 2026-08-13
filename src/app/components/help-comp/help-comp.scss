@@ -1,0 +1,16 @@
+@use '../../../../public/styles/main' as *;
+
+div {
+    width: 100%;
+    height: 100%;
+    @include d-flex(row, flex-start, flex-end);
+
+    .close-btn-help {
+        width: fit-content;
+        height: fit-content;
+        font-size: 40px;
+    }
+
+
+
+}

@@ -18,6 +18,7 @@ main {
 }
 
 app-header {
+    height: $height-header;
     width: calc(100dvw - var(--width-aside));
     position: absolute;
     z-index: 2;
