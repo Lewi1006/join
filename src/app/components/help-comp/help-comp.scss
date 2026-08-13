@@ -1,0 +1,35 @@
+@use '../../../../public/styles/main' as *;
+
+.help-section {
+    width: 100%;
+    height: 100%;
+    padding: 60px 80px;
+    overflow: hidden;
+
+    .help-heading {
+        div {
+            @include d-flex(row, center, space-between);
+            h1 {
+                @include h1;
+            }
+
+            .close-btn-help {
+                width: fit-content;
+                height: fit-content;
+                font-size: 40px;
+            }
+        }
+    }
+}
+
+// div {
+//     width: 100%;
+//     height: 100%;
+//     // @include d-flex(row, flex-start, flex-end);
+
+//     .close-btn-help {
+//         width: fit-content;
+//         height: fit-content;
+//         font-size: 40px;
+//     }
+// }
