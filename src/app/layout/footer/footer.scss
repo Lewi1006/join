@@ -1,0 +1,20 @@
+@use '../../../../public/styles/main' as *;
+
+.footer_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    text-align: left;
+    gap: 1rem;
+    padding: 0 2rem;
+    color: var(--footer-link-color, inherit);
+    a:hover {
+        color: $blue-light;
+    }
+}

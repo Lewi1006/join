@@ -1,1 +1,13 @@
-<nav></nav>
+<section class="navigation">
+    <div class="nav_wrapper">
+        <a routerLink="/summary" class="logo_link">
+        <img src="/img/logo-white.svg" alt="logo" /></a>
+        <nav>
+            <a routerLink="/summary" routerLinkActive="active"><img src="/icons/summary-white.svg" alt="Summary"/><p>Summary</p></a>
+            <a routerLink="/task" routerLinkActive="active"><img src="/icons/add-task-white.svg" alt="Add Task"/><p>Add Task</p></a>
+            <a routerLink="/board" routerLinkActive="active"><img src="/icons/kanban-board-white.svg" alt="Board"/><p>Board</p></a>
+            <a routerLink="/contacts" routerLinkActive="active"><img src="/icons/contacts-white.svg" alt="Contacts"/><p>Contact</p></a>
+        </nav>
+    </div>
+    <app-footer></app-footer>
+</section>
