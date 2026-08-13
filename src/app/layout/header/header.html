@@ -2,12 +2,16 @@
     <p class="header-title">Kanban Project Management Tool</p>
 
     <div class="header-actions">
-        @if (!helpActive) 
-        {
-            <button class="help-btn" aria-label="Help" routerLink="/help" (click)="openHelp()">
+       
+            <button
+                class="help-btn"
+                aria-label="Help"
+                routerLink="/help"
+                routerLinkActive="active"
+            >
                 &#63;
             </button>
-        }
+        
 
         <button class="profile-btn" aria-label="Open menu" (click)="toggleMenu()">WM</button>
     </div>
@@ -21,7 +25,9 @@
                     <a routerLink="/legal" class="nav-link" (click)="closeMenu()">Legal Notice</a>
                 </li>
                 <li>
-                    <a routerLink="/privacy" class="nav-link" (click)="closeMenu()">Privacy Policy</a>
+                    <a routerLink="/privacy" class="nav-link" (click)="closeMenu()"
+                        >Privacy Policy</a
+                    >
                 </li>
                 <li>
                     <a routerLink="/logout" class="nav-link" (click)="closeMenu()">Log out</a>
@@ -30,4 +36,3 @@
         </nav>
     </div>
 }
-

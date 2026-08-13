@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import {RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-header',
-    imports: [RouterLink],
+    imports: [RouterLink, RouterLinkActive],
     templateUrl: './header.html',
     styleUrl: './header.scss',
 })
 export class Header {
     menuOpen = false;
-    helpActive = false;
+  
+    constructor(private router: Router) {}
 
     toggleMenu() {
         this.menuOpen = !this.menuOpen;
@@ -17,9 +18,5 @@ export class Header {
 
     closeMenu() {
         this.menuOpen = false;
-    }
-
-    openHelp(){
-      this.helpActive = true;
     }
 }
