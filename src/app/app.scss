@@ -2,12 +2,16 @@
 
 .wrapper {
     display: flex;
+    @include respond-max(m) {
+        flex-direction: column-reverse;
+    }
     max-width: $content-rest;
     width: 100%;
+    height: 100dvh;
 }
 
 main {
-    height: 100dvh;
+    height: 100%;
     flex: 1;
     border: solid 3px black;
     padding-top: $height-header;
@@ -23,7 +27,10 @@ app-header {
 }
 
 aside {
-    // border: 3px solid blue;
     height: 100dvh;
     width: var(--width-aside);
+    @include respond-max(m) {
+        height: 80px;
+        width: 100%;
+    }
 }
