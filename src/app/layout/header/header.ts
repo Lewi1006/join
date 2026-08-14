@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +9,6 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Header {
     menuOpen = false;
-  
-    constructor(private router: Router) {}
 
     toggleMenu() {
         this.menuOpen = !this.menuOpen;
