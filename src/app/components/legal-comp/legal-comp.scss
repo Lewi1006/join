@@ -10,7 +10,7 @@
 .legal-wrapper {
     @include d-flex(column, flex-start, center, 30px);
 
-    .brand-name {
+    .highlight {
         color: $blue-light;
     }
 
