@@ -19,10 +19,13 @@ $content-rest: 1440px;
 
 :root {
     --width-aside: 230px;
+    --height-navbar-res: 0px;
+
     @include respond-max(l) {
         --width-aside: 180px;
     }
         @include respond-max(m) {
         --width-aside: 0px;
+        --height-navbar-res: 80px;
     }
 }
