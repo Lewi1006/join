@@ -19,4 +19,11 @@ export class Header {
     closeMenu() {
         this.menuOpen = false;
     }
+
+    // target = where user clicks; currentTarget = where EventListener is attached to
+    closeMenuOnBackdrop(event:PointerEvent):void{
+        if(event.target === event.currentTarget ){
+            this.closeMenu();
+        }
+    }
 }
