@@ -3,8 +3,13 @@
 .help-section {
     width: 100%;
     height: 100%;
-    padding: 80px 80px;
+    // padding: 80px 80px;
     overflow-y: auto;
+
+     @include respond-max(sm) {
+        
+                    // padding: 80px 16px 40px 16px;
+                }
 }
 
 .help-wrapper {
@@ -21,6 +26,11 @@
         div {
             @include d-flex(row, center, space-between);
 
+            h1 {
+                @include respond-max(sm) {
+                    @include font(56px, 700, 120%);
+                }
+            }
             .close-btn-help {
                 width: fit-content;
                 height: fit-content;
