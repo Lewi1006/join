@@ -43,41 +43,41 @@
                 }
             }
         }
+
+        .help-content {
+            @include d-flex(column, space-between, center, 30px);
+
+            .help-paragraph {
+                @include d-flex(column, space-between, center, 10px);
+                h2 {
+                    @include font(28px, 700, 120%);
+                }
+
+                .guide {
+                    margin-top: 10px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
     }
 
-    .help-content {
-        @include d-flex(column, space-between, center, 30px);
+    #help-list {
+        list-style: decimal;
+        padding-left: 30px;
+        @include d-flex(column, flex-start, flex-start, 10px);
 
-        .help-paragraph {
-            @include d-flex(column, space-between, center, 10px);
-            h2 {
-                @include font(28px, 700, 120%);
+        li {
+            padding-left: 20px;
+
+            &::marker {
+                @include font(25px, 700);
+                font-family: 'inter';
             }
 
-            .guide {
-                margin-top: 10px;
+            h3 {
+                @include font(20px, 700, 120%);
                 margin-bottom: 5px;
             }
-        }
-    }
-}
-
-#help-list {
-    list-style: decimal;
-    padding-left: 30px;
-    @include d-flex(column, flex-start, flex-start, 10px);
-
-    li {
-        padding-left: 20px;
-
-        &::marker {
-            @include font(25px, 700);
-            font-family: 'inter';
-        }
-
-        h3 {
-            @include font(20px, 700, 120%);
-            margin-bottom: 5px;
         }
     }
 }
