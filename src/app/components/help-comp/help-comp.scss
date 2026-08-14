@@ -27,7 +27,7 @@
                 font-size: 40px;
                 cursor: pointer;
 
-                img{
+                img {
                     width: 22px;
                     height: auto;
                 }
@@ -52,20 +52,17 @@
                 padding-left: 30px;
                 @include d-flex(column, flex-start, flex-start, 10px);
 
-                
                 li {
-                    padding-left: 20px;            
-                    
-                    &::marker{
-                      @include font(25px, 700);
-                      font-family: 'inter';
-    
+                    padding-left: 20px;
+
+                    &::marker {
+                        @include font(25px, 700);
+                        font-family: 'inter';
                     }
-                    
+
                     h3 {
                         @include font(20px, 700, 120%);
                         margin-bottom: 5px;
-                    
                     }
                 }
             }
