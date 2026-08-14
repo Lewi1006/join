@@ -3,20 +3,16 @@
 .help-section {
     width: 100%;
     height: 100%;
-   
- 
+
     padding: 80px 80px;
     overflow-y: auto;
 
-     @include respond-max(sm) {
-        
-                    // padding: 80px 16px 40px 16px;
-                }
+    @include respond-max(sm) {
+        padding: 30px 16px;
+    }
 }
 
 .help-wrapper {
-    // width: 100%;
-    // height: 100%;
     @include d-flex(column, center, center, 30px);
 
     .brand-name {
