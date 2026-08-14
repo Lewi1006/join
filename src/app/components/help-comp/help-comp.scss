@@ -25,6 +25,7 @@
                 width: fit-content;
                 height: fit-content;
                 font-size: 40px;
+                cursor: pointer;
 
                 img{
                     width: 22px;
@@ -53,11 +54,11 @@
 
                 
                 li {
-                    padding-left: 20px;
-                        
+                    padding-left: 20px;            
                     
                     &::marker{
                       @include font(25px, 700);
+                      font-family: 'inter';
     
                     }
                     
