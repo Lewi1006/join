@@ -11,9 +11,9 @@
 }
 
 main {
-    height: 100%;
+    height: calc(100% - var(--height-navbar-res));
     flex: 1;
-    border: solid 3px black;
+    // border: solid 3px black;
     padding-top: $height-header;
 }
 
@@ -24,14 +24,14 @@ app-header {
     z-index: 2;
     top: 0;
     left: var(--width-aside);
-    border: solid 3px red;
+    // border: solid 3px red;
 }
 
 aside {
     height: 100dvh;
     width: var(--width-aside);
     @include respond-max(m) {
-        height: 80px;
+        height: var(--height-navbar-res);
         width: 100%;
     }
 }
