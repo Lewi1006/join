@@ -54,31 +54,39 @@ header {
     }
 }
 
-.overlay-menu {
-    width: 150px;
-    height: fit-content;
-    @include d-flex(column, center, center);
-    background: $blue-main;
-    color: $grey-light;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    padding: 30px 10px;
-    position: absolute;
-    top: $height-header;
-    right: 30px;
+.menu-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: var(--width-aside);
+
+    .overlay-menu {
+        width: 150px;
+        height: fit-content;
+        @include d-flex(column, center, center);
+        background: $blue-main;
+        color: $grey-light;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        padding: 30px 10px;
+        position: absolute;
+        top: $height-header;
+        right: 30px;
 
     .overlay-nav ul {
         @include d-flex(column, flex-start, center, 30px);
         list-style: none;
 
-        li {
-            width: 100%;
-            padding: 5px 10px;
-            cursor: pointer;
+            li {
+                width: 100%;
+                padding: 5px 10px;
+                cursor: pointer;
 
-            &:hover {
-                background: $blue-hover-nav;
+                &:hover {
+                    background: $blue-hover-nav;
+                }
             }
         }
     }
