@@ -5,11 +5,33 @@ header {
     background: $white;
     @include drop-shadow;
     padding: 0 60px;
-
+    @include respond-max(m) {
+        padding: 0 30px;
+    }
     @include d-flex(row, center, space-between);
+    a {
+        display: none;
+    }
+    @include respond-max(sm) {
+        padding: 0 1rem;
 
+        a {
+            display: block;
+            height: 56px;
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
     .header-title {
         @include font(20px, 400, 120%);
+                @include respond-max(m) {
+            font-size: 1rem;
+        }
+        @include respond-max(sm) {
+            display: none;
+        }
         // font-size: 20px;
         // line-height: 120%;
     }
@@ -19,6 +41,9 @@ header {
         width: fit-content;
 
         .help-btn {
+            @include respond-max(sm) {
+                display: none;
+            }
             @include font(16px, 600);
             // font-size: 16px;
             // font-weight: 600;
@@ -56,6 +81,7 @@ header {
 
 .menu-backdrop {
     position: fixed;
+    pointer-events: none;
     top: 0;
     right: 0;
     bottom: 0;
@@ -63,7 +89,8 @@ header {
 
     .overlay-menu {
         width: 150px;
-        height: fit-content;
+        pointer-events: all;
+        // height: fit-content;
         @include d-flex(column, center, center);
         background: $blue-main;
         color: $grey-light;
@@ -74,11 +101,22 @@ header {
         position: absolute;
         top: $height-header;
         right: 30px;
+        @include respond-max(sm) {
+            padding: 15px 10px;
+        }
 
-    .overlay-nav ul {
-        @include d-flex(column, flex-start, center, 30px);
-        list-style: none;
-
+        .overlay-nav ul {
+            @include d-flex(column, flex-start, center, 15px);
+            list-style: none;
+            .mobile-link {
+                display: none;
+            }
+            @include respond-max(sm) {
+                gap: 10px;
+                .mobile-link {
+                    display: block;
+                }
+            }
             li {
                 width: 100%;
                 padding: 5px 10px;

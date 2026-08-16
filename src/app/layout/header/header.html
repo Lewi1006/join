@@ -1,11 +1,10 @@
 <header>
     <p class="header-title">Kanban Project Management Tool</p>
-
+    <a routerLink="/summary"><img src="/img/logo.png" alt="Logo" class="logo" /></a>
     <div class="header-actions">
         <button class="help-btn" aria-label="Help" routerLink="/help" routerLinkActive="active">
             &#63;
         </button>
-
         <button class="profile-btn" aria-label="Open menu" (click)="toggleMenu()">WM</button>
     </div>
 </header>
@@ -15,6 +14,11 @@
         <div class="overlay-menu">
             <nav class="overlay-nav">
                 <ul>
+                    <li class="mobile-link">
+                        <a routerLink="/help" class="nav-link mobile-link" (click)="closeMenu()"
+                            >Help</a
+                        >
+                    </li>
                     <li>
                         <a routerLink="/legal" class="nav-link" (click)="closeMenu()"
                             >Legal Notice</a

@@ -15,17 +15,20 @@
     border: initial;
 }
 
-body{
+body {
     background: $grey-bg;
 }
 
-a{
-cursor: pointer;
+a {
+    cursor: pointer;
 }
 
-h1{
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 120%;
-  color: black;
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 120%;
+    color: black;
+        @include respond-max(sm) {
+        font-size: 3rem;
+}
 }
