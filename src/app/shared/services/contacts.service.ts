@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
 
 @Injectable({providedIn: 'root'})
-export class Contacts {
+export class ContactsService {
     supabase = createClient(
         'https://rkjgcmzrhlmpbfapwvza.supabase.co',
         'sb_publishable_V4B66HpLZWJy9CzHT3Licg_WhntLnHS',
