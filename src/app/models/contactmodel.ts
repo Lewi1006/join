@@ -1,4 +1,4 @@
-import { Contact } from "../interfaces/contact";
+import { Contact } from "../shared/interfaces/contact.interface";
 
 export class ContactModel implements Contact{
     id: number;
