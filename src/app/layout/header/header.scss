@@ -81,7 +81,6 @@ header {
 
 .menu-backdrop {
     position: fixed;
-    pointer-events: none;
     top: 0;
     right: 0;
     bottom: 0;
@@ -89,7 +88,6 @@ header {
 
     .overlay-menu {
         width: 150px;
-        pointer-events: all;
         // height: fit-content;
         @include d-flex(column, center, center);
         background: $blue-main;

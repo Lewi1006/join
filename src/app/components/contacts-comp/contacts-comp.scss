@@ -1,6 +1,26 @@
 @use '../../../../public/styles/main' as *;
 
-
-section{
-
-} 
+.contacts {
+    height: 100%;
+    width: 100%;
+    border: 2px solid purple;
+    @include d-flex;
+}
+.contact_card {
+    // width: 70%;
+    flex: 1;
+    height: 100%;
+    @include respond-max(sm) {
+        display: none;
+    }
+}
+.contact_list {
+    background: white;
+    height: 100%;
+    width: 35%;
+    min-width: 275px;
+    @include respond-max(sm) {
+        width: 100%;
+    }
+    @include drop-shadow;
+}
