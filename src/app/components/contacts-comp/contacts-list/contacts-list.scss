@@ -1,0 +1,19 @@
+/* @use '../../../../styles.scss' as *; */
+@use '../../../../../public/styles/main' as *;
+
+
+.contact-preview-card{
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+    gap: 16px;
+
+    .contact-initials{
+        width: 50px;
+        height: 50px;
+        background-color: purple;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+}

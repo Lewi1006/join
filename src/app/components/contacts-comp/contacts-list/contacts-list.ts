@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Contacts } from './contacts';
+import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-contacts-list',
-    imports: [],
+    imports: [JsonPipe],
     templateUrl: './contacts-list.html',
     styleUrl: './contacts-list.scss',
 })
-export class ContactsList {}
+
+export class ContactsList {
+    dbService = inject(Contacts);
+
+    ngOnInit(){
+        this.dbService.getAllContacts();
+    }
+}
