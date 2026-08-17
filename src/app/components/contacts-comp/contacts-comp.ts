@@ -12,7 +12,8 @@ import { Contact } from '../../shared/interfaces/contact.interface';
 export class ContactsComp {
     contacts: Contact[] = [
         {
-            id: '1',
+            id: 1,
+            created_at: '17.08.2026',
             name: 'Anton Mayer',
             email: 'antom@gmail.com',
             phone: '+49 1111 111 11 1',
