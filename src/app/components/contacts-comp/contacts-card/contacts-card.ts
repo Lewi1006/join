@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { ContactsService } from '../../../shared/services/contacts.service';
+import { Component} from '@angular/core';
+// import { ContactsService } from '../../../shared/services/contacts.service';
 
 @Component({
     selector: 'app-contacts-card',
@@ -8,5 +8,7 @@ import { ContactsService } from '../../../shared/services/contacts.service';
     styleUrl: './contacts-card.scss',
 })
 export class ContactsCard {
-    dbService = inject(ContactsService);
+    // dbService = inject(ContactsService);
+    // name = input.required<string>();
+
 }
