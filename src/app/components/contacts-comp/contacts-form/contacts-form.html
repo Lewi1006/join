@@ -1,5 +1,5 @@
 <section class="dialog">
-    <div class="dialog-left">
+    <div class="dialog-header">
         <img src="/img/logo-white.svg" alt="join logo" />
         <div class="dialog-heading">
             <h1 id="dialog-headline">Edit Contact</h1>
@@ -7,5 +7,43 @@
         </div>
     </div>
 
-    <div class="dialog-right"></div>
+    <div class="dialog-content">
+        <div class="contact-profile">
+            <div class="profile-picture">
+                <p class="initials">WM</p>
+            </div>
+        </div>
+
+        <form class="contact-form">
+            <div class="form-fields">
+                <div class="form-field">
+                    <label for="name"></label>
+                    <div class="input-wrapper">
+                        <input id="name" name="name" type="text" placeholder="Name" />
+                        <img src="/icons/person.svg" alt="profile icon" />
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="email"></label>
+                    <div class="input-wrapper">
+                        <input id="email" name="email" type="email" placeholder="Email" />
+                        <img src="/icons/mail.svg" alt="profile icon" />
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="phone"></label>
+
+                    <div class="input-wrapper">
+                        <input id="phone" name="phone" type="tel" placeholder="Phone" />
+                        <img src="/icons/call.svg" alt="profile icon" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="delete-btn">Delete</button>
+                <button type="submit" class="save-btn"><p>Save</p>
+                <img src="/icons/checkmark-white.svg"> </button>
+            </div>
+        </form>
+    </div>
 </section>
