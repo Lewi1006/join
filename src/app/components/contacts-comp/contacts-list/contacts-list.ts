@@ -1,20 +1,22 @@
 import { Component, inject, output } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts.service';
-import { JsonPipe } from '@angular/common';
+import { Contact } from '../../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-contacts-list',
-    imports: [JsonPipe],
+    imports: [],
     templateUrl: './contacts-list.html',
     styleUrl: './contacts-list.scss',
 })
-
 export class ContactsList {
     dbService = inject(ContactsService);
-    selectedContact = output<void>()
+    selectedContact = output<void>();
 
-    ngOnInit(){
+    ngOnInit() {
         this.dbService.getAllContacts();
     }
 
+/*     filterByLetter(){
+        filteredNames: <Contact[]> = this.dbService.contacts().filter(name => name.startsWith("A"));
+        }; */
 }

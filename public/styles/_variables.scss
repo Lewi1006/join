@@ -24,8 +24,88 @@ $content-rest: 1440px;
     @include respond-max(l) {
         --width-aside: 180px;
     }
-        @include respond-max(m) {
+    @include respond-max(m) {
         --width-aside: 0px;
         --height-navbar-res: 80px;
     }
 }
+
+
+
+
+
+
+//#region Profile Colors - WIP
+/* $profileColors: (
+    orange-one: #ff7a00,
+    pink-one: #ff5eb3,
+    blue-one: #6e52ff,
+    purple: #9327ff,
+    light-blue: #00bee8,
+    light-teal: #1fd7c1,
+    orange-two: #ff745e,
+    orange-three: #ffa35e,
+    pink-two: #fc71ff,
+    yellow-one: #ffc701,
+    blue-two: #0038ff,
+    lime: #c3ff2b,
+    yellow-two: #ffe62b,
+    red: #ff4646,
+    orange-four: #ffbb2b,
+); */
+
+
+// https://codepen.io/DeptofJeffAyer/pen/dYaBdN
+/*Step 1: Make some colors*/
+$orange-one: #ff7a00;
+$pink-one: #ff5eb3;
+$blue-one: #6e52ff;
+$purple: #9327ff;
+$light-blue: #00bee8;
+$light-teal: #1fd7c1;
+$orange-two: #ff745e;
+$orange-three: #ffa35e;
+$pink-two: #fc71ff;
+$yellow-one: #ffc701;
+$blue-two: #0038ff;
+$lime: #c3ff2b;
+$yellow-two: #ffe62b;
+$red: #ff4646;
+$orange-four: #ffbb2b;
+
+/*Step 2: Add the colors to a list*/
+$profileColors:
+    $orange-one, $pink-one, $blue-one, $purple, $light-blue, $light-teal, $orange-two,
+    $orange-three, $pink-two, $yellow-one, $blue-two, $lime, $yellow-two, $red, $orange-four;
+
+/*Step 3: Create a mixin to grab a random color from the list*/
+@mixin bg-color() {
+    /*generate a random number between 1 and the length of the list*/
+    $random-color: random(length($profileColors));
+
+    /*return an item from the list based on the random number*/
+    background: nth($profileColors, $random-color);
+}
+
+//Example:
+.column {
+    float: left;
+    width: 33%;
+
+    .item {
+        width: 100%;
+        min-height: 100px;
+    }
+}
+
+@for $i from 1 through 3 {
+    .column:nth-child(#{$i}) {
+        @for $i from 1 through 20 {
+            .item:nth-child(#{$i}) {
+                /*use the mixin to generate a random background color*/
+                @include bg-color;
+            }
+        }
+    }
+}
+//#endregion

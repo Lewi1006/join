@@ -1,19 +1,41 @@
 /* @use '../../../../styles.scss' as *; */
 @use '../../../../../public/styles/main' as *;
+@use '../contacts-card/contacts-card.scss' as card;
 
-
-.contact-preview-card{
+.contact-list-wrapper {
     width: 100%;
-    display: flex;
-    border: 1px solid black;
-    gap: 16px;
+    height: 100%;
+    @include d-flex(column, flex-start, flex-start, 16px);
+    padding: 32px 24px;
 
-    .contact-initials{
-        width: 50px;
-        height: 50px;
-        background-color: purple;
-        border-radius: 50%;
-        text-align: center;
+    .contact-preview-card {
+        width: 100%;
+        height: 80px;
+        border: 1px solid pink;
+        border-radius: 10px;
+        padding: 16px 24px;
+        @include d-flex(row, center, flex-start, 32px);
+
+        .profile-picture {
+            @include bg-color;
+            border: solid 4px white;
+            height: 42px;
+            width: 42px;
+
+            border-radius: 50%;
+            @include drop-shadow;
+            @include d-flex;
+
+            .initials {
+                color: white;
+                @include font(16px, 500, 120%);
+            }
+        }
+
+        button {
+            cursor: pointer;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
     }
-
 }
