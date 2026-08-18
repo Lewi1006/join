@@ -9,4 +9,8 @@ import { ContactsList } from './contacts-list/contacts-list';
     styleUrl: './contacts-comp.scss',
 })
 export class ContactsComp {
+    
+    contactWasSelected(){
+        console.log('selected');
+    }
 }
