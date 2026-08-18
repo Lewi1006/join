@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { ContactsCard } from './contacts-card/contacts-card';
 import { ContactsList } from './contacts-list/contacts-list';
+import { Contact } from '../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-contacts-comp',
@@ -9,8 +10,9 @@ import { ContactsList } from './contacts-list/contacts-list';
     styleUrl: './contacts-comp.scss',
 })
 export class ContactsComp {
-    
-    contactWasSelected(){
-        console.log('selected');
+    selectedContact: WritableSignal<Contact | undefined> = signal(undefined);
+
+    contactWasSelected(clickedContact: Contact) {
+        this.selectedContact.set(clickedContact);
     }
 }

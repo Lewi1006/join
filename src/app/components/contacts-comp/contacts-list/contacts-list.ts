@@ -1,6 +1,7 @@
 import { Component, inject, output } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { JsonPipe } from '@angular/common';
+import { Contact } from '../../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-contacts-list',
@@ -11,10 +12,12 @@ import { JsonPipe } from '@angular/common';
 
 export class ContactsList {
     dbService = inject(ContactsService);
-    selectedContact = output<void>()
+    // pass interface as type into output
+    selectedContact = output<Contact>()
 
     ngOnInit(){
         this.dbService.getAllContacts();
     }
+
 
 }

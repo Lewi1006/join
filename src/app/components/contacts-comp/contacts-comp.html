@@ -1,4 +1,4 @@
 <section class="contacts">
-    <div class="contact_list"><app-contacts-list (selectedContact)="contactWasSelected()"></app-contacts-list></div>
-    <div class="contact_card"><app-contacts-card></app-contacts-card> </div>
+    <div class="contact_list"><app-contacts-list (selectedContact)="contactWasSelected($event)"></app-contacts-list></div>
+    <div class="contact_card"><app-contacts-card [contact] ="selectedContact()"></app-contacts-card> </div>
 </section>
