@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Contact } from '../../../shared/interfaces/contact.interface';
+import { Component} from '@angular/core';
+// import { ContactsService } from '../../../shared/services/contacts.service';
 
 @Component({
     selector: 'app-contacts-card',
@@ -8,5 +8,7 @@ import { Contact } from '../../../shared/interfaces/contact.interface';
     styleUrl: './contacts-card.scss',
 })
 export class ContactsCard {
-    @Input()contact!:Contact;
+    // dbService = inject(ContactsService);
+    // name = input.required<string>();
+
 }

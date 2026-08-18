@@ -1,49 +1,15 @@
 <p>contacts-list works!</p>
-<!-- @for (item of dbService.contacts(); track $index) {
-} -->
-<div class="contact-preview-card">
-    <div class="contact-initials">
-        <p>WM</p>
-    </div>
-    <div class="contact-details">
-        <p>{{dbService.contacts()[0].name | json}}</p>
-        <a href="mailto:">{{dbService.contacts()[0].email | json}}</a>
-    </div>  
-</div>
-<div class="contact-preview-card">
-    <div class="contact-initials">
-        <p>WM</p>
-    </div>
-    <div class="contact-details">
-        <p>{{dbService.contacts()[1].name | json}}</p>
-        <a href="mailto:">{{dbService.contacts()[1].email | json}}</a>
-    </div>  
-</div>
 
-<div class="contact-preview-card">
-    <div class="contact-initials">
-        <p>WM</p>
+
+@for(item of dbService.contacts(); track item.id; let i = $index){
+    <div class="contact-preview-card">
+        <div class="contact-initials">
+            <p>WM</p>
+        </div>
+        <div class="contact-details">
+            <p>{{item.name}}</p>
+            <a href="mailto:">{{item.email}}</a>
+        </div>  
     </div>
-    <div class="contact-details">
-        <p>{{dbService.contacts()[2].name | json}}</p>
-        <a href="mailto:">{{dbService.contacts()[2].email | json}}</a>
-    </div>  
-</div>
-<div class="contact-preview-card">
-    <div class="contact-initials">
-        <p>WM</p>
-    </div>
-    <div class="contact-details">
-        <p>{{dbService.contacts()[3].name | json}}</p>
-        <a href="mailto:">{{dbService.contacts()[3].email | json}}</a>
-    </div>  
-</div>
-<div class="contact-preview-card">
-    <div class="contact-initials">
-        <p>WM</p>
-    </div>
-    <div class="contact-details">
-        <p>{{dbService.contacts()[4].name | json}}</p>
-        <a href="mailto:">{{dbService.contacts()[4].email | json}}</a>
-    </div>  
-</div>
+
+}

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Contacts } from './contacts';
+import { ContactsService } from '../../../shared/services/contacts.service';
 import { JsonPipe } from '@angular/common';
 
 @Component({
@@ -10,7 +10,7 @@ import { JsonPipe } from '@angular/common';
 })
 
 export class ContactsList {
-    dbService = inject(Contacts);
+    dbService = inject(ContactsService);
 
     ngOnInit(){
         this.dbService.getAllContacts();

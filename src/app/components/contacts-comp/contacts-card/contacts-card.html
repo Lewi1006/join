@@ -12,7 +12,7 @@
             </div>
 
             <div class="contact-details">
-                <h2>{{contact.name}}</h2>
+                <h2>{{ dbService.contacts()[0]?.name }}</h2>
 
                 <div class="contact-actions">
                     <button class="contact-actions-btn edit-btn">
@@ -33,12 +33,12 @@
             <div class="contact-fields">
                 <div class="contact-field">
                     <h4>Email</h4>
-                    <p class="highlight">test@email.com</p>
+                    <p class="highlight">{{ dbService.contacts()[0]?.email }}</p>
                 </div>
 
                 <div class="contact-field">
                     <h4>Phone</h4>
-                    <p>+1 604 000 0000</p>
+                    <p>{{ dbService.contacts()[0]?.phone }}</p>
                 </div>
             </div>
 
