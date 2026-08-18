@@ -13,4 +13,6 @@ export class ContactsComp {
     contactWasSelected(){
         console.log('selected');
     }
-}
+
+    
+}   
