@@ -1,5 +1,6 @@
 import { Component, inject, output } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts.service';
+import { Contact } from '../../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-contacts-list',
@@ -14,4 +15,8 @@ export class ContactsList {
     ngOnInit() {
         this.dbService.getAllContacts();
     }
+
+/*     filterByLetter(){
+        filteredNames: <Contact[]> = this.dbService.contacts().filter(name => name.startsWith("A"));
+        }; */
 }
