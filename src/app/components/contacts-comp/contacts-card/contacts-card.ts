@@ -1,5 +1,6 @@
-import { Component, input} from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Contact } from '../../../shared/interfaces/contact.interface';
+import { ContactsService } from '../../../shared/services/contacts.service';
 
 @Component({
     selector: 'app-contacts-card',
@@ -9,5 +10,12 @@ import { Contact } from '../../../shared/interfaces/contact.interface';
 })
 export class ContactsCard {
     receivedContact = input<Contact>();
+    deletedContact = output<number>();
 
+    dbService = inject(ContactsService);
+
+    async deleteContact(contactId: number) {
+        await this.dbService.deleteContact(contactId);
+        this.deletedContact.emit(contactId);
+    }
 }
