@@ -24,3 +24,14 @@
     }
     @include drop-shadow;
 }
+
+.contact_form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1210px;
+    height: 590px;
+    margin: auto;
+    border-radius: 30px;
+}

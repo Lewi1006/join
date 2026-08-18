@@ -1,11 +1,12 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ContactsCard } from './contacts-card/contacts-card';
 import { ContactsList } from './contacts-list/contacts-list';
+import { ContactsForm } from './contacts-form/contacts-form';
 import { Contact } from '../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-contacts-comp',
-    imports: [ContactsCard, ContactsList],
+    imports: [ContactsCard, ContactsList, ContactsForm],
     templateUrl: './contacts-comp.html',
     styleUrl: './contacts-comp.scss',
 })
