@@ -4,8 +4,26 @@
     width: 100%;
     height: 100%;
     background: $white;
-    @include d-flex(row, center, flex-start);
+    @include d-flex(row, center, center);
     border-radius: 30px;
+
+    .close-btn {
+    position: absolute;
+    z-index: 20;
+    top: 20px;
+    right: 20px;
+    
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    
+    @include d-flex;
+    
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
 
     .dialog-header {
         background: $blue-main;
@@ -107,6 +125,7 @@
                     padding: 15px 24px;
                     @include font(20px, 400, 120%);
                     color: $blue-main;
+                    cursor: pointer;
 
                     &:hover{
                         @include drop-shadow;
@@ -123,6 +142,7 @@
                     color: $white;
                     @include font(20px, 700, 120%);
                     @include d-flex(row, center,center, 10px);
+                    cursor: pointer;
 
                      &:hover{
                         @include drop-shadow;
