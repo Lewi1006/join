@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, input} from '@angular/core';
+import { Contact } from '../../../shared/interfaces/contact.interface';
 // import { ContactsService } from '../../../shared/services/contacts.service';
 
 @Component({
@@ -9,6 +10,6 @@ import { Component} from '@angular/core';
 })
 export class ContactsCard {
     // dbService = inject(ContactsService);
-    // name = input.required<string>();
+    contact = input<Contact>();
 
 }
