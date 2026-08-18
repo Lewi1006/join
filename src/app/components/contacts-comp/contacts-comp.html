@@ -3,8 +3,8 @@
         <app-contacts-list (selectedContact)="contactWasSelected($event)"></app-contacts-list>
     </div>
     <div class="contact_card">
-        <app-contacts-card [contact]="selectedContact()"></app-contacts-card>
+        <app-contacts-card [contact]="selectedContact()" (editContact)="openEditForm()"></app-contacts-card>
     </div>
 </section>
 
-<dialog class="contact_form" open><app-contacts-form></app-contacts-form></dialog>
+<dialog #contactsDialog class="contact_form" open><app-contacts-form></app-contacts-form></dialog>

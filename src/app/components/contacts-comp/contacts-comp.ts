@@ -17,5 +17,7 @@ export class ContactsComp {
         this.selectedContact.set(clickedContact);
     }
 
+    openEditForm(){
+    }
     
 }   
