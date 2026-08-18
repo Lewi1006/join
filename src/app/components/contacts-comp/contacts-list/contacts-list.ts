@@ -10,13 +10,13 @@ import { Contact } from '../../../shared/interfaces/contact.interface';
 })
 export class ContactsList {
     dbService = inject(ContactsService);
-    selectedContact = output<void>();
+    // pass interface as type into output
+    selectedContact = output<Contact>();
 
     ngOnInit() {
         this.dbService.getAllContacts();
     }
-
-/*     filterByLetter(){
+    /*     filterByLetter(){
         filteredNames: <Contact[]> = this.dbService.contacts().filter(name => name.startsWith("A"));
         }; */
 }
