@@ -5,43 +5,44 @@
         <p>Better with a team</p>
     </div>
 
-    <div class="contact-card-content">
-        <div class="contact-profile">
-            <div class="profile-picture">
-                <p class="initials">WM</p>
+    @if (contact(); as selectedContact) {
+        <div class="contact-card-content">
+            <div class="contact-profile">
+                <div class="profile-picture">
+                    <p class="initials">WM</p>
+                </div>
+
+                <div class="contact-details">
+                    <h2>{{selectedContact.name}}</h2>
+
+                    <div class="contact-actions">
+                        <button class="contact-actions-btn edit-btn">
+                            <img src="/icons/edit-pen-blue.svg" alt="edit pen" />
+                            <span>Edit</span>
+                        </button>
+                        <button class="contact-actions-btn delete-btn">
+                            <img src="/icons/delete-bin-blue.svg" alt="delete" />
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <div class="contact-details">
-                <h2></h2>
+            <div class="contact-information">
+                <h3>Contact Information</h3>
 
-                <div class="contact-actions">
-                    <button class="contact-actions-btn edit-btn">
-                        <img src="/icons/edit-pen-blue.svg" alt="edit pen" />
-                        <span>Edit</span>
-                    </button>
-                    <button class="contact-actions-btn delete-btn">
-                        <img src="/icons/delete-bin-blue.svg" alt="delete" />
-                        <span>Delete</span>
-                    </button>
+                <div class="contact-fields">
+                    <div class="contact-field">
+                        <h4>Email</h4>
+                        <p class="highlight">{{selectedContact.email}}</p>
+                    </div>
+
+                    <div class="contact-field">
+                        <h4>Phone</h4>
+                        <p>{{selectedContact.phone}}</p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="contact-information">
-            <h3>Contact Information</h3>
-
-            <div class="contact-fields">
-                <div class="contact-field">
-                    <h4>Email</h4>
-                    <p class="highlight"></p>
-                </div>
-
-                <div class="contact-field">
-                    <h4>Phone</h4>
-                    <p></p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    }
 </section>
