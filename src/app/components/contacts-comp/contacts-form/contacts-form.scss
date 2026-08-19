@@ -118,20 +118,7 @@
                 @include d-flex(row, center, center, 20px);
 
                 .delete-btn {
-                    min-width: 115px;
-                    width: fit-content;
-                    height: 55px;
-                    border: 1px solid $blue-light;
-                    border-radius: 8px;
-                    padding: 15px 24px;
-                    @include font(20px, 400, 120%);
-                    color: $blue-main;
-                    cursor: pointer;
-
-                    &:hover {
-                        @include drop-shadow;
-                        border: 2px solid $blue-light;
-                    }
+                    @include outline-button;
                 }
 
                 .save-btn {
@@ -177,20 +164,10 @@
     .contact-form {
         .form-actions {
             .cancel-btn {
-               width: 150px;
-                height: 55px;
-                border: 1px solid $blue-light;
-                border-radius: 8px;
-                padding: 15px 24px;
-                @include font(20px, 400, 120%);
-                color: $blue-main;
-                cursor: pointer;
+                @include outline-button;
+                width: 150px;
                 @include d-flex(row, center, center, 10px);
-
-                &:hover {
-                    @include drop-shadow;
-                    border: 2px solid $blue-light;
-                }
+          
             }
 
             .create-btn {
