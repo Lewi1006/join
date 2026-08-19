@@ -11,15 +11,19 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
-    /*     sortedContacts = computed(() => {
-        return this.contacts().sort((a, b) => a.name.localeCompare(b.name));
-    }); */
-
     async getAllContacts() {
-        let { data: contacts, error } = await this.supabase.from('contacts').select('*');
+        let { data: contacts, error } = await this.supabase
+        .from('contacts')
+        .select('*')
+        .order('name', { ascending: true });
+        /* .ilike('name', 'A%'); // only works when not using .order - but filtering at DB level doesn't make sense anyway
+        // https://www.rapidevelopers.com/supabase-tutorial/how-to-query-with-filters-in-supabase */
+
         if (!contacts) return;
         this.contacts.set(contacts);
-        this.contacts().sort((a, b) => a.name.localeCompare(b.name));
+
+        // Not needed when using .order
+        /* this.contacts().sort((a, b) => a.name.localeCompare(b.name)); */   
     }
 
     async deleteContact(id: number) {
