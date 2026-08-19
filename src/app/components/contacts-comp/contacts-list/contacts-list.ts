@@ -16,7 +16,5 @@ export class ContactsList {
     ngOnInit() {
         this.dbService.getAllContacts();
     }
-    /*     filterByLetter(){
-        filteredNames: <Contact[]> = this.dbService.contacts().filter(name => name.startsWith("A"));
-        }; */
+
 }
