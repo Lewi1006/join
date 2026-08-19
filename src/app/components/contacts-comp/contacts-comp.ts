@@ -12,16 +12,24 @@ import { Contact } from '../../shared/interfaces/contact.interface';
 })
 export class ContactsComp {
     selectedContact: WritableSignal<Contact | undefined> = signal(undefined);
+    formMode: 'add' | 'edit' = 'add';
 
     contactWasSelected(clickedContact: Contact) {
         this.selectedContact.set(clickedContact);
     }
 
-    openEditForm(contactsDialog: HTMLDialogElement ){
-        contactsDialog.showModal()
+    openAddForm(contactsDialog: HTMLDialogElement) {
+        this.formMode = "add"
+        contactsDialog.showModal();
     }
-    
-    closeEditForm(contactsDialog: HTMLDialogElement) {
-    contactsDialog.close();
+
+    openEditForm(contactsDialog: HTMLDialogElement) {
+        this.formMode = "edit"
+        contactsDialog.showModal();
+    }
+
+
+    closeForm(contactsDialog: HTMLDialogElement) {
+        contactsDialog.close();
+    }
 }
-}   

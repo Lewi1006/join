@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, output, input } from '@angular/core';
 
 @Component({
     selector: 'app-contacts-form',
@@ -7,6 +7,8 @@ import { Component, output } from '@angular/core';
     styleUrl: './contacts-form.scss',
 })
 export class ContactsForm {
+
+    formMode = input<'add' | 'edit'>('add')
 
     closeForm = output<void>();
 
