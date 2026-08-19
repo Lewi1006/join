@@ -1,4 +1,4 @@
-import { Component, inject, input, output , output} from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
 
@@ -19,5 +19,4 @@ export class ContactsCard {
         this.deletedContact.emit(contactId);
     }
     editContact = output<void>();
-
 }
