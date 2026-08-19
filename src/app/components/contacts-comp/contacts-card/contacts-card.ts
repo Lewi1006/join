@@ -11,6 +11,7 @@ import { ContactsService } from '../../../shared/services/contacts.service';
 export class ContactsCard {
     receivedContact = input<Contact>();
     deletedContact = output<number>();
+    editContact = output<void>();
 
     dbService = inject(ContactsService);
 
@@ -18,5 +19,4 @@ export class ContactsCard {
         await this.dbService.deleteContact(contactId);
         this.deletedContact.emit(contactId);
     }
-    editContact = output<void>();
 }

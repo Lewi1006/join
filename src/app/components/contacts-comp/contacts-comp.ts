@@ -19,6 +19,10 @@ export class ContactsComp {
         this.selectedContact.set(clickedContact);
     }
 
+       contactWasDeleted(contactId: number){
+        this.selectedContact.set(undefined);
+    }
+
     openAddForm(contactsDialog: HTMLDialogElement) {
    this.isEditMode = false;
         contactsDialog.showModal();
