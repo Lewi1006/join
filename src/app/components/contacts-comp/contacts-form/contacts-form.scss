@@ -8,29 +8,29 @@
     border-radius: 30px;
 
     .close-btn {
-    position: absolute;
-    z-index: 20;
-    top: 20px;
-    right: 20px;
-    
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    
-    @include d-flex;
-    
-    img {
-        width: 24px;
-        height: 24px;
+        position: absolute;
+        z-index: 20;
+        top: 20px;
+        right: 20px;
+
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+
+        @include d-flex;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
     }
-}
 
     .dialog-header {
         background: $blue-main;
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
         height: 100%;
-        width: 35%;
+        width: 40%;
         @include d-flex(column, flex-start, center, 40px);
         padding: 30px;
 
@@ -56,8 +56,8 @@
     }
 
     .dialog-content {
-        @include d-flex(row, center, center, 50px);
-        width: 65%;
+        @include d-flex(row, center, center, 90px);
+        width: 60%;
         height: 100%;
 
         .contact-profile {
@@ -101,7 +101,7 @@
                         @include d-flex(row, center, space-between);
                         width: 100%;
 
-                        input{
+                        input {
                             width: 100%;
                             height: 100%;
                         }
@@ -118,7 +118,8 @@
                 @include d-flex(row, center, center, 20px);
 
                 .delete-btn {
-                    width: 115px;
+                    min-width: 115px;
+                    width: fit-content;
                     height: 55px;
                     border: 1px solid $blue-light;
                     border-radius: 8px;
@@ -127,28 +128,86 @@
                     color: $blue-main;
                     cursor: pointer;
 
-                    &:hover{
+                    &:hover {
                         @include drop-shadow;
                         border: 2px solid $blue-light;
                     }
                 }
 
                 .save-btn {
-                    width: 115px;
+                    min-width: 115px;
+                    width: fit-content;
                     height: 55px;
                     background: $blue-main;
                     border-radius: 8px;
                     padding: 15px 24px;
                     color: $white;
                     @include font(20px, 700, 120%);
-                    @include d-flex(row, center,center, 10px);
+                    @include d-flex(row, center, center, 10px);
                     cursor: pointer;
 
-                     &:hover{
+                    &:hover {
                         @include drop-shadow;
-                         background: $blue-light;
-                        
+                        background: $blue-light;
                     }
+                }
+            }
+        }
+    }
+}
+
+.add-dialog {
+    .dialog-header {
+        .dialog-heading {
+            .dialog-subheading {
+                color: $white;
+                @include font(28px, 400, 120%);
+            }
+        }
+    }
+
+    .dialog-content {
+        .contact-profile {
+            .profile-picture {
+                background: $grey-light;
+            }
+        }
+    }
+
+    .contact-form {
+        .form-actions {
+            .cancel-btn {
+               width: 150px;
+                height: 55px;
+                border: 1px solid $blue-light;
+                border-radius: 8px;
+                padding: 15px 24px;
+                @include font(20px, 400, 120%);
+                color: $blue-main;
+                cursor: pointer;
+                @include d-flex(row, center, center, 10px);
+
+                &:hover {
+                    @include drop-shadow;
+                    border: 2px solid $blue-light;
+                }
+            }
+
+            .create-btn {
+                min-width: 115px;
+                width: fit-content;
+                height: 55px;
+                background: $blue-main;
+                border-radius: 8px;
+                padding: 15px 24px;
+                color: $white;
+                @include font(20px, 700, 120%);
+                @include d-flex(row, center, center, 10px);
+                cursor: pointer;
+
+                &:hover {
+                    @include drop-shadow;
+                    background: $blue-light;
                 }
             }
         }

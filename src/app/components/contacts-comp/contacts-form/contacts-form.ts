@@ -8,7 +8,7 @@ import { Component, output, input } from '@angular/core';
 })
 export class ContactsForm {
 
-    formMode = input<'add' | 'edit'>('add')
+    receivedModeIsEdit = input(false);
 
     closeForm = output<void>();
 

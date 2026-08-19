@@ -11,5 +11,5 @@
 </section>
 
 <dialog #contactsDialog class="contact_form">
-    <app-contacts-form (closeForm)="closeForm(contactsDialog)"></app-contacts-form>
+    <app-contacts-form (closeForm)="closeForm(contactsDialog)"  [receivedModeIsEdit] = "isEditMode"></app-contacts-form>
 </dialog>
