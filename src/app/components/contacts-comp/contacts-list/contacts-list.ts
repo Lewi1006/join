@@ -13,6 +13,8 @@ export class ContactsList {
     // pass interface as type into output
     selectedContact = output<Contact>();
 
+    addContact = output<void>();
+
     ngOnInit() {
         this.dbService.getAllContacts();
     }

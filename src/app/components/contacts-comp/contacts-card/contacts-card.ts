@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output , output} from '@angular/core';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
 
@@ -18,4 +18,6 @@ export class ContactsCard {
         await this.dbService.deleteContact(contactId);
         this.deletedContact.emit(contactId);
     }
+    editContact = output<void>();
+
 }

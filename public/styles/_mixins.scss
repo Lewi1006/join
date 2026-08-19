@@ -1,50 +1,71 @@
 @mixin d-flex($direction: row, $align: center, $justify: center, $gap: 0px) {
-  display: flex;
-  flex-direction: $direction;
-  align-items: $align;
-  justify-content: $justify;
-  gap: $gap;
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
 }
 
-
-@mixin font($size, $weight: 400, $line-height: 100%){
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $line-height;
+@mixin font($size, $weight: 400, $line-height: 100%) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height;
 }
 
-@mixin drop-shadow{
-  box-shadow: 0px 0px 0px rgba(3, 7, 18, 0.09),
-  0px 1px 2px rgba(3, 7, 18, 0.07),
-  0px 2px 4px rgba(3, 7, 18, 0.05),
-  0px 3px 8px rgba(3, 7, 18, 0.04),
-  0px 5px 12px rgba(3, 7, 18, 0.02);
+@mixin outline-button {
+    min-width: 115px;
+    width: fit-content;
+    height: 55px;
+    border: 1px solid #124658;
+    border-radius: 8px;
+    padding: 15px 24px;
+    @include font(20px, 400, 120%);
+    color: #2a3647;
+    cursor: pointer;
+
+    &:hover {
+        @include drop-shadow;
+        border: 2px solid #124658;
+    }
+}
+
+@mixin colored-button{
+  
+}
+
+@mixin drop-shadow {
+    box-shadow:
+        0px 0px 0px rgba(3, 7, 18, 0.09),
+        0px 1px 2px rgba(3, 7, 18, 0.07),
+        0px 2px 4px rgba(3, 7, 18, 0.05),
+        0px 3px 8px rgba(3, 7, 18, 0.04),
+        0px 5px 12px rgba(3, 7, 18, 0.02);
 }
 
 //#region responsive
 $breakpoints: (
-  zero: 0px,
-  sm: 480px,
-  m: 768px,
-  l: 1024px,
-  desktop: 1440px,
+    zero: 0px,
+    sm: 480px,
+    m: 768px,
+    l: 1024px,
+    desktop: 1440px,
 );
 
 @mixin respond($minsize: zero, $maxsize: desktop) {
-  @media screen and (min-width: map-get($breakpoints, $minsize)) and (max-width: map-get($breakpoints, $maxsize)) {
-    @content;
-  }
+    @media screen and (min-width: map-get($breakpoints, $minsize)) and (max-width: map-get($breakpoints, $maxsize)) {
+        @content;
+    }
 }
 
 @mixin respond-min($size) {
-  @media screen and (min-width: map-get($breakpoints, $size)) {
-    @content;
-  }
+    @media screen and (min-width: map-get($breakpoints, $size)) {
+        @content;
+    }
 }
 
 @mixin respond-max($size) {
-  @media screen and (max-width: map-get($breakpoints, $size)) {
-    @content;
-  }
+    @media screen and (max-width: map-get($breakpoints, $size)) {
+        @content;
+    }
 }
 //#endregion

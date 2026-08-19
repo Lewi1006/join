@@ -13,14 +13,14 @@
                 </div>
 
                 <div class="contact-details">
-                    <h2>{{selectedContact.name}}</h2>
+                    <h2>{{ selectedContact.name }}</h2>
 
                     <div class="contact-actions">
-                        <button class="contact-actions-btn edit-btn">
+                        <button class="contact-actions-btn edit-btn" (click)="editContact.emit()">
                             <img src="/icons/edit-pen-blue.svg" alt="edit pen" />
                             <span>Edit</span>
                         </button>
-                        <button class="contact-actions-btn delete-btn" (click)="deleteContact(selectedContact.id)">
+                        <button class="contact-actions-btn delete-btn">
                             <img src="/icons/delete-bin-blue.svg" alt="delete" />
                             <span>Delete</span>
                         </button>
@@ -34,12 +34,12 @@
                 <div class="contact-fields">
                     <div class="contact-field">
                         <h4>Email</h4>
-                        <p class="highlight">{{selectedContact.email}}</p>
+                        <p class="highlight">{{ selectedContact.email }}</p>
                     </div>
 
                     <div class="contact-field">
                         <h4>Phone</h4>
-                        <p>{{selectedContact.phone}}</p>
+                        <p>{{ selectedContact.phone }}</p>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,116 @@
+<!-- edit mode and then add mode -->
+
+@if (receivedModeIsEdit()) {
+    <section class="dialog edit-dialog">
+        <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
+            <img src="/icons/close-blue.svg" alt="" />
+        </button>
+
+        <div class="dialog-header">
+            <img src="/img/logo-white.svg" alt="join logo" />
+            <div class="dialog-heading">
+                <h1 id="dialog-headline">Edit Contact</h1>
+                <div class="heading-line-dialog" aria-hidden="true"></div>
+            </div>
+        </div>
+
+        <div class="dialog-content">
+            <div class="contact-profile">
+                <div class="profile-picture">
+                    <p class="initials">WM</p>
+                </div>
+            </div>
+
+            <form class="contact-form">
+                <div class="form-fields">
+                    <div class="form-field">
+                        <label for="name"></label>
+                        <div class="input-wrapper">
+                            <input id="name" name="name" type="text" placeholder="Name" />
+                            <img src="/icons/person.svg" alt="profile icon" />
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="email"></label>
+                        <div class="input-wrapper">
+                            <input id="email" name="email" type="email" placeholder="Email" />
+                            <img src="/icons/mail.svg" alt="profile icon" />
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="phone"></label>
+
+                        <div class="input-wrapper">
+                            <input id="phone" name="phone" type="tel" placeholder="Phone" />
+                            <img src="/icons/call.svg" alt="profile icon" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="delete-btn">Delete</button>
+                    <button type="submit" class="save-btn">
+                        <span>Save</span> <img src="/icons/checkmark-white.svg" />
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+} @else {
+    <section class="dialog add-dialog">
+        <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
+            <img src="/icons/close-blue.svg" alt="" />
+        </button>
+
+        <div class="dialog-header">
+            <img src="/img/logo-white.svg" alt="join logo" />
+            <div class="dialog-heading">
+                <h1 id="dialog-headline">Add Contact</h1>
+                <p class="dialog-subheading">Tasks are better with a team!</p>
+                <div class="heading-line-dialog" aria-hidden="true"></div>
+            </div>
+        </div>
+
+        <div class="dialog-content">
+            <div class="contact-profile">
+                <div class="profile-picture">
+                    <img src="/icons/person-white.svg" />
+                </div>
+            </div>
+
+            <form class="contact-form">
+                <div class="form-fields">
+                    <div class="form-field">
+                        <label for="name"></label>
+                        <div class="input-wrapper">
+                            <input id="name" name="name" type="text" placeholder="Name" />
+                            <img src="/icons/person.svg" alt="profile icon" />
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="email"></label>
+                        <div class="input-wrapper">
+                            <input id="email" name="email" type="email" placeholder="Email" />
+                            <img src="/icons/mail.svg" alt="profile icon" />
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="phone"></label>
+
+                        <div class="input-wrapper">
+                            <input id="phone" name="phone" type="tel" placeholder="Phone" />
+                            <img src="/icons/call.svg" alt="profile icon" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">
+                        <span>Cancel</span><img src="/icons/close-blue.svg" />
+                    </button>
+                    <button type="submit" class="create-btn">
+                        <span>Create contact</span> <img src="/icons/checkmark-white.svg" />
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+}

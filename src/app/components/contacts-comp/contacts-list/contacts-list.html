@@ -1,6 +1,8 @@
 <section class="contact-list-wrapper">
     @for (item of dbService.contacts(); track item.id; let i = $index) {
-        <div class="contact-preview-card" (click)="selectedContact.emit(item)">
+    
+    <button (click)="addContact.emit()">Add Contact</button>
+    <div class="contact-preview-card" (click)="selectedContact.emit(item)">
             <div class="profile-picture">
                 <p class="initials">WM</p>
             </div>
