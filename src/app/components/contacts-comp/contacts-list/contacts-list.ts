@@ -17,4 +17,8 @@ export class ContactsList {
         this.dbService.getAllContacts();
     }
 
+    filterNames(){    
+        // https://www.xjavascript.com/blog/typescript-startswith/#best-practices
+    }
+
 }
