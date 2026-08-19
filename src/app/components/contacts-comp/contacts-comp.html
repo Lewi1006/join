@@ -5,6 +5,7 @@
     <div class="contact_card">
         <app-contacts-card
             [receivedContact]="selectedContact()"
+            (deletedContact)="contactWasDeleted($event)"
             (editContact)="openEditForm(contactsDialog)"
         ></app-contacts-card>
     </div>
