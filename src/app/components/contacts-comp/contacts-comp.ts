@@ -21,4 +21,7 @@ export class ContactsComp {
         contactsDialog.showModal()
     }
     
+    closeEditForm(contactsDialog: HTMLDialogElement) {
+    contactsDialog.close();
+}
 }   

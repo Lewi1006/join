@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
     selector: 'app-contacts-form',
@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
     templateUrl: './contacts-form.html',
     styleUrl: './contacts-form.scss',
 })
-export class ContactsForm {}
+export class ContactsForm {
+
+    closeForm = output<void>();
+
+    closeClick(){
+        this.closeForm.emit();
+    }
+}

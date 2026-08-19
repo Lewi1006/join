@@ -7,4 +7,4 @@
     </div>
 </section>
 
-<dialog #contactsDialog class="contact_form"><app-contacts-form></app-contacts-form></dialog>
+<dialog #contactsDialog class="contact_form"><app-contacts-form (closeForm)="closeEditForm(contactsDialog)"></app-contacts-form></dialog>
