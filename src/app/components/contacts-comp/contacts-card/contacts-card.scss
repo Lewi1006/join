@@ -66,6 +66,11 @@
 
                         span {
                             color: $blue-main;
+                            min-width: 32px;
+
+                            &:hover {
+                                font-weight: 700;
+                            }
                         }
                     }
                 }
@@ -84,19 +89,16 @@
 
                 .contact-field {
                     @include d-flex(column, flex-start, flex-start, 10px);
-                    
-                    h4{
+
+                    h4 {
                         @include font(16px, 700, 120%);
                     }
-
-
                 }
             }
         }
     }
 }
 
-
-.highlight{
+.highlight {
     color: $blue-bright;
 }

@@ -16,5 +16,7 @@ export class ContactsComp {
         this.selectedContact.set(clickedContact);
     }
 
-    
-}   
+    contactWasDeleted(contactId: number){
+        this.selectedContact.set(undefined);
+    }
+}

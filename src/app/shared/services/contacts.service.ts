@@ -11,7 +11,7 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
-/*     sortedContacts = computed(() => {
+    /*     sortedContacts = computed(() => {
         return this.contacts().sort((a, b) => a.name.localeCompare(b.name));
     }); */
 
@@ -20,5 +20,10 @@ export class ContactsService {
         if (!contacts) return;
         this.contacts.set(contacts);
         this.contacts().sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    async deleteContact(id: number) {
+        const { error } = await this.supabase.from('contacts').delete().eq('id', id);
+        await this.getAllContacts();
     }
 }
