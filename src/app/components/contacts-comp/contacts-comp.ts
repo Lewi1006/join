@@ -17,7 +17,8 @@ export class ContactsComp {
         this.selectedContact.set(clickedContact);
     }
 
-    openEditForm(){
+    openEditForm(contactsDialog: HTMLDialogElement ){
+        contactsDialog.showModal()
     }
     
 }   
