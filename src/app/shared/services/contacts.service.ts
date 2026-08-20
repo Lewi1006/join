@@ -11,6 +11,41 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
+
+    // computed signal reacts to contacts (--> supabase data)
+    readonly groupedContacts = computed(() => {
+        // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
+        // we only work with 
+        const clonedContacts = [...this.contacts()];
+
+
+        clonedContacts.sort((a, b) => a.name.localeCompare(b.name));
+        
+
+        const letterGroups = this.groupContactsByLetter(clonedContacts);
+
+        https://dev.to/askyt/how-to-sort-a-map-in-javascript-324a
+        return Array.from(letterGroups);
+    })
+
+    groupContactsByLetter(clonedContacts: Contact[]){
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+        // <> = TypeScript generics --> tells the Type so string (A), ContactsArray[]
+        const letterGroups = new Map<string , Contact[]>();
+
+        for(const currentContact of clonedContacts){
+            const letter = currentContact.name.charAt(0).toUpperCase();
+
+            const contactWithLetterX = letterGroups.get(letter) ?? [];
+
+           contactWithLetterX.push(currentContact);
+           letterGroups.set(letter, contactWithLetterX);
+        };
+
+        return letterGroups;
+    }
+
+
     /*     sortedContacts = computed(() => {
         return this.contacts().sort((a, b) => a.name.localeCompare(b.name));
     }); */
@@ -19,7 +54,9 @@ export class ContactsService {
         let { data: contacts, error } = await this.supabase.from('contacts').select('*');
         if (!contacts) return;
         this.contacts.set(contacts);
-        this.contacts().sort((a, b) => a.name.localeCompare(b.name));
+
+         console.log(this.contacts());
+        // this.contacts().sort((a, b) => a.name.localeCompare(b.name));
     }
 
     async deleteContact(id: number) {
