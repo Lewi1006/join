@@ -16,7 +16,6 @@ export class ContactsForm {
 
     closeForm = output<void>();
 
-    
     contactForm = new FormGroup({
         name: new FormControl('', {
             validators: [Validators.required],
@@ -43,7 +42,6 @@ export class ContactsForm {
         return this.contactForm.get('phone');
     }
 
-
     async formSubmit() {
         if (this.contactForm.valid) {
             const contact: Contact = {
@@ -67,5 +65,12 @@ export class ContactsForm {
     closeFormAndReset() {
         this.contactForm.reset();
         this.closeForm.emit();
+    }
+
+    patchForm() {
+        console.log('hi');
+        this.contactForm.patchValue({
+            name: 'name',
+        });
     }
 }
