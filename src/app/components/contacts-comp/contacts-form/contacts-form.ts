@@ -16,6 +16,7 @@ export class ContactsForm {
 
     closeForm = output<void>();
 
+    
     contactForm = new FormGroup({
         name: new FormControl('', {
             validators: [Validators.required],
