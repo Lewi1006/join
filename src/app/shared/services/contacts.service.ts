@@ -11,6 +11,7 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
+     
 
     // computed signal reacts to contacts (--> supabase data)
     readonly groupedContacts = computed(() => {
@@ -24,7 +25,7 @@ export class ContactsService {
 
         const letterGroups = this.groupContactsByLetter(clonedContacts);
 
-        https://dev.to/askyt/how-to-sort-a-map-in-javascript-324a
+        // https://dev.to/askyt/how-to-sort-a-map-in-javascript-324a
         return Array.from(letterGroups);
     })
 
@@ -36,6 +37,7 @@ export class ContactsService {
         for(const currentContact of clonedContacts){
             const letter = currentContact.name.charAt(0).toUpperCase();
 
+            
             const contactWithLetterX = letterGroups.get(letter) ?? [];
 
            contactWithLetterX.push(currentContact);
@@ -55,7 +57,8 @@ export class ContactsService {
         if (!contacts) return;
         this.contacts.set(contacts);
 
-         console.log(this.contacts());
+        console.log(this.groupedContacts());
+
         // this.contacts().sort((a, b) => a.name.localeCompare(b.name));
     }
 
