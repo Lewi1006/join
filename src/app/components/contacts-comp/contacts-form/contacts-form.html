@@ -77,36 +77,75 @@
                 </div>
             </div>
 
-            <form class="contact-form">
+            <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="formSubmit()">
                 <div class="form-fields">
                     <div class="form-field">
                         <label for="name"></label>
                         <div class="input-wrapper">
-                            <input id="name" name="name" type="text" placeholder="Name" />
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="Name"
+                                formControlName="name"
+                            />
                             <img src="/icons/person.svg" alt="profile icon" />
                         </div>
+                        <div class="form-error-wrapper">
+                            @if (name?.touched && name?.invalid) {
+                                <p class="form-error">Please enter your name!</p>
+                            }
+                        </div>
                     </div>
+
                     <div class="form-field">
                         <label for="email"></label>
                         <div class="input-wrapper">
-                            <input id="email" name="email" type="email" placeholder="Email" />
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="Email"
+                                formControlName="email"
+                            />
                             <img src="/icons/mail.svg" alt="profile icon" />
                         </div>
+                        <div class="form-error-wrapper">
+                            @if (email?.touched && email?.invalid) {
+                                <p class="form-error">Please enter a valid email!</p>
+                            }
+                        </div>
                     </div>
+
                     <div class="form-field">
                         <label for="phone"></label>
 
                         <div class="input-wrapper">
-                            <input id="phone" name="phone" type="tel" placeholder="Phone" />
+                            <input
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                placeholder="Phone"
+                                formControlName="phone"
+                            />
                             <img src="/icons/call.svg" alt="profile icon" />
+                        </div>
+                        <div class="form-error-wrapper">
+                            @if (phone?.touched && phone?.invalid) {
+                                <p class="form-error">Please enter a valid phone number!</p>
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="cancel-btn">
+                    <button type="button" class="cancel-btn" (click)="closeClick()">
                         <span>Cancel</span><img src="/icons/close-blue.svg" />
                     </button>
-                    <button type="submit" class="create-btn">
+                    <button
+                        type="submit"
+                        class="create-btn"
+                        [disabled]="contactForm.invalid"
+                    >
                         <span>Create contact</span> <img src="/icons/checkmark-white.svg" />
                     </button>
                 </div>
