@@ -1,13 +1,21 @@
-<!-- <section class="contact-list-wrapper">
-    @for (item of dbService.groupedContacts(); track item.id; let i = $index) {
-        <div class="contact-preview-card" (click)="selectedContact.emit(item)">
-            <div class="profile-picture">
-                <p class="initials">WM</p>
-            </div>
-            <div class="contact-details">
-                <p>{{ item.name }}</p>
-                <a href="mailto:">{{ item.email }}</a>
-            </div>
+<section class="contact-list-wrapper">
+    @for (item of dbService.groupedContacts(); track item[0]) {
+
+        <div class="contact-group">
+            <h3>{{item[0]}}</h3>
         </div>
+
+        @for(contact of item[1]; track contact.id){
+            <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
+                <div class="profile-picture">
+                    <p class="initials">WM</p>
+                </div>
+                <div class="contact-details">
+                    <p>{{ contact.name }}</p>
+                    <a href="mailto:">{{ contact.email }}</a>
+                </div>
+            </div>
+
+        }
     }
-</section> -->
+</section>
