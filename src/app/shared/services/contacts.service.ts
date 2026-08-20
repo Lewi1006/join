@@ -11,6 +11,13 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
+
+    // readonly groupedContacts = computed(() => {
+    //     // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
+    //     const clonedContacts = [...this.contacts()];
+    // });
+
+
     async getAllContacts() {
         let { data: contacts, error } = await this.supabase
             .from('contacts')
