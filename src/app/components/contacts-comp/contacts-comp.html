@@ -13,5 +13,5 @@
 
 <!-- https://blog.angulartraining.com/how-to-create-a-simple-modal-dialog-with-angular-277ea7f96da1 -->
 <dialog #contactsDialog class="contact_form">
-    <app-contacts-form (closeForm)="closeForm(contactsDialog)"  [receivedModeIsEdit] = "isEditMode"></app-contacts-form>
+    <app-contacts-form (closeForm)="closeForm(contactsDialog)"  [receivedModeIsEdit] = "isEditMode" [contactToEdit]="selectedContact()"></app-contacts-form>
 </dialog>

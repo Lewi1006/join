@@ -1,4 +1,4 @@
-import { Component, output, input, inject } from '@angular/core';
+import { Component, output, input, inject, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
@@ -11,6 +11,7 @@ import { ContactsService } from '../../../shared/services/contacts.service';
 })
 export class ContactsForm {
     dbService = inject(ContactsService);
+
     receivedModeIsEdit = input(false);
     contactToEdit = input<Contact | undefined>(undefined);
 
@@ -29,6 +30,20 @@ export class ContactsForm {
             validators: [Validators.required],
         }),
     });
+
+    constructor() {
+        effect(() => {
+            const contact = this.contactToEdit();
+
+            if (contact) {
+                this.contactForm.patchValue({
+                    name: contact.name,
+                    email: contact.email,
+                    phone: contact.phone,
+                });
+            }
+        });
+    }
 
     get name() {
         return this.contactForm.get('name');
@@ -67,10 +82,18 @@ export class ContactsForm {
         this.closeForm.emit();
     }
 
-    patchForm() {
-        console.log('hi');
-        this.contactForm.patchValue({
-            name: 'name',
-        });
-    }
+    // patchForm() {
+    //     const contact = this.contactToEdit();
+
+    //     console.log(contact);
+    //     if (!contact) {
+    //         return;
+    //     }
+
+    //     this.contactForm.patchValue({
+    //         name: contact.name,
+    //         email: contact.email,
+    //         phone: contact.phone,
+    //     });
+    // }
 }

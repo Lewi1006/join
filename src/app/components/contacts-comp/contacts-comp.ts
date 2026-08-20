@@ -12,27 +12,27 @@ import { Contact } from '../../shared/interfaces/contact.interface';
 })
 export class ContactsComp {
     selectedContact: WritableSignal<Contact | undefined> = signal(undefined);
-  
-    isEditMode= false;
+
+    isEditMode = false;
 
     contactWasSelected(clickedContact: Contact) {
         this.selectedContact.set(clickedContact);
     }
 
-       contactWasDeleted(contactId: number){
+    contactWasDeleted(contactId: number) {
         this.selectedContact.set(undefined);
     }
 
     openAddForm(contactsDialog: HTMLDialogElement) {
-   this.isEditMode = false;
+        this.isEditMode = false;
+        this.selectedContact.set(undefined);
         contactsDialog.showModal();
     }
 
     openEditForm(contactsDialog: HTMLDialogElement) {
-       this.isEditMode = true;
+        this.isEditMode = true;
         contactsDialog.showModal();
     }
-
 
     closeForm(contactsDialog: HTMLDialogElement) {
         contactsDialog.close();
