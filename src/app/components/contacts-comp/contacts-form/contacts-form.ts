@@ -10,12 +10,20 @@ import { ContactsService } from '../../../shared/services/contacts.service';
     styleUrl: './contacts-form.scss',
 })
 export class ContactsForm {
+    // #region properties
+    // Service handles all communication with Supabase
     dbService = inject(ContactsService);
 
+    // Determines whether the form is being used to add or edit a contact
     receivedModeIsEdit = input(false);
+
+    // Contact that is currently being edited. Undefined when creating a new contact.
     contactToEdit = input<Contact | undefined>(undefined);
+
+    // Notifies the parent which contact was deleted
     deletedContact = output<number>();
 
+    // Notifies the parent that the form should be closed
     closeForm = output<void>();
 
     contactForm = new FormGroup({
@@ -32,11 +40,19 @@ export class ContactsForm {
         }),
     });
 
+    // #endregion
+
     constructor() {
-        // this.formDefaultValues = this.contactToEdit;
         // https://angular.dev/api/core/OnChanges
         // https://angular.dev/api/core/effect
-        // will be scheduled & executed whenever the signals that it reads changes
+        //
+        // contactToEdit is a signal input, so its value can change whenever
+        // the parent selects a different contact from the list.
+        //
+        // The effect reacts to that change and fills the reactive form
+        // with the selected contact's existing data.
+        //
+        // --> effect will be executed whenever the signals that it reads changes
         effect(() => {
             const contact = this.contactToEdit();
 
@@ -52,6 +68,8 @@ export class ContactsForm {
         });
     }
 
+    // #region getters
+    // getters for accessing the form controls in html
     get name() {
         return this.contactForm.get('name');
     }
@@ -63,7 +81,9 @@ export class ContactsForm {
     get phone() {
         return this.contactForm.get('phone');
     }
+    // #endregion
 
+    // #region methods
     async formSubmit() {
         if (this.contactForm.valid) {
             const contact: Contact = {
@@ -106,4 +126,6 @@ export class ContactsForm {
         this.contactForm.reset();
         this.closeForm.emit();
     }
+
+    // #endregion
 }
