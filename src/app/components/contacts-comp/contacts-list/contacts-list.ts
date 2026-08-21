@@ -17,10 +17,6 @@ export class ContactsList {
 
     ngOnInit() {
         this.dbService.getAllContacts();
+        this.dbService.cloneArray();
     }
-
-    filterNames(){    
-        // https://www.xjavascript.com/blog/typescript-startswith/#best-practices
-    }
-
 }
