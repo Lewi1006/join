@@ -15,6 +15,6 @@ export class ContactsList {
 
     ngOnInit() {
         this.dbService.getAllContacts();
+        this.dbService.cloneArray();
     }
-
 }

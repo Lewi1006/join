@@ -11,42 +11,43 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
-     
+    cloneArray() {
+        const clonedContacts = [...this.contacts()];
+        return clonedContacts;
+    }
 
     // computed signal reacts to contacts (--> supabase data)
     readonly groupedContacts = computed(() => {
         // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
-        // we only work with 
-        const clonedContacts = [...this.contacts()];
+        // we only work with
+        // const clonedContacts = [...this.contacts()];
 
+        const clonedContacts = this.cloneArray();
 
         clonedContacts.sort((a, b) => a.name.localeCompare(b.name));
-        
 
         const letterGroups = this.groupContactsByLetter(clonedContacts);
 
         // https://dev.to/askyt/how-to-sort-a-map-in-javascript-324a
         return Array.from(letterGroups);
-    })
+    });
 
-    groupContactsByLetter(clonedContacts: Contact[]){
+    groupContactsByLetter(clonedContacts: Contact[]) {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
         // <> = TypeScript generics --> tells the Type so string (A), ContactsArray[]
-        const letterGroups = new Map<string , Contact[]>();
+        const letterGroups = new Map<string, Contact[]>();
 
-        for(const currentContact of clonedContacts){
+        for (const currentContact of clonedContacts) {
             const letter = currentContact.name.charAt(0).toUpperCase();
 
-            
             const contactWithLetterX = letterGroups.get(letter) ?? [];
 
-           contactWithLetterX.push(currentContact);
-           letterGroups.set(letter, contactWithLetterX);
-        };
+            contactWithLetterX.push(currentContact);
+            letterGroups.set(letter, contactWithLetterX);
+        }
 
         return letterGroups;
     }
-
 
     /*     sortedContacts = computed(() => {
         return this.contacts().sort((a, b) => a.name.localeCompare(b.name));
