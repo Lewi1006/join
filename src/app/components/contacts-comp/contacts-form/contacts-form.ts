@@ -85,6 +85,7 @@ export class ContactsForm {
 
     // #region methods
     async formSubmit() {
+        // ! tells TypeScript that we know the values exist here
         if (this.contactForm.valid) {
             const contact: Contact = {
                 name: this.contactForm.value.name!,
@@ -92,6 +93,7 @@ export class ContactsForm {
                 phone: this.contactForm.value.phone!,
             };
 
+            // Edit mode updates the existing contact using the id
             if (this.receivedModeIsEdit()) {
                 const contactToEdit = this.contactToEdit();
 
@@ -116,7 +118,9 @@ export class ContactsForm {
         const contactToDelete = this.contactToEdit();
 
         if (contactToDelete) {
+            // Delete the contact from Supabase
             await this.dbService.deleteContact(contactToDelete.id!);
+            // Tell the parent which contact was deleted so it can clear the selected card
             this.deletedContact.emit(contactToDelete.id!);
             this.closeFormAndReset();
         }
