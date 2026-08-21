@@ -14,6 +14,7 @@ export class ContactsForm {
 
     receivedModeIsEdit = input(false);
     contactToEdit = input<Contact | undefined>(undefined);
+    // formDefaultValues;
 
     closeForm = output<void>();
 
@@ -32,8 +33,15 @@ export class ContactsForm {
     });
 
     constructor() {
+
+        // this.formDefaultValues = this.contactToEdit;
+        // https://angular.dev/api/core/OnChanges
+        // https://angular.dev/api/core/effect 
+        // will be scheduled & executed whenever the signals that it reads changes
         effect(() => {
             const contact = this.contactToEdit();
+
+            console.log(contact);
 
             if (contact) {
                 this.contactForm.patchValue({

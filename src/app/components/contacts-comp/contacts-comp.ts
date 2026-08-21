@@ -17,6 +17,8 @@ export class ContactsComp {
 
     contactWasSelected(clickedContact: Contact) {
         this.selectedContact.set(clickedContact);
+       
+
     }
 
     contactWasDeleted(contactId: number) {
@@ -31,6 +33,9 @@ export class ContactsComp {
 
     openEditForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = true;
+        let formDefaultValues = this.selectedContact();
+         console.log(formDefaultValues);
+    
         contactsDialog.showModal();
     }
 
