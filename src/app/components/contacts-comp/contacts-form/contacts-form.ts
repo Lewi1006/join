@@ -1,4 +1,4 @@
-import { Component, output, input, inject } from '@angular/core';
+import { Component, output, input, inject, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
@@ -10,13 +10,22 @@ import { ContactsService } from '../../../shared/services/contacts.service';
     styleUrl: './contacts-form.scss',
 })
 export class ContactsForm {
+    // #region properties
+    // Service handles all communication with Supabase
     dbService = inject(ContactsService);
+
+    // Determines whether the form is being used to add or edit a contact
     receivedModeIsEdit = input(false);
+
+    // Contact that is currently being edited. Undefined when creating a new contact.
     contactToEdit = input<Contact | undefined>(undefined);
 
+    // Notifies the parent which contact was deleted
+    deletedContact = output<number>();
+
+    // Notifies the parent that the form should be closed
     closeForm = output<void>();
 
-    
     contactForm = new FormGroup({
         name: new FormControl('', {
             validators: [Validators.required],
@@ -31,6 +40,36 @@ export class ContactsForm {
         }),
     });
 
+    // #endregion
+
+    constructor() {
+        // https://angular.dev/api/core/OnChanges
+        // https://angular.dev/api/core/effect
+        //
+        // contactToEdit is a signal input, so its value can change whenever
+        // the parent selects a different contact from the list.
+        //
+        // The effect reacts to that change and fills the reactive form
+        // with the selected contact's existing data.
+        //
+        // --> effect will be executed whenever the signals that it reads changes
+        effect(() => {
+            const contact = this.contactToEdit();
+
+            console.log(contact);
+
+            if (contact) {
+                this.contactForm.patchValue({
+                    name: contact.name,
+                    email: contact.email,
+                    phone: contact.phone,
+                });
+            }
+        });
+    }
+
+    // #region getters
+    // getters for accessing the form controls in html
     get name() {
         return this.contactForm.get('name');
     }
@@ -42,9 +81,11 @@ export class ContactsForm {
     get phone() {
         return this.contactForm.get('phone');
     }
+    // #endregion
 
-
+    // #region methods
     async formSubmit() {
+        // ! tells TypeScript that we know the values exist here
         if (this.contactForm.valid) {
             const contact: Contact = {
                 name: this.contactForm.value.name!,
@@ -52,9 +93,18 @@ export class ContactsForm {
                 phone: this.contactForm.value.phone!,
             };
 
-            console.log('Contact to send:', contact);
+            // Edit mode updates the existing contact using the id
+            if (this.receivedModeIsEdit()) {
+                const contactToEdit = this.contactToEdit();
 
-            await this.dbService.createContact(contact);
+                console.log(contactToEdit);
+
+                if (contactToEdit) {
+                    await this.dbService.updateContact(contactToEdit.id!, contact);
+                }
+            } else {
+                await this.dbService.createContact(contact);
+            }
 
             this.closeFormAndReset();
         }
@@ -64,8 +114,22 @@ export class ContactsForm {
         this.closeFormAndReset();
     }
 
+    async deleteContact() {
+        const contactToDelete = this.contactToEdit();
+
+        if (contactToDelete) {
+            // Delete the contact from Supabase
+            await this.dbService.deleteContact(contactToDelete.id!);
+            // Tell the parent which contact was deleted so it can clear the selected card
+            this.deletedContact.emit(contactToDelete.id!);
+            this.closeFormAndReset();
+        }
+    }
+
     closeFormAndReset() {
         this.contactForm.reset();
         this.closeForm.emit();
     }
+
+    // #endregion
 }

@@ -7,6 +7,11 @@
     @include d-flex(row, center, center);
     border-radius: 30px;
 
+    @include respond(zero, sm) {
+        border-radius: 0;
+        @include d-flex(column, center, center);
+    }
+
     .close-btn {
         position: absolute;
         z-index: 20;
@@ -19,10 +24,19 @@
 
         @include d-flex;
 
-        img {
-            width: 24px;
-            height: 24px;
+        p {
+            font-size: 16px;
+            color: $blue-main;
+
+            @include respond(zero, sm) {
+                font-size: 16px;
+                color: $white;
+            }
         }
+        // img {
+        //     width: 24px;
+        //     height: 24px;
+        // }
     }
 
     .dialog-header {
@@ -33,6 +47,17 @@
         width: 40%;
         @include d-flex(column, flex-start, center, 40px);
         padding: 30px;
+
+        @include respond(zero, sm) {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            width: 100%;
+            height: 40%;
+
+            img {
+                display: none;
+            }
+        }
 
         img {
             width: 54px;
@@ -45,6 +70,10 @@
             #dialog-headline {
                 @include font(60px, 700, 120%);
                 color: $white;
+
+                @include respond(zero, sm) {
+                    @include font(42px, 700, 120%);
+                }
             }
 
             .heading-line-dialog {
@@ -149,6 +178,10 @@
             .dialog-subheading {
                 color: $white;
                 @include font(28px, 400, 120%);
+
+                @include respond(zero, sm) {
+                    @include font(20px, 400, 120%);
+                }
             }
         }
     }
@@ -167,7 +200,6 @@
                 @include outline-button;
                 width: 150px;
                 @include d-flex(row, center, center, 10px);
-          
             }
 
             .create-btn {

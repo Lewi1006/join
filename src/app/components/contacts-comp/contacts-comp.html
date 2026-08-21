@@ -1,6 +1,9 @@
 <section class="contacts">
     <div class="contact_list">
-        <app-contacts-list (selectedContact)="contactWasSelected($event)"  (addContact)="openAddForm(contactsDialog)"></app-contacts-list>
+        <app-contacts-list
+            (selectedContact)="contactWasSelected($event)"
+            (addContact)="openAddForm(contactsDialog)"
+        ></app-contacts-list>
     </div>
     <div class="contact_card">
         <app-contacts-card
@@ -13,5 +16,11 @@
 
 <!-- https://blog.angulartraining.com/how-to-create-a-simple-modal-dialog-with-angular-277ea7f96da1 -->
 <dialog #contactsDialog class="contact_form">
-    <app-contacts-form (closeForm)="closeForm(contactsDialog)"  [receivedModeIsEdit] = "isEditMode"></app-contacts-form>
+    <app-contacts-form
+        (closeForm)="closeForm(contactsDialog)"
+        (deletedContact)="contactWasDeleted($event)"
+        [receivedModeIsEdit]="isEditMode"
+        /* [contactToEdit]="selectedContact()" */
+        [contactToEdit]="contactToEdit()"
+    ></app-contacts-form>
 </dialog>

@@ -34,4 +34,15 @@
     height: 590px;
     margin: auto;
     border-radius: 30px;
+
+    @include respond(zero, sm){
+        position: fixed;
+        width: 100dvw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+        z-index: 1000;
+    }
 }

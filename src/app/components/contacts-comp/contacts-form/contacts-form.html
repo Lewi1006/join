@@ -3,7 +3,8 @@
 @if (receivedModeIsEdit()) {
     <section class="dialog edit-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
-            <img src="/icons/close-blue.svg" alt="" />
+            <!-- <img src="/icons/close-blue.svg" alt="" /> -->
+            <p>&#128473;</p>
         </button>
 
         <div class="dialog-header">
@@ -21,19 +22,19 @@
                 </div>
             </div>
 
-            <form class="contact-form">
+            <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="formSubmit()">
                 <div class="form-fields">
                     <div class="form-field">
                         <label for="name"></label>
                         <div class="input-wrapper">
-                            <input id="name" name="name" type="text" placeholder="Name" />
+                            <input id="name" name="name" type="text" placeholder="Name" formControlName="name" />
                             <img src="/icons/person.svg" alt="profile icon" />
                         </div>
                     </div>
                     <div class="form-field">
                         <label for="email"></label>
                         <div class="input-wrapper">
-                            <input id="email" name="email" type="email" placeholder="Email" />
+                            <input id="email" name="email" type="email" placeholder="Email" formControlName="email"/>
                             <img src="/icons/mail.svg" alt="profile icon" />
                         </div>
                     </div>
@@ -41,24 +42,26 @@
                         <label for="phone"></label>
 
                         <div class="input-wrapper">
-                            <input id="phone" name="phone" type="tel" placeholder="Phone" />
+                            <input id="phone" name="phone" type="tel" placeholder="Phone" formControlName="phone"/>
                             <img src="/icons/call.svg" alt="profile icon" />
                         </div>
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="delete-btn">Delete</button>
+                    <button type="button" class="delete-btn" (click)="deleteContact()">Delete</button>
                     <button type="submit" class="save-btn">
                         <span>Save</span> <img src="/icons/checkmark-white.svg" />
                     </button>
                 </div>
+                <!-- <button type="button" (click)="patchForm()">patchForm</button> -->
             </form>
         </div>
     </section>
 } @else {
     <section class="dialog add-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
-            <img src="/icons/close-blue.svg" alt="" />
+            <!-- <img src="/icons/close-blue.svg" alt="" /> -->
+            <p>&#128473;</p>
         </button>
 
         <div class="dialog-header">

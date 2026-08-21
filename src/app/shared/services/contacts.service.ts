@@ -71,10 +71,22 @@ export class ContactsService {
 
     async createContact(contact: Contact) {
         const { data, error } = await this.supabase.from('contacts').insert([contact]);
+
+        await this.getAllContacts();
     }
 
     async deleteContact(id: number) {
         const { error } = await this.supabase.from('contacts').delete().eq('id', id);
         await this.getAllContacts();
+    }
+
+    async updateContact(id: number, contact: Contact) {
+        const { data, error } = await this.supabase
+            .from('contacts')
+            .update({ name: contact.name, email: contact.email, phone: contact.phone })
+            .eq('id', id)
+            .select();
+
+            await this.getAllContacts();
     }
 }
