@@ -15,7 +15,7 @@
 </section>
 
 <!-- https://blog.angulartraining.com/how-to-create-a-simple-modal-dialog-with-angular-277ea7f96da1 -->
-<dialog #contactsDialog class="contact_form">
+<dialog #contactsDialog class="contact_form" open>
     <app-contacts-form
         (closeForm)="closeForm(contactsDialog)"
         (deletedContact)="contactWasDeleted($event)"
