@@ -14,7 +14,7 @@ export class ContactsForm {
 
     receivedModeIsEdit = input(false);
     contactToEdit = input<Contact | undefined>(undefined);
-    // formDefaultValues;
+    deletedContact = output<number>();
 
     closeForm = output<void>();
 
@@ -33,10 +33,9 @@ export class ContactsForm {
     });
 
     constructor() {
-
         // this.formDefaultValues = this.contactToEdit;
         // https://angular.dev/api/core/OnChanges
-        // https://angular.dev/api/core/effect 
+        // https://angular.dev/api/core/effect
         // will be scheduled & executed whenever the signals that it reads changes
         effect(() => {
             const contact = this.contactToEdit();
@@ -73,9 +72,17 @@ export class ContactsForm {
                 phone: this.contactForm.value.phone!,
             };
 
-            console.log('Contact to send:', contact);
+            if (this.receivedModeIsEdit()) {
+                const contactToEdit = this.contactToEdit();
 
-            await this.dbService.createContact(contact);
+                console.log(contactToEdit);
+
+                if (contactToEdit) {
+                    await this.dbService.updateContact(contactToEdit.id!, contact);
+                }
+            } else {
+                await this.dbService.createContact(contact);
+            }
 
             this.closeFormAndReset();
         }
@@ -85,23 +92,18 @@ export class ContactsForm {
         this.closeFormAndReset();
     }
 
+    async deleteContact() {
+        const contactToDelete = this.contactToEdit();
+
+        if (contactToDelete) {
+            await this.dbService.deleteContact(contactToDelete.id!);
+            this.deletedContact.emit(contactToDelete.id!);
+            this.closeFormAndReset();
+        }
+    }
+
     closeFormAndReset() {
         this.contactForm.reset();
         this.closeForm.emit();
     }
-
-    // patchForm() {
-    //     const contact = this.contactToEdit();
-
-    //     console.log(contact);
-    //     if (!contact) {
-    //         return;
-    //     }
-
-    //     this.contactForm.patchValue({
-    //         name: contact.name,
-    //         email: contact.email,
-    //         phone: contact.phone,
-    //     });
-    // }
 }

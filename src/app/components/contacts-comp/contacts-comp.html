@@ -18,6 +18,7 @@
 <dialog #contactsDialog class="contact_form">
     <app-contacts-form
         (closeForm)="closeForm(contactsDialog)"
+        (deletedContact)="contactWasDeleted($event)"
         [receivedModeIsEdit]="isEditMode"
         /* [contactToEdit]="selectedContact()" */
         [contactToEdit]="contactToEdit()"
