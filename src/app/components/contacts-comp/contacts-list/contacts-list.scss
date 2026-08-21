@@ -14,8 +14,8 @@
         height: 80px;
         border: 1px solid pink;
         border-radius: 10px;
-        padding: 16px 24px;
-        @include d-flex(row, center, flex-start, 32px);
+        padding: 16px;
+        @include d-flex(row, center, flex-start, 16px);
 
         .profile-picture {
             @include bg-color;
@@ -30,6 +30,18 @@
             .initials {
                 color: white;
                 @include font(16px, 500, 120%);
+            }
+        }
+
+        .contact-details{
+            width: calc(100% - 75px);
+            box-sizing: border-box;
+
+            .contact-detail-text{
+                width: 100%;
+                overflow:hidden;
+                white-space:nowrap;
+                text-overflow: ellipsis;
             }
         }
 
