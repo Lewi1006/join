@@ -1,4 +1,4 @@
-<section class="contact-list-wrapper">
+<!-- <section class="contact-list-wrapper">
     <button (click)="addContact.emit()">Add Contact</button>
     @for (item of dbService.contacts(); track item.id; let i = $index) {
     
@@ -12,4 +12,29 @@
             </div>
         </div>
     }
+</section> -->
+
+<section class="contact-list-wrapper">
+    <button (click)="addContact.emit()">Add Contact</button>
+    <div class="user-list">
+        @for (group of dbService.groupedContacts(); track group.letter) {
+            <section>
+                <h2>
+                    <span>{{ group.letter }}</span>
+                </h2>
+
+                @for (contact of group.contacts; track contact.id) {
+                    <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
+                        <div class="profile-picture">
+                            <p class="initials">WM</p>
+                        </div>
+                        <div class="contact-details">
+                            <p>{{ contact.name }}</p>
+                            <p>{{ contact.email }}</p>
+                        </div>
+                    </div>
+                }
+            </section>
+        }
+    </div>
 </section>

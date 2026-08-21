@@ -11,12 +11,10 @@ export class ContactsService {
 
     contacts = signal<Contact[]>([]);
 
-
     // readonly groupedContacts = computed(() => {
     //     // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
     //     const clonedContacts = [...this.contacts()];
     // });
-
 
     async getAllContacts() {
         let { data: contacts, error } = await this.supabase
@@ -32,6 +30,29 @@ export class ContactsService {
         // Not needed when using .order
         /* this.contacts().sort((a, b) => a.name.localeCompare(b.name)); */
     }
+
+    // Group the users by the first letter of their name.
+    readonly groupedContacts = computed(() => {
+        const groups = new Map<string, Contact[]>();
+
+        const sortedContacts = [...this.contacts()]
+            .filter((contact) => contact.name.trim())
+            .sort((first, second) => first.name.localeCompare(second.name));
+
+        for (const contact of sortedContacts) {
+            const letter = contact.name.charAt(0).toUpperCase();
+
+            const users = groups.get(letter) ?? [];
+
+            users.push(contact);
+            groups.set(letter, users);
+        }
+
+        return Array.from(groups, ([letter, contacts]) => ({
+            letter,
+            contacts,
+        }));
+    });
 
     async createContact(contact: Contact) {
         const { data, error } = await this.supabase.from('contacts').insert([contact]);
