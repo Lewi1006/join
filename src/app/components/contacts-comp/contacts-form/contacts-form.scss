@@ -53,6 +53,7 @@
             border-bottom-left-radius: 0px;
             width: 100%;
             height: 40%;
+            padding: 100px 30px;
 
             img {
                 display: none;
@@ -89,8 +90,17 @@
         width: 60%;
         height: 100%;
 
+        @include respond(zero, sm) {
+            @include d-flex(column, center, center, 90px);
+        }
+
         .contact-profile {
             @include d-flex(row, center, flex-start, 50px);
+
+            @include respond(zero, sm) {
+                position: fixed;
+                top: 30%;
+            }
 
             .profile-picture {
                 background: #ff13f0;
@@ -115,8 +125,17 @@
             height: fit-content;
             @include d-flex(column, flex-start, center, 40px);
 
+            @include respond(zero, sm) {
+                @include d-flex(column, center, center, 40px);
+            }
+
             .form-fields {
                 @include d-flex(column, flex-start, center, 20px);
+
+                @include respond(zero, sm) {
+                    @include d-flex(column, center, center, 20px);
+                    width: 100dvw;
+                }
 
                 .form-field {
                     @include d-flex;
@@ -125,6 +144,11 @@
                     border-radius: 10px;
                     width: 420px;
                     height: 50px;
+
+                    @include respond(zero, sm) {
+                        width: 90%;
+                        height: 40px;
+                    }
 
                     .input-wrapper {
                         @include d-flex(row, center, space-between);
@@ -148,24 +172,14 @@
 
                 .delete-btn {
                     @include outline-button;
+
+                    @include respond(zero, sm) {
+                        width: 100px;
+                    }
                 }
 
                 .save-btn {
-                    min-width: 115px;
-                    width: fit-content;
-                    height: 55px;
-                    background: $blue-main;
-                    border-radius: 8px;
-                    padding: 15px 24px;
-                    color: $white;
-                    @include font(20px, 700, 120%);
-                    @include d-flex(row, center, center, 10px);
-                    cursor: pointer;
-
-                    &:hover {
-                        @include drop-shadow;
-                        background: $blue-light;
-                    }
+                    @include colored-button;
                 }
             }
         }
@@ -180,7 +194,7 @@
                 @include font(28px, 400, 120%);
 
                 @include respond(zero, sm) {
-                    @include font(20px, 400, 120%);
+                    @include font(18px, 400, 120%);
                 }
             }
         }
@@ -200,23 +214,19 @@
                 @include outline-button;
                 width: 150px;
                 @include d-flex(row, center, center, 10px);
+
+                @include respond(zero, sm) {
+                    width: 110px;
+                    @include font(18px, 400, 120%);
+                }
             }
 
             .create-btn {
-                min-width: 115px;
-                width: fit-content;
-                height: 55px;
-                background: $blue-main;
-                border-radius: 8px;
-                padding: 15px 24px;
-                color: $white;
-                @include font(20px, 700, 120%);
-                @include d-flex(row, center, center, 10px);
-                cursor: pointer;
-
-                &:hover {
-                    @include drop-shadow;
-                    background: $blue-light;
+                @include colored-button;
+        
+                @include respond(zero, sm) {
+                    width: 110px;
+                    @include font(18px, 400, 120%);
                 }
             }
         }
