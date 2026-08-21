@@ -19,6 +19,7 @@
     <app-contacts-form
         (closeForm)="closeForm(contactsDialog)"
         [receivedModeIsEdit]="isEditMode"
-        [contactToEdit]="selectedContact()"
+        /* [contactToEdit]="selectedContact()" */
+        [contactToEdit]="contactToEdit()"
     ></app-contacts-form>
 </dialog>
