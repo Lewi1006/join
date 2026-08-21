@@ -1,10 +1,11 @@
 import { Component, inject, input, output } from '@angular/core';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
+import { TruncatePipe } from '../../../shared/pipes.pipe';
 
 @Component({
     selector: 'app-contacts-card',
-    imports: [],
+    imports: [TruncatePipe],
     templateUrl: './contacts-card.html',
     styleUrl: './contacts-card.scss',
 })
