@@ -1,21 +1,32 @@
-<section class="contact-list-wrapper">
-    <button (click)="addContact.emit()">Add Contact</button>
-
-    @for (item of dbService.groupedContacts(); track item[0]) {
-        <div class="contact-group">
-            <h3>{{ item[0] }}</h3>
-        </div>
-
-        @for (contact of item[1]; track contact.id) {
-            <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
-                <div class="profile-picture">
-                    <p class="initials">WM</p>
-                </div>
-                <div class="contact-details">
-                    <p class="contact-detail-text">{{ contact.name }}</p>
-                    <p class="contact-detail-text">{{ contact.email }}</p>
-                </div>
+<section id="contact-list">
+    <div id="add-contact">
+        <button (click)="addContact.emit()">
+            <p>Add Contact</p>
+            <p>&#128100;</p>
+            <!-- <img src="../../../../../public/icons/add-contact-white.svg" alt=""> -->
+        </button>
+    </div>
+    <section class="contact-list-wrapper">
+        @for (item of dbService.groupedContacts(); track item[0]) {
+            <div class="contact-group">
+                <h3>{{ item[0] }}</h3>
             </div>
+    
+            @for (contact of item[1]; track contact.id) {
+                <button>
+                    <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
+                        <div class="profile-picture">
+                            <p class="initials">WM</p>
+                        </div>
+                        <div class="contact-details">
+                            <p class="contact-detail-text">{{ contact.name }}</p>
+                            <p class="contact-detail-text contact-email">{{ contact.email }}</p>
+                        </div>
+                    </div>
+                </button>
+            }
         }
-    }
+    </section>
 </section>
+
+
