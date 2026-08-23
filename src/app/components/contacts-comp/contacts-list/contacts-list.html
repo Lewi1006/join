@@ -11,12 +11,12 @@
             <div class="contact-group">
                 <h3>{{ item[0] }}</h3>
             </div>
-    
+
             @for (contact of item[1]; track contact.id) {
                 <button>
                     <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
-                        <div class="profile-picture">
-                            <p class="initials">WM</p>
+                        <div class="profile-picture" [style.background]="contact.profile_color">
+                            <p class="initials">{{ contact.name | initials }}</p>
                         </div>
                         <div class="contact-details">
                             <p class="contact-detail-text">{{ contact.name }}</p>
@@ -28,5 +28,3 @@
         }
     </section>
 </section>
-
-

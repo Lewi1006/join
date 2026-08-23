@@ -69,8 +69,30 @@ export class ContactsService {
         /* this.contacts().sort((a, b) => a.name.localeCompare(b.name)); */
     }
 
+    colors = [
+        '#ff7a00',
+        '#ff5eb3',
+        '#6e52ff',
+        '#9327ff',
+        '#00bee8',
+        '#1fd7c1',
+        '#1fd7c1',
+        '#ffa35e',
+        '#fc71ff',
+        '#ffc701',
+        '#0038ff',
+        '#c3ff2b',
+        '#ffe62b',
+        '#ff4646',
+        '#ffbb2b',
+    ];
+    randomColor(): string {
+        return this.colors[Math.floor(Math.random() * this.colors.length)];
+    }
+
     async createContact(contact: Contact) {
-        const { data, error } = await this.supabase.from('contacts').insert([contact]);
+        const contactWithColor = { ...contact, profile_color: this.randomColor() };
+        const { data, error } = await this.supabase.from('contacts').insert([contactWithColor]);
 
         await this.getAllContacts();
     }
@@ -87,6 +109,6 @@ export class ContactsService {
             .eq('id', id)
             .select();
 
-            await this.getAllContacts();
+        await this.getAllContacts();
     }
 }

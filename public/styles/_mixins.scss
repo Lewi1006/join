@@ -55,6 +55,23 @@
         0px 3px 8px rgba(3, 7, 18, 0.04),
         0px 5px 12px rgba(3, 7, 18, 0.02);
 }
+@mixin modal($bg: white, $bg-backdrop: rgba(black, 0.4)) {
+    position: fixed;
+    margin: auto;
+    width: fit-content;
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 10px;
+    border-radius: 15px;
+    background: $bg;
+    @include drop-shadow;
+    &[open] {
+        @include d-flex();
+    }
+    &::backdrop {
+        background: $bg-backdrop;
+    }
+}
 
 //#region responsive
 $breakpoints: (

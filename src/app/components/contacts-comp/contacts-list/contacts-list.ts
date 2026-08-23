@@ -1,10 +1,11 @@
 import { Component, inject, output } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { Contact } from '../../../shared/interfaces/contact.interface';
+import { InitialsPipe } from '../../../shared/pipes.pipe'; 
 
 @Component({
     selector: 'app-contacts-list',
-    imports: [],
+    imports: [InitialsPipe],
     templateUrl: './contacts-list.html',
     styleUrl: './contacts-list.scss',
 })
