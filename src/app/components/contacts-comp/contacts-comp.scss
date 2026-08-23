@@ -46,3 +46,6 @@
         z-index: 1000;
     }
 }
+    .confirm_dialog{
+        @include modal;
+    }

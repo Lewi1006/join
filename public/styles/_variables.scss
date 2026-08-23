@@ -4,7 +4,7 @@ $blue-light: #124658; //-> hover for buttons in dialog
 $blue-hover-nav: #2a3d59; // -> hover navigation button
 $blue-main: #2a3647; //main blue for background in navigation
 $blue-dark: #091931; //darkest blue --> buttons, onclick
-$blue-email: #007CEE; // email address in contact preview card
+$blue-email: #007cee; // email address in contact preview card
 
 $grey-bg: #f6f7f8; //background board
 $grey-light: #cdcdcd; // ->same as #d1d1d1 Navigation Text; anonymius background filler
@@ -29,12 +29,10 @@ $content-rest: 1440px;
         --width-aside: 0px;
         --height-navbar-res: 80px;
     }
+    // @each $color in $profileColors {
+    //     --profile-#{index($profileColors, $color)}: #{$color};
+    // }
 }
-
-
-
-
-
 
 //#region Profile Colors - WIP
 /* $profileColors: (
@@ -54,7 +52,6 @@ $content-rest: 1440px;
     red: #ff4646,
     orange-four: #ffbb2b,
 ); */
-
 
 // https://codepen.io/DeptofJeffAyer/pen/dYaBdN
 /*Step 1: Make some colors*/

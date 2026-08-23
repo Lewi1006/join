@@ -21,6 +21,10 @@ export class ContactsForm {
     contactToEdit = input<Contact | undefined>(undefined);
 
     // Notifies the parent which contact was deleted
+    deleteRequested = output<void>();
+    deleteRequestClick() {
+        this.deleteRequested.emit();
+    }
     deletedContact = output<number>();
 
     // Notifies the parent that the form should be closed

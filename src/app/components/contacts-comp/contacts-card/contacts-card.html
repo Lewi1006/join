@@ -8,8 +8,8 @@
     @if (receivedContact(); as selectedContact) {
         <div class="contact-card-content">
             <div class="contact-profile">
-                <div class="profile-picture">
-                    <p class="initials">WM</p>
+                <div class="profile-picture" [style.background]="selectedContact.profile_color">
+                    <p class="initials">{{ selectedContact.name | initials }}</p>
                 </div>
 
                 <div class="contact-details">
@@ -22,7 +22,10 @@
                             <img src="/icons/edit-pen-blue.svg" alt="edit pen" />
                             <span>Edit</span>
                         </button>
-                        <button class="contact-actions-btn delete-btn"  (click)="deleteContact(selectedContact.id!)">
+                        <button
+                            class="contact-actions-btn delete-btn"
+                            (click)="deleteRequested.emit()"
+                        >
                             <img src="/icons/delete-bin-blue.svg" alt="delete" />
                             <span>Delete</span>
                         </button>

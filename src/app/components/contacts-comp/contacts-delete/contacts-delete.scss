@@ -1,0 +1,32 @@
+@use '../../../../../public/styles/main' as *;
+.dialog_wrapper {
+    h2 {
+        padding: 1rem;
+    }
+    .confirm_actions {
+        @include d-flex();
+        gap: 15px;
+        button {
+            height: 3rem;
+            @include d-flex(row, center, center, 16px);
+            background-color: $blue-main;
+            @include font(20px, 700, 120%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+
+            &:hover {
+                background-color: $blue-bright;
+                @include drop-shadow;
+            }
+        }
+        .delete_btn {
+            background: red;
+            border: red, 2px, solid;
+            &:hover {
+                color: red;
+                background: white;
+            }
+        }
+    }
+}
