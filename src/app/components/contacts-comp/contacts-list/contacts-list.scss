@@ -33,7 +33,7 @@
         width: 100%;
         height: flex1;
         @include d-flex(column, flex-start, flex-start, 16px);
-        padding: 32px 24px;
+        padding: 2rem 1rem;
         overflow-y: auto;
 
         .contact-group {
@@ -65,7 +65,7 @@
                 width: 100%;
                 height: 100%;
                 border-radius: 10px;
-                padding: 16px;
+                padding: 16px 0;
                 @include d-flex(row, center, flex-start, 16px);
                 cursor: pointer;
 

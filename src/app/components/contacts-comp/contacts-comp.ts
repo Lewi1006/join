@@ -24,7 +24,6 @@ export class ContactsComp {
         const contact = this.selectedContact();
         if (contact) {
             await this.dbService.deleteContact(contact.id!);
-            // -----------------------------------------------------
             this.selectedContact.set(undefined);
         }
         deleteDialog.close();
@@ -35,9 +34,9 @@ export class ContactsComp {
         this.selectedContact.set(clickedContact);
     }
 
-    contactWasDeleted(contactId: number) {
-        this.selectedContact.set(undefined);
-    }
+    // contactWasDeleted(contactId: number) {
+    //     this.selectedContact.set(undefined);
+    // }
 
     openAddForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = false;

@@ -3,14 +3,18 @@
 .contact-card {
     height: 100%;
     width: 100%;
-    padding: 100px 60px;
+    padding: 100px 3rem;
+    @include respond-max(l) {
+        padding: 3rem 1.25rem;
+    }
     @include d-flex(column, flex-start, flex-start, 40px);
 
     .contact-card-heading {
         @include d-flex(row, center, flex-start, 25px);
-        h1 {
-            @include font(60px, 700);
-        }
+
+        // h1 {
+        //     @include font(60px, 700);
+        // }
 
         .heading-line {
             height: 60px;
@@ -21,6 +25,18 @@
         p {
             @include font(28px, 400, 120%);
             color: $blue-main;
+        }
+        @include respond-max(l) {
+            flex-direction: column;
+            gap: 0.25rem;
+            align-items: flex-start;
+            p {
+                font-size: 1.25rem;
+            }
+            .heading-line {
+                width: 60px;
+                height: 3px;
+            }
         }
     }
     .contact-card-content {
@@ -46,10 +62,17 @@
                     color: white;
                     @include font(48px, 500, 120%);
                 }
+                @include respond-max(l) {
+                    display: none;
+                }
             }
 
             .contact-details {
                 width: calc(100% - 150px);
+                @include respond-max(l) {
+                    width: 100%;
+                }
+
                 container-type: inline-size;
                 @include d-flex(column, flex-start, center, 10px);
 
@@ -58,9 +81,18 @@
                     width: 100%;
 
                     h2 {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                         margin: 0;
                         width: 100%;
                         @include font(48px, 600, 120%);
+                        @include respond-max(l) {
+                            font-size: 2rem;
+                        }
+                        // @media screen and (min-width: 550px) {
+                        //     font-size: 1rem;
+                        // }
                     }
                 }
 
@@ -100,7 +132,11 @@
 
                 .contact-field {
                     @include d-flex(column, flex-start, flex-start, 10px);
-
+                    p {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
                     h4 {
                         @include font(16px, 700, 120%);
                     }

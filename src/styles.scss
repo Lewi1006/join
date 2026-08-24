@@ -28,7 +28,7 @@ h1 {
     font-weight: 700;
     line-height: 120%;
     color: black;
-        @include respond-max(sm) {
+        @include respond-max(m) {
         font-size: 3rem;
 }
 }
