@@ -7,7 +7,7 @@
     </div>
     <div class="contact_card">
         <app-contacts-card
-            [receivedContact]="selectedContact()" 
+            [receivedContact]="selectedContact()"
             (deleteRequested)="deleteDialog.showModal()"
             (editContact)="openEditForm(contactsDialog)"
         ></app-contacts-card>
@@ -19,7 +19,7 @@
     <app-contacts-form
         (closeForm)="closeForm(contactsDialog)"
         (deleteRequested)="deleteDialog.showModal()"
-         (updatedContact)="contactWasEdited($event)"
+        (updatedContact)="contactWasEdited($event)"
         [receivedModeIsEdit]="isEditMode"
         [contactToEdit]="contactToEdit()"
     ></app-contacts-form>
@@ -31,3 +31,6 @@
         (cancel)="deleteDialog.close()"
     ></app-contacts-delete>
 </dialog>
+
+
+<!-- (deleteRequested)="deleteDialog.showModal()" -> opens deleteDialog via inline code in html template -->

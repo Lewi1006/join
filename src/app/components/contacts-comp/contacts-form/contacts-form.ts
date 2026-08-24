@@ -29,6 +29,7 @@ export class ContactsForm {
     // Notifies the parent that the form should be closed
     closeForm = output<void>();
 
+    // Reactive form with validators
     contactForm = new FormGroup({
         name: new FormControl('', {
             validators: [Validators.required],
@@ -90,6 +91,7 @@ export class ContactsForm {
 
     async formSubmit() {
         // ! tells TypeScript that we know the values exist here
+        // Only submit the form when all validators pass
         if (this.contactForm.valid) {
             const contact: Contact = {
                 name: this.contactForm.value.name!,
@@ -101,19 +103,24 @@ export class ContactsForm {
             if (this.receivedModeIsEdit()) {
                 const contactToEdit = this.contactToEdit();
 
-                console.log(contactToEdit);
-
                 if (contactToEdit) {
                     await this.dbService.updateContact(contactToEdit.id!, contact);
 
+                    // Send the updated contact to the parent so the card
+                    // immediately displays the changed information.
+                    // ... = spread operator = copies the updated form values and add the original contact ID
+                    // so the parent receives the complete updated contact.
                     this.updatedContact.emit({
                         ...contact,
                         id: contactToEdit.id,
                     });
                 }
             } else {
+                // In add mode, create a new contact in the database.
                 const createdContact = await this.dbService.createContact(contact);
 
+                // Send the newly created contact to the parent so it
+                // can immediately be displayed in the contact card.
                 if (createdContact) {
                     this.updatedContact.emit(createdContact);
                 }
@@ -123,14 +130,18 @@ export class ContactsForm {
         }
     }
 
+    // Notifies the parent that the user clicked the delete button.
+    // The parent then opens the confirmation dialog.
     deleteRequestClick() {
         this.deleteRequested.emit();
     }
 
+    // Closes the form when the user clicks the close button.
     closeClick() {
         this.closeFormAndReset();
     }
 
+    // Resets the form and tells the parent to close the dialog.
     closeFormAndReset() {
         this.contactForm.reset();
         this.closeForm.emit();

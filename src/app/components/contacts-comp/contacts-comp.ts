@@ -20,7 +20,7 @@ export class ContactsComp {
     // selected contact is stored as the one that gets edited
     contactToEdit = signal<Contact | undefined>(undefined);
 
-    //  tells dialog html 8contact form) weather its in add or edit mode
+    //  tells dialog html (contact form) weather its in add or edit mode
     isEditMode = false;
 
     dbService = inject(ContactsService);
