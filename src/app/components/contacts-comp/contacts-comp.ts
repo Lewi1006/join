@@ -13,13 +13,35 @@ import { ContactsService } from '../../shared/services/contacts.service';
     styleUrl: './contacts-comp.scss',
 })
 export class ContactsComp {
+    // #region properties
+    // clicked contact from contact list
     selectedContact: WritableSignal<Contact | undefined> = signal(undefined);
+
+    // selected contact is stored as the one that gets edited
     contactToEdit = signal<Contact | undefined>(undefined);
 
+    //  tells dialog html 8contact form) weather its in add or edit mode
     isEditMode = false;
 
     dbService = inject(ContactsService);
+    // #endregion
 
+    // #region methods
+
+    // Stores the contact currently selected in the contact list.
+    // This contact is displayed in the contact card.
+    contactWasSelected(clickedContact: Contact) {
+        this.selectedContact.set(clickedContact);
+    }
+
+    // Updates the selected contact after editing or creating a contact.
+    // This makes the contact card display the new data immediately.
+    contactWasEdited(updatedContact: Contact) {
+        this.selectedContact.set(updatedContact);
+    }
+
+    // Deletes the currently selected contact and clears the contact card with set(undefined)
+    // Both dialogs are closed after the deletion is completed.
     async confirmDelete(deleteDialog: HTMLDialogElement, contactsDialog: HTMLDialogElement) {
         const contact = this.selectedContact();
         if (contact) {
@@ -30,37 +52,38 @@ export class ContactsComp {
         contactsDialog.close();
     }
 
-    contactWasSelected(clickedContact: Contact) {
-        this.selectedContact.set(clickedContact);
-    }
-
-    // contactWasDeleted(contactId: number) {
-    //     this.selectedContact.set(undefined);
-    // }
-
+    // Opens the form in add mode.
+    // The selected contact is cleared because no existing contact is being edited.
     openAddForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = false;
         this.selectedContact.set(undefined);
         contactsDialog.showModal();
     }
 
+    // Opens the form in edit mode.
+    // The currently selected contact is copied to contactToEdit so the form
+    // knows which contact should be patched into the input fields.
     openEditForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = true;
 
         this.contactToEdit.set(this.selectedContact());
 
-        console.log('Contact to edit:', this.contactToEdit());
-        // let formDefaultValues = this.selectedContact();
-        //  console.log(formDefaultValues);
-
+        // console.log('Contact to edit:', this.contactToEdit());
         contactsDialog.showModal();
     }
 
+    // Closes the form and clears contactToEdit.
+    // Clearing is important because the signal needs to change when the form
+    // is opened again so the effect() in ContactsForm can run again.
     closeForm(contactsDialog: HTMLDialogElement) {
         contactsDialog.close();
         this.contactToEdit.set(undefined);
     }
+
+    
+    // #endregion
 }
+
 
 // contactToEdit is an input signal to contact-form.ts
 // in openEditForm we assign the currently selectedContact/clicked Contact to the contactToEdit signal

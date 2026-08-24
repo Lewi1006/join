@@ -22,10 +22,9 @@ export class ContactsForm {
 
     // Notifies the parent which contact was deleted
     deleteRequested = output<void>();
-    deleteRequestClick() {
-        this.deleteRequested.emit();
-    }
-    deletedContact = output<number>();
+
+    // Notifies the parent that an existing contact was updated
+    updatedContact = output<Contact>();
 
     // Notifies the parent that the form should be closed
     closeForm = output<void>();
@@ -88,6 +87,7 @@ export class ContactsForm {
     // #endregion
 
     // #region methods
+
     async formSubmit() {
         // ! tells TypeScript that we know the values exist here
         if (this.contactForm.valid) {
@@ -105,29 +105,30 @@ export class ContactsForm {
 
                 if (contactToEdit) {
                     await this.dbService.updateContact(contactToEdit.id!, contact);
+
+                    this.updatedContact.emit({
+                        ...contact,
+                        id: contactToEdit.id,
+                    });
                 }
             } else {
-                await this.dbService.createContact(contact);
+                const createdContact = await this.dbService.createContact(contact);
+
+                if (createdContact) {
+                    this.updatedContact.emit(createdContact);
+                }
             }
 
             this.closeFormAndReset();
         }
     }
 
-    closeClick() {
-        this.closeFormAndReset();
+    deleteRequestClick() {
+        this.deleteRequested.emit();
     }
 
-    async deleteContact() {
-        const contactToDelete = this.contactToEdit();
-
-        if (contactToDelete) {
-            // Delete the contact from Supabase
-            await this.dbService.deleteContact(contactToDelete.id!);
-            // Tell the parent which contact was deleted so it can clear the selected card
-            this.deletedContact.emit(contactToDelete.id!);
-            this.closeFormAndReset();
-        }
+    closeClick() {
+        this.closeFormAndReset();
     }
 
     closeFormAndReset() {

@@ -7,8 +7,7 @@
     </div>
     <div class="contact_card">
         <app-contacts-card
-            [receivedContact]="selectedContact()"
-            /* (deletedContact)="contactWasDeleted($event)" */
+            [receivedContact]="selectedContact()" 
             (deleteRequested)="deleteDialog.showModal()"
             (editContact)="openEditForm(contactsDialog)"
         ></app-contacts-card>
@@ -19,10 +18,9 @@
 <dialog #contactsDialog class="contact_form">
     <app-contacts-form
         (closeForm)="closeForm(contactsDialog)"
-        /* (deletedContact)="contactWasDeleted($event)" */
         (deleteRequested)="deleteDialog.showModal()"
+         (updatedContact)="contactWasEdited($event)"
         [receivedModeIsEdit]="isEditMode"
-        /* [contactToEdit]="selectedContact()" */
         [contactToEdit]="contactToEdit()"
     ></app-contacts-form>
 </dialog>

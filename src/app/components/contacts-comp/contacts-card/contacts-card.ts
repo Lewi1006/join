@@ -11,14 +11,8 @@ import { InitialsPipe, TruncatePipe } from '../../../shared/pipes.pipe';
 })
 export class ContactsCard {
     receivedContact = input<Contact>();
-    // deletedContact = output<number>();
     editContact = output<void>();
     deleteRequested = output<void>();
 
     dbService = inject(ContactsService);
-
-    // async deleteContact(contactId: number) {
-    //     await this.dbService.deleteContact(contactId);
-    //     this.deletedContact.emit(contactId);
-    // }
 }
