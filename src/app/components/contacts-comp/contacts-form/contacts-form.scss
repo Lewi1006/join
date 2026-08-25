@@ -12,6 +12,10 @@
         @include d-flex(column, center, center);
     }
 
+    @include respond(sm, m) {
+        @include d-flex(column, center, center);
+    }
+
     .close-btn {
         position: absolute;
         z-index: 20;
@@ -28,7 +32,7 @@
             font-size: 16px;
             color: $blue-main;
 
-            @include respond(zero, sm) {
+            @include respond(zero, m) {
                 font-size: 16px;
                 color: $white;
             }
@@ -44,8 +48,21 @@
         @include d-flex(column, flex-start, center, 40px);
         padding: 30px;
 
-        @include respond(sm, l) {
+        @include respond(m, l) {
             width: 30%;
+        }
+
+        @include respond(sm, m) {
+            @include d-flex(column, center, center, 40px);
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            width: 100%;
+            height: 35%;
+          
+
+            img {
+                display: none;
+            }
         }
 
         @include respond(zero, sm) {
@@ -77,7 +94,7 @@
                 }
 
                 @include respond(sm, l) {
-                     @include font(42px, 700, 120%);
+                    @include font(42px, 700, 120%);
                 }
             }
 
@@ -99,9 +116,13 @@
             @include d-flex(column, center, center, 90px);
         }
 
-        @include respond(sm, l) {
+         @include respond(sm, m) {
+            @include d-flex(column, center, center, 10px);
+        }
+
+        @include respond(m, l) {
             @include d-flex(row, center, center, 30px);
-            width: 70%
+            width: 70%;
         }
 
         .contact-profile {
@@ -112,7 +133,12 @@
                 top: 30%;
             }
 
-            @include respond(sm, l) {
+               @include respond(sm, m) {
+            position: fixed;
+                top: 22%;
+        }
+
+            @include respond(m, l) {
                 @include d-flex(row, center, flex-start, 20px);
             }
 
@@ -256,8 +282,8 @@
                     @include font(18px, 400, 120%);
                 }
 
-                  @include respond(sm, l) {
-                     @include font(20px, 400, 120%);
+                @include respond(sm, l) {
+                    @include font(20px, 400, 120%);
                 }
             }
         }
