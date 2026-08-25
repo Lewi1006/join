@@ -126,15 +126,16 @@
             @include d-flex(column, flex-start, center, 10px);
 
             @include respond(zero, sm) {
-                @include d-flex(column, center, center, 40px);
+                @include d-flex(column, center, center, 20px);
             }
 
             .form-fields {
                 @include d-flex(column, flex-start, center);
 
                 @include respond(zero, sm) {
-                    @include d-flex(column, center, center, 20px);
+                    @include d-flex(column, center, center, 15px);
                     width: 100dvw;
+                    height: fit-content;
                 }
 
                 .form-field {
@@ -144,7 +145,6 @@
 
                     @include respond(zero, sm) {
                         width: 90%;
-                        height: 40px;
                     }
 
                     .input-wrapper {
@@ -154,6 +154,10 @@
                         padding: 0 10px;
                         border: solid 1px $blue-light;
                         border-radius: 10px;
+
+                        @include respond(zero, sm) {
+                            min-height: 40px;
+                        }
 
                         input {
                             width: 100%;
@@ -167,11 +171,23 @@
                     }
 
                     .form-error-wrapper {
-                        height: 30px;
+                        // height: 30px;
+
+                        min-height: 20px;
+                        width: 100%;
+                        padding-left: 5px;
+
+                        @include respond(zero, sm) {
+                            min-height: 18px;
+                        }
 
                         .form-error {
                             font-size: 16px;
                             color: red;
+
+                            @include respond(zero, sm) {
+                                font-size: 14px;
+                            }
                         }
                     }
                 }

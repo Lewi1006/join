@@ -37,13 +37,20 @@
 
     @include respond(zero, sm){
         position: fixed;
-        width: 100dvw;
+        inset: 0;
+
+        width: 100vw;
         height: 100vh;
-        top: 0;
-        left: 0;
-        transform: none;
+
+        max-width: none;
+        max-height: none;
+
+        margin: 0;
+        padding: 0;
+        border: none;
         border-radius: 0;
-        z-index: 1000;
+
+        transform: none;
     }
 }
     .confirm_dialog{
