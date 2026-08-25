@@ -36,22 +36,40 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
     width: 1210px;
     height: 590px;
-    margin: auto;
+
+    margin: 0;
+    padding: 0;
+    border: none;
     border-radius: 30px;
 
-    @include respond(zero, sm){
+    @include respond(sm, l) {
+        width: 90vw;
+        height: 590px;
+    }
+
+    @include respond(zero, sm) {
         position: fixed;
-        width: 100dvw;
-        height: 100vh;
         top: 0;
         left: 0;
-        transform: none;
+        // inset: 0;
+
+        width: 100vw;
+        height: 100vh;
+
+        max-width: none;
+        max-height: none;
+
+        margin: 0;
+        padding: 0;
+        border: none;
         border-radius: 0;
-        z-index: 1000;
+
+        transform: none;
     }
 }
-    .confirm_dialog{
-        @include modal;
-    }
+.confirm_dialog {
+    @include modal;
+}
