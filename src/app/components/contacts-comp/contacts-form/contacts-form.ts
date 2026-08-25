@@ -22,14 +22,14 @@ export class ContactsForm {
 
     // Notifies the parent which contact was deleted
     deleteRequested = output<void>();
-    deleteRequestClick() {
-        this.deleteRequested.emit();
-    }
-    deletedContact = output<number>();
+
+    // Notifies the parent that an existing contact was updated
+    updatedContact = output<Contact>();
 
     // Notifies the parent that the form should be closed
     closeForm = output<void>();
 
+    // Reactive form with validators
     contactForm = new FormGroup({
         name: new FormControl('', {
             validators: [Validators.required],
@@ -88,8 +88,10 @@ export class ContactsForm {
     // #endregion
 
     // #region methods
+
     async formSubmit() {
         // ! tells TypeScript that we know the values exist here
+        // Only submit the form when all validators pass
         if (this.contactForm.valid) {
             const contact: Contact = {
                 name: this.contactForm.value.name!,
@@ -101,35 +103,45 @@ export class ContactsForm {
             if (this.receivedModeIsEdit()) {
                 const contactToEdit = this.contactToEdit();
 
-                console.log(contactToEdit);
-
                 if (contactToEdit) {
                     await this.dbService.updateContact(contactToEdit.id!, contact);
+
+                    // Send the updated contact to the parent so the card
+                    // immediately displays the changed information.
+                    // ... = spread operator = copies the updated form values and add the original contact ID
+                    // so the parent receives the complete updated contact.
+                    this.updatedContact.emit({
+                        ...contact,
+                        id: contactToEdit.id,
+                    });
                 }
             } else {
-                await this.dbService.createContact(contact);
+                // In add mode, create a new contact in the database.
+                const createdContact = await this.dbService.createContact(contact);
+
+                // Send the newly created contact to the parent so it
+                // can immediately be displayed in the contact card.
+                if (createdContact) {
+                    this.updatedContact.emit(createdContact);
+                }
             }
 
             this.closeFormAndReset();
         }
     }
 
+    // Notifies the parent that the user clicked the delete button.
+    // The parent then opens the confirmation dialog.
+    deleteRequestClick() {
+        this.deleteRequested.emit();
+    }
+
+    // Closes the form when the user clicks the close button.
     closeClick() {
         this.closeFormAndReset();
     }
 
-    async deleteContact() {
-        const contactToDelete = this.contactToEdit();
-
-        if (contactToDelete) {
-            // Delete the contact from Supabase
-            await this.dbService.deleteContact(contactToDelete.id!);
-            // Tell the parent which contact was deleted so it can clear the selected card
-            this.deletedContact.emit(contactToDelete.id!);
-            this.closeFormAndReset();
-        }
-    }
-
+    // Resets the form and tells the parent to close the dialog.
     closeFormAndReset() {
         this.contactForm.reset();
         this.closeForm.emit();

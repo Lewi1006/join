@@ -92,9 +92,14 @@ export class ContactsService {
 
     async createContact(contact: Contact) {
         const contactWithColor = { ...contact, profile_color: this.randomColor() };
-        const { data, error } = await this.supabase.from('contacts').insert([contactWithColor]);
+        const { data, error } = await this.supabase
+            .from('contacts')
+            .insert([contactWithColor])
+            .select()
+            .single();
 
         await this.getAllContacts();
+        return data;
     }
 
     async deleteContact(id: number) {
