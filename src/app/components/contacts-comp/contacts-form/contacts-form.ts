@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { InitialsPipe } from '../../../shared/pipes.pipe';
+import { AlertService } from '../../../shared/services/alert.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class ContactsForm {
     // #region properties
     // Service handles all communication with Supabase
     dbService = inject(ContactsService);
+    alertService = inject(AlertService);
 
     // Determines whether the form is being used to add or edit a contact
     receivedModeIsEdit = input(false);
@@ -116,6 +118,8 @@ export class ContactsForm {
                         ...contact,
                         id: contactToEdit.id,
                     });
+
+                    this.alertService.success('Contact was saved!', 2000);
                 }
             } else {
                 // In add mode, create a new contact in the database.
@@ -126,6 +130,8 @@ export class ContactsForm {
                 if (createdContact) {
                     this.updatedContact.emit(createdContact);
                 // this.selectedContact()
+                    
+                    this.alertService.success('Contact was created!', 2000);
                 }
             }
 
