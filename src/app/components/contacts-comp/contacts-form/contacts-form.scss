@@ -33,10 +33,6 @@
                 color: $white;
             }
         }
-        // img {
-        //     width: 24px;
-        //     height: 24px;
-        // }
     }
 
     .dialog-header {
@@ -85,6 +81,7 @@
         }
     }
 
+    // #region edit dialog
     .dialog-content {
         @include d-flex(row, center, center, 90px);
         width: 60%;
@@ -140,14 +137,14 @@
         .contact-form {
             width: fit-content;
             height: fit-content;
-            @include d-flex(column, flex-start, center, 10px);
+            @include d-flex(column, flex-start, center, 20px);
 
             @include respond(zero, sm) {
                 @include d-flex(column, center, center, 20px);
             }
 
             .form-fields {
-                @include d-flex(column, flex-start, center);
+                @include d-flex(column, flex-start, center, 5px);
 
                 @include respond(zero, sm) {
                     @include d-flex(column, center, center, 15px);
@@ -209,25 +206,27 @@
                     }
                 }
             }
+        }
 
-            .form-actions {
-                @include d-flex(row, center, center, 20px);
+        .form-actions {
+            @include d-flex(row, center, center, 20px);
 
-                .delete-btn {
-                    @include outline-button;
+            .delete-btn {
+                @include outline-button;
 
-                    @include respond(zero, sm) {
-                        width: 100px;
-                    }
+                @include respond(zero, sm) {
+                    width: 100px;
                 }
+            }
 
-                .save-btn {
-                    @include colored-button;
-                }
+            .save-btn {
+                @include colored-button;
             }
         }
     }
 }
+
+// #endregion
 
 .add-dialog {
     .dialog-header {
