@@ -9,6 +9,21 @@
     }
     @include d-flex(column, flex-start, flex-start, 40px);
 
+    .headline_area {
+        button {
+            display: none;
+        }
+        @include respond-max(sm) {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            button {
+                display: block;
+            }
+        }
+    }
+
     .contact-card-heading {
         @include d-flex(row, center, flex-start, 25px);
 
@@ -37,6 +52,9 @@
                 width: 60px;
                 height: 3px;
             }
+        }
+        @include respond-max(sm) {
+            width: 100%;
         }
     }
     .contact-card-content {
@@ -117,9 +135,53 @@
                         }
                     }
                 }
+                .contact-actions_wrapper {
+                    z-index: 2;
+                    .mobile_settings {
+                        display: none;
+                        color: white;
+                        width: 48px;
+                        height: 48px;
+                    }
+                    @include respond-max(sm) {
+                        .mobile_settings {
+                            display: block;
+                        }
+                        background-color: $blue-main;
+                        position: fixed;
+                        bottom: 100px;
+                        right: 30px;
+                        width: auto;
+                        height: auto;
+                        border-radius: 50%;
+                        z-index: 1;
+
+                        .contact-actions {
+                            position: fixed;
+                            right: -100%;
+                            transition: right 0.3s ease;
+                            background-color: white;
+                            flex-direction: column;
+                            z-index: 2;
+                        }
+                        &.open .contact-actions {
+                            right: 0;
+                            
+                        }
+                    }
+                }
             }
         }
-
+        .contact-actions_backdrop {
+            display: none;
+            background: rgba(0, 0, 0, 0.473);
+            @include respond-max(sm) {
+                display: block;
+                position: fixed;
+                inset: 0;
+                z-index: 1;
+            }
+        }
         .contact-information {
             @include d-flex(column, flex-start, flex-start, 35px);
 
