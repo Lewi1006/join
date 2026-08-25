@@ -1,11 +1,29 @@
 import { Injectable, signal} from '@angular/core';
-import { Alert } from '../interfaces/alert.interface';
+import { Alert, AlertType } from '../interfaces/alert.interface';
 
 @Injectable({ providedIn: 'root' })
 
 export class AlertService {
-  message = signal<Alert | undefined>(undefined);
+  alert = signal<Alert | undefined>(undefined);
 
-//   switch case
+  showAlert(message: string, type: AlertType, duration: number){
+    this.alert.set({message, type, duration,});
+
+    setTimeout(() => {
+        this.alert.set(undefined);
+    }, duration)
+  }
+
+    success(message: string, duration: number) {
+        this.showAlert(message, AlertType.Success, duration);
+    }
+
+    error(message: string, duration: number) {
+        this.showAlert(message, AlertType.Error, duration);
+    }
+
+    warning(message: string, duration: number) {
+        this.showAlert(message, AlertType.Warning, duration);
+    }
 
 }
