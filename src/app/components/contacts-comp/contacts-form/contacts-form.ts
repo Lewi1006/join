@@ -118,6 +118,8 @@ export class ContactsForm {
                         ...contact,
                         id: contactToEdit.id,
                     });
+
+                    this.alertService.success('Contact was saved!', 2000);
                 }
             } else {
                 // In add mode, create a new contact in the database.
@@ -127,6 +129,8 @@ export class ContactsForm {
                 // can immediately be displayed in the contact card.
                 if (createdContact) {
                     this.updatedContact.emit(createdContact);
+                    
+                    this.alertService.success('Contact was created!', 2000);
                 }
             }
 

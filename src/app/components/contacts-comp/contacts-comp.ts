@@ -5,6 +5,7 @@ import { ContactsForm } from './contacts-form/contacts-form';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { ContactsDelete } from './contacts-delete/contacts-delete';
 import { ContactsService } from '../../shared/services/contacts.service';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
     selector: 'app-contacts-comp',
@@ -24,6 +25,7 @@ export class ContactsComp {
     isEditMode = false;
 
     dbService = inject(ContactsService);
+    alertService = inject(AlertService)
     // #endregion
 
     // #region methods
@@ -47,6 +49,7 @@ export class ContactsComp {
         if (contact) {
             await this.dbService.deleteContact(contact.id!);
             this.selectedContact.set(undefined);
+            this.alertService.success('Contact was deleted!', 2000);
         }
         deleteDialog.close();
         contactsDialog.close();
