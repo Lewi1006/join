@@ -32,7 +32,7 @@ export class ContactsForm {
     // Reactive form with validators
     contactForm = new FormGroup({
         name: new FormControl('', {
-            validators: [Validators.required],
+            validators: [Validators.required, Validators.pattern(/^(\w+\s+\w+)/)],
         }),
 
         email: new FormControl('', {
