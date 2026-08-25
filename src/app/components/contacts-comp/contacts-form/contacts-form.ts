@@ -36,11 +36,11 @@ export class ContactsForm {
         }),
 
         email: new FormControl('', {
-            validators: [Validators.required, Validators.email],
-        }),
+            validators: [Validators.required, Validators.email, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)],
+        }), // https://stackblitz.com/edit/angular-pgc7st?file=src%2Fapp%2Fapp.component.ts
 
         phone: new FormControl('', {
-            validators: [Validators.required],
+            validators: [Validators.required, Validators.pattern('^[- +()0-9]+$')],
         }),
     });
 
