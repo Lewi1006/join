@@ -8,6 +8,4 @@ export interface Alert {
 // define a set of named constants
 export enum AlertType {
     Success = 'success',
-    // Error = 'error',
-    // Warning = 'warning',
 }

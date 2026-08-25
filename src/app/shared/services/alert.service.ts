@@ -8,12 +8,6 @@ export class AlertService {
 
   showAlert(message: string, type: AlertType, duration: number){
 
-    console.log('ALERT TRIGGERED:', {
-        message,
-        type,
-        duration
-    });
-    
     this.alert.set({message, type, duration,});
 
     setTimeout(() => {
@@ -24,13 +18,5 @@ export class AlertService {
     success(message: string, duration: number) {
         this.showAlert(message, AlertType.Success, duration);
     }
-
-    // error(message: string, duration: number) {
-    //     this.showAlert(message, AlertType.Error, duration);
-    // }
-
-    // warning(message: string, duration: number) {
-    //     this.showAlert(message, AlertType.Warning, duration);
-    // }
 
 }
