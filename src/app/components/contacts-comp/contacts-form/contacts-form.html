@@ -17,7 +17,7 @@
 
         <div class="dialog-content">
             <div class="contact-profile">
-                <div class="profile-picture">
+                <div class="profile-picture" [style.background]="contact.profile_color">
                     <p class="initials">{{ contact.name | initials }}</p>
                 </div>
             </div>
