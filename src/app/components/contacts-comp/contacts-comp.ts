@@ -34,7 +34,7 @@ export class ContactsComp {
     //  tells dialog html (contact form) weather its in add or edit mode
     isEditMode = false;
 
-    dbService = inject(ContactsService);
+    // dbService = inject(ContactsService);
     alertService = inject(AlertService)
     // #endregion
 
@@ -58,7 +58,8 @@ export class ContactsComp {
         const contact = this.selectedContact();
         if (contact) {
             await this.dbService.deleteContact(contact.id!);
-            this.selectedContact.set(undefined);
+            // this.selectedContact.set(undefined);
+            this.selectedId.set(undefined);
             this.alertService.success('Contact was deleted!', 2000);
         }
         deleteDialog.close();

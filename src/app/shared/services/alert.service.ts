@@ -7,6 +7,13 @@ export class AlertService {
   alert = signal<Alert | undefined>(undefined);
 
   showAlert(message: string, type: AlertType, duration: number){
+
+    console.log('ALERT TRIGGERED:', {
+        message,
+        type,
+        duration
+    });
+    
     this.alert.set({message, type, duration,});
 
     setTimeout(() => {
