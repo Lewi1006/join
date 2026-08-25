@@ -1,6 +1,11 @@
 <section class="contact-card">
     <div class="contact-card-heading">
-        <h1>Contacts</h1>
+        <div class="headline_area">
+            <h1>Contacts</h1>
+            <button class="back-btn" (click)="back.emit()">
+                <img src="/icons/arrow-back-blue.svg" alt="back" />
+            </button>
+        </div>
         <div class="heading-line" aria-hidden="true"></div>
         <p>Better with a team</p>
     </div>
@@ -16,20 +21,28 @@
                     <div class="contact-card-htwo">
                         <h2>{{ selectedContact.name }}</h2>
                     </div>
-
-                    <div class="contact-actions">
-                        <button class="contact-actions-btn edit-btn" (click)="editContact.emit()">
-                            <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-                            <span>Edit</span>
-                        </button>
-                        <button
-                            class="contact-actions-btn delete-btn"
-                            (click)="deleteRequested.emit()"
-                        >
-                            <img src="icons/delete-bin-blue.svg" alt="delete" />
-                            <span>Delete</span>
-                        </button>
+                    <div class="contact-actions_wrapper" [class.open]="settingsOpen">
+                        <button class="mobile_settings" (click)="settingsOpen = !settingsOpen">&#5010;</button>
+                        <div class="contact-actions">
+                            <button
+                                class="contact-actions-btn edit-btn"
+                                (click)="editContact.emit()"
+                            >
+                                <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+                                <span>Edit</span>
+                            </button>
+                            <button
+                                class="contact-actions-btn delete-btn"
+                                (click)="deleteRequested.emit()"
+                            >
+                                <img src="icons/delete-bin-blue.svg" alt="delete" />
+                                <span>Delete</span>
+                            </button>
+                        </div>
                     </div>
+                    @if (settingsOpen) {
+    <div class="contact-actions_backdrop" (click)="settingsOpen = false"></div>
+}
                 </div>
             </div>
 

@@ -10,6 +10,7 @@ import { InitialsPipe } from '../../../shared/pipes.pipe';
     styleUrl: './contacts-card.scss',
 })
 export class ContactsCard {
+    settingsOpen = false;
     // Contact selected in the contact list and displayed in the card.
     receivedContact = input<Contact>();
 
@@ -20,5 +21,6 @@ export class ContactsCard {
     // The parent then opens the delete confirmation dialog.
     deleteRequested = output<void>();
 
+    back = output<void>();
     dbService = inject(ContactsService);
 }
