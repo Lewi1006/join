@@ -13,7 +13,7 @@
             </div>
 
             @for (contact of item[1]; track contact.id) {
-                <button>
+                <button [class.active]="contact.id === selectedId()">
                     <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
                         <div class="profile-picture" [style.background]="contact.profile_color">
                             <p class="initials">{{ contact.name | initials }}</p>

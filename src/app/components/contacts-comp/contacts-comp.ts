@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal, inject } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { ContactsCard } from './contacts-card/contacts-card';
 import { ContactsList } from './contacts-list/contacts-list';
 import { ContactsForm } from './contacts-form/contacts-form';
@@ -14,49 +14,57 @@ import { ContactsService } from '../../shared/services/contacts.service';
 })
 export class ContactsComp {
     // #region properties
-    // clicked contact from contact list
-    selectedContact: WritableSignal<Contact | undefined> = signal(undefined);
+    dbService = inject(ContactsService);
+
+    // id of the contact clicked in the contact list.
+    // Only the id is stored, not the contact object itself.
+    selectedId = signal<number | undefined>(undefined);
+
+    // The selected contact is derived from the id and the current contacts array.
+    // after every create/update/delete the service refetches the contacts,
+    // and the computed signal recalculates automatically.
+    selectedContact = computed(() =>
+        this.dbService.contacts().find((contact) => contact.id === this.selectedId()),
+    );
 
     // selected contact is stored as the one that gets edited
     contactToEdit = signal<Contact | undefined>(undefined);
 
     //  tells dialog html (contact form) weather its in add or edit mode
     isEditMode = false;
-
-    dbService = inject(ContactsService);
     // #endregion
 
     // #region methods
 
-    // Stores the contact currently selected in the contact list.
-    // This contact is displayed in the contact card.
+    // Stores the id of the contact currently selected in the contact list.
+    // The contact behind that id is displayed in the contact card.
     contactWasSelected(clickedContact: Contact) {
-        this.selectedContact.set(clickedContact);
+        this.selectedId.set(clickedContact.id);
     }
 
-    // Updates the selected contact after editing or creating a contact.
-    // This makes the contact card display the new data immediately.
+    // Selects the contact after editing or creating it.
+    // A newly created contact is therefore selected automatically,
+    // because the form emits the contact returned by the database (including its new id).
     contactWasEdited(updatedContact: Contact) {
-        this.selectedContact.set(updatedContact);
+        this.selectedId.set(updatedContact.id);
     }
-
     // Deletes the currently selected contact and clears the contact card with set(undefined)
     // Both dialogs are closed after the deletion is completed.
     async confirmDelete(deleteDialog: HTMLDialogElement, contactsDialog: HTMLDialogElement) {
         const contact = this.selectedContact();
         if (contact) {
             await this.dbService.deleteContact(contact.id!);
-            this.selectedContact.set(undefined);
+            this.selectedId.set(undefined);
         }
         deleteDialog.close();
         contactsDialog.close();
     }
 
     // Opens the form in add mode.
-    // The selected contact is cleared because no existing contact is being edited.
+    // The selection is cleared because no existing contact is being edited.
     openAddForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = false;
-        this.selectedContact.set(undefined);
+        this.selectedId.set(undefined);
         contactsDialog.showModal();
     }
 

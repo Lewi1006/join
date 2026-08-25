@@ -174,12 +174,10 @@
         }
         .contact-actions_backdrop {
             display: none;
-            background: rgba(0, 0, 0, 0.473);
             @include respond-max(sm) {
                 display: block;
                 position: fixed;
                 inset: 0;
-                z-index: 1;
             }
         }
         .contact-information {

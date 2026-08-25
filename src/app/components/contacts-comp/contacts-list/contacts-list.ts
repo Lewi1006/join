@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { InitialsPipe } from '../../../shared/pipes.pipe'; 
@@ -11,6 +11,10 @@ import { InitialsPipe } from '../../../shared/pipes.pipe';
 })
 export class ContactsList {
     dbService = inject(ContactsService);
+
+    // id of the contact currently selected in the parent.
+    selectedId = input<number | undefined>(undefined);
+
     // pass interface as type into output
     selectedContact = output<Contact>();
 
