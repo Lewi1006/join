@@ -94,12 +94,20 @@
             @include d-flex(column, center, center, 90px);
         }
 
+        @include respond(m, l) {
+            @include d-flex(row, center, center, 30px);
+        }
+
         .contact-profile {
             @include d-flex(row, center, flex-start, 50px);
 
             @include respond(zero, sm) {
                 position: fixed;
                 top: 30%;
+            }
+
+            @include respond(m, l) {
+                @include d-flex(row, center, flex-start, 20px);
             }
 
             .profile-picture {
@@ -113,9 +121,18 @@
 
                 @include d-flex;
 
+                @include respond(m, l) {
+                    height: 100px;
+                    width: 100px;
+                }
+
                 .initials {
                     color: white;
                     @include font(48px, 500, 120%);
+
+                    @include respond(m, l) {
+                        @include font(36px, 500, 120%);
+                    }
                 }
             }
         }
