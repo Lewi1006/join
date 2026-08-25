@@ -123,6 +123,7 @@ export class ContactsForm {
                 // can immediately be displayed in the contact card.
                 if (createdContact) {
                     this.updatedContact.emit(createdContact);
+                // this.selectedContact()
                 }
             }
 

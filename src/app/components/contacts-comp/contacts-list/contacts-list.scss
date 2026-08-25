@@ -74,9 +74,17 @@
                 background-color: $grey-light;
             }
 
-            &:focus {
+            &.active {
                 background-color: $blue-main;
                 color: white;
+
+                .contact-email {
+                    color: white;
+                }
+            }
+            &:focus-visible {
+                outline: 2px solid $blue-bright;
+                outline-offset: -2px;
             }
 
             .contact-preview-card {

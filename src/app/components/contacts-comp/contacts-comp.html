@@ -1,6 +1,7 @@
 <section class="contacts" [class.contact-selected]="selectedContact()">
     <div class="contact_list">
         <app-contacts-list
+            [selectedId]="selectedId()"
             (selectedContact)="contactWasSelected($event)"
             (addContact)="openAddForm(contactsDialog)"
         ></app-contacts-list>
@@ -10,7 +11,7 @@
             [receivedContact]="selectedContact()"
             (deleteRequested)="deleteDialog.showModal()"
             (editContact)="openEditForm(contactsDialog)"
-            (back)="selectedContact.set(undefined)"
+            (back)="selectedId.set(undefined)"
         ></app-contacts-card>
     </div>
 </section>
