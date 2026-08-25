@@ -18,12 +18,12 @@ export class AlertService {
         this.showAlert(message, AlertType.Success, duration);
     }
 
-    error(message: string, duration: number) {
-        this.showAlert(message, AlertType.Error, duration);
-    }
+    // error(message: string, duration: number) {
+    //     this.showAlert(message, AlertType.Error, duration);
+    // }
 
-    warning(message: string, duration: number) {
-        this.showAlert(message, AlertType.Warning, duration);
-    }
+    // warning(message: string, duration: number) {
+    //     this.showAlert(message, AlertType.Warning, duration);
+    // }
 
 }
