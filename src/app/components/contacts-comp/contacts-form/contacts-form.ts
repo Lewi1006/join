@@ -2,10 +2,12 @@ import { Component, output, input, inject, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
+import { InitialsPipe } from '../../../shared/pipes.pipe';
+
 
 @Component({
     selector: 'app-contacts-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, InitialsPipe],
     templateUrl: './contacts-form.html',
     styleUrl: './contacts-form.scss',
 })
@@ -32,15 +34,15 @@ export class ContactsForm {
     // Reactive form with validators
     contactForm = new FormGroup({
         name: new FormControl('', {
-            validators: [Validators.required],
+            validators: [Validators.required, Validators.pattern(/^(\w+\s+\w+)/)],
         }),
 
         email: new FormControl('', {
-            validators: [Validators.required, Validators.email],
-        }),
+            validators: [Validators.required, Validators.email, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)],
+        }), // https://stackblitz.com/edit/angular-pgc7st?file=src%2Fapp%2Fapp.component.ts
 
         phone: new FormControl('', {
-            validators: [Validators.required],
+            validators: [Validators.required, Validators.pattern('^[- +()0-9]+$')],
         }),
     });
 
