@@ -52,12 +52,12 @@
                 <div class="contact-fields">
                     <div class="contact-field">
                         <h4>Email</h4>
-                        <p class="highlight">{{ selectedContact.email }}</p>
+                        <a class="highlight" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
                     </div>
 
                     <div class="contact-field">
                         <h4>Phone</h4>
-                        <p>{{ selectedContact.phone }}</p>
+                        <a href="tel:{{ selectedContact.phone }}">{{ selectedContact.phone }}</a>
                     </div>
                 </div>
             </div>

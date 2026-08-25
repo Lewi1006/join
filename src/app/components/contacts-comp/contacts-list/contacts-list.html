@@ -2,8 +2,8 @@
     <div id="add-contact">
         <button (click)="addContact.emit()">
             <p class="button_text">Add Contact</p>
-            <p>&#128100;</p>
-            <!-- <img src="../../../../../public/icons/add-contact-white.svg" alt=""> -->
+            <!-- <p>&#128100;</p> -->
+            <img src="icons/add-contact-white.svg" alt="">
         </button>
     </div>
     <section class="contact-list-wrapper">
@@ -13,7 +13,7 @@
             </div>
 
             @for (contact of item[1]; track contact.id) {
-                <button>
+                <button class="" id="{{ contact.id }}">
                     <div class="contact-preview-card" (click)="selectedContact.emit(contact)">
                         <div class="profile-picture" [style.background]="contact.profile_color">
                             <p class="initials">{{ contact.name | initials }}</p>
