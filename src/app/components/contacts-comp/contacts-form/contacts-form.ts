@@ -2,10 +2,12 @@ import { Component, output, input, inject, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
+import { InitialsPipe } from '../../../shared/pipes.pipe';
+
 
 @Component({
     selector: 'app-contacts-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, InitialsPipe],
     templateUrl: './contacts-form.html',
     styleUrl: './contacts-form.scss',
 })

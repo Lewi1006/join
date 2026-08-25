@@ -1,6 +1,6 @@
 <!-- edit mode and then add mode -->
 
-@if (receivedModeIsEdit()) {
+@if (receivedModeIsEdit() && contactToEdit(); as contact) {
     <section class="dialog edit-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
             <!-- <img src="icons/close-blue.svg" alt="" /> -->
@@ -18,7 +18,7 @@
         <div class="dialog-content">
             <div class="contact-profile">
                 <div class="profile-picture">
-                    <p class="initials">WM</p>
+                    <p class="initials">{{ contact.name | initials }}</p>
                 </div>
             </div>
 
