@@ -58,7 +58,6 @@
             border-bottom-left-radius: 0px;
             width: 100%;
             height: 35%;
-          
 
             img {
                 display: none;
@@ -116,7 +115,7 @@
             @include d-flex(column, center, center, 90px);
         }
 
-         @include respond(sm, m) {
+        @include respond(sm, m) {
             @include d-flex(column, center, center, 10px);
         }
 
@@ -133,10 +132,10 @@
                 top: 30%;
             }
 
-               @include respond(sm, m) {
-            position: fixed;
+            @include respond(sm, m) {
+                position: fixed;
                 top: 22%;
-        }
+            }
 
             @include respond(m, l) {
                 @include d-flex(row, center, flex-start, 20px);
@@ -305,8 +304,9 @@
                 @include d-flex(row, center, center, 10px);
 
                 @include respond(zero, sm) {
-                    width: 110px;
-                    @include font(18px, 400, 120%);
+                    display: none;
+                    // width: 110px;
+                    // @include font(18px, 400, 120%);
                 }
             }
 
@@ -314,7 +314,7 @@
                 @include colored-button;
 
                 @include respond(zero, sm) {
-                    width: 110px;
+                    width: fit-content;
                     @include font(18px, 400, 120%);
                 }
             }

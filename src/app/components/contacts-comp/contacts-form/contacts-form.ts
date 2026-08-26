@@ -11,6 +11,7 @@ import { AlertService } from '../../../shared/services/alert.service';
     templateUrl: './contacts-form.html',
     styleUrl: './contacts-form.scss',
 })
+
 export class ContactsForm {
     // #region properties
     // Service handles all communication with Supabase
