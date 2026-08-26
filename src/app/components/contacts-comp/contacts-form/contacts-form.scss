@@ -28,11 +28,11 @@
         @include d-flex;
 
         p {
-            font-size: 16px;
+            font-size: 26px;
             color: $blue-main;
 
             @include respond(zero, m) {
-                font-size: 16px;
+                font-size: 26px;
                 color: $white;
             }
         }
