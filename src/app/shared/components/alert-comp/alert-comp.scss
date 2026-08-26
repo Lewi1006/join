@@ -16,4 +16,22 @@
     z-index: 5000;
 
     color: $white;
+
+    @include respond(sm, m) {
+        position: fixed;
+        top: 20px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    @include respond(zero, sm) {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 200px;
+        height: fit-content;
+        padding: 10px 20px;
+    }
 }
