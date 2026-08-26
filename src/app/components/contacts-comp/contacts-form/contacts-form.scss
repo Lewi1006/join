@@ -6,7 +6,6 @@
     background: $white;
     @include d-flex(row, center, center);
     border-radius: 30px;
-
     @include respond(zero, sm) {
         border-radius: 0;
         @include d-flex(column, center, center);
