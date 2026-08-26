@@ -5,7 +5,6 @@ import { ContactsService } from '../../../shared/services/contacts.service';
 import { InitialsPipe } from '../../../shared/pipes.pipe';
 import { AlertService } from '../../../shared/services/alert.service';
 
-
 @Component({
     selector: 'app-contacts-form',
     imports: [ReactiveFormsModule, InitialsPipe],
@@ -40,7 +39,13 @@ export class ContactsForm {
         }),
 
         email: new FormControl('', {
-            validators: [Validators.required, Validators.email, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)],
+            validators: [
+                Validators.required,
+                Validators.email,
+                Validators.pattern(
+                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                ),
+            ],
         }), // https://stackblitz.com/edit/angular-pgc7st?file=src%2Fapp%2Fapp.component.ts
 
         phone: new FormControl('', {
@@ -94,6 +99,11 @@ export class ContactsForm {
     // #region methods
 
     async formSubmit() {
+        if (this.contactForm.invalid) {
+            this.contactForm.markAllAsTouched();
+            return;
+        }
+
         // ! tells TypeScript that we know the values exist here
         // Only submit the form when all validators pass
         if (this.contactForm.valid) {
@@ -129,8 +139,8 @@ export class ContactsForm {
                 // can immediately be displayed in the contact card.
                 if (createdContact) {
                     this.updatedContact.emit(createdContact);
-                // this.selectedContact()
-                    
+                    // this.selectedContact()
+
                     this.alertService.success('Contact was created!', 2000);
                 }
             }
