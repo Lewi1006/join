@@ -99,6 +99,8 @@ export class ContactsService {
             .single();
 
         await this.getAllContacts();
+/*         const divElement = document.getElementById('data.id');
+        divElement?.classList.add('active'); */
         return data;
     }
 

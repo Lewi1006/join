@@ -1,10 +1,10 @@
 <!-- edit mode and then add mode -->
 
-@if (receivedModeIsEdit()) {
+@if (receivedModeIsEdit() && contactToEdit(); as contact) {
     <section class="dialog edit-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
-            <!-- <img src="icons/close-blue.svg" alt="" /> -->
-            <p>&#128473;</p>
+            <img src="icons/close-blue.svg" alt="" />
+            <!-- <p>&#128473;</p> -->
         </button>
 
         <div class="dialog-header">
@@ -17,8 +17,8 @@
 
         <div class="dialog-content">
             <div class="contact-profile">
-                <div class="profile-picture">
-                    <p class="initials">WM</p>
+                <div class="profile-picture" [style.background]="contact.profile_color">
+                    <p class="initials">{{ contact.name | initials }}</p>
                 </div>
             </div>
 
@@ -30,12 +30,22 @@
                             <input id="name" name="name" type="text" placeholder="Name" formControlName="name" />
                             <img src="icons/person.svg" alt="profile icon" />
                         </div>
+                        <div class="form-error-wrapper">
+                            @if (name?.touched && name?.invalid) {
+                                <p class="form-error">Please enter your name and surname!</p>
+                            }
+                        </div>
                     </div>
                     <div class="form-field">
                         <label for="email"></label>
                         <div class="input-wrapper">
                             <input id="email" name="email" type="email" placeholder="Email" formControlName="email"/>
                             <img src="icons/mail.svg" alt="profile icon" />
+                        </div>
+                         <div class="form-error-wrapper">
+                            @if (email?.touched && email?.invalid) {
+                                <p class="form-error">Please enter a valid email!</p>
+                            }
                         </div>
                     </div>
                     <div class="form-field">
@@ -44,6 +54,12 @@
                         <div class="input-wrapper">
                             <input id="phone" name="phone" type="tel" placeholder="Phone" formControlName="phone"/>
                             <img src="icons/call.svg" alt="profile icon" />
+                        </div>
+
+                          <div class="form-error-wrapper">
+                            @if (phone?.touched && phone?.invalid) {
+                                <p class="form-error">Please enter a valid phone number!</p>
+                            }
                         </div>
                     </div>
                 </div>
@@ -60,8 +76,8 @@
 } @else {
     <section class="dialog add-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
-            <!-- <img src="icons/close-blue.svg" alt="" /> -->
-            <p>&#128473;</p>
+            <img src="icons/close-blue.svg" alt="" />
+            <!-- <p>&#128473;</p> -->
         </button>
 
         <div class="dialog-header">
@@ -96,7 +112,7 @@
                         </div>
                         <div class="form-error-wrapper">
                             @if (name?.touched && name?.invalid) {
-                                <p class="form-error">Please enter your name!</p>
+                                <p class="form-error">Please enter your name and surname!</p>
                             }
                         </div>
                     </div>
