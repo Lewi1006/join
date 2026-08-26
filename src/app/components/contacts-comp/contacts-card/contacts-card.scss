@@ -57,9 +57,11 @@
             width: 100%;
         }
     }
+    overflow-x: hidden;
     .contact-card-content {
         width: 100%;
         @include d-flex(column, flex-start, flex-start, 50px);
+        @include slide-in();
 
         .contact-profile {
             width: 100%;
@@ -118,8 +120,8 @@
                     @include d-flex(row, center, center, 20px);
 
                     .contact-actions-btn {
-                        @include d-flex(row, center, center, 4px);
-
+                        @include d-flex(row, center, flex-start, 4px);
+                        width: 100%;
                         img {
                             height: 24px;
                             width: auto;
@@ -163,10 +165,14 @@
                             background-color: white;
                             flex-direction: column;
                             z-index: 2;
+                            padding: 15px;
+                            border-radius: 10px 10px 0 10px;
+                            bottom: 90px;
+                            width: 115px;
+                            @include drop-shadow();
                         }
                         &.open .contact-actions {
                             right: 0;
-                            
                         }
                     }
                 }

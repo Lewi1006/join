@@ -11,56 +11,67 @@
     </div>
 
     @if (receivedContact(); as selectedContact) {
-        <div class="contact-card-content">
-            <div class="contact-profile">
-                <div class="profile-picture" [style.background]="selectedContact.profile_color">
-                    <p class="initials">{{ selectedContact.name | initials }}</p>
+        @for (currentSelectedContact of [selectedContact]; track currentSelectedContact.id) {
+            <div class="contact-card-content">
+                <div class="contact-profile">
+                    <div class="profile-picture" [style.background]="currentSelectedContact.profile_color">
+                        <p class="initials">{{ currentSelectedContact.name | initials }}</p>
+                    </div>
+
+                    <div class="contact-details">
+                        <div class="contact-card-htwo">
+                            <h2>{{ currentSelectedContact.name }}</h2>
+                        </div>
+                        <div class="contact-actions_wrapper" [class.open]="settingsOpen">
+                            <button class="mobile_settings" (click)="settingsOpen = !settingsOpen">
+                                &#5010;
+                            </button>
+                            <div class="contact-actions">
+                                <button
+                                    class="contact-actions-btn edit-btn"
+                                    (click)="editContact.emit()"
+                                >
+                                    <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+                                    <span>Edit</span>
+                                </button>
+                                <button
+                                    class="contact-actions-btn delete-btn"
+                                    (click)="deleteRequested.emit()"
+                                >
+                                    <img src="icons/delete-bin-blue.svg" alt="delete" />
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        @if (settingsOpen) {
+                            <div
+                                class="contact-actions_backdrop"
+                                (click)="settingsOpen = false"
+                            ></div>
+                        }
+                    </div>
                 </div>
 
-                <div class="contact-details">
-                    <div class="contact-card-htwo">
-                        <h2>{{ selectedContact.name }}</h2>
-                    </div>
-                    <div class="contact-actions_wrapper" [class.open]="settingsOpen">
-                        <button class="mobile_settings" (click)="settingsOpen = !settingsOpen">&#5010;</button>
-                        <div class="contact-actions">
-                            <button
-                                class="contact-actions-btn edit-btn"
-                                (click)="editContact.emit()"
-                            >
-                                <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-                                <span>Edit</span>
-                            </button>
-                            <button
-                                class="contact-actions-btn delete-btn"
-                                (click)="deleteRequested.emit()"
-                            >
-                                <img src="icons/delete-bin-blue.svg" alt="delete" />
-                                <span>Delete</span>
-                            </button>
+                <div class="contact-information">
+                    <h3>Contact Information</h3>
+
+                    <div class="contact-fields">
+                        <div class="contact-field">
+                            <h4>Email</h4>
+                            <a class="highlight" href="mailto:{{ currentSelectedContact.email }}">{{
+                                currentSelectedContact.email
+                            }}</a>
+                        </div>
+
+                        <div class="contact-field">
+                            <h4>Phone</h4>
+                            <a href="tel:{{ currentSelectedContact.phone }}">{{
+                                currentSelectedContact.phone
+                            }}</a>
                         </div>
                     </div>
-                    @if (settingsOpen) {
-    <div class="contact-actions_backdrop" (click)="settingsOpen = false"></div>
-}
                 </div>
             </div>
-
-            <div class="contact-information">
-                <h3>Contact Information</h3>
-
-                <div class="contact-fields">
-                    <div class="contact-field">
-                        <h4>Email</h4>
-                        <a class="highlight" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
-                    </div>
-
-                    <div class="contact-field">
-                        <h4>Phone</h4>
-                        <a href="tel:{{ selectedContact.phone }}">{{ selectedContact.phone }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     }
 </section>

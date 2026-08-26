@@ -35,7 +35,19 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    &[open] {
+        animation: dialogIn 0.4s ease-out;
+    }
 
+
+@keyframes dialogIn {
+    from {
+        transform: translate(50vw, -50%);
+    }
+    to {
+        transform: translate(-50%, -50%);
+    }
+}
     width: 1210px;
     height: 590px;
 
