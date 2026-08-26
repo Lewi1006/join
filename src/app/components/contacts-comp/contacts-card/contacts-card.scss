@@ -101,9 +101,6 @@
                     width: 100%;
 
                     h2 {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
                         margin: 0;
                         width: 100%;
                         @include font(48px, 600, 120%);
@@ -178,6 +175,7 @@
                 }
             }
         }
+
         .contact-actions_backdrop {
             display: none;
             @include respond-max(sm) {
@@ -186,6 +184,7 @@
                 inset: 0;
             }
         }
+
         .contact-information {
             @include d-flex(column, flex-start, flex-start, 35px);
 

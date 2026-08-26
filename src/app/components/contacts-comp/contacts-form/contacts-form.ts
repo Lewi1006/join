@@ -36,7 +36,10 @@ export class ContactsForm {
     // Reactive form with validators
     contactForm = new FormGroup({
         name: new FormControl('', {
-            validators: [Validators.required, Validators.pattern(/^(\w+\s+\w+)/)],
+            /* validators: [Validators.required, Validators.pattern(/^(\w+\s+\w+)/)], */ // only checks for 2 words
+            /* validators: [Validators.required, Validators.pattern(/^[a-z ,.'-]+$/i)], */ // only checks for valid characters, not 2 words
+            validators: [Validators.required, Validators.pattern(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð .'-]+\s+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð .'-]+$/i)],
+            // https://stackoverflow.com/questions/2385701/regular-expression-for-first-and-last-name
         }),
 
         email: new FormControl('', {
