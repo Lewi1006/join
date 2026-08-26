@@ -77,6 +77,8 @@ export class ContactsForm {
                     email: contact.email,
                     phone: contact.phone,
                 });
+            } else {
+                this.contactForm.reset();
             }
         });
     }
