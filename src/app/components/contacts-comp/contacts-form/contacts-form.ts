@@ -5,13 +5,13 @@ import { ContactsService } from '../../../shared/services/contacts.service';
 import { InitialsPipe } from '../../../shared/pipes.pipe';
 import { AlertService } from '../../../shared/services/alert.service';
 
-
 @Component({
     selector: 'app-contacts-form',
     imports: [ReactiveFormsModule, InitialsPipe],
     templateUrl: './contacts-form.html',
     styleUrl: './contacts-form.scss',
 })
+
 export class ContactsForm {
     // #region properties
     // Service handles all communication with Supabase
@@ -43,7 +43,13 @@ export class ContactsForm {
         }),
 
         email: new FormControl('', {
-            validators: [Validators.required, Validators.email, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)],
+            validators: [
+                Validators.required,
+                Validators.email,
+                Validators.pattern(
+                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                ),
+            ],
         }), // https://stackblitz.com/edit/angular-pgc7st?file=src%2Fapp%2Fapp.component.ts
 
         phone: new FormControl('', {
@@ -75,6 +81,8 @@ export class ContactsForm {
                     email: contact.email,
                     phone: contact.phone,
                 });
+            } else {
+                this.contactForm.reset();
             }
         });
     }
@@ -97,6 +105,11 @@ export class ContactsForm {
     // #region methods
 
     async formSubmit() {
+        if (this.contactForm.invalid) {
+            this.contactForm.markAllAsTouched();
+            return;
+        }
+
         // ! tells TypeScript that we know the values exist here
         // Only submit the form when all validators pass
         if (this.contactForm.valid) {
@@ -108,37 +121,45 @@ export class ContactsForm {
 
             // Edit mode updates the existing contact using the id
             if (this.receivedModeIsEdit()) {
-                const contactToEdit = this.contactToEdit();
-
-                if (contactToEdit) {
-                    await this.dbService.updateContact(contactToEdit.id!, contact);
-
-                    // Send the updated contact to the parent so the card
-                    // immediately displays the changed information.
-                    // ... = spread operator = copies the updated form values and add the original contact ID
-                    // so the parent receives the complete updated contact.
-                    this.updatedContact.emit({
-                        ...contact,
-                        id: contactToEdit.id,
-                    });
-
-                    this.alertService.success('Contact was saved!', 2000);
-                }
+                await this.updateContact(contact);
             } else {
-                // In add mode, create a new contact in the database.
-                const createdContact = await this.dbService.createContact(contact);
-
-                // Send the newly created contact to the parent so it
-                // can immediately be displayed in the contact card.
-                if (createdContact) {
-                    this.updatedContact.emit(createdContact);
-                // this.selectedContact()
-                    
-                    this.alertService.success('Contact was created!', 2000);
-                }
+                await this.createContact(contact);
             }
 
             this.closeFormAndReset();
+        }
+    }
+
+    async updateContact(contact: Contact) {
+        const contactToEdit = this.contactToEdit();
+
+        if (contactToEdit) {
+            await this.dbService.updateContact(contactToEdit.id!, contact);
+
+            // Send the updated contact to the parent so the card
+            // immediately displays the changed information.
+            // ... = spread operator = copies the updated form values and add the original contact ID
+            // so the parent receives the complete updated contact.
+            this.updatedContact.emit({
+                ...contact,
+                id: contactToEdit.id,
+            });
+
+            this.alertService.success('Contact was saved!', 2000);
+        }
+    }
+
+    async createContact(contact: Contact) {
+        // In add mode, create a new contact in the database.
+        const createdContact = await this.dbService.createContact(contact);
+
+        // Send the newly created contact to the parent so it
+        // can immediately be displayed in the contact card.
+        if (createdContact) {
+            this.updatedContact.emit(createdContact);
+            // this.selectedContact()
+
+            this.alertService.success('Contact was created!', 2000);
         }
     }
 

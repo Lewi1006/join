@@ -28,7 +28,7 @@ export class ContactsComp {
         this.dbService.contacts().find((contact) => contact.id === this.selectedId()),
     );
 
-    // selected contact is stored as the one that gets edited
+    // selected contact object is stored as the one that gets edited and opened in the edit form
     contactToEdit = signal<Contact | undefined>(undefined);
 
     //  tells dialog html (contact form) weather its in add or edit mode
@@ -60,6 +60,7 @@ export class ContactsComp {
             await this.dbService.deleteContact(contact.id!);
             // this.selectedContact.set(undefined);
             this.selectedId.set(undefined);
+            this.contactToEdit.set(undefined);
             this.alertService.success('Contact was deleted!', 2000);
         }
         deleteDialog.close();
@@ -71,6 +72,7 @@ export class ContactsComp {
     openAddForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = false;
         this.selectedId.set(undefined);
+        this.contactToEdit.set(undefined);
         contactsDialog.showModal();
     }
 
