@@ -62,7 +62,9 @@
         width: 100%;
         @include d-flex(column, flex-start, flex-start, 50px);
         @include slide-in();
-
+        @include respond-max(sm) {
+            animation: none;
+        }
         .contact-profile {
             width: 100%;
             @include d-flex(row, center, flex-start, 24px);
