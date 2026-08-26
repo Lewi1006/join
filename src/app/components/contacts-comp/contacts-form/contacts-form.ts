@@ -115,37 +115,45 @@ export class ContactsForm {
 
             // Edit mode updates the existing contact using the id
             if (this.receivedModeIsEdit()) {
-                const contactToEdit = this.contactToEdit();
-
-                if (contactToEdit) {
-                    await this.dbService.updateContact(contactToEdit.id!, contact);
-
-                    // Send the updated contact to the parent so the card
-                    // immediately displays the changed information.
-                    // ... = spread operator = copies the updated form values and add the original contact ID
-                    // so the parent receives the complete updated contact.
-                    this.updatedContact.emit({
-                        ...contact,
-                        id: contactToEdit.id,
-                    });
-
-                    this.alertService.success('Contact was saved!', 2000);
-                }
+                await this.updateContact(contact);
             } else {
-                // In add mode, create a new contact in the database.
-                const createdContact = await this.dbService.createContact(contact);
-
-                // Send the newly created contact to the parent so it
-                // can immediately be displayed in the contact card.
-                if (createdContact) {
-                    this.updatedContact.emit(createdContact);
-                    // this.selectedContact()
-
-                    this.alertService.success('Contact was created!', 2000);
-                }
+                await this.createContact(contact);
             }
 
             this.closeFormAndReset();
+        }
+    }
+
+    async updateContact(contact: Contact) {
+        const contactToEdit = this.contactToEdit();
+
+        if (contactToEdit) {
+            await this.dbService.updateContact(contactToEdit.id!, contact);
+
+            // Send the updated contact to the parent so the card
+            // immediately displays the changed information.
+            // ... = spread operator = copies the updated form values and add the original contact ID
+            // so the parent receives the complete updated contact.
+            this.updatedContact.emit({
+                ...contact,
+                id: contactToEdit.id,
+            });
+
+            this.alertService.success('Contact was saved!', 2000);
+        }
+    }
+
+    async createContact(contact: Contact) {
+        // In add mode, create a new contact in the database.
+        const createdContact = await this.dbService.createContact(contact);
+
+        // Send the newly created contact to the parent so it
+        // can immediately be displayed in the contact card.
+        if (createdContact) {
+            this.updatedContact.emit(createdContact);
+            // this.selectedContact()
+
+            this.alertService.success('Contact was created!', 2000);
         }
     }
 
