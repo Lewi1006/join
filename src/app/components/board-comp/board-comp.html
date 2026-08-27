@@ -13,7 +13,7 @@
                     aria-label="Find task"
                 />
                 <div class="divider" aria-hidden="true"></div>
-                <img src="icons/search.svg" alt="search icon">
+                <img src="icons/search.svg" alt="search icon" />
             </div>
 
             <button class="add-task-btn">
@@ -24,6 +24,8 @@
     </div>
 
     <div class="board-columns">
-        <app-column-comp></app-column-comp>
+        @for (column of columns; track column.status) {
+            <app-column-comp [title]="column.title" [status]="column.status"></app-column-comp>
+        }
     </div>
 </section>

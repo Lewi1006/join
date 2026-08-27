@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { TaskStatus } from '../../../shared/interfaces/column.interface';
 
 @Component({
     selector: 'app-column-comp',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
     templateUrl: './column-comp.html',
     styleUrl: './column-comp.scss',
 })
-export class ColumnComp {}
+export class ColumnComp {
+title = input<string>();
+status = input<TaskStatus>();
+
+
+}
