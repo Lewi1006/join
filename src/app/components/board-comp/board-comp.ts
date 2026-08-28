@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ColumnComp } from './column-comp/column-comp';
 import { BoardColumn, TaskStatus } from '../../shared/interfaces/column.interface';
+import { Task } from '../../shared/interfaces/task.interface';
 
 @Component({
     selector: 'app-board-comp',
@@ -27,4 +28,16 @@ export class BoardComp {
             status: TaskStatus.Done,
         },
     ];
+
+    task: Task[]=[
+      {
+        id: 1,
+        status: TaskStatus.Todo,
+        title: 'HTML Base Temolate Creation',
+        description: 'Create reusable HTML base templates',
+        subtaskCount: 3,
+        category: 'todo',
+        dueDate: '01/09/2026',
+      }
+    ]
 }
