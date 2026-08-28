@@ -1,10 +1,10 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { Task } from '../interfaces/task.interface';
-import { Crud } from './crud';
+import { CrudService } from './crud.service';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
-    crud = inject(Crud);
+    crud = inject(CrudService);
 
     table = 'tasks';
 
@@ -31,7 +31,7 @@ export class TasksService {
     async updateTask(id: number, task: Task) {
         await this.crud.update<Task>(this.table, id, {
             // task keys needed
-            name: task.name,
+            // name: task.name,
         });
 
         await this.getAllTasks();

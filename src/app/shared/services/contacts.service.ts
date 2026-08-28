@@ -1,10 +1,10 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { Contact } from '../interfaces/contact.interface';
-import { Crud } from './crud';
+import { CrudService } from './crud.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContactsService {
-    crud = inject(Crud);
+    crud = inject(CrudService);
 
     table = 'contacts';
 
