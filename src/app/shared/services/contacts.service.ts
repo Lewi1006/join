@@ -1,13 +1,12 @@
-import { Injectable, signal, computed } from '@angular/core';
-import { createClient } from '@supabase/supabase-js';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { Contact } from '../interfaces/contact.interface';
+import { CrudService } from './crud.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContactsService {
-    supabase = createClient(
-        'https://rkjgcmzrhlmpbfapwvza.supabase.co',
-        'sb_publishable_V4B66HpLZWJy9CzHT3Licg_WhntLnHS',
-    );
+    crud = inject(CrudService);
+
+    table = 'contacts';
 
     contacts = signal<Contact[]>([]);
 
@@ -21,7 +20,6 @@ export class ContactsService {
         // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
         // we only work with
         // const clonedContacts = [...this.contacts()];
-
         const clonedContacts = this.cloneArray();
 
         clonedContacts.sort((a, b) => a.name.localeCompare(b.name));
@@ -55,18 +53,8 @@ export class ContactsService {
     // });
 
     async getAllContacts() {
-        let { data: contacts, error } = await this.supabase
-            .from('contacts')
-            .select('*')
-            .order('name', { ascending: true });
-        /* .ilike('name', 'A%'); // only works when not using .order - but filtering at DB level doesn't make sense anyway
-        // https://www.rapidevelopers.com/supabase-tutorial/how-to-query-with-filters-in-supabase */
-
-        if (!contacts) return;
+        const contacts = await this.crud.getAll<Contact>(this.table, 'name');
         this.contacts.set(contacts);
-
-        // Not needed when using .order
-        /* this.contacts().sort((a, b) => a.name.localeCompare(b.name)); */
     }
 
     colors = [
@@ -92,29 +80,23 @@ export class ContactsService {
 
     async createContact(contact: Contact) {
         const contactWithColor = { ...contact, profile_color: this.randomColor() };
-        const { data, error } = await this.supabase
-            .from('contacts')
-            .insert([contactWithColor])
-            .select()
-            .single();
+        const createdContact = await this.crud.create<Contact>(this.table, contactWithColor);
 
         await this.getAllContacts();
-/*         const divElement = document.getElementById('data.id');
-        divElement?.classList.add('active'); */
-        return data;
+        return createdContact;
     }
 
     async deleteContact(id: number) {
-        const { error } = await this.supabase.from('contacts').delete().eq('id', id);
+        await this.crud.delete(this.table, id);
         await this.getAllContacts();
     }
 
     async updateContact(id: number, contact: Contact) {
-        const { data, error } = await this.supabase
-            .from('contacts')
-            .update({ name: contact.name, email: contact.email, phone: contact.phone })
-            .eq('id', id)
-            .select();
+        await this.crud.update<Contact>(this.table, id, {
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone,
+        });
 
         await this.getAllContacts();
     }
