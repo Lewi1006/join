@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ColumnComp } from './column-comp/column-comp';
 import { BoardColumn, TaskStatus } from '../../shared/interfaces/column.interface';
-import { Task } from '../../shared/interfaces/task.interface';
+import { TasksService } from '../../shared/services/tasks.service';
 
 @Component({
     selector: 'app-board-comp',
@@ -10,6 +10,14 @@ import { Task } from '../../shared/interfaces/task.interface';
     styleUrl: './board-comp.scss',
 })
 export class BoardComp {
+taskService = inject(TasksService);
+
+ngOnInit(){
+  this.taskService.getAllTasks();
+}
+
+
+// array for columns
     columns: BoardColumn[] = [
         {
             title: 'To do',
@@ -29,15 +37,15 @@ export class BoardComp {
         },
     ];
 
-    task: Task[]=[
-      {
-        id: 1,
-        status: TaskStatus.Todo,
-        title: 'HTML Base Temolate Creation',
-        description: 'Create reusable HTML base templates',
-        subtaskCount: 3,
-        category: 'todo',
-        dueDate: '01/09/2026',
-      }
-    ]
+    // task: Task[]=[
+    //   {
+    //     id: 1,
+    //     status: TaskStatus.Todo,
+    //     title: 'HTML Base Temolate Creation',
+    //     description: 'Create reusable HTML base templates',
+    //     subtaskCount: 3,
+    //     category: 'todo',
+    //     dueDate: '01/09/2026',
+    //   }
+    // ]
 }

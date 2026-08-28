@@ -25,7 +25,7 @@
 
     <div class="board-columns">
         @for (column of columns; track column.status) {
-            <app-column-comp [title]="column.title" [status]="column.status"></app-column-comp>
+            <app-column-comp [title]="column.title" [status]="column.status" [task]="taskService.tasks()"></app-column-comp>
         }
     </div>
 </section>

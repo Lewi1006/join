@@ -6,8 +6,17 @@
         </button>
     </div>
 
-    <div class="task-card">
-        <h3></h3>
-        <p class="task-description"></p>
+    
+    
+    <div class="column-tasks">
+        
+        @for (task of columnTasks(); track task.id){
+            <div class="task-card">
+                <h3>{{task.title}}</h3>
+                <p class="task-description">{{task.description}}</p>
+            </div>
+
+        }
+
     </div>
 </section>

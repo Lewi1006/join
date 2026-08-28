@@ -13,4 +13,13 @@
             color: $blue-main;
         }
     }
+
+    .column-tasks{
+        .task-card{
+            background: white;
+            width: 200px;
+            min-height: 100px;
+            height: fit-content;
+        }
+    }
 }
