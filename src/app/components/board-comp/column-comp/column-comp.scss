@@ -1,0 +1,16 @@
+@use '../../../../../public/styles/main' as *;
+
+.column{
+    min-height: 550px;
+    width: 250px;
+    background: pink;
+
+    .column-header{
+        @include d-flex(row, center, space-between);
+
+        h2{
+            @include font(20px, 700, 120%);
+            color: $blue-main;
+        }
+    }
+}
