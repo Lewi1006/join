@@ -8,6 +8,12 @@
     <label for="due-date">Due Date: </label>
     <input id="due-date" type="date" formControlName="dueDate" />
 
+    <label for="priority">Priority: </label>
+    <select formControlName="priority">
+        <option>Choose a category</option>
+        @for (category of categories; track $index) {
+            <option>{{ category }}</option>
+        }
+    </select>
     <button type="submit" [disabled]="!taskForm.valid">Save</button>
-
 </form>

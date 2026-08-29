@@ -4,6 +4,7 @@ import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { Tasks } from '../../share/services/tasks';
 import { TasksService } from '../../shared/services/tasks.service';
+import { NgForOf } from '@angular/common';
 
 @Component({
     selector: 'app-task-form',
@@ -16,7 +17,13 @@ export class TaskForm {
         title: new FormControl(''),
         description: new FormControl(''),
         dueDate: new FormControl(''),
+        priority: new FormControl(''),
     });
+
+    categories = [
+        'Technical task',
+        'User Story',
+    ];
 
     taskService = inject(TasksService);
 
