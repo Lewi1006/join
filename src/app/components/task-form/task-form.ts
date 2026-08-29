@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
+import { Tasks } from '../../share/services/tasks';
+import { TasksService } from '../../shared/services/tasks.service';
 
 @Component({
     selector: 'app-task-form',
@@ -16,6 +18,8 @@ export class TaskForm {
         dueDate: new FormControl(''),
     });
 
+    taskService = inject(TasksService);
+
     async onSubmit() {
         if (this.taskForm.valid) {
             const task: Task = {
@@ -26,11 +30,8 @@ export class TaskForm {
             };
 
             console.log(task);
+
+            this.taskService.createTask(task);
         }
     }
-
-    async createTask(){
-        
-    }
-
 }
