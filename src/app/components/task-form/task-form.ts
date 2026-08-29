@@ -4,7 +4,6 @@ import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { Tasks } from '../../share/services/tasks';
 import { TasksService } from '../../shared/services/tasks.service';
-import { NgForOf } from '@angular/common';
 
 @Component({
     selector: 'app-task-form',
@@ -17,7 +16,7 @@ export class TaskForm {
         title: new FormControl(''),
         description: new FormControl(''),
         dueDate: new FormControl(''),
-        priority: new FormControl(''),
+        category: new FormControl(''),
     });
 
     categories = [
@@ -34,6 +33,7 @@ export class TaskForm {
                 title: this.taskForm.value.title!,
                 status: TaskStatus.Todo,
                 dueDate: this.taskForm.value.dueDate!,
+                category: this.taskForm.value.category!,
             };
 
             console.log(task);
