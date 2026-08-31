@@ -16,6 +16,34 @@ export class ColumnComp {
     // save task status in thos property so html can accsess it
     TaskStatus = TaskStatus;
 
+    fakeAssignees = [
+        {
+            id: 1,
+            initials: 'PB',
+            profile_color: '#fc71ff',
+        },
+        {
+            id: 2,
+            initials: 'WM',
+            profile_color: '#6e52ff',
+        },
+        {
+            id: 3,
+            initials: 'OL',
+            profile_color: '#00bee8',
+        },
+        {
+            id: 4,
+            initials: 'LD',
+            profile_color: '#c3ff2b',
+        },
+        {
+            id: 5,
+            initials: 'AB',
+            profile_color: '#ff7a00;',
+        },
+    ];
+
     // Filters the tasks based on the column's status,
     // so each column only displays the tasks belonging to it.
     // item is a variable that stores each item in the array

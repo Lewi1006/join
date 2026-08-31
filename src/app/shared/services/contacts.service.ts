@@ -64,7 +64,6 @@ export class ContactsService {
         '#9327ff',
         '#00bee8',
         '#1fd7c1',
-        '#1fd7c1',
         '#ffa35e',
         '#fc71ff',
         '#ffc701',

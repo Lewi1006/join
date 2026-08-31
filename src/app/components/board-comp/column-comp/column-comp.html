@@ -33,15 +33,11 @@
 
                     <div class="card-footer">
                         <div class="card-assignees">
-                            <div class="assignee">
-                                <span>AB</span>
-                            </div>
-                            <div class="assignee">
-                                <span>WM</span>
-                            </div>
-                            <div class="assignee">
-                                <span>OL</span>
-                            </div>
+                            @for (assignee of fakeAssignees; track assignee.id) {
+                                <div class="assignee" [style.background]="assignee.profile_color">
+                                    <span>{{assignee.initials}}</span>
+                                </div>
+                            }
                         </div>
 
                         <img
