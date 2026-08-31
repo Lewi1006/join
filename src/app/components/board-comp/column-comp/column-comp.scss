@@ -111,6 +111,51 @@
                     }
                 }
             }
+
+            .card-footer {
+                width: 100%;
+                height: fit-content;
+                @include d-flex(row, center, space-between);
+
+                .card-assignees {
+                    @include d-flex;
+
+                    .assignee {
+                        width: 36px;
+                        height: 36px;
+
+                        border-radius: 50%;
+                        border: 2px solid $white;
+                        background: pink;
+
+                        @include d-flex;
+
+                        @include font(16px, 400, 120%);
+
+                        color: $white;
+
+                        &:not(:first-child) {
+                            margin-left: -12px;
+                        }
+                    }
+
+                    .card-priority {
+                        height: 32px;
+                        width: 32px;
+                    }
+                }
+            }
+        }
+
+        .empty-column {
+            width: 100%;
+            height: fit-content;
+            padding: 20px 10px;
+            border: $grey-medium 1px dotted;
+            border-radius: 10px;
+            background: $grey-bright;
+            color: $grey-medium;
+            @include d-flex;
         }
     }
 }

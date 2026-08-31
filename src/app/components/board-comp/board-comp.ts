@@ -17,6 +17,7 @@ ngOnInit(){
 }
 
 
+
 // array for columns
     columns: BoardColumn[] = [
         {

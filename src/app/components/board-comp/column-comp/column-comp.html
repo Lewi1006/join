@@ -1,34 +1,61 @@
 <section class="column">
     <div class="column-header">
         <h2>{{ title() }}</h2>
-        <button class="add-btn" type="button" aria-label="Add task">
-            <span>&#43;</span>
-        </button>
+
+        @if (status() !== TaskStatus.Done) {
+            <button class="add-btn" type="button" aria-label="Add task">
+                <span>&#43;</span>
+            </button>
+        }
     </div>
 
     <div class="column-tasks">
-        @for (task of columnTasks(); track task.id) {
-            <article class="task-card">
-                <div class="card-category">
-                    <p>User Story</p>
-                </div>
-
-                <div class="card-content">
-                    <h3>{{ task.title }}</h3>
-                    <p class="task-description">{{ task.description }}</p>
-                </div>
-
-                <div class="card-subtasks">
-                    <div class="bar-wrapper">
-                        <div class="full-bar">
-                            <div class="percentage"></div>
-                        </div>
+        @if (columnTasks()?.length) {
+            @for (task of columnTasks(); track task.id) {
+                <article class="task-card">
+                    <div class="card-category">
+                        <p>User Story</p>
                     </div>
-                    <p>x/x Subtasks</p>
-                </div>
 
-                <div class="card-assignees"></div>
-            </article>
+                    <div class="card-content">
+                        <h3>{{ task.title }}</h3>
+                        <p class="task-description">{{ task.description }}</p>
+                    </div>
+
+                    <div class="card-subtasks">
+                        <div class="bar-wrapper">
+                            <div class="full-bar">
+                                <div class="percentage"></div>
+                            </div>
+                        </div>
+                        <p>x/x Subtasks</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="card-assignees">
+                            <div class="assignee">
+                                <span>AB</span>
+                            </div>
+                            <div class="assignee">
+                                <span>WM</span>
+                            </div>
+                            <div class="assignee">
+                                <span>OL</span>
+                            </div>
+                        </div>
+
+                        <img
+                            class="card-priority"
+                            src="icons/priority-high.svg"
+                            alt="priority icon"
+                        />
+                    </div>
+                </article>
+            }
+        } @else {
+            <div class="empty-column">
+                <p>{{ getEmptyMessage() }}</p>
+            </div>
         }
     </div>
 </section>
