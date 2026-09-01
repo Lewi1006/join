@@ -1,19 +1,111 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <label for="title">Title: </label>
-    <input id="title" type="text" formControlName="title" />
+<section id="add-task">
+    <h1>Add Task</h1>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
+        <div class="form-column">
+            <div class="input-fields-group">
+                <div class="input-field-div">
+                    <label for="title" class="input-field-title">Title: </label>
+                    <input id="title" type="text" formControlName="title" class="input-field" />
+                </div>
+                <div class="input-field-div">
+                    <label for="description" class="input-field-title">Description: </label>
+                    <input
+                        id="description"
+                        type="text"
+                        formControlName="description"
+                        class="input-field"
+                    />
+                </div>
+                <div class="input-field-div">
+                    <label for="due-date" class="input-field">Due Date: </label>
+                    <input
+                        id="due-date"
+                        type="date"
+                        formControlName="dueDate"
+                        class="input-field"
+                    />
+                </div>
+            </div>
+            <div>
+                <p>blablabla</p>
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="input-fields-group">
+                <div class="input-field-div">
+                    <label for="priority" class="input-field">Priority: </label>
+                    <div id="priority">
+                        <input type="radio" id="low" formControlName="priority" value="Low" />
+                        <label for="low">Low</label><br />
+                        <input type="radio" id="medium" formControlName="priority" value="medium" />
+                        <label for="high">Medium</label><br />
+                        <input type="radio" id="high" formControlName="priority" value="High" />
+                        <label for="high">High</label><br /><br />
+                    </div>
+                </div>
 
-    <label for="description">Description: </label>
-    <input id="description" type="text" formControlName="description" />
+                <div class="input-field-div">
+                    <label for="category" class="input-field">Category: </label>
+                    <select formControlName="category" class="input-field">
+                        <option class="input-field">Choose a category</option>
+                        @for (category of categories; track $index) {
+                            <option class="input-field">{{ category }}</option>
+                        }
+                    </select>
+                </div>
 
-    <label for="due-date">Due Date: </label>
-    <input id="due-date" type="date" formControlName="dueDate" />
+                <div class="input-field-div" id="assignees">
+                    <label for="assignees" class="input-field">Assigned to</label>
+                    <p class="input-field" (click)="toggleDisplayNone()">
+                        Select contacts to assign
+                    </p>
+                    <div id="list-of-assignees" [class]="divClassList">
+                        @for (contact of dbService.contacts(); track contact.id) {
+                            <div class="assignee-box">
+                                <div class="initials">
+                                    <p>{{ contact.name | initials }}</p>
+                                </div>
+                                <div class="label">
+                                    <label class="label-text" for="{{ contact.name }}">{{ contact.name }}</label>
+                                </div>
+                                <input
+                                    formControlName="assignees"
+                                    type="checkbox"
+                                    id="{{ contact.id }}"
+                                    name="{{ contact.name }}"
+                                    value="{{ contact.name }}"
+                                />
+                            </div>
+                        }
+                    </div>
+                </div>
 
-    <label for="category">Priority: </label>
-    <select formControlName="category">
-        <option>Choose a category</option>
-        @for (category of categories; track $index) {
-            <option>{{ category }}</option>
-        }
-    </select>
-    <button type="submit" [disabled]="!taskForm.valid">Save</button>
-</form>
+                <div class="input-field-div" id="subtasks">
+                    <label for="subtasks" class="input-field-title">Subtasks</label>
+                    <div>
+                        <input
+                            id="input-subtask"
+                            type="text"
+                            class="input-field"
+                        />
+                        <button (click)="addSubtask()">add</button>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+                            <label for="vehicle1"> I have a bike</label><br />
+                        </div>
+                        <div>
+                            <input type="checkbox" id="vehicle2" name="vehicle2" value="bla" />
+                            <label for="vehicle1"> I have a bla</label><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" [disabled]="!taskForm.valid">Save</button>
+                <button>Clear</button>
+            </div>
+        </div>
+    </form>
+</section>

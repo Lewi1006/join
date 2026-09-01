@@ -1,3 +1,5 @@
+import { Contact } from "./contact.interface";
+
 export interface Task{
     id?: number;
     createdAt?: string;
@@ -5,7 +7,8 @@ export interface Task{
     title?: string;
     status?: string;
     subtaskCount?: number;
-    assignees?: number[];
+    assignees?: Contact[];
+    subtasks?: string[];
     dueDate?: string;
     category?: string;
     priority?: string;
