@@ -50,14 +50,12 @@ export class TaskForm {
     assignContact() {}
 
     addSubtask() {
-        console.log("subtask added");
-        
-/*         const inputSubtaskRef = document.getElementById('input-subtask');
-        if (inputSubtaskRef === null) {
-        } else {
-            let newSubtask = inputSubtaskRef.value;
-            this.subtasks = [...this.subtasks, newSubtask];
-        } */
+        const inputSubtaskRef = (<HTMLInputElement>document.getElementById('input-subtask'));
+        let newSubtask = inputSubtaskRef?.value;
+        console.log(newSubtask);
+
+        /* this.subtasks = [...this.subtasks, newSubtask]; */
+
     }
 
     async onSubmit() {
