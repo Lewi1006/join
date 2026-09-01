@@ -1,15 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { ColumnComp } from './column-comp/column-comp';
 import { BoardColumn, TaskStatus } from '../../shared/interfaces/column.interface';
+import { TasksService } from '../../shared/services/tasks.service';
+import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 import { Task } from '../../shared/interfaces/task.interface';
 
 @Component({
     selector: 'app-board-comp',
-    imports: [ColumnComp],
+    imports: [ColumnComp, TaskDialogComp],
     templateUrl: './board-comp.html',
     styleUrl: './board-comp.scss',
 })
 export class BoardComp {
+    taskService = inject(TasksService);
+
+    ngOnInit() {
+        this.taskService.getAllTasks();
+    }
+
+    // array for columns
     columns: BoardColumn[] = [
         {
             title: 'To do',
@@ -29,15 +38,16 @@ export class BoardComp {
         },
     ];
 
-    task: Task[]=[
-      {
-        id: 1,
-        status: TaskStatus.Todo,
-        title: 'HTML Base Temolate Creation',
-        description: 'Create reusable HTML base templates',
-        subtaskCount: 3,
-        category: 'todo',
-        dueDate: '01/09/2026',
-      }
-    ]
+    searchTerm = signal('');
+
+    filteredTasks = computed(() => {
+        const term = this.searchTerm().toLowerCase().trim();
+        return term.length >= 3
+            ? this.taskService.tasks().filter((t) => t.title.toLowerCase().includes(term))
+            : this.taskService.tasks();
+    });
+
+    tasksForColumn(status: TaskStatus): Task[] {
+        return this.filteredTasks().filter((t) => t.status === status);
+    }
 }

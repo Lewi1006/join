@@ -1,13 +1,57 @@
 <section class="column">
     <div class="column-header">
-        <h2>{{title()}}</h2>
-        <button class="add-btn" type="button">
-            <span>&#43;</span>
-        </button>
+        <h2>{{ title() }}</h2>
+
+        @if (status() !== TaskStatus.Done) {
+            <button class="add-btn" type="button" aria-label="Add task">
+                <span>&#43;</span>
+            </button>
+        }
     </div>
 
-    <div class="task-card">
-        <h3></h3>
-        <p class="task-description"></p>
+    <div class="column-tasks">
+        @if (columnTasks()?.length) {
+            @for (task of columnTasks(); track task.id) {
+                <article class="task-card">
+                    <div class="card-category">
+                        <p>User Story</p>
+                    </div>
+
+                    <div class="card-content">
+                        <h3>{{ task.title }}</h3>
+                        <p class="task-description">{{ task.description }}</p>
+                    </div>
+
+                    <div class="card-subtasks">
+                        <div class="bar-wrapper">
+                            <div class="full-bar">
+                                <div class="percentage"></div>
+                            </div>
+                        </div>
+                        <p>x/x Subtasks</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="card-assignees">
+                            @for (assignee of fakeAssignees; track assignee.id) {
+                                <div class="assignee" [style.background]="assignee.profile_color">
+                                    <span>{{assignee.initials}}</span>
+                                </div>
+                            }
+                        </div>
+
+                        <img
+                            class="card-priority"
+                            src="icons/priority-high.svg"
+                            alt="priority icon"
+                        />
+                    </div>
+                </article>
+            }
+        } @else {
+            <div class="empty-column">
+                <p>{{ getEmptyMessage() }}</p>
+            </div>
+        }
     </div>
 </section>

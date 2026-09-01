@@ -6,11 +6,13 @@
             <div class="search-field">
                 <label for="find"></label>
                 <input
+                    #find
                     id="find"
                     name="find"
                     type="search"
                     placeholder="Find task"
                     aria-label="Find task"
+                    (input)="searchTerm.set(find.value)"
                 />
                 <div class="divider" aria-hidden="true"></div>
                 <img src="icons/search.svg" alt="search icon" />
@@ -25,7 +27,13 @@
 
     <div class="board-columns">
         @for (column of columns; track column.status) {
-            <app-column-comp [title]="column.title" [status]="column.status"></app-column-comp>
+            <app-column-comp
+                [title]="column.title"
+                [status]="column.status"
+                [task]="tasksForColumn(column.status)"
+            ></app-column-comp>
         }
     </div>
+
+    <app-task-dialog-comp> </app-task-dialog-comp>
 </section>
