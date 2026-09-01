@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Task } from '../../../shared/interfaces/task.interface';
 
 @Component({
@@ -9,4 +9,6 @@ import { Task } from '../../../shared/interfaces/task.interface';
 })
 export class TaskDialogComp {
     task = input<Task>();
+
+    closeDialog = output<void>();
 }
