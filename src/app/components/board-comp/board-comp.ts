@@ -3,6 +3,7 @@ import { ColumnComp } from './column-comp/column-comp';
 import { BoardColumn, TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
 import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
+import { Task } from '../../shared/interfaces/task.interface';
 
 @Component({
     selector: 'app-board-comp',
@@ -11,15 +12,13 @@ import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
     styleUrl: './board-comp.scss',
 })
 export class BoardComp {
-taskService = inject(TasksService);
+    taskService = inject(TasksService);
 
-ngOnInit(){
-  this.taskService.getAllTasks();
-}
+    ngOnInit() {
+        this.taskService.getAllTasks();
+    }
 
-
-
-// array for columns
+    // array for columns
     columns: BoardColumn[] = [
         {
             title: 'To do',
@@ -39,14 +38,13 @@ ngOnInit(){
         },
     ];
 
-
-        searchTerm = signal('');
+    searchTerm = signal('');
 
     filteredTasks = computed(() => {
         const term = this.searchTerm().toLowerCase().trim();
         return term.length >= 3
-            ? this.task.filter((t) => t.title.toLowerCase().includes(term))
-            : this.task;
+            ? this.taskService.tasks().filter((t) => t.title.toLowerCase().includes(term))
+            : this.taskService.tasks();
     });
 
     tasksForColumn(status: TaskStatus): Task[] {

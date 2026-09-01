@@ -6,7 +6,7 @@
             <div class="search-field">
                 <label for="find"></label>
                 <input
-                #find
+                    #find
                     id="find"
                     name="find"
                     type="search"
@@ -27,11 +27,13 @@
 
     <div class="board-columns">
         @for (column of columns; track column.status) {
-            <app-column-comp [title]="column.title" [status]="column.status" [task]="taskService.tasks()"></app-column-comp>
+            <app-column-comp
+                [title]="column.title"
+                [status]="column.status"
+                [task]="tasksForColumn(column.status)"
+            ></app-column-comp>
         }
     </div>
 
-    <app-task-dialog-comp>
-        
-    </app-task-dialog-comp>
+    <app-task-dialog-comp> </app-task-dialog-comp>
 </section>
