@@ -52,9 +52,9 @@ export class TaskForm {
     addSubtask() {
         const inputSubtaskRef = (<HTMLInputElement>document.getElementById('input-subtask'));
         let newSubtask = inputSubtaskRef?.value;
+        
+        this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
-
-        /* this.subtasks = [...this.subtasks, newSubtask]; */
 
     }
 
