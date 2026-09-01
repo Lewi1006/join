@@ -6,8 +6,9 @@
         </button>
     </div>
 
+      @for (task of tasks(); track task.id) {
     <div class="task-card">
-        <h3></h3>
-        <p class="task-description"></p>
-    </div>
+        <h3>{{ task.title }}</h3>
+        <p class="task-description">{{ task.description }}</p>
+    </div>}
 </section>
