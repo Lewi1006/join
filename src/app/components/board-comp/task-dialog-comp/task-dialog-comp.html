@@ -1,4 +1,4 @@
-<dialog class="task-dialog">
+<dialog class="task-dialog" open>
     <div class="task-dialog-wrapper">
         <header class="task-dialog-header">
             <div class="card-category">
@@ -31,41 +31,54 @@
 
         <section class="task-details">
             <div class="detail">
-                <span class="detail-label">Due date</span> <span>01.09.2026</span>
+                <span class="detail-label">Due date:</span>
+                <span>01/09/2026</span>
             </div>
+
             <div class="detail">
-                <span class="detail-label">Priority</span>
+                <span class="detail-label">Priority:</span>
                 <div class="priority">
                     <span>Medium</span>
                     <img src="icons/priority-medium.svg" alt="Medium priority" />
                 </div>
             </div>
-            <div class="detail">
-                <span class="detail-label">Assigned to</span>
+
+            <div class="detail assigned-to">
+                <span class="detail-label">Assigned to:</span>
+                <div class="assignee">
+                    <div class="assignee-avatar"><span>WM</span></div>
+                    <span>Name Surname</span>
+                </div>
+
+                <div class="assignee">
+                    <div class="assignee-avatar"><span>WM</span></div>
+                    <span>Name Surname</span>
+                </div>
+
                 <div class="assignee">
                     <div class="assignee-avatar"><span>WM</span></div>
                     <span>Name Surname</span>
                 </div>
             </div>
-        </section>
 
-        <section class="subtasks">
-            <h2>Subtasks</h2>
-            <label> <input type="checkbox" /> Create HTML structure </label>
-            <label> <input type="checkbox" /> Add styling </label>
+            <div class="detail subtasks">
+                <span class="detail-label">Subtasks:</span>
+                <div class="subtasks-list">
+                    <label> <input type="checkbox" /> Create HTML structure </label>
+                    <label> <input type="checkbox" /> Add styling </label>
+                </div>
+            </div>
         </section>
 
         <section class="task-actions">
-            <div class="contact-actions">
-                <button class="contact-actions-btn edit-btn">
-                    <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-                    <span>Edit</span>
-                </button>
-                <button class="contact-actions-btn delete-btn">
-                    <img src="icons/delete-bin-blue.svg" alt="delete" />
-                    <span>Delete</span>
-                </button>
-            </div>
+            <button class="task-actions-btn edit-btn">
+                <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+                <span>Edit</span>
+            </button>
+            <button class="task-actions-btn delete-btn">
+                <img src="icons/delete-bin-blue.svg" alt="delete" />
+                <span>Delete</span>
+            </button>
         </section>
     </div>
 </dialog>

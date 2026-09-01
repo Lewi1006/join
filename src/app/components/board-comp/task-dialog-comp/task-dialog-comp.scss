@@ -3,59 +3,121 @@
     @include modal($bg-backdrop: rgba(black, 0.6));
 
     width: 525px;
-    min-height: 750px;
-    // height: fit-content;
-    
+    // max-height: 800px;
+    max-height: calc(100dvh - 40px);
 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
     z-index: 500;
     overflow-y: auto;
 }
 
+.task-dialog-wrapper {
+    width: 100%;
 
-.task-dialog-wrapper{
-   width: 525px;
-    min-height: 750px;
-    // height: fit-content;
+    padding: 36px 40px;
 
-    padding: 48px 40px;
+    @include d-flex(column, center, flex-start, 30px);
 
-
-    @include d-flex(column, center, space-between);
-
-
-    .task-dialog-header{
+    .task-dialog-header {
         width: 100%;
 
         @include d-flex(row, center, space-between);
 
-          .card-category {
-                background: $blue-category;
-                color: $white;
-                padding: 4px 24px;
-                border-radius: 8px;
+        .card-category {
+            background: $blue-category;
+            color: $white;
+            padding: 4px 24px;
+            border-radius: 8px;
 
-                @include font(24px, 400, 120%);
-            }
-
-            .close-btn-x{
-                font-size: 24px;
-                color: $blue-main;
-            }
-    }
-
-    .task-dialog-content{
-    
-        @include d-flex(column, center, flex-start, 20px);
-
-        h1{
-            @include font(60px, 700, 110%);
+            @include font(24px, 400, 120%);
         }
 
-        .task-description{
-            @include font(20px)
+        .close-btn-x {
+            font-size: 24px;
+            color: $blue-main;
+        }
+    }
+
+    .task-dialog-content {
+        @include d-flex(column, center, flex-start, 20px);
+
+        h1 {
+            @include font(60px, 700, 100%);
+        }
+
+        .task-description {
+            @include font(20px);
+        }
+    }
+
+    .task-details {
+        width: 100%;
+
+        @include d-flex(column, flex-start, flex-start, 15px);
+
+        .detail {
+            @include d-flex(row, center, flex-start, 40px);
+            @include font(20px, 400, 120%);
+
+            .detail-label {
+                width: 120px;
+                color: $blue-light;
+            }
+
+            .priority {
+                @include d-flex(row, center, center, 10px);
+            }
+        }
+
+        .assigned-to {
+            @include d-flex(column, flex-start, flex-start, 10px);
+
+            .assignee {
+                @include d-flex(row, center, center, 15px);
+                @include font(20px, 400, 120%);
+                padding-left: 10px;
+
+                .assignee-avatar {
+                    width: 42px;
+                    height: 42px;
+
+                    border-radius: 50%;
+                    border: 2px solid $white;
+                    background: pink;
+
+                    @include d-flex;
+
+                    @include font(16px, 400, 120%);
+
+                    color: $white;
+                }
+            }
+        }
+
+        .subtasks {
+            @include d-flex(column, flex-start, flex-start, 10px);
+
+            .subtasks-list {
+                @include d-flex(column, flex-start, flex-start, 10px);
+                @include font(16px, 400, 120%);
+            }
+        }
+    }
+
+    .task-actions {
+        width: 100%;
+        @include d-flex(row, center, flex-end, 15px);
+
+        .task-actions-btn {
+            @include d-flex(row, center, center, 5px);
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
         }
     }
 }
