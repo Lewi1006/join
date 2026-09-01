@@ -68,4 +68,5 @@ export class ColumnComp {
                 return 'No task';
         }
     }
+
 }

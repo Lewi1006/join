@@ -80,6 +80,7 @@
         background: $bg-backdrop;
     }
 }
+
 @mixin slide-in($distance: 100%, $duration: 0.5s, $delay: 0s) {
     animation: slideIn $duration ease-out $delay both;
 

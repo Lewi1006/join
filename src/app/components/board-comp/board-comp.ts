@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { ColumnComp } from './column-comp/column-comp';
 import { BoardColumn, TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
+import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 
 @Component({
     selector: 'app-board-comp',
-    imports: [ColumnComp],
+    imports: [ColumnComp, TaskDialogComp],
     templateUrl: './board-comp.html',
     styleUrl: './board-comp.scss',
 })
