@@ -1,9 +1,11 @@
+import { TaskStatus } from "./column.interface";
+
 export interface Task{
     id?: number;
     createdAt?: number;
     description?: string;
     title: string;
-    status: string;
+    status: TaskStatus;
     subtaskCount?: number;
     assignees?: number[];
     dueDate: string;

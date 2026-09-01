@@ -13,6 +13,8 @@ export class TasksService {
     async getAllTasks() {
         // is "status" correct?
         const tasks = await this.crud.getAll<Task>(this.table, 'status');
+        console.log(tasks);
+        console.log(tasks.length);
         this.tasks.set(tasks);
     }
 
