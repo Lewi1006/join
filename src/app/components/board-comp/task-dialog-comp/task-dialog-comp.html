@@ -8,38 +8,24 @@
         </header>
 
         <section class="task-dialog-content">
-            <h1>Add validator to contact form</h1>
+            <h1>{{task()?.title}}</h1>
             <p class="task-description">
-                check if all validators and regex for email, name.. are working Lorem ipsum dolor
-                <!-- sit amet, consectetur adipiscing elit. Aenean lobortis quis odio ut suscipit.
-                Praesent tristique ante sem, eget tincidunt erat malesuada ut. Proin scelerisque
-                nulla eros, eget fringilla mauris euismod et. Nunc velit risus, tincidunt eu erat
-                vel, blandit dictum libero. Pellentesque bibendum sapien in neque pharetra finibus.
-                Fusce ut volutpat metus. Integer neque justo, luctus id elementum sit amet, feugiat
-                sit amet urna. Aenean molestie lacus sem, in cursus est convallis quis. Curabitur
-                diam urna, pulvinar eu interdum eleifend, dignissim at urna. Morbi nulla nisl,
-                rutrum ut nulla quis, elementum sollicitudin erat. Morbi non tincidunt nisl. Ut eget
-                pharetra metus, id molestie nisi. Vestibulum vehicula sem orci, a venenatis est
-                luctus non. Morbi id mollis nisi. Duis dignissim feugiat elit et malesuada. Nunc
-                ornare, felis sed eleifend fermentum, sapien lectus varius ligula, eget suscipit sem
-                urna aliquet magna. Ut egestas erat eu arcu consectetur, tristique malesuada tortor
-                molestie. Etiam mattis nibh cursus risus maximus, nec pellentesque mi tincidunt.
-                Nunc a ullamcorper dui, vitae egestas dui. Morbi et mauris et lacus sodales
-                volutpat. Ut in augue gravida, accumsan dolor ut, lacinia nisl. -->
+            {{task()?.description}}
             </p>
         </section>
 
         <section class="task-details">
             <div class="detail">
                 <span class="detail-label">Due date:</span>
-                <span>01/09/2026</span>
+                <span>{{task()?.dueDate}}</span>
             </div>
 
             <div class="detail">
                 <span class="detail-label">Priority:</span>
                 <div class="priority">
-                    <span>Medium</span>
-                    <img src="icons/priority-medium.svg" alt="Medium priority" />
+                    <span>{{task()?.priority}}</span>
+                     <img [src]="taskPriorityService.getPriorityIcon(task()?.priority)" alt="priority icon" />
+                    <!-- <img src="icons/priority-medium.svg" alt="Medium priority" /> -->
                 </div>
             </div>
 

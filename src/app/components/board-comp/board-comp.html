@@ -37,6 +37,9 @@
     </div>
 
     <dialog #taskDialog class="task-dialog">
-        <app-task-dialog-comp [task]="selectedTask()"  (closeDialog)="closeTaskDialog(taskDialog)"> </app-task-dialog-comp>
+        @if (selectedTask(); as task) {
+            <app-task-dialog-comp [task]="task" (closeDialog)="closeTaskDialog(taskDialog)">
+            </app-task-dialog-comp>
+        }
     </dialog>
 </section>
