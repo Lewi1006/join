@@ -1,12 +1,15 @@
+import { Contact } from "./contact.interface";
+
 export interface Task{
-    id: number;
-    createdAt?: number;
+    id?: number;
+    createdAt?: string;
     description?: string;
-    title: string;
-    status: string;
+    title?: string;
+    status?: string;
     subtaskCount?: number;
-    assignees?: number[];
-    dueDate: string;
-    category: string;
+    assignees?: Contact[];
+    subtasks?: string[];
+    dueDate?: string;
+    category?: string;
     priority?: string;
 }
