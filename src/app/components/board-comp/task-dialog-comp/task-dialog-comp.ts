@@ -17,10 +17,3 @@ export class TaskDialogComp {
 
     closeDialog = output<void>();
 }
-
-
-
-// calculate subtasks percentage
-// assignes max three displayed in preview card
-// + add task in spalte status der spalte automatisch 
-// add task board dialog
