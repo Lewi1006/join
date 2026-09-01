@@ -42,7 +42,7 @@
 
                         <img
                             class="card-priority"
-                            src="icons/priority-high.svg"
+                            [src]="taskDetailService.getPriorityIcon(task.priority)"
                             alt="priority icon"
                         />
                     </div>

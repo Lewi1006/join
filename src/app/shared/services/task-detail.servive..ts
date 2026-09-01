@@ -1,7 +1,7 @@
 import { Service } from '@angular/core';
 
 @Service()
-export class TaskPriorityServiveTs {
+export class TaskDetailServive{
 
      getPriorityIcon(priority?: string): string {
         switch (priority) {

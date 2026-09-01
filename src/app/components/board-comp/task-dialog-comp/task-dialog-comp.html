@@ -24,8 +24,7 @@
                 <span class="detail-label">Priority:</span>
                 <div class="priority">
                     <span>{{task()?.priority}}</span>
-                     <img [src]="taskPriorityService.getPriorityIcon(task()?.priority)" alt="priority icon" />
-                    <!-- <img src="icons/priority-medium.svg" alt="Medium priority" /> -->
+                     <img [src]="taskDetailService.getPriorityIcon(task()?.priority)" alt="priority icon" />
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 import { Component, input, output, inject } from '@angular/core';
 import { Task } from '../../../shared/interfaces/task.interface';
-import { TaskPriorityServiveTs } from '../../../shared/services/task-priority.servive.ts';
+import { TaskDetailServive } from '../../../shared/services/task-detail.servive.';
 
 @Component({
     selector: 'app-task-dialog-comp',
@@ -9,7 +9,7 @@ import { TaskPriorityServiveTs } from '../../../shared/services/task-priority.se
     styleUrl: './task-dialog-comp.scss',
 })
 export class TaskDialogComp {
-    taskPriorityService = inject(TaskPriorityServiveTs);
+    taskDetailService = inject(TaskDetailServive);
     // selected task data
     task = input<Task>();
 
