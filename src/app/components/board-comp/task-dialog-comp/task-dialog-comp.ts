@@ -11,9 +11,16 @@ import { TaskDetailService } from '../../../shared/services/task-detail.service.
 })
 export class TaskDialogComp {
     taskDetailService = inject(TaskDetailService);
-    
+
     // selected task data
     task = input<Task>();
 
     closeDialog = output<void>();
 }
+
+
+
+// calculate subtasks percentage
+// assignes max three displayed in preview card
+// + add task in spalte status der spalte automatisch 
+// add task board dialog
