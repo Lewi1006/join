@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
+import { Task } from '../../../shared/interfaces/task.interface';
 
 @Component({
     selector: 'app-column-comp',
@@ -10,6 +11,6 @@ import { TaskStatus } from '../../../shared/interfaces/column.interface';
 export class ColumnComp {
 title = input<string>();
 status = input<TaskStatus>();
-
+tasks = input<Task[]>([]);
 
 }
