@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Task } from '../../../shared/interfaces/task.interface';
 
 @Component({
     selector: 'app-task-dialog-comp',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
     templateUrl: './task-dialog-comp.html',
     styleUrl: './task-dialog-comp.scss',
 })
-export class TaskDialogComp {}
+export class TaskDialogComp {
+    task = input<Task>();
+}

@@ -1,4 +1,4 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed, output } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
 
@@ -12,6 +12,8 @@ export class ColumnComp {
     title = input<string>();
     status = input<TaskStatus>();
     task = input<Task[]>();
+
+    taskSelected = output<Task>();
 
     // save task status in thos property so html can accsess it
     TaskStatus = TaskStatus;
@@ -69,4 +71,7 @@ export class ColumnComp {
         }
     }
 
+    selectTask(task: Task) {
+        this.taskSelected.emit(task);
+    }
 }

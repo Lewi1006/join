@@ -31,9 +31,12 @@
                 [title]="column.title"
                 [status]="column.status"
                 [task]="tasksForColumn(column.status)"
+                (taskSelected)="openTaskDialog($event, taskDialog)"
             ></app-column-comp>
         }
     </div>
 
-    <app-task-dialog-comp> </app-task-dialog-comp>
+    <dialog #taskDialog class="task-dialog">
+        <app-task-dialog-comp [task]="selectedTask()"> </app-task-dialog-comp>
+    </dialog>
 </section>
