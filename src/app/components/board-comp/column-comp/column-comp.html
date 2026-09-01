@@ -13,8 +13,11 @@
         @if (columnTasks()?.length) {
             @for (task of columnTasks(); track task.id) {
                 <article class="task-card" (click)="selectTask(task)">
-                    <div class="card-category">
-                        <p>User Story</p>
+                    <div
+                        class="card-category"
+                        [class]="taskDetailService.getCategory(task.category)"
+                    >
+                        <p>{{ task.category }}</p>
                     </div>
 
                     <div class="card-content">
@@ -35,7 +38,7 @@
                         <div class="card-assignees">
                             @for (assignee of fakeAssignees; track assignee.id) {
                                 <div class="assignee" [style.background]="assignee.profile_color">
-                                    <span>{{assignee.initials}}</span>
+                                    <span>{{ assignee.initials }}</span>
                                 </div>
                             }
                         </div>

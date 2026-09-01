@@ -28,12 +28,19 @@
         @include d-flex(row, center, space-between);
 
         .card-category {
-            background: $blue-category;
             color: $white;
             padding: 4px 24px;
             border-radius: 8px;
-
+            
             @include font(24px, 400, 120%);
+            
+            &.user-story{
+                background: $blue-category;
+            }
+
+            &.technical-task{
+                background: $green-category;
+            }
         }
 
         .close-btn-x {

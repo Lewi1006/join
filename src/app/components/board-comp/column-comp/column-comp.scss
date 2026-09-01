@@ -71,10 +71,17 @@
             flex-shrink: 0;
 
             .card-category {
-                background: $blue-category;
                 color: $white;
                 padding: 4px 16px;
                 border-radius: 8px;
+
+                &.user-story {
+                    background: $blue-category;
+                }
+
+                &.technical-task {
+                    background: $green-category;
+                }
             }
 
             .card-content {

@@ -1,8 +1,8 @@
 <!-- <dialog class="task-dialog"> -->
     <div class="task-dialog-wrapper">
         <header class="task-dialog-header">
-            <div class="card-category">
-                <p>User Story</p>
+            <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
+                <p>{{task()?.category}}</p>
             </div>
             <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">&times;</button>
         </header>

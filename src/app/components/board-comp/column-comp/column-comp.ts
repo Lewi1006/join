@@ -1,7 +1,7 @@
 import { Component, input, computed, output, inject } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
-import { TaskDetailServive } from '../../../shared/services/task-detail.servive.';
+import { TaskDetailService } from '../../../shared/services/task-detail.service.';
 
 @Component({
     selector: 'app-column-comp',
@@ -10,7 +10,7 @@ import { TaskDetailServive } from '../../../shared/services/task-detail.servive.
     styleUrl: './column-comp.scss',
 })
 export class ColumnComp {
-    taskDetailService = inject(TaskDetailServive)
+    taskDetailService = inject(TaskDetailService)
 
 
     title = input<string>();
