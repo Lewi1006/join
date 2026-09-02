@@ -104,4 +104,14 @@
     border-radius: 24px;
 
     @include scrollbar(20px 0);
+
+    @include respond(zero, sm) {
+        width: 90dvw;
+        
+        margin: 0;
+
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
