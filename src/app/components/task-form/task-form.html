@@ -95,8 +95,8 @@
                 <div>
                     @for (item of subtasks(); track $index) {
                         <div>
-                            <input type="checkbox" id="subtasks.index" name="subtasks.index" value="{{item}}" />
-                            <label for="">{{item}}</label><br />
+                            <input type="checkbox" id="subtasks.index" name="subtasks.index" value="{{item.description}}" />
+                            <label for="">{{item.description}}</label><br />
                         </div>
                     }
                 </div>
