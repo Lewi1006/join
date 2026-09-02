@@ -83,12 +83,25 @@
 }
 
 .task-dialog {
-    @include modal($bg-backdrop: rgba(black, 0.6));
+    // @include modal($bg-backdrop: rgba(black, 0.6));
+    position: fixed;
+    margin: auto;
+    border-radius: 15px;
+    background: $white;
+    @include drop-shadow;
+
+    &::backdrop {
+        background: rgba(black, 0.4);
+    }
 
     width: 525px;
-
     max-height: calc(100dvh - 40px);
 
     z-index: 500;
+
     overflow-y: auto;
+
+    border-radius: 24px;
+
+    @include scrollbar(20px 0);
 }
