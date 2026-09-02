@@ -8,6 +8,7 @@ export interface Task{
     status: TaskStatus;
     subtaskCount?: number;
     assignees?: number[];
+    subtasks?: string[];
     dueDate: string;
     category: string;
     priority?: string;

@@ -1,9 +1,21 @@
-import { Injectable} from '@angular/core';
+import { Injectable,} from '@angular/core';
+import { Task } from '../interfaces/task.interface';
 
 @Injectable({
     providedIn: 'root',
 })
+
 export class TaskDetailService{
+
+    getSubtaskCount(task: Task): number{
+        if (task.subtasks?.length){
+            return task.subtasks.length;
+        }
+        
+        return 0;
+    }
+
+
 
      getPriorityIcon(priority?: string): string {
         switch (priority?.toLowerCase()) {

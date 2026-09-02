@@ -84,7 +84,7 @@ export class ContactsComp {
 
         this.contactToEdit.set(this.selectedContact());
 
-        // console.log('Contact to edit:', this.contactToEdit());
+       
         contactsDialog.showModal();
     }
 

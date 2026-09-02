@@ -5,6 +5,7 @@ import { TasksService } from '../../shared/services/tasks.service';
 import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 import { Task } from '../../shared/interfaces/task.interface';
 
+
 @Component({
     selector: 'app-board-comp',
     imports: [ColumnComp, TaskDialogComp],
@@ -13,6 +14,7 @@ import { Task } from '../../shared/interfaces/task.interface';
 })
 export class BoardComp {
     taskService = inject(TasksService);
+  
     
     selectedTaskId = signal<number | undefined>(undefined);
     selectedTask = computed(() =>
