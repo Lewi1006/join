@@ -1,5 +1,4 @@
 import { Contact } from "./contact.interface";
-
 import { TaskStatus } from "./column.interface";
 
 export interface Task{

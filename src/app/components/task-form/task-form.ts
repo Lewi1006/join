@@ -47,15 +47,18 @@ export class TaskForm {
         this.dbService.cloneArray();
     }
 
-    assignContact() {}
+    assignContact(contact:Contact) {
+        this.assignees.update((assignees) => [...assignees, contact])
+        console.log(this.assignees());
+
+    }
 
     addSubtask() {
         const inputSubtaskRef = (<HTMLInputElement>document.getElementById('input-subtask'));
         let newSubtask = inputSubtaskRef?.value;
-        
+
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
-
     }
 
     async onSubmit() {
@@ -72,6 +75,7 @@ export class TaskForm {
             };
 
             this.taskService.createTask(task);
+            console.log("task created");
         }
     }
 }

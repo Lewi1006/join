@@ -74,6 +74,7 @@
                                     id="{{ contact.id }}"
                                     name="{{ contact.name }}"
                                     value="{{ contact.name }}"
+                                    (click)="assignContact(contact)"
                                 />
                             </div>
                         }
@@ -90,16 +91,14 @@
                         />
                         <button (click)="addSubtask()">add</button>
                     </div>
-                    <div>
-<!--                         <div>
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                            <label for="vehicle1"> I have a bike</label><br />
-                        </div>
+                </div>
+                <div>
+                    @for (item of subtasks(); track $index) {
                         <div>
-                            <input type="checkbox" id="vehicle2" name="vehicle2" value="bla" />
-                            <label for="vehicle1"> I have a bla</label><br />
-                        </div> -->
-                    </div>
+                            <input type="checkbox" id="subtasks.index" name="subtasks.index" value="{{item}}" />
+                            <label for="">{{item}}</label><br />
+                        </div>
+                    }
                 </div>
             </div>
             <div>
