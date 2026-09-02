@@ -18,9 +18,13 @@ export class TaskDetailService{
 
 
 
-    // getAssignees(task: Task, contacts:Contact[]): Contact[]{
+    getAssignees(task: Task): Contact[]{
+        if(task.assignees){
+            return task.assignees;
+        }
 
-    // }
+        return [];
+    }
 
 
 

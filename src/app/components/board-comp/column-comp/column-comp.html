@@ -41,9 +41,9 @@
 
                     <div class="card-footer">
                         <div class="card-assignees">
-                            @for (assignee of fakeAssignees; track assignee.id) {
+                            @for (assignee of taskDetailService.getAssignees(task); track assignee.id) {
                                 <div class="assignee" [style.background]="assignee.profile_color">
-                                    <span>{{ assignee.initials }}</span>
+                                    <span>{{ assignee.name | initials }}</span>
                                 </div>
                             }
                         </div>
