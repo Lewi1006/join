@@ -1,7 +1,8 @@
-import { Component, input, output, computed } from '@angular/core';
+import { Component, input, computed, output, inject } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
 import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { TaskDetailService } from '../../../shared/services/task-detail.service.';
 
 @Component({
     selector: 'app-column-comp',
@@ -10,9 +11,15 @@ import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
     styleUrl: './column-comp.scss',
 })
 export class ColumnComp {
+    taskDetailService = inject(TaskDetailService)
+
+
     title = input<string>();
     status = input<TaskStatus>();
     task = input<Task[]>();
+
+    taskSelected = output<Task>();
+
 
     // bubbles the drop up to the board, which owns the task data
     taskDropped = output<CdkDragDrop<Task[]>>();
@@ -73,4 +80,7 @@ export class ColumnComp {
         }
     }
 
+    selectTask(task: Task) {
+        this.taskSelected.emit(task);
+    }
 }

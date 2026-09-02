@@ -1,71 +1,69 @@
-<dialog class="task-dialog">
+<!-- <dialog class="task-dialog"> -->
     <div class="task-dialog-wrapper">
         <header class="task-dialog-header">
-            <div class="card-category">
-                <p>User Story</p>
+            <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
+                <p>{{task()?.category}}</p>
             </div>
-            <button class="close-btn-x" type="button" aria-label="Close">&times;</button>
+            <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">&times;</button>
         </header>
 
         <section class="task-dialog-content">
-            <h1>Add validator to contact form</h1>
+            <h1>{{task()?.title}}</h1>
             <p class="task-description">
-                check if all validators and regex for email, name.. are working Lorem ipsum dolor
-                <!-- sit amet, consectetur adipiscing elit. Aenean lobortis quis odio ut suscipit.
-                Praesent tristique ante sem, eget tincidunt erat malesuada ut. Proin scelerisque
-                nulla eros, eget fringilla mauris euismod et. Nunc velit risus, tincidunt eu erat
-                vel, blandit dictum libero. Pellentesque bibendum sapien in neque pharetra finibus.
-                Fusce ut volutpat metus. Integer neque justo, luctus id elementum sit amet, feugiat
-                sit amet urna. Aenean molestie lacus sem, in cursus est convallis quis. Curabitur
-                diam urna, pulvinar eu interdum eleifend, dignissim at urna. Morbi nulla nisl,
-                rutrum ut nulla quis, elementum sollicitudin erat. Morbi non tincidunt nisl. Ut eget
-                pharetra metus, id molestie nisi. Vestibulum vehicula sem orci, a venenatis est
-                luctus non. Morbi id mollis nisi. Duis dignissim feugiat elit et malesuada. Nunc
-                ornare, felis sed eleifend fermentum, sapien lectus varius ligula, eget suscipit sem
-                urna aliquet magna. Ut egestas erat eu arcu consectetur, tristique malesuada tortor
-                molestie. Etiam mattis nibh cursus risus maximus, nec pellentesque mi tincidunt.
-                Nunc a ullamcorper dui, vitae egestas dui. Morbi et mauris et lacus sodales
-                volutpat. Ut in augue gravida, accumsan dolor ut, lacinia nisl. -->
+            {{task()?.description}}
             </p>
         </section>
 
         <section class="task-details">
             <div class="detail">
-                <span class="detail-label">Due date</span> <span>01.09.2026</span>
+                <span class="detail-label">Due date:</span>
+                <span>{{task()?.dueDate}}</span>
             </div>
+
             <div class="detail">
-                <span class="detail-label">Priority</span>
+                <span class="detail-label">Priority:</span>
                 <div class="priority">
-                    <span>Medium</span>
-                    <img src="icons/priority-medium.svg" alt="Medium priority" />
+                    <span>{{task()?.priority}}</span>
+                     <img [src]="taskDetailService.getPriorityIcon(task()?.priority)" alt="priority icon" />
                 </div>
             </div>
-            <div class="detail">
-                <span class="detail-label">Assigned to</span>
+
+            <div class="detail assigned-to">
+                <span class="detail-label">Assigned to:</span>
+                <div class="assignee">
+                    <div class="assignee-avatar"><span>WM</span></div>
+                    <span>Name Surname</span>
+                </div>
+
+                <div class="assignee">
+                    <div class="assignee-avatar"><span>WM</span></div>
+                    <span>Name Surname</span>
+                </div>
+
                 <div class="assignee">
                     <div class="assignee-avatar"><span>WM</span></div>
                     <span>Name Surname</span>
                 </div>
             </div>
-        </section>
 
-        <section class="subtasks">
-            <h2>Subtasks</h2>
-            <label> <input type="checkbox" /> Create HTML structure </label>
-            <label> <input type="checkbox" /> Add styling </label>
+            <div class="detail subtasks">
+                <span class="detail-label">Subtasks:</span>
+                <div class="subtasks-list">
+                    <label> <input type="checkbox" /> Create HTML structure </label>
+                    <label> <input type="checkbox" /> Add styling </label>
+                </div>
+            </div>
         </section>
 
         <section class="task-actions">
-            <div class="contact-actions">
-                <button class="contact-actions-btn edit-btn">
-                    <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-                    <span>Edit</span>
-                </button>
-                <button class="contact-actions-btn delete-btn">
-                    <img src="icons/delete-bin-blue.svg" alt="delete" />
-                    <span>Delete</span>
-                </button>
-            </div>
+            <button class="task-actions-btn edit-btn">
+                <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+                <span>Edit</span>
+            </button>
+            <button class="task-actions-btn delete-btn">
+                <img src="icons/delete-bin-blue.svg" alt="delete" />
+                <span>Delete</span>
+            </button>
         </section>
     </div>
-</dialog>
+<!-- </dialog> -->
