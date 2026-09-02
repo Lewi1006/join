@@ -9,10 +9,15 @@
         }
     </div>
 
-    <div class="column-tasks">
+    <div
+        class="column-tasks"
+        cdkDropList
+        [cdkDropListData]="columnTasks()"
+        (cdkDropListDropped)="taskDropped.emit($event)"
+    >
         @if (columnTasks()?.length) {
             @for (task of columnTasks(); track task.id) {
-                <article class="task-card">
+                <article class="task-card" cdkDrag [cdkDragData]="task">
                     <div class="card-category">
                         <p>User Story</p>
                     </div>

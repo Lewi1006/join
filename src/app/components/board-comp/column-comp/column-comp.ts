@@ -1,10 +1,11 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
+import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-column-comp',
-    imports: [],
+    imports: [CdkDrag, CdkDropList],
     templateUrl: './column-comp.html',
     styleUrl: './column-comp.scss',
 })
@@ -13,7 +14,10 @@ export class ColumnComp {
     status = input<TaskStatus>();
     task = input<Task[]>();
 
-    // save task status in thos property so html can accsess it
+    // bubbles the drop up to the board, which owns the task data
+    taskDropped = output<CdkDragDrop<Task[]>>();
+
+    // save task status in those property so html can accsess it
     TaskStatus = TaskStatus;
 
     fakeAssignees = [
@@ -48,7 +52,7 @@ export class ColumnComp {
     // so each column only displays the tasks belonging to it.
     // item is a variable that stores each item in the array
     // compares and matches items status to column status
-    columnTasks = computed(() => this.task()?.filter((item) => item.status === this.status()));
+    columnTasks = computed(() => this.task()?.filter((item) => item.status === this.status()) ?? []);
 
     getEmptyMessage(): string {
         switch (this.status()) {
