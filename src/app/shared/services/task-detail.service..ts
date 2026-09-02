@@ -25,8 +25,26 @@ export class TaskDetailService{
 
         return [];
     }
+    
+
+    getDisplayedAssignees(task: Task): Contact[]{
+        const assignees = this.getAssignees(task);
+
+        const displayed = assignees.slice(0,3);
+
+        return displayed;
+    }
 
 
+    getRemainingAssigneeCount(task:Task): number{
+        const assignees = this.getAssignees(task);
+
+        if(assignees.length > 3){
+            return assignees.length -3;
+        }
+
+        return 0;
+    }
 
 
      getPriorityIcon(priority?: string): string {
