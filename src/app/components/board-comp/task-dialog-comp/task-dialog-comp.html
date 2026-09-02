@@ -30,20 +30,13 @@
 
             <div class="detail assigned-to">
                 <span class="detail-label">Assigned to:</span>
-                <div class="assignee">
-                    <div class="assignee-avatar"><span>WM</span></div>
-                    <span>Name Surname</span>
-                </div>
+                @for(assignee of taskDetailService.getAssignees(task()!); track assignee.id){
+                    <div class="assignee">
+                        <div class="assignee-avatar" [style.background]="assignee.profile_color"><span>{{assignee.name | initials}}</span></div>
+                        <span>{{assignee.name}}</span>
+                    </div>
 
-                <div class="assignee">
-                    <div class="assignee-avatar"><span>WM</span></div>
-                    <span>Name Surname</span>
-                </div>
-
-                <div class="assignee">
-                    <div class="assignee-avatar"><span>WM</span></div>
-                    <span>Name Surname</span>
-                </div>
+                }
             </div>
 
             <div class="detail subtasks">

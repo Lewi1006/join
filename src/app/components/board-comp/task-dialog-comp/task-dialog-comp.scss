@@ -88,11 +88,12 @@
                 @include d-flex(row, center, center, 15px);
                 @include font(20px, 400, 120%);
                 padding-left: 10px;
-
+                
                 .assignee-avatar {
                     width: 42px;
                     height: 42px;
-
+                    flex-shrink: 0;
+                    
                     border-radius: 50%;
                     border: 2px solid $white;
                     background: pink;
