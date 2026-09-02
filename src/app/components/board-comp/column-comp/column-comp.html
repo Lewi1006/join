@@ -12,9 +12,12 @@
     <div class="column-tasks">
         @if (columnTasks()?.length) {
             @for (task of columnTasks(); track task.id) {
-                <article class="task-card">
-                    <div class="card-category">
-                        <p>User Story</p>
+                <article class="task-card" (click)="selectTask(task)">
+                    <div
+                        class="card-category"
+                        [class]="taskDetailService.getCategory(task.category)"
+                    >
+                        <p>{{ task.category }}</p>
                     </div>
 
                     <div class="card-content">
@@ -28,21 +31,21 @@
                                 <div class="percentage"></div>
                             </div>
                         </div>
-                        <p>x/x Subtasks</p>
+                        <p>0/{{taskDetailService.getSubtaskCount(task)}} Subtasks</p>
                     </div>
 
                     <div class="card-footer">
                         <div class="card-assignees">
                             @for (assignee of fakeAssignees; track assignee.id) {
                                 <div class="assignee" [style.background]="assignee.profile_color">
-                                    <span>{{assignee.initials}}</span>
+                                    <span>{{ assignee.initials }}</span>
                                 </div>
                             }
                         </div>
 
                         <img
                             class="card-priority"
-                            src="icons/priority-high.svg"
+                            [src]="taskDetailService.getPriorityIcon(task.priority)"
                             alt="priority icon"
                         />
                     </div>

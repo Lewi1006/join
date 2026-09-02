@@ -1,6 +1,7 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed, output, inject } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
+import { TaskDetailService } from '../../../shared/services/task-detail.service.';
 
 @Component({
     selector: 'app-column-comp',
@@ -9,9 +10,14 @@ import { Task } from '../../../shared/interfaces/task.interface';
     styleUrl: './column-comp.scss',
 })
 export class ColumnComp {
+    taskDetailService = inject(TaskDetailService)
+
+
     title = input<string>();
     status = input<TaskStatus>();
     task = input<Task[]>();
+
+    taskSelected = output<Task>();
 
     // save task status in thos property so html can accsess it
     TaskStatus = TaskStatus;
@@ -69,4 +75,7 @@ export class ColumnComp {
         }
     }
 
+    selectTask(task: Task) {
+        this.taskSelected.emit(task);
+    }
 }

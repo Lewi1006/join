@@ -73,8 +73,6 @@ export class ContactsForm {
         effect(() => {
             const contact = this.contactToEdit();
 
-            console.log(contact);
-
             if (contact) {
                 this.contactForm.patchValue({
                     name: contact.name,

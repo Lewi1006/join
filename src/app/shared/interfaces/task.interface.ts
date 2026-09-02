@@ -4,14 +4,14 @@ import { Subtask } from "./subtask.interface";
 
 export interface Task{
     id?: number;
-    createdAt?: string;
+    created_at?: string;
     description?: string;
     title?: string;
     status?: TaskStatus;
     subtaskCount?: number;
-    assignees?: Contact[];
     subtasks?: Subtask[];
     dueDate?: string;
     category?: string;
     priority?: string;
+    assignees?: Contact[];
 }

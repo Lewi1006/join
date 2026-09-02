@@ -5,6 +5,7 @@ import { TasksService } from '../../shared/services/tasks.service';
 import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 import { Task } from '../../shared/interfaces/task.interface';
 
+
 @Component({
     selector: 'app-board-comp',
     imports: [ColumnComp, TaskDialogComp],
@@ -13,6 +14,12 @@ import { Task } from '../../shared/interfaces/task.interface';
 })
 export class BoardComp {
     taskService = inject(TasksService);
+  
+    
+    selectedTaskId = signal<number | undefined>(undefined);
+    selectedTask = computed(() =>
+    this.taskService.tasks().find((task)=>task.id === this.selectedTaskId()) 
+    )
 
     ngOnInit() {
         this.taskService.getAllTasks();
@@ -38,6 +45,8 @@ export class BoardComp {
         },
     ];
 
+
+
     searchTerm = signal('');
 
     filteredTasks = computed(() => {
@@ -50,4 +59,25 @@ export class BoardComp {
     tasksForColumn(status: TaskStatus): Task[] {
         return this.filteredTasks().filter((t) => t.status === status);
     }
+
+
+
+    // column-comp has (click) onto a task (Task) this emits 
+    // an output signal (taskSelected) with the selected task through method openTaskDialog
+    // (taskSelected)="openTaskDialog($event)" --> child(column) hands over event(task) to parent(board)
+    // parent(board) saves the ID of the selected Task in a signal calles selectedTaskId
+    // this can then be handed over to the child(dialog) as an input signal
+    // dialog gets opened here 
+
+    openTaskDialog(task:Task,  taskDialog: HTMLDialogElement){
+        this.selectedTaskId.set(task.id);
+        console.log(this.selectedTaskId());
+        taskDialog.showModal();
+    }
+
+    closeTaskDialog(taskDialog: HTMLDialogElement){
+        taskDialog.close();
+        this.selectedTaskId.set(undefined);
+    }
 }
+
