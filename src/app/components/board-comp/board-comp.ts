@@ -43,7 +43,7 @@ export class BoardComp {
     filteredTasks = computed(() => {
         const term = this.searchTerm().toLowerCase().trim();
         return term.length >= 3
-            ? this.taskService.tasks().filter((t) => t.title.toLowerCase().includes(term))
+            ? this.taskService.tasks().filter((t) => t.title?.toLowerCase().includes(term))
             : this.taskService.tasks();
     });
 

@@ -1,6 +1,6 @@
 import { Contact } from "./contact.interface";
-
 import { TaskStatus } from "./column.interface";
+import { Subtask } from "./subtask.interface";
 
 export interface Task{
     id?: number;
@@ -10,7 +10,7 @@ export interface Task{
     status?: TaskStatus;
     subtaskCount?: number;
     assignees?: Contact[];
-    subtasks?: string[];
+    subtasks?: Subtask[];
     dueDate?: string;
     category?: string;
     priority?: string;

@@ -2,11 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
-import { Tasks } from '../../share/services/tasks';
 import { TasksService } from '../../shared/services/tasks.service';
 import { ContactsService } from '../../shared/services/contacts.service';
 import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
+import { Subtask } from '../../shared/interfaces/subtask.interface';
 
 @Component({
     selector: 'app-task-form',
@@ -20,14 +20,14 @@ export class TaskForm {
 
     divClassList = 'd-none';
     toggleDisplayNone() {
-        if(this.divClassList == ''){
+        if (this.divClassList == '') {
             this.divClassList = 'd-none';
-        } else{
+        } else {
             this.divClassList = '';
-        };
+        }
     }
 
-    subtasks = signal<string[]>([]);
+    subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
 
     taskForm = new FormGroup({
@@ -47,15 +47,22 @@ export class TaskForm {
         this.dbService.cloneArray();
     }
 
-    assignContact() {}
+    assignContact(contact: Contact) {
+        this.assignees.update((assignees) => [...assignees, contact]);
+        console.log(this.assignees());
+    }
 
     addSubtask() {
-        const inputSubtaskRef = (<HTMLInputElement>document.getElementById('input-subtask'));
-        let newSubtask = inputSubtaskRef?.value;
-        
+        const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
+        let newSubtaskDescription = inputSubtaskRef?.value;
+
+        const newSubtask: Subtask = {
+            description: newSubtaskDescription,
+            checked: false,
+        };
+
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
-
     }
 
     async onSubmit() {
@@ -72,6 +79,7 @@ export class TaskForm {
             };
 
             this.taskService.createTask(task);
+            console.log('task created');
         }
     }
 }
