@@ -1,5 +1,6 @@
 import { Injectable,} from '@angular/core';
 import { Task } from '../interfaces/task.interface';
+import { Contact } from '../interfaces/contact.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -11,9 +12,16 @@ export class TaskDetailService{
         if (task.subtasks?.length){
             return task.subtasks.length;
         }
-        
+
         return 0;
     }
+
+
+
+    // getAssignees(task: Task, contacts:Contact[]): Contact[]{
+
+    // }
+
 
 
 
