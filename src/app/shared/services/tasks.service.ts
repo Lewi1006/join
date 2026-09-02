@@ -12,7 +12,7 @@ export class TasksService {
 
     async getAllTasks() {
         // is "status" correct?
-        const tasks = await this.crud.getAll<Task>(this.table, 'status');
+        const tasks = await this.crud.getAll<Task>(this.table, );
         console.log(tasks);
         console.log(tasks.length);
         this.tasks.set(tasks);
@@ -30,11 +30,10 @@ export class TasksService {
         await this.getAllTasks();
     }
 
-    async updateTask(id: number, task: Task) {
-        await this.crud.update<Task>(this.table, id, {
-            // task keys needed
-            // name: task.name,
-        });
+    // only the passed keys are written, id and createdAt stay untouched
+    async updateTask(id: number, changes: Partial<Task>) {
+        // const { } = changes;
+        await this.crud.update<Task>(this.table, id, changes);
 
         await this.getAllTasks();
     }

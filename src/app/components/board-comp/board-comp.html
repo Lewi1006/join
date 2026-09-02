@@ -25,12 +25,13 @@
         </div>
     </div>
 
-    <div class="board-columns">
+    <div class="board-columns" cdkDropListGroup>
         @for (column of columns; track column.status) {
             <app-column-comp
                 [title]="column.title"
                 [status]="column.status"
                 [task]="tasksForColumn(column.status)"
+                (taskDropped)="onTaskDropped($event, column.status)"
             ></app-column-comp>
         }
     </div>
