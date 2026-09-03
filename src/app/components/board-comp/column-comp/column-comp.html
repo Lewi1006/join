@@ -3,7 +3,7 @@
         <h2>{{ title() }}</h2>
 
         @if (status() !== TaskStatus.Done) {
-            <button class="add-btn" type="button" aria-label="Add task">
+            <button class="add-btn" type="button" aria-label="Add task" (click)="addTask()">
                 <span>&#43;</span>
             </button>
         }
@@ -17,7 +17,13 @@
     >
         @if (columnTasks()?.length) {
             @for (task of columnTasks(); track task.id) {
-                <article class="task-card" (click)="selectTask(task)" cdkDrag [cdkDragData]="task" cdkDragPreviewContainer="parent">
+                <article
+                    class="task-card"
+                    (click)="selectTask(task)"
+                    cdkDrag
+                    [cdkDragData]="task"
+                    cdkDragPreviewContainer="parent"
+                >
                     <div
                         class="card-category"
                         [class]="taskDetailService.getCategory(task.category)"
@@ -61,11 +67,13 @@
                             }
                         </div>
 
-                        <img
-                            class="card-priority"
-                            [src]="taskDetailService.getPriorityIcon(task.priority)"
-                            alt="priority icon"
-                        />
+                        @if (taskDetailService.getPriorityIcon(task.priority)) {
+                            <img
+                                class="card-priority"
+                                [src]="taskDetailService.getPriorityIcon(task.priority)"
+                                alt="priority icon"
+                            />
+                        }
                     </div>
                 </article>
             }
