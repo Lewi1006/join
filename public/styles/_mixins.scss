@@ -121,7 +121,7 @@ $breakpoints: (
     sm: 480px,
     m: 768px,
     l: 1024px,
-    desktop: 1440px,
+    desktop: 1439px,
 );
 
 @mixin respond($minsize: zero, $maxsize: desktop) {
