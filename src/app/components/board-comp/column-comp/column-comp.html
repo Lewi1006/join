@@ -36,14 +36,27 @@
                                 <div class="percentage"></div>
                             </div>
                         </div>
-                        <p>0/{{taskDetailService.getSubtaskCount(task)}} Subtasks</p>
+                        <p>0/{{ taskDetailService.getSubtaskCount(task) }} Subtasks</p>
                     </div>
 
                     <div class="card-footer">
                         <div class="card-assignees">
-                            @for (assignee of fakeAssignees; track assignee.id) {
+                            @for (
+                                assignee of taskDetailService.getDisplayedAssignees(task);
+                                track assignee.id
+                            ) {
                                 <div class="assignee" [style.background]="assignee.profile_color">
-                                    <span>{{ assignee.initials }}</span>
+                                    <span>{{ assignee.name | initials }}</span>
+                                </div>
+                            }
+
+                            @if (taskDetailService.getRemainingAssigneeCount(task) > 0) {
+                                <div class="remaining-assignees">
+                                    <span
+                                        >+{{
+                                            taskDetailService.getRemainingAssigneeCount(task)
+                                        }}</span
+                                    >
                                 </div>
                             }
                         </div>

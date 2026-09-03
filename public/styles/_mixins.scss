@@ -1,3 +1,4 @@
+
 @mixin d-flex($direction: row, $align: center, $justify: center, $gap: 0px) {
     display: flex;
     flex-direction: $direction;
@@ -63,6 +64,26 @@
         0px 0px 28px rgba(3, 7, 18, 0.04);
 }
 
+@mixin scrollbar($track-margin: 0){
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        margin: $track-margin;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #6b6b6bb6;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background:#2a3647;
+}
+}
+
 @mixin modal($bg: white, $bg-backdrop: rgba(black, 0.4)) {
     position: fixed;
     margin: auto;
@@ -100,7 +121,7 @@ $breakpoints: (
     sm: 480px,
     m: 768px,
     l: 1024px,
-    desktop: 1440px,
+    desktop: 1439px,
 );
 
 @mixin respond($minsize: zero, $maxsize: desktop) {

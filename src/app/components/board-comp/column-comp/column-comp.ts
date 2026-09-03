@@ -3,10 +3,11 @@ import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
 import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskDetailService } from '../../../shared/services/task-detail.service.';
+import { InitialsPipe } from '../../../shared/pipes.pipe';
 
 @Component({
     selector: 'app-column-comp',
-    imports: [CdkDrag, CdkDropList],
+    imports: [CdkDrag, CdkDropList, InitialsPipe],
     templateUrl: './column-comp.html',
     styleUrl: './column-comp.scss',
 })

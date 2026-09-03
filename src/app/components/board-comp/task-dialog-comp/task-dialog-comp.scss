@@ -15,12 +15,24 @@
 // }
 
 .task-dialog-wrapper {
-    min-width: 500px;
-    width: 100%;
+    // min-width: 500px;
+    // width: 100%;
+
+    // width: 525px;
+    // max-width: calc(100dvw - 40px);
+
+    width: 525px;
+    max-width: 100%;
+    height: 100%;
 
     padding: 36px 40px;
 
-    @include d-flex(column, center, flex-start, 30px);
+    @include d-flex(column, center, center, 30px);
+
+    @include respond(zero, sm) {
+        padding: 32px 24px;
+         @include d-flex(column, center, center, 20px);
+    }
 
     .task-dialog-header {
         width: 100%;
@@ -31,14 +43,19 @@
             color: $white;
             padding: 4px 24px;
             border-radius: 8px;
-            
+
             @include font(24px, 400, 120%);
-            
-            &.user-story{
+
+            @include respond(zero, sm) {
+                @include font(16px, 400, 120%);
+                padding: 4px 16px;
+            }
+
+            &.user-story {
                 background: $blue-category;
             }
 
-            &.technical-task{
+            &.technical-task {
                 background: $green-category;
             }
         }
@@ -46,6 +63,10 @@
         .close-btn-x {
             font-size: 24px;
             color: $blue-main;
+
+            @include respond(zero, sm) {
+                font-size: 16px;
+            }
         }
     }
 
@@ -55,10 +76,18 @@
 
         h1 {
             @include font(60px, 700, 100%);
+
+            @include respond(zero, sm) {
+                @include font(36px, 700, 100%);
+            }
         }
 
         .task-description {
             @include font(20px);
+
+            @include respond(zero, sm) {
+                @include font(16px);
+            }
         }
     }
 
@@ -68,30 +97,63 @@
         @include d-flex(column, flex-start, flex-start, 15px);
 
         .detail {
+            width: 100%;
+
             @include d-flex(row, center, flex-start, 40px);
             @include font(20px, 400, 120%);
+
+            @include respond(zero, sm) {
+                @include d-flex(row, center, flex-start, 20px);
+                @include font(16px);
+            }
 
             .detail-label {
                 width: 120px;
                 color: $blue-light;
+
+                @include respond(zero, sm) {
+                    width: 80px;
+                    flex-shrink: 0;
+                }
+            }
+
+            .due-date {
+                @include respond(zero, sm) {
+                    flex: 1;
+                    min-width: 0;
+                    overflow-wrap: anywhere;
+                }
             }
 
             .priority {
-                @include d-flex(row, center, center, 10px);
+                @include d-flex(row, center, flex-start, 10px);
+                @include respond(zero, sm) {
+                    flex: 1;
+                    min-width: 0;
+                }
             }
         }
 
         .assigned-to {
             @include d-flex(column, flex-start, flex-start, 10px);
 
+            .detail-label {
+                width: 120px;
+            }
+
             .assignee {
                 @include d-flex(row, center, center, 15px);
                 @include font(20px, 400, 120%);
                 padding-left: 10px;
 
+                @include respond(zero, sm) {
+                    @include font(16px);
+                }
+
                 .assignee-avatar {
                     width: 42px;
                     height: 42px;
+                    flex-shrink: 0;
 
                     border-radius: 50%;
                     border: 2px solid $white;
