@@ -12,7 +12,7 @@ export class TasksService {
 
     async getAllTasks() {
         // is "status" correct?
-        const tasks = await this.crud.getAll<Task>(this.table, );
+        const tasks = await this.crud.getAll<Task>(this.table);
         console.log(tasks);
         console.log(tasks.length);
         this.tasks.set(tasks);
@@ -32,8 +32,9 @@ export class TasksService {
 
     // only the passed keys are written, id and createdAt stay untouched
     async updateTask(id: number, changes: Partial<Task>) {
-        // const { } = changes;
-        await this.crud.update<Task>(this.table, id, changes);
+        const patch = { ...changes, updated_at: new Date().toISOString() };
+
+        await this.crud.update<Task>(this.table, id, patch);
 
         await this.getAllTasks();
     }

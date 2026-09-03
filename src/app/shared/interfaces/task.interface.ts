@@ -1,8 +1,8 @@
-import { Contact } from "./contact.interface";
-import { TaskStatus } from "./column.interface";
-import { Subtask } from "./subtask.interface";
+import { Contact } from './contact.interface';
+import { TaskStatus } from './column.interface';
+import { Subtask } from './subtask.interface';
 
-export interface Task{
+export interface Task {
     id?: number;
     created_at?: string;
     description?: string;
@@ -14,4 +14,5 @@ export interface Task{
     category?: string;
     priority?: string;
     assignees?: Contact[];
+    updated_at?: string;
 }

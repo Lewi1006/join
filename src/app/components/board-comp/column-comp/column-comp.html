@@ -17,7 +17,7 @@
     >
         @if (columnTasks()?.length) {
             @for (task of columnTasks(); track task.id) {
-                <article class="task-card" (click)="selectTask(task)" cdkDrag [cdkDragData]="task">
+                <article class="task-card" (click)="selectTask(task)" cdkDrag [cdkDragData]="task" cdkDragPreviewContainer="parent">
                     <div
                         class="card-category"
                         [class]="taskDetailService.getCategory(task.category)"
