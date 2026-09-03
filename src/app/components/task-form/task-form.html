@@ -78,7 +78,7 @@
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <div class="assignee-box">
                                     <div class="initials">
-                                        <p>{{ contact.name | initials }}</p>
+                                        <p [style.background]="contact.profile_color">{{ contact.name | initials }}</p>
                                     </div>
                                     <div class="label">
                                         <label class="label-text" for="{{ contact.name }}">{{

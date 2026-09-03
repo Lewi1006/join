@@ -1,7 +1,6 @@
 @use '../../../../public/styles/main' as *;
 
 #add-task {
-    border: 1px solid green;
     width: 100%;
     height: 100%;
     max-height: 900px;
@@ -11,20 +10,16 @@
     h1 {
         height: fit-content;
         width: 100%;
-        background-color: green;
     }
 
     #taskform {
-        background-color: teal;
         width: 100%;
         height: 100%;
-        border: 2px solid yellow;
         @include d-flex(column, center, center, 0px);
 
         #taskform-content {
             width: 100%;
-            height: 80%;
-            background-color: salmon;
+            height: 85%;
             @include d-flex(row, center, space-between, 0px);
 
             #column-separation-line {
@@ -38,66 +33,76 @@
             }
 
             .form-column {
-                width: 49%;
+                width: 45%;
                 height: 100%;
                 @include d-flex(column, flex-start, space-between);
 
                 .input-fields-group {
                     width: 100%;
                     height: 85%;
-                    border: 1px solid black;
                     @include d-flex(column, flex-start, flex-start, 24px);
 
                     #priority {
                         @include d-flex(row, flex-start, flex-start, 0px);
                     }
 
-                    #list-of-assignees {
-                        border: 2px solid orange;
-                        width: 100%;
-                        height: 250px;
-                        overflow-y: scroll;
-
-                        .assignee-box {
-                            height: 30px;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-
-                            border: 1px solid red;
+                    #assignees {
+                    
+                        #list-of-assignees {
+                            background-color: white;
+                            border: 1px solid white;
+                            border-radius: 10px;
+                            position: absolute;
+                            top: 60px;
                             width: 100%;
+                            height: 250px;
+                            overflow-y: scroll;
+                            z-index: 1;
 
-                            .initials {
-                                width: 10%;
-                                p {
-                                    height: 25px;
-                                    width: 25px;
-                                    border-radius: 50%;
-                                    background-color: orange;
+                            .assignee-box {
+                                height: 56px;
+                                border: 1px solid black;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 100%;
+                                border-radius: 10px;
+
+                                .initials {
+                                    width: 10%;
+                                    height: 40px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    p {
+                                        height: 35px;
+                                        border: solid 3px white;
+                                        aspect-ratio: 1;
+                                        border-radius: 50%;
+                                    }
                                 }
-                            }
 
-                            input {
-                                width: 5%;
-                            }
+                                input {
+                                    width: 5%;
+                                }
 
-                            .label {
-                                width: calc(100% - 10% - 5%);
-                                overflow: hidden;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                                text-align: left;
+                                .label {
+                                    width: calc(100% - 10% - 5%);
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    text-align: left;
+                                }
                             }
                         }
                     }
 
                     .input-field-div {
                         width: 100%;
-                        border: 2px solid purple;
                         @include d-flex(column, flex-start, flex-start, 8px);
 
                         .input-field-title {
-                            background-color: green;
                             @include font(20px);
                             color: $blue-main;
                         }
@@ -108,9 +113,12 @@
                         }
 
                         .input-field {
-                            background-color: pink;
                             width: 100%;
+                            min-height: 30px;
                             @include d-flex(column, 16px);
+                            border: 1px solid black;
+                            border-radius: 8px;
+                            padding: 4px 8px;
                         }
                     }
                 }
@@ -118,19 +126,16 @@
         }
 
         #taskform-footer {
-            background-color: beige;
             width: 100%;
-            height: 20%;
+            height: 15%;
             @include d-flex(row, flex-end, space-between);
 
             #disclaimer-text {
-                background-color: orange;
                 width: fit-content;
                 @include d-flex(row, flex-end, flex-end, 4px);
             }
 
             #create-or-clear {
-                border: 2px solid purple;
                 height: fit-content;
                 width: fit-content;
                 @include d-flex(row, center, flex-end, 16px);
