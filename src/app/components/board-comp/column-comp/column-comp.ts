@@ -21,6 +21,8 @@ export class ColumnComp {
 
     taskSelected = output<Task>();
 
+    // so column knows the status when add task is clicked via +
+    addColumnTask = output<TaskStatus>();
 
     // bubbles the drop up to the board, which owns the task data
     taskDropped = output<CdkDragDrop<Task[]>>();
@@ -83,5 +85,10 @@ export class ColumnComp {
 
     selectTask(task: Task) {
         this.taskSelected.emit(task);
+    }
+
+
+    addTask(){
+        this.addColumnTask.emit(this.status()!);
     }
 }

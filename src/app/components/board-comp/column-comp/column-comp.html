@@ -3,7 +3,7 @@
         <h2>{{ title() }}</h2>
 
         @if (status() !== TaskStatus.Done) {
-            <button class="add-btn" type="button" aria-label="Add task">
+            <button class="add-btn" type="button" aria-label="Add task" (click)="addTask()">
                 <span>&#43;</span>
             </button>
         }

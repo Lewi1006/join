@@ -119,3 +119,24 @@
         transform: translate(-50%, -50%);
     }
 }
+
+.add-task-dialog {
+    position: fixed;
+    margin: auto;
+    border-radius: 15px;
+    background: $white;
+    @include drop-shadow;
+
+    &::backdrop {
+        background: rgba(black, 0.4);
+    }
+
+    border-radius: 24px;
+
+    @include scrollbar(20px 0);
+
+    width: 1000px;
+    height: 700px;
+    max-width: calc(100dvw - 40px);
+    max-height: calc(100dvh - 40px);
+}
