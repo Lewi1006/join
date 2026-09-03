@@ -17,7 +17,7 @@
                     />
                 </div>
                 <div class="input-field-div">
-                    <label for="due-date" class="input-field">Due Date: </label>
+                    <label for="due-date" class="input-field-title">Due Date: </label>
                     <input
                         id="due-date"
                         type="date"
@@ -26,14 +26,18 @@
                     />
                 </div>
             </div>
-            <div>
-                <p>blablabla</p>
+            <div id="disclaimer-text">
+                <p>*</p>
+                <p>This field is required</p>
             </div>
+        </div>
+        <div id="column-separation-line">
+            <img src="icons/grey-separation-line.svg" alt="">
         </div>
         <div class="form-column">
             <div class="input-fields-group">
                 <div class="input-field-div">
-                    <label for="priority" class="input-field">Priority: </label>
+                    <label for="priority" class="input-field-title">Priority: </label>
                     <div id="priority">
                         <input type="radio" id="low" formControlName="priority" value="Low" />
                         <label for="low">Low</label><br />
@@ -45,7 +49,7 @@
                 </div>
 
                 <div class="input-field-div">
-                    <label for="category" class="input-field">Category: </label>
+                    <label for="category" class="input-field-title">Category: </label>
                     <select formControlName="category" class="input-field">
                         <option class="input-field">Choose a category</option>
                         @for (category of categories; track $index) {
@@ -55,7 +59,7 @@
                 </div>
 
                 <div class="input-field-div" id="assignees">
-                    <label for="assignees" class="input-field">Assigned to</label>
+                    <label for="assignees" class="input-field-title">Assigned to</label>
                     <p class="input-field" (click)="toggleDisplayNone()">
                         Select contacts to assign
                     </p>
@@ -101,9 +105,15 @@
                     }
                 </div>
             </div>
-            <div>
-                <button type="submit" [disabled]="!taskForm.valid">Save</button>
-                <button>Clear</button>
+            <div id="create-or-clear">
+                <button>
+                    <p>Clear</p>
+                    <img src="icons/close-blue.svg" alt="">
+                    </button>
+                <button type="submit" [disabled]="!taskForm.valid">
+                    <p>Create Task</p>
+                    <img src="icons/checkmark-blue.svg" alt="">
+                </button>
             </div>
         </div>
     </form>
