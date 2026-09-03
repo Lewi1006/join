@@ -45,17 +45,25 @@
                     <div class="input-field-div">
                         <label for="priority" class="input-field-title">Priority: </label>
                         <div id="priority">
-                            <input type="radio" id="low" formControlName="priority" value="Low" />
-                            <label for="low">Low</label><br />
-                            <input
-                                type="radio"
-                                id="medium"
-                                formControlName="priority"
-                                value="medium"
-                            />
-                            <label for="high">Medium</label><br />
-                            <input type="radio" id="high" formControlName="priority" value="High" />
-                            <label for="high">High</label><br /><br />
+                            <div class="priority-button" id="priority-low">
+                                <input  type="radio" id="low" formControlName="priority" value="Low" />
+                                <label for="low">Low</label>
+                            </div>
+
+                            <div class="priority-button" id="priority-medium">
+                                <input
+                                    type="radio"
+                                    id="medium"
+                                    formControlName="priority"
+                                    value="medium"
+                                />
+                                <label for="high">Medium</label>
+                            </div>
+
+                            <div class="priority-button" id="priority-high">
+                                <input class="radio-btn" type="radio" id="high" formControlName="priority" value="High" />
+                                <label for="high">High</label>
+                            </div>
                         </div>
                     </div>
 

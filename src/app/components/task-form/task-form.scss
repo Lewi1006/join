@@ -43,7 +43,23 @@
                     @include d-flex(column, flex-start, flex-start, 24px);
 
                     #priority {
-                        @include d-flex(row, flex-start, flex-start, 0px);
+                        width: 100%;
+                        @include d-flex(row, center, space-between, 0px);
+
+                        .priority-button{
+                            background-color: purple;
+                            width: 30%;
+                            height: 50px;
+                            border-radius: 10px;
+                            @include d-flex(row, center, center, 16px);
+
+/*                             .radio-btn{
+
+                            } */
+                            
+                        }
+
+
                     }
 
                     #assignees {
