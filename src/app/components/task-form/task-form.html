@@ -1,115 +1,142 @@
 <section id="add-task">
     <h1>Add Task</h1>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
-        <div class="form-column">
-            <div class="input-fields-group">
-                <div class="input-field-div">
-                    <label for="title" class="input-field-title">Title</label>
-                    <textarea id="title" class="input-field" id="text" formControlName="title" rows="1" cols="50"></textarea>
-                </div>
-                <div class="input-field-div">
-                    <label for="description" class="input-field-title">Description</label>
-                    <textarea id="description" class="input-field" id="text" formControlName="description" rows="10" cols="50"></textarea>
-                </div>
-                <div class="input-field-div">
-                    <label for="due-date" class="input-field-title">Due Date</label>
-                    <input
-                        id="due-date"
-                        type="datetime-local"
-                        formControlName="dueDate"
-                        class="input-field"
-                    />
-                </div>
-            </div>
-            <div id="disclaimer-text">
-                <p>*</p>
-                <p>This field is required</p>
-            </div>
-        </div>
-        <div id="column-separation-line">
-            <img src="icons/grey-separation-line.svg" alt="">
-        </div>
-        <div class="form-column">
-            <div class="input-fields-group">
-                <div class="input-field-div">
-                    <label for="priority" class="input-field-title">Priority: </label>
-                    <div id="priority">
-                        <input type="radio" id="low" formControlName="priority" value="Low" />
-                        <label for="low">Low</label><br />
-                        <input type="radio" id="medium" formControlName="priority" value="medium" />
-                        <label for="high">Medium</label><br />
-                        <input type="radio" id="high" formControlName="priority" value="High" />
-                        <label for="high">High</label><br /><br />
+        <section id="taskform-content">
+            <div class="form-column">
+                <div class="input-fields-group">
+                    <div class="input-field-div">
+                        <label for="title" class="input-field-title">Title</label>
+                        <textarea
+                            id="title"
+                            class="input-field"
+                            id="text"
+                            formControlName="title"
+                            rows="1"
+                            cols="50"
+                        ></textarea>
+                    </div>
+                    <div class="input-field-div">
+                        <label for="description" class="input-field-title">Description</label>
+                        <textarea
+                            id="description"
+                            class="input-field"
+                            id="text"
+                            formControlName="description"
+                            rows="10"
+                            cols="50"
+                        ></textarea>
+                    </div>
+                    <div class="input-field-div">
+                        <label for="due-date" class="input-field-title">Due Date</label>
+                        <input
+                            id="due-date"
+                            type="datetime-local"
+                            formControlName="dueDate"
+                            class="input-field"
+                        />
                     </div>
                 </div>
+            </div>
+            <div id="column-separation-line">
+                <img src="icons/grey-separation-line.svg" alt="" />
+            </div>
+            <div class="form-column">
+                <div class="input-fields-group">
+                    <div class="input-field-div">
+                        <label for="priority" class="input-field-title">Priority: </label>
+                        <div id="priority">
+                            <input type="radio" id="low" formControlName="priority" value="Low" />
+                            <label for="low">Low</label><br />
+                            <input
+                                type="radio"
+                                id="medium"
+                                formControlName="priority"
+                                value="medium"
+                            />
+                            <label for="high">Medium</label><br />
+                            <input type="radio" id="high" formControlName="priority" value="High" />
+                            <label for="high">High</label><br /><br />
+                        </div>
+                    </div>
 
-                <div class="input-field-div">
-                    <label for="category" class="input-field-title">Category: </label>
-                    <select formControlName="category" class="input-field">
-                        <option class="input-field">Choose a category</option>
-                        @for (category of categories; track $index) {
-                            <option class="input-field">{{ category }}</option>
-                        }
-                    </select>
-                </div>
+                    <div class="input-field-div">
+                        <label for="category" class="input-field-title">Category: </label>
+                        <select formControlName="category" class="input-field">
+                            <option class="input-field">Choose a category</option>
+                            @for (category of categories; track $index) {
+                                <option class="input-field">{{ category }}</option>
+                            }
+                        </select>
+                    </div>
 
-                <div class="input-field-div" id="assignees">
-                    <label for="assignees" class="input-field-title">Assigned to</label>
-                    <p class="input-field" (click)="toggleDisplayNone()">
-                        Select contacts to assign
-                    </p>
-                    <div id="list-of-assignees" [class]="divClassList">
-                        @for (contact of dbService.contacts(); track contact.id) {
-                            <div class="assignee-box">
-                                <div class="initials">
-                                    <p>{{ contact.name | initials }}</p>
+                    <div class="input-field-div" id="assignees">
+                        <label for="assignees" class="input-field-title">Assigned to</label>
+                        <p class="input-field" (click)="toggleDisplayNone()">
+                            Select contacts to assign
+                        </p>
+                        <div id="list-of-assignees" [class]="divClassList">
+                            @for (contact of dbService.contacts(); track contact.id) {
+                                <div class="assignee-box">
+                                    <div class="initials">
+                                        <p>{{ contact.name | initials }}</p>
+                                    </div>
+                                    <div class="label">
+                                        <label class="label-text" for="{{ contact.name }}">{{
+                                            contact.name
+                                        }}</label>
+                                    </div>
+                                    <input
+                                        formControlName="assignees"
+                                        type="checkbox"
+                                        id="{{ contact.id }}"
+                                        name="{{ contact.name }}"
+                                        value="{{ contact.name }}"
+                                        (click)="assignContact(contact)"
+                                    />
                                 </div>
-                                <div class="label">
-                                    <label class="label-text" for="{{ contact.name }}">{{ contact.name }}</label>
-                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="input-field-div" id="subtasks">
+                        <label for="subtasks" class="input-field-title">Subtasks</label>
+                        <div>
+                            <input id="input-subtask" type="text" class="input-field" />
+                            <button (click)="addSubtask()">add</button>
+                        </div>
+                    </div>
+                    <div>
+                        @for (item of subtasks(); track $index) {
+                            <div>
                                 <input
-                                    formControlName="assignees"
                                     type="checkbox"
-                                    id="{{ contact.id }}"
-                                    name="{{ contact.name }}"
-                                    value="{{ contact.name }}"
-                                    (click)="assignContact(contact)"
+                                    id="subtasks.index"
+                                    name="subtasks.index"
+                                    value="{{ item.description }}"
                                 />
+                                <label for="">{{ item.description }}</label
+                                ><br />
                             </div>
                         }
                     </div>
                 </div>
-
-                <div class="input-field-div" id="subtasks">
-                    <label for="subtasks" class="input-field-title">Subtasks</label>
-                    <div>
-                        <input
-                            id="input-subtask"
-                            type="text"
-                            class="input-field"
-                        />
-                        <button (click)="addSubtask()">add</button>
-                    </div>
-                </div>
-                <div>
-                    @for (item of subtasks(); track $index) {
-                        <div>
-                            <input type="checkbox" id="subtasks.index" name="subtasks.index" value="{{item.description}}" />
-                            <label for="">{{item.description}}</label><br />
-                        </div>
-                    }
-                </div>
+            </div>
+        </section>
+        <section id="taskform-footer">
+            <div id="disclaimer-text">
+                <p>*</p>
+                <p>This field is required</p>
             </div>
             <div id="create-or-clear">
                 <button>
                     <p>Clear</p>
-                    <img src="icons/close-blue.svg" alt="">
-                    </button>
+                    <img src="icons/close-blue.svg" alt="" />
+                </button>
                 <button type="submit" [disabled]="!taskForm.valid">
                     <p>Create Task</p>
-                    <img src="icons/checkmark-blue.svg" alt="">
+                    <img src="icons/checkmark-blue.svg" alt="" />
                 </button>
             </div>
-        </div>
+        </section>
     </form>
 </section>

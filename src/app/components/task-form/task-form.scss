@@ -4,124 +4,144 @@
     border: 1px solid green;
     width: 100%;
     height: 100%;
-    @include d-flex(column, flex-start, flex-start, 20px);
-    padding: 20px;
+    max-height: 900px;
+    @include d-flex(column, flex-start, flex-start, 32px);
+    padding: 32px;
+
+    h1 {
+        height: fit-content;
+        width: 100%;
+        background-color: green;
+    }
 
     #taskform {
+        background-color: teal;
         width: 100%;
         height: 100%;
         border: 2px solid yellow;
-        @include d-flex(row, center, center, 0px);
+        @include d-flex(column, center, center, 0px);
 
+        #taskform-content {
+            width: 100%;
+            height: 80%;
+            background-color: salmon;
+            @include d-flex(row, center, space-between, 0px);
 
-        #column-separation-line{
-            justify-self: center;
-            height: 100%;
-            width: fit-content;
+            #column-separation-line {
+                justify-self: center;
+                height: 100%;
+                width: fit-content;
 
-            img{
-                height: 75%;
+                img {
+                    height: 75%;
+                }
+            }
+
+            .form-column {
+                width: 49%;
+                height: 100%;
+                @include d-flex(column, flex-start, space-between);
+
+                .input-fields-group {
+                    width: 100%;
+                    height: 85%;
+                    border: 1px solid black;
+                    @include d-flex(column, flex-start, flex-start, 24px);
+
+                    #priority {
+                        @include d-flex(row, flex-start, flex-start, 0px);
+                    }
+
+                    #list-of-assignees {
+                        border: 2px solid orange;
+                        width: 100%;
+                        height: 250px;
+                        overflow-y: scroll;
+
+                        .assignee-box {
+                            height: 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            border: 1px solid red;
+                            width: 100%;
+
+                            .initials {
+                                width: 10%;
+                                p {
+                                    height: 25px;
+                                    width: 25px;
+                                    border-radius: 50%;
+                                    background-color: orange;
+                                }
+                            }
+
+                            input {
+                                width: 5%;
+                            }
+
+                            .label {
+                                width: calc(100% - 10% - 5%);
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                text-align: left;
+                            }
+                        }
+                    }
+
+                    .input-field-div {
+                        width: 100%;
+                        border: 2px solid purple;
+                        @include d-flex(column, flex-start, flex-start, 8px);
+
+                        .input-field-title {
+                            background-color: green;
+                            @include font(20px);
+                            color: $blue-main;
+                        }
+
+                        #description {
+                            width: 100%;
+                            height: 150px;
+                        }
+
+                        .input-field {
+                            background-color: pink;
+                            width: 100%;
+                            @include d-flex(column, 16px);
+                        }
+                    }
+                }
             }
         }
 
-        .form-column {
-            width: 49%;
-            height: 100%;
-            @include d-flex(column, flex-start, space-between);
-            padding: 20px;
+        #taskform-footer {
+            background-color: beige;
+            width: 100%;
+            height: 20%;
+            @include d-flex(row, flex-end, space-between);
 
-            #disclaimer-text{
+            #disclaimer-text {
                 background-color: orange;
                 width: fit-content;
-                @include d-flex(row, flex-start, flex-start, 4px)
+                @include d-flex(row, flex-end, flex-end, 4px);
             }
 
-            .input-fields-group {
-                width: 100%;
-                height: 85%;
-                border: 1px solid black;
-                @include d-flex(column, flex-start, flex-start, 24px);
-
-                #priority {
-                    @include d-flex(row, flex-start, flex-start, 0px);
-                }
-
-                #list-of-assignees {
-                    border: 2px solid orange;
-                    width: 100%;
-                    height: 250px;
-                    overflow-y: scroll;
-
-                    .assignee-box {
-                        height: 30px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-
-                        border: 1px solid red;
-                        width: 100%;
-
-                        .initials{
-                            width: 10%;
-                            p {
-                                height: 25px;
-                                width: 25px;
-                                border-radius: 50%;
-                                background-color: orange;
-                            }
-                        }
-
-
-                        input {
-                            width: 5%;
-                        }
-
-                        .label {
-                            width: calc(100% - 10% - 5%);
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                            text-align: left;
-                        }
-                    }
-                }
-
-                .input-field-div {
-                    width: 100%;
-                    border: 2px solid purple;
-                    @include d-flex(column, flex-start, flex-start, 8px);
-
-                    .input-field-title{
-                        background-color: green;
-                        @include font(20px);
-                        color: $blue-main;
-                    }
-
-                    #description {
-                        width: 100%;
-                        height: 150px;
-                    }
-
-                    .input-field {
-                        background-color: pink;
-                        width: 100%;
-                        @include d-flex(column, 16px);
-                    }
-                }
-            }
-
-            #create-or-clear{
+            #create-or-clear {
+                border: 2px solid purple;
                 height: fit-content;
-                width: 100%;
+                width: fit-content;
                 @include d-flex(row, center, flex-end, 16px);
 
-                button{
+                button {
                     @include font(24px);
                     padding: 16px;
                     border: 2px solid $blue-main;
                     color: $blue-main;
                     border-radius: 10px;
-                    @include d-flex(row, center, center, 8px)
+                    @include d-flex(row, center, center, 8px);
                 }
             }
         }
