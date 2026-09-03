@@ -18,10 +18,14 @@
                 <img src="icons/search.svg" alt="search icon" />
             </div>
 
-            <button class="add-task-btn">
+            <button class="add-task-btn" (click)="openAddTaskDialog(addTaskDialog)">
                 <span>Add task</span>
                 <span>&#43;</span>
             </button>
+
+            <dialog #addTaskDialog class="add-task-dialog">
+                <app-task-comp></app-task-comp>
+            </dialog>
         </div>
     </div>
 

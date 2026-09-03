@@ -5,10 +5,11 @@ import { TasksService } from '../../shared/services/tasks.service';
 import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 import { Task } from '../../shared/interfaces/task.interface';
 import { CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { TaskComp } from "../task-comp/task-comp";
 
 @Component({
     selector: 'app-board-comp',
-    imports: [ColumnComp, TaskDialogComp, CdkDropListGroup],
+    imports: [ColumnComp, TaskDialogComp, CdkDropListGroup, TaskComp],
 
     templateUrl: './board-comp.html',
     styleUrl: './board-comp.scss',
@@ -94,6 +95,11 @@ export class BoardComp {
     closeTaskDialog(taskDialog: HTMLDialogElement){
         taskDialog.close();
         this.selectedTaskId.set(undefined);
+    }
+
+
+    openAddTaskDialog( addTaskDialog: HTMLDialogElement){
+        addTaskDialog.showModal();
     }
 }
 
