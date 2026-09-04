@@ -116,4 +116,8 @@ export class BoardComp {
 
         console.log(this.selectedTaskStatus());
     }
+
+    closeAddTaskDialog(addTaskDialog:HTMLDialogElement){
+        addTaskDialog.close();
+    }
 }

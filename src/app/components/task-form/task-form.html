@@ -1,5 +1,12 @@
 <section id="add-task">
-    <h1>Add Task</h1>
+    <div class="add-task-header">
+        <h1>Add Task</h1>
+        <button class="close-btn-x" type="button" aria-label="Close" 
+        (click)="closeDialog.emit()"
+        >
+            &times;
+        </button>
+    </div>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
         <div class="form-column">
             <div class="input-fields-group">
@@ -66,7 +73,9 @@
                                     <p>{{ contact.name | initials }}</p>
                                 </div>
                                 <div class="label">
-                                    <label class="label-text" for="{{ contact.name }}">{{ contact.name }}</label>
+                                    <label class="label-text" for="{{ contact.name }}">{{
+                                        contact.name
+                                    }}</label>
                                 </div>
                                 <input
                                     formControlName="assignees"
@@ -84,19 +93,21 @@
                 <div class="input-field-div" id="subtasks">
                     <label for="subtasks" class="input-field-title">Subtasks</label>
                     <div>
-                        <input
-                            id="input-subtask"
-                            type="text"
-                            class="input-field"
-                        />
+                        <input id="input-subtask" type="text" class="input-field" />
                         <button (click)="addSubtask()">add</button>
                     </div>
                 </div>
                 <div>
                     @for (item of subtasks(); track $index) {
                         <div>
-                            <input type="checkbox" id="subtasks.index" name="subtasks.index" value="{{item.description}}" />
-                            <label for="">{{item.description}}</label><br />
+                            <input
+                                type="checkbox"
+                                id="subtasks.index"
+                                name="subtasks.index"
+                                value="{{ item.description }}"
+                            />
+                            <label for="">{{ item.description }}</label
+                            ><br />
                         </div>
                     }
                 </div>

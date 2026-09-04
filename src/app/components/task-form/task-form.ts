@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -29,6 +29,7 @@ export class TaskForm {
 
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
+    closeDialog = output<void>();
 
     taskForm = new FormGroup({
         title: new FormControl(''),
