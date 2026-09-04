@@ -167,4 +167,36 @@
             }
         }
     }
+.edit_form_submit{display: none;}
+    &.edit-mode {
+h1 { display: none; }
+        #column-separation-line { display: none; }
+
+        #taskform {
+            #taskform-content {
+                flex-direction: column;
+
+                .form-column {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            #taskform-footer {
+                display: none;
+            }
+            .edit_form_submit{display: flex;
+                width: 100%;
+            align-items: center;
+        justify-content: flex-end;
+button {
+                    @include font(24px);
+                    padding: 16px;
+                    border: 2px solid $blue-main;
+                    background: $blue-main;
+                    color: white;
+                    border-radius: 10px;
+                    @include d-flex(row, center, center, 8px);
+                }}
+        }}
 }

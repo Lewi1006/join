@@ -1,4 +1,4 @@
-<section id="add-task">
+<section id="add-task" [class.edit-mode]="!!task()">
     <h1>Add Task</h1>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
         <section id="taskform-content">
@@ -45,9 +45,13 @@
                     <div class="input-field-div">
                         <label for="priority" class="input-field-title">Priority: </label>
                         <div id="priority">
-
                             <div class="priority-button" id="priority-low">
-                                <input  type="radio" id="low" formControlName="priority" value="Low" />
+                                <input
+                                    type="radio"
+                                    id="low"
+                                    formControlName="priority"
+                                    value="Low"
+                                />
                                 <label for="low">Low</label>
                             </div>
 
@@ -62,10 +66,15 @@
                             </div>
 
                             <div class="priority-button" id="priority-high">
-                                <input class="radio-btn" type="radio" id="high" formControlName="priority" value="High" />
+                                <input
+                                    class="radio-btn"
+                                    type="radio"
+                                    id="high"
+                                    formControlName="priority"
+                                    value="High"
+                                />
                                 <label for="high">High</label>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -78,7 +87,6 @@
                             }
                         </select>
                     </div>
-
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
                         <p class="input-field" (click)="toggleDisplayNone()">
@@ -88,7 +96,9 @@
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <div class="assignee-box">
                                     <div class="initials">
-                                        <p [style.background]="contact.profile_color">{{ contact.name | initials }}</p>
+                                        <p [style.background]="contact.profile_color">
+                                            {{ contact.name | initials }}
+                                        </p>
                                     </div>
                                     <div class="label">
                                         <label class="label-text" for="{{ contact.name }}">{{
@@ -147,6 +157,12 @@
                     <img src="icons/checkmark-blue.svg" alt="" />
                 </button>
             </div>
+        </section>
+        <section class="edit_form_submit">
+            <button type="submit" [disabled]="!taskForm.valid" class="submit">
+                <p>Ok cool</p>
+                <img src="icons/checkmark-white.svg" alt="" />
+            </button>
         </section>
     </form>
 </section>
