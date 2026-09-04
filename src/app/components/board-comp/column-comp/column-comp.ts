@@ -88,6 +88,8 @@ export class ColumnComp {
     }
 
 
+    // add task emits the output signal with the status of the column
+    // hands over signal to board comp (addColumnTask)="openAddTaskDialogFromColumn($event, addTaskDialog)"
     addTask(){
         this.addColumnTask.emit(this.status()!);
     }
