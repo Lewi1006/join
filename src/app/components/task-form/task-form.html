@@ -2,13 +2,15 @@
     <div class="add-task-header">
         <h1>Add Task</h1>
 
-        @if(showCloseButton()){
-            <button class="close-btn-x" type="button" aria-label="Close" 
-            (click)="closeDialog.emit()"
+        @if (showCloseButton()) {
+            <button
+                class="close-btn-x"
+                type="button"
+                aria-label="Close"
+                (click)="closeDialog.emit()"
             >
                 &times;
             </button>
-
         }
     </div>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
@@ -56,9 +58,13 @@
                     <div class="input-field-div">
                         <label for="priority" class="input-field-title">Priority: </label>
                         <div id="priority">
-
                             <div class="priority-button" id="priority-low">
-                                <input  type="radio" id="low" formControlName="priority" value="Low" />
+                                <input
+                                    type="radio"
+                                    id="low"
+                                    formControlName="priority"
+                                    value="Low"
+                                />
                                 <label for="low">Low</label>
                             </div>
 
@@ -73,10 +79,15 @@
                             </div>
 
                             <div class="priority-button" id="priority-high">
-                                <input class="radio-btn" type="radio" id="high" formControlName="priority" value="High" />
+                                <input
+                                    class="radio-btn"
+                                    type="radio"
+                                    id="high"
+                                    formControlName="priority"
+                                    value="High"
+                                />
                                 <label for="high">High</label>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -99,7 +110,9 @@
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <div class="assignee-box">
                                     <div class="initials">
-                                        <p [style.background]="contact.profile_color">{{ contact.name | initials }}</p>
+                                        <p [style.background]="contact.profile_color">
+                                            {{ contact.name | initials }}
+                                        </p>
                                     </div>
                                     <div class="label">
                                         <label class="label-text" for="{{ contact.name }}">{{
@@ -119,32 +132,33 @@
                         </div>
                     </div>
 
-                <div class="input-field-div" id="subtasks">
-                    <label for="subtasks" class="input-field-title">Subtasks</label>
-                    <div>
-                        <input id="input-subtask" type="text" class="input-field" />
-                        <button (click)="addSubtask()">add</button>
-                    </div>
-                </div>
-                <div>
-                    @for (item of subtasks(); track $index) {
+                    <div class="input-field-div" id="subtasks">
+                        <label for="subtasks" class="input-field-title">Subtasks</label>
                         <div>
-                            <input
-                                type="checkbox"
-                                id="subtasks.index"
-                                name="subtasks.index"
-                                [checked]="item.checked"
-                                (change)="toggleSubtask(item)"
-                                value="{{ item.description }}"
-                            />
-                            <label for="">{{ item.description }}</label
-                            ><br />
+                            <input id="input-subtask" type="text" class="input-field" />
+                            <button (click)="addSubtask()">add</button>
                         </div>
-                    }
+                    </div>
+                    <div>
+                        @for (item of subtasks(); track $index) {
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    id="subtasks.index"
+                                    name="subtasks.index"
+                                    [checked]="item.checked"
+                                    (change)="toggleSubtask(item)"
+                                    value="{{ item.description }}"
+                                />
+                                <label for="">{{ item.description }}</label
+                                ><br />
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </section>
-        
+
         <section id="taskform-footer">
             <div id="disclaimer-text">
                 <p>*</p>
