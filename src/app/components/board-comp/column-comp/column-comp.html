@@ -39,10 +39,10 @@
                     <div class="card-subtasks">
                         <div class="bar-wrapper">
                             <div class="full-bar">
-                                <div class="percentage"></div>
+                                <div class="percentage" [style.width.%]="taskDetailService.calculateSubtaskPercentage(task)"></div>
                             </div>
                         </div>
-                        <p>0/{{ taskDetailService.getSubtaskCount(task) }} Subtasks</p>
+                        <p>{{taskDetailService.getCompletedSubtaskCount(task)}}/{{ taskDetailService.getSubtaskCount(task) }} Subtasks</p>
                     </div>
 
                     <div class="card-footer">

@@ -1,5 +1,18 @@
 <section id="add-task" [class.edit-mode]="!!task()">
-    <h1>Add Task</h1>
+    <div class="add-task-header">
+        <h1>Add Task</h1>
+
+        @if (showCloseButton()) {
+            <button
+                class="close-btn-x"
+                type="button"
+                aria-label="Close"
+                (click)="closeDialog.emit()"
+            >
+                &times;
+            </button>
+        }
+    </div>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
         <section id="taskform-content">
             <div class="form-column">
@@ -132,6 +145,8 @@
                                     type="checkbox"
                                     id="subtasks.index"
                                     name="subtasks.index"
+                                    [checked]="item.checked"
+                                    (change)="toggleSubtask(item)"
                                     value="{{ item.description }}"
                                 />
                                 <label for="">{{ item.description }}</label
@@ -142,6 +157,7 @@
                 </div>
             </div>
         </section>
+
         <section id="taskform-footer">
             <div id="disclaimer-text">
                 <p>*</p>
