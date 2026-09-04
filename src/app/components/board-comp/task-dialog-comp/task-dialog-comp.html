@@ -1,13 +1,12 @@
 <!-- <dialog class="task-dialog"> -->
-<div class="task-dialog-wrapper">
-    <header class="task-dialog-header">
-        <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
-            <p>{{ task()?.category }}</p>
-        </div>
-        <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">
-            &times;
-        </button>
-    </header>
+    <div class="task-dialog-wrapper">
+        @if (!editMode()) {
+        <header class="task-dialog-header">
+            <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
+                <p>{{task()?.category}}</p>
+            </div>
+            <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">&times;</button>
+        </header>
 
     <section class="task-dialog-content">
         <h1>{{ task()?.title }}</h1>
@@ -61,15 +60,18 @@
         </div>
     </section>
 
-    <section class="task-actions">
-        <button class="task-actions-btn edit-btn">
-            <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-            <span>Edit</span>
-        </button>
-        <button class="task-actions-btn delete-btn">
-            <img src="icons/delete-bin-blue.svg" alt="delete" />
-            <span>Delete</span>
-        </button>
-    </section>
-</div>
+        <section class="task-actions">
+            <button class="task-actions-btn edit-btn" (click)="editMode.set(true)">
+                <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+                <span>Edit</span>
+            </button>
+            <button class="task-actions-btn delete-btn">
+                <img src="icons/delete-bin-blue.svg" alt="delete" />
+                <span>Delete</span>
+            </button>
+        </section>}
+             @else {
+        <app-task-form [task]="task()" (saved)="editMode.set(false)"></app-task-form>
+    }
+    </div>
 <!-- </dialog> -->

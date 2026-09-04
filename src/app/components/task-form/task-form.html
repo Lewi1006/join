@@ -1,4 +1,4 @@
-<section id="add-task">
+<section id="add-task" [class.edit-mode]="!!task()">
     <div class="add-task-header">
         <h1>Add Task</h1>
 
@@ -100,7 +100,6 @@
                             }
                         </select>
                     </div>
-
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
                         <p class="input-field" (click)="toggleDisplayNone()">
@@ -174,6 +173,12 @@
                     <img src="icons/checkmark-blue.svg" alt="" />
                 </button>
             </div>
+        </section>
+        <section class="edit_form_submit">
+            <button type="submit" [disabled]="!taskForm.valid" class="submit">
+                <p>Ok cool</p>
+                <img src="icons/checkmark-white.svg" alt="" />
+            </button>
         </section>
     </form>
 </section>
