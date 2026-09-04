@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, output, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -29,6 +29,10 @@ export class TaskForm {
 
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
+
+    // input true in the dialog so button is only visible when the dialog is open
+    showCloseButton = input(false);
+    closeDialog = output<void>();
 
     taskForm = new FormGroup({
         title: new FormControl(''),
@@ -66,12 +70,15 @@ export class TaskForm {
     }
 
     async onSubmit() {
+        console.log(this.taskForm.value);
         if (this.taskForm.valid) {
+            const dueDate = this.taskForm.value.dueDate;
+
             const task: Task = {
                 description: this.taskForm.value.description!,
                 title: this.taskForm.value.title!,
                 status: TaskStatus.Todo,
-                dueDate: this.taskForm.value.dueDate!,
+                dueDate: dueDate || undefined,
                 category: this.taskForm.value.category!,
                 priority: this.taskForm.value.priority!,
                 assignees: this.assignees()!,
@@ -81,5 +88,22 @@ export class TaskForm {
             this.taskService.createTask(task);
             console.log('task created');
         }
+    }
+
+    toggleSubtask(subtask: Subtask) {
+        // Update the subtasks signal
+        this.subtasks.update((subtasks) => {
+            // Go through every subtask in the array
+            for (const currentSubtask of subtasks) {
+                // Check if this is the subtask that was clicked
+                if (currentSubtask === subtask) {
+                     // Change checked to the opposite value
+                    currentSubtask.checked = !currentSubtask.checked;
+                }
+            }
+            console.log(subtasks);
+
+            return subtasks;
+        });
     }
 }

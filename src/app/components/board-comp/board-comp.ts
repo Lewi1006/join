@@ -5,11 +5,12 @@ import { TasksService } from '../../shared/services/tasks.service';
 import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 import { Task } from '../../shared/interfaces/task.interface';
 import { CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TaskComp } from '../task-comp/task-comp';
+import { TaskForm } from '../task-form/task-form';
+
 
 @Component({
     selector: 'app-board-comp',
-    imports: [ColumnComp, TaskDialogComp, CdkDropListGroup, TaskComp],
+    imports: [ColumnComp, TaskDialogComp, CdkDropListGroup, TaskForm],
 
     templateUrl: './board-comp.html',
     styleUrl: './board-comp.scss',
@@ -23,6 +24,8 @@ export class BoardComp {
     );
 
 
+
+    // store the task status in a signal and set it to to do as default
     selectedTaskStatus = signal<TaskStatus>(TaskStatus.Todo);
 
     ngOnInit() {
@@ -85,6 +88,7 @@ export class BoardComp {
     // this can then be handed over to the child(dialog) as an input signal
     // dialog gets opened here
 
+    // opens task card
     openTaskDialog(task: Task, taskDialog: HTMLDialogElement) {
         this.selectedTaskId.set(task.id);
         console.log(this.selectedTaskId());
@@ -96,16 +100,24 @@ export class BoardComp {
         this.selectedTaskId.set(undefined);
     }
 
+
+    // opens add task on big button (default status is todo)
     openAddTaskDialog(addTaskDialog: HTMLDialogElement) {
-        this.selectedTaskStatus.set(TaskStatus.Todo);
+        // this.selectedTaskStatus.set(TaskStatus.Todo);
         addTaskDialog.showModal();
         console.log(this.selectedTaskStatus());
     }
 
+    // opens add task on + button for column (status gets assigned)
+    // receives the status value and dialog element
     openAddTaskDialogFromColumn(status: TaskStatus, addTaskDialog: HTMLDialogElement) {
         this.selectedTaskStatus.set(status);
         addTaskDialog.showModal();
 
         console.log(this.selectedTaskStatus());
+    }
+
+    closeAddTaskDialog(addTaskDialog:HTMLDialogElement){
+        addTaskDialog.close();
     }
 }

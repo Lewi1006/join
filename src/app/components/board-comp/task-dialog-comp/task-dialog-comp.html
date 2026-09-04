@@ -1,62 +1,75 @@
 <!-- <dialog class="task-dialog"> -->
-    <div class="task-dialog-wrapper">
-        <header class="task-dialog-header">
-            <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
-                <p>{{task()?.category}}</p>
+<div class="task-dialog-wrapper">
+    <header class="task-dialog-header">
+        <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
+            <p>{{ task()?.category }}</p>
+        </div>
+        <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">
+            &times;
+        </button>
+    </header>
+
+    <section class="task-dialog-content">
+        <h1>{{ task()?.title }}</h1>
+        <p class="task-description">
+            {{ task()?.description }}
+        </p>
+    </section>
+
+    <section class="task-details">
+        <div class="detail">
+            <span class="detail-label">Due date:</span>
+            <span class="due-date">{{ task()?.dueDate }}</span>
+        </div>
+
+        <div class="detail">
+            <span class="detail-label">Priority:</span>
+            <div class="priority">
+                <span>{{ task()?.priority }}</span>
+                <img
+                    [src]="taskDetailService.getPriorityIcon(task()?.priority)"
+                    alt="priority icon"
+                />
             </div>
-            <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">&times;</button>
-        </header>
+        </div>
 
-        <section class="task-dialog-content">
-            <h1>{{task()?.title}}</h1>
-            <p class="task-description">
-            {{task()?.description}}
-            </p>
-        </section>
-
-        <section class="task-details">
-            <div class="detail">
-                <span class="detail-label">Due date:</span>
-                <span class="due-date">{{task()?.dueDate}}</span>
-            </div>
-
-            <div class="detail">
-                <span class="detail-label">Priority:</span>
-                <div class="priority">
-                    <span>{{task()?.priority}}</span>
-                     <img [src]="taskDetailService.getPriorityIcon(task()?.priority)" alt="priority icon" />
-                </div>
-            </div>
-
-            <div class="detail assigned-to">
-                <span class="detail-label">Assigned to:</span>
-                @for(assignee of taskDetailService.getAssignees(task()!); track assignee.id){
-                    <div class="assignee">
-                        <div class="assignee-avatar" [style.background]="assignee.profile_color"><span>{{assignee.name | initials}}</span></div>
-                        <span>{{assignee.name}}</span>
+        <div class="detail assigned-to">
+            <span class="detail-label">Assigned to:</span>
+            @for (assignee of taskDetailService.getAssignees(task()!); track assignee.id) {
+                <div class="assignee">
+                    <div class="assignee-avatar" [style.background]="assignee.profile_color">
+                        <span>{{ assignee.name | initials }}</span>
                     </div>
+                    <span>{{ assignee.name }}</span>
+                </div>
+            }
+        </div>
 
+        <div class="detail subtasks">
+            <span class="detail-label">Subtasks:</span>
+            <div class="subtasks-list">
+                @if (task()?.subtasks; as subtasks) {
+                    @for (subtask of subtasks; track $index) {
+                        <label>
+                            <input type="checkbox" [checked]="subtask.checked" />
+
+                            {{ subtask.description }}
+                        </label>
+                    }
                 }
             </div>
+        </div>
+    </section>
 
-            <div class="detail subtasks">
-                <span class="detail-label">Subtasks:</span>
-                <div class="subtasks-list">
-                    <label> <input type="checkbox" /> Create HTML structure </label>
-                    <label> <input type="checkbox" /> Add styling </label>
-                </div>
-            </div>
-        </section>
-
-        <section class="task-actions">
-            <button class="task-actions-btn edit-btn">
-                <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-                <span>Edit</span>
-            </button>
-            <button class="task-actions-btn delete-btn">
-                <img src="icons/delete-bin-blue.svg" alt="delete" />
-                <span>Delete</span>
-            </button>
-        </section>
-    </div>
+    <section class="task-actions">
+        <button class="task-actions-btn edit-btn">
+            <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+            <span>Edit</span>
+        </button>
+        <button class="task-actions-btn delete-btn">
+            <img src="icons/delete-bin-blue.svg" alt="delete" />
+            <span>Delete</span>
+        </button>
+    </section>
+</div>
 <!-- </dialog> -->
