@@ -19,7 +19,7 @@
                     <input id="title" type="text" formControlName="title" class="input-field" />
                 </div>
                 <div class="input-field-div">
-                    <label for="description" class="input-field-title">Description: </label>
+                    <label for="description" cla[ss="input-field-title">Description: </label>
                     <input
                         id="description"
                         type="text"
@@ -108,6 +108,8 @@
                                 type="checkbox"
                                 id="subtasks.index"
                                 name="subtasks.index"
+                                [checked]="item.checked"
+                                (change)="toggleSubtask(item)"
                                 value="{{ item.description }}"
                             />
                             <label for="">{{ item.description }}</label

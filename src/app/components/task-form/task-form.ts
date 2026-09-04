@@ -70,12 +70,15 @@ export class TaskForm {
     }
 
     async onSubmit() {
+        console.log(this.taskForm.value);
         if (this.taskForm.valid) {
+            const dueDate = this.taskForm.value.dueDate;
+
             const task: Task = {
                 description: this.taskForm.value.description!,
                 title: this.taskForm.value.title!,
                 status: TaskStatus.Todo,
-                dueDate: this.taskForm.value.dueDate!,
+                dueDate: dueDate || undefined,
                 category: this.taskForm.value.category!,
                 priority: this.taskForm.value.priority!,
                 assignees: this.assignees()!,
@@ -85,5 +88,22 @@ export class TaskForm {
             this.taskService.createTask(task);
             console.log('task created');
         }
+    }
+
+    toggleSubtask(subtask: Subtask) {
+        // Update the subtasks signal
+        this.subtasks.update((subtasks) => {
+            // Go through every subtask in the array
+            for (const currentSubtask of subtasks) {
+                // Check if this is the subtask that was clicked
+                if (currentSubtask === subtask) {
+                     // Change checked to the opposite value
+                    currentSubtask.checked = !currentSubtask.checked;
+                }
+            }
+            console.log(subtasks);
+
+            return subtasks;
+        });
     }
 }
