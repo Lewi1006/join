@@ -1,11 +1,15 @@
 <section id="add-task">
     <div class="add-task-header">
         <h1>Add Task</h1>
-        <button class="close-btn-x" type="button" aria-label="Close" 
-        (click)="closeDialog.emit()"
-        >
-            &times;
-        </button>
+
+        @if(showCloseButton()){
+            <button class="close-btn-x" type="button" aria-label="Close" 
+            (click)="closeDialog.emit()"
+            >
+                &times;
+            </button>
+
+        }
     </div>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
         <div class="form-column">

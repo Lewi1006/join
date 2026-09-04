@@ -25,6 +25,7 @@
 
             <dialog #addTaskDialog class="add-task-dialog">
                 <app-task-form
+                  [showCloseButton]="true"
                 (closeDialog) = "closeAddTaskDialog(addTaskDialog)"></app-task-form>
             </dialog>
         </div>

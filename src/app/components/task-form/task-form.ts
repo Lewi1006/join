@@ -1,4 +1,4 @@
-import { Component, inject, signal, output } from '@angular/core';
+import { Component, inject, signal, output, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -29,6 +29,9 @@ export class TaskForm {
 
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
+
+    // input true in the dialog so button is only visible when the dialog is open
+    showCloseButton = input(false);
     closeDialog = output<void>();
 
     taskForm = new FormGroup({
