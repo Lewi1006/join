@@ -56,41 +56,23 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
+                        
                         <label for="priority" class="input-field-title">Priority: </label>
                         <div id="priority">
-                            <div class="priority-button" id="priority-low">
-                                <input
-                                    type="radio"
-                                    id="low"
-                                    formControlName="priority"
-                                    value="Low"
-                                />
-                                <label for="low">Low</label>
-                            </div>
-
-                            <div class="priority-button" id="priority-medium">
-                                <input
-                                    type="radio"
-                                    id="medium"
-                                    formControlName="priority"
-                                    value="medium"
-                                />
-                                <label for="high">Medium</label>
-                            </div>
-
-                            <div class="priority-button" id="priority-high">
-                                <input
-                                    class="radio-btn"
-                                    type="radio"
-                                    id="high"
-                                    formControlName="priority"
-                                    value="High"
-                                />
-                                <label for="high">High</label>
-                            </div>
+                            <button class="priority-button" (click)="getPriority('Urgent')">
+                                <p>Urgent</p>
+                                <img src="icons/priority-high.svg" alt="urgent">
+                            </button>
+                            <button class="priority-button" (click)="getPriority('Medium')">
+                                <p>Medium</p>
+                                <img src="icons/priority-medium.svg" alt="medium">
+                            </button>
+                            <button class="priority-button" (click)="getPriority('Low')">
+                                <p>Low</p>
+                                <img src="icons/priority-low.svg" alt="low">
+                            </button>
                         </div>
                     </div>
-
                     <div class="input-field-div">
                         <label for="category" class="input-field-title">Category: </label>
                         <select formControlName="category" class="input-field">

@@ -19,8 +19,13 @@ export class TaskForm {
     dbService = inject(ContactsService);
     task = input<Task>();
     saved = output<void>();
-
+    priority = 'medium';
     divClassList = 'd-none';
+    categories = ['Technical task', 'User Story'];
+    subtasks = signal<Subtask[]>([]);
+    assignees = signal<Contact[]>([]);
+
+
     toggleDisplayNone() {
         if (this.divClassList == '') {
             this.divClassList = 'd-none';
@@ -28,9 +33,6 @@ export class TaskForm {
             this.divClassList = '';
         }
     }
-
-    subtasks = signal<Subtask[]>([]);
-    assignees = signal<Contact[]>([]);
 
     // input true in the dialog so button is only visible when the dialog is open
     showCloseButton = input(false);
@@ -46,7 +48,11 @@ export class TaskForm {
         subtasks: new FormControl(''),
     });
 
-    categories = ['Technical task', 'User Story'];
+    getPriority(priority:string){
+        this.priority = priority;
+        console.log(this.priority)
+        return this.priority;
+    }
 
     ngOnInit() {
         this.dbService.getAllContacts();
@@ -94,7 +100,7 @@ export class TaskForm {
                 status: TaskStatus.Todo,
                 dueDate: dueDate || undefined,
                 category: this.taskForm.value.category!,
-                priority: this.taskForm.value.priority!,
+                priority: this.priority,
                 assignees: this.assignees()!,
                 subtasks: this.subtasks()!,
             };
