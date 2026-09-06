@@ -59,17 +59,17 @@
                         
                         <label for="priority" class="input-field-title">Priority: </label>
                         <div id="priority">
-                            <button class="priority-button" (click)="getPriority('Urgent')">
+                            <button class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
                                 <p>Urgent</p>
-                                <img src="icons/priority-high.svg" alt="urgent">
+                                <div class="priority-icon icon-urgent"></div>
                             </button>
-                            <button class="priority-button" (click)="getPriority('Medium')">
+                            <button class="priority-button priority-medium" [class]="mediumSelected" (click)="getPriority('Medium')">
                                 <p>Medium</p>
-                                <img src="icons/priority-medium.svg" alt="medium">
+                                <div class="priority-icon icon-medium"></div>
                             </button>
-                            <button class="priority-button" (click)="getPriority('Low')">
+                            <button class="priority-button priority-low" [class]="lowSelected" (click)="getPriority('Low')">
                                 <p>Low</p>
-                                <img src="icons/priority-low.svg" alt="low">
+                                <div class="priority-icon icon-low"></div>
                             </button>
                         </div>
                     </div>

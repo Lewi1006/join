@@ -25,7 +25,6 @@ export class TaskForm {
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
 
-
     toggleDisplayNone() {
         if (this.divClassList == '') {
             this.divClassList = 'd-none';
@@ -48,9 +47,27 @@ export class TaskForm {
         subtasks: new FormControl(''),
     });
 
-    getPriority(priority:string){
+    urgentSelected = '';
+    mediumSelected = '';
+    lowSelected = '';
+
+    getPriority(priority: string) {
         this.priority = priority;
-        console.log(this.priority)
+
+        if (priority == 'Urgent') {
+            this.urgentSelected = 'urgent-clicked';
+            this.mediumSelected = '';
+            this.lowSelected = '';
+        } else if (priority == 'Medium') {
+            this.urgentSelected = '';
+            this.mediumSelected = 'medium-selected';
+            this.lowSelected = '';
+        } else if (priority == 'Low') {
+            this.urgentSelected = '';
+            this.mediumSelected = '';
+            this.lowSelected = 'low-selected';
+        }
+        
         return this.priority;
     }
 
@@ -79,12 +96,10 @@ export class TaskForm {
     addSubtask() {
         const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
         let newSubtaskDescription = inputSubtaskRef?.value;
-
         const newSubtask: Subtask = {
             description: newSubtaskDescription,
             checked: false,
         };
-
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
     }
@@ -93,7 +108,6 @@ export class TaskForm {
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
-
             const task: Task = {
                 description: this.taskForm.value.description!,
                 title: this.taskForm.value.title!,
@@ -127,7 +141,6 @@ export class TaskForm {
                 }
             }
             console.log(subtasks);
-
             return subtasks;
         });
     }
