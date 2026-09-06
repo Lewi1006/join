@@ -18,7 +18,7 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
-                        <label for="title" class="input-field-title">Title</label>
+                        <label for="title" class="input-field-title">Title<span class="red">*</span></label>
                         <textarea
                             id="title"
                             class="input-field"
@@ -40,7 +40,7 @@
                         ></textarea>
                     </div>
                     <div class="input-field-div">
-                        <label for="due-date" class="input-field-title">Due Date</label>
+                        <label for="due-date" class="input-field-title">Due Date<span class="red">*</span></label>
                         <input
                             id="due-date"
                             type="date"
@@ -57,7 +57,7 @@
                 <div class="input-fields-group">
                     <div class="input-field-div">
                         
-                        <label for="priority" class="input-field-title">Priority: </label>
+                        <label for="priority" class="input-field-title">Priority</label>
                         <div id="priority">
                             <button class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
                                 <p>Urgent</p>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="input-field-div">
-                        <label for="category" class="input-field-title">Category: </label>
+                        <label for="category" class="input-field-title">Category<span class="red">*</span></label>
                         <select formControlName="category" class="input-field">
                             <option class="input-field">Choose a category</option>
                             @for (category of categories; track $index) {
@@ -142,8 +142,7 @@
 
         <section id="taskform-footer">
             <div id="disclaimer-text">
-                <p>*</p>
-                <p>This field is required</p>
+                <p><span class="red">*</span>This field is required</p>
             </div>
             <div id="create-or-clear">
                 <button>

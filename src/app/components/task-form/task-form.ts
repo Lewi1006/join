@@ -1,5 +1,5 @@
 import { Component, inject, signal, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
@@ -39,9 +39,9 @@ export class TaskForm {
 
     taskForm = new FormGroup({
         title: new FormControl(''),
-        description: new FormControl(''),
-        dueDate: new FormControl(''),
-        category: new FormControl(''),
+        description: new FormControl('', { validators: [Validators.required] }),
+        dueDate: new FormControl('', { validators: [Validators.required]}),
+        category: new FormControl('', { validators: [Validators.required] }),
         priority: new FormControl(''),
         assignees: new FormControl(''),
         subtasks: new FormControl(''),
@@ -67,7 +67,7 @@ export class TaskForm {
             this.mediumSelected = '';
             this.lowSelected = 'low-selected';
         }
-        
+
         return this.priority;
     }
 
@@ -143,5 +143,15 @@ export class TaskForm {
             console.log(subtasks);
             return subtasks;
         });
+    }
+}
+
+export class DateValidator {
+    static LessThanToday(control: FormControl): ValidationErrors | null {
+        let today: Date = new Date();
+
+        if (new Date(control.value) > today) return { LessThanToday: true };
+
+        return null;
     }
 }

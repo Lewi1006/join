@@ -27,6 +27,10 @@
         height: 100%;
         @include d-flex(column, center, center, 0px);
 
+        .red {
+            color: red;
+        }
+
         #taskform-content {
             width: 100%;
             height: 85%;
@@ -64,7 +68,7 @@
                                 0px 0px 3px rgba(3, 7, 18, 0.5),
                                 0px 0px 12px rgba(3, 7, 18, 0.1),
                                 0px 0px 28px rgba(3, 7, 18, 0.1);
-                            @include d-flex(row, center, center, 16px);
+                            @include d-flex(row, center, center, 8px);
                             p {
                                 @include font(20px, 400, 120%);
                             }
