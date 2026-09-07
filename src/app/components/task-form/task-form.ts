@@ -19,7 +19,7 @@ export class TaskForm {
     dbService = inject(ContactsService);
     task = input<Task>();
     saved = output<void>();
-    priority = 'medium';
+    priority = 'Medium';
     divClassList = 'd-none';
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
@@ -38,10 +38,10 @@ export class TaskForm {
     closeDialog = output<void>();
 
     taskForm = new FormGroup({
-        title: new FormControl(''),
-        description: new FormControl('', { validators: [Validators.required] }),
+        title: new FormControl('', { validators: [Validators.required]}),
+        description: new FormControl(''),
         dueDate: new FormControl('', { validators: [Validators.required]}),
-        category: new FormControl('', { validators: [Validators.required] }),
+        category: new FormControl('',{ validators: [Validators.required]}),
         priority: new FormControl(''),
         assignees: new FormControl(''),
         subtasks: new FormControl(''),
