@@ -1,5 +1,5 @@
 import { Component, inject, signal, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
@@ -19,8 +19,12 @@ export class TaskForm {
     dbService = inject(ContactsService);
     task = input<Task>();
     saved = output<void>();
-
+    priority = 'medium';
     divClassList = 'd-none';
+    categories = ['Technical task', 'User Story'];
+    subtasks = signal<Subtask[]>([]);
+    assignees = signal<Contact[]>([]);
+
     toggleDisplayNone() {
         if (this.divClassList == '') {
             this.divClassList = 'd-none';
@@ -29,24 +33,43 @@ export class TaskForm {
         }
     }
 
-    subtasks = signal<Subtask[]>([]);
-    assignees = signal<Contact[]>([]);
-
     // input true in the dialog so button is only visible when the dialog is open
     showCloseButton = input(false);
     closeDialog = output<void>();
 
     taskForm = new FormGroup({
         title: new FormControl(''),
-        description: new FormControl(''),
-        dueDate: new FormControl(''),
-        category: new FormControl(''),
+        description: new FormControl('', { validators: [Validators.required] }),
+        dueDate: new FormControl('', { validators: [Validators.required]}),
+        category: new FormControl('', { validators: [Validators.required] }),
         priority: new FormControl(''),
         assignees: new FormControl(''),
         subtasks: new FormControl(''),
     });
 
-    categories = ['Technical task', 'User Story'];
+    urgentSelected = '';
+    mediumSelected = '';
+    lowSelected = '';
+
+    getPriority(priority: string) {
+        this.priority = priority;
+
+        if (priority == 'Urgent') {
+            this.urgentSelected = 'urgent-clicked';
+            this.mediumSelected = '';
+            this.lowSelected = '';
+        } else if (priority == 'Medium') {
+            this.urgentSelected = '';
+            this.mediumSelected = 'medium-selected';
+            this.lowSelected = '';
+        } else if (priority == 'Low') {
+            this.urgentSelected = '';
+            this.mediumSelected = '';
+            this.lowSelected = 'low-selected';
+        }
+
+        return this.priority;
+    }
 
     ngOnInit() {
         this.dbService.getAllContacts();
@@ -73,12 +96,10 @@ export class TaskForm {
     addSubtask() {
         const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
         let newSubtaskDescription = inputSubtaskRef?.value;
-
         const newSubtask: Subtask = {
             description: newSubtaskDescription,
             checked: false,
         };
-
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
     }
@@ -87,14 +108,13 @@ export class TaskForm {
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
-
             const task: Task = {
                 description: this.taskForm.value.description!,
                 title: this.taskForm.value.title!,
                 status: TaskStatus.Todo,
                 dueDate: dueDate || undefined,
                 category: this.taskForm.value.category!,
-                priority: this.taskForm.value.priority!,
+                priority: this.priority,
                 assignees: this.assignees()!,
                 subtasks: this.subtasks()!,
             };
@@ -121,8 +141,17 @@ export class TaskForm {
                 }
             }
             console.log(subtasks);
-
             return subtasks;
         });
+    }
+}
+
+export class DateValidator {
+    static LessThanToday(control: FormControl): ValidationErrors | null {
+        let today: Date = new Date();
+
+        if (new Date(control.value) > today) return { LessThanToday: true };
+
+        return null;
     }
 }
