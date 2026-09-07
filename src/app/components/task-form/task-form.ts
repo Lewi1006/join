@@ -1,5 +1,11 @@
 import { Component, inject, signal, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import {
+    FormControl,
+    ReactiveFormsModule,
+    FormGroup,
+    Validators,
+    ValidationErrors,
+} from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
@@ -40,7 +46,7 @@ export class TaskForm {
     taskForm = new FormGroup({
         title: new FormControl(''),
         description: new FormControl('', { validators: [Validators.required] }),
-        dueDate: new FormControl('', { validators: [Validators.required]}),
+        dueDate: new FormControl('', { validators: [Validators.required] }),
         category: new FormControl('', { validators: [Validators.required] }),
         priority: new FormControl(''),
         assignees: new FormControl(''),
@@ -102,6 +108,12 @@ export class TaskForm {
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
+        this.clearSubtaskInput();
+    }
+
+    clearSubtaskInput() {
+        const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
+        inputSubtaskRef.value = '';
     }
 
     async onSubmit() {
