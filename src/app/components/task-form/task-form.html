@@ -18,7 +18,7 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
-                        <label for="title" class="input-field-title">Title</label>
+                        <label for="title" class="input-field-title">Title<span class="red">*</span></label>
                         <textarea
                             id="title"
                             class="input-field"
@@ -40,7 +40,7 @@
                         ></textarea>
                     </div>
                     <div class="input-field-div">
-                        <label for="due-date" class="input-field-title">Due Date</label>
+                        <label for="due-date" class="input-field-title">Due Date<span class="red">*</span></label>
                         <input
                             id="due-date"
                             type="date"
@@ -56,43 +56,25 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
-                        <label for="priority" class="input-field-title">Priority: </label>
+                        
+                        <label for="priority" class="input-field-title">Priority</label>
                         <div id="priority">
-                            <div class="priority-button" id="priority-low">
-                                <input
-                                    type="radio"
-                                    id="low"
-                                    formControlName="priority"
-                                    value="Low"
-                                />
-                                <label for="low">Low</label>
-                            </div>
-
-                            <div class="priority-button" id="priority-medium">
-                                <input
-                                    type="radio"
-                                    id="medium"
-                                    formControlName="priority"
-                                    value="medium"
-                                />
-                                <label for="high">Medium</label>
-                            </div>
-
-                            <div class="priority-button" id="priority-high">
-                                <input
-                                    class="radio-btn"
-                                    type="radio"
-                                    id="high"
-                                    formControlName="priority"
-                                    value="High"
-                                />
-                                <label for="high">High</label>
-                            </div>
+                            <button type="button" class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
+                                <p>Urgent</p>
+                                <div class="priority-icon icon-urgent"></div>
+                            </button>
+                            <button type="button" class="priority-button priority-medium" [class]="mediumSelected" (click)="getPriority('Medium')">
+                                <p>Medium</p>
+                                <div class="priority-icon icon-medium"></div>
+                            </button>
+                            <button type="button" class="priority-button priority-low" [class]="lowSelected" (click)="getPriority('Low')">
+                                <p>Low</p>
+                                <div class="priority-icon icon-low"></div>
+                            </button>
                         </div>
                     </div>
-
                     <div class="input-field-div">
-                        <label for="category" class="input-field-title">Category: </label>
+                        <label for="category" class="input-field-title">Category<span class="red">*</span></label>
                         <select formControlName="category" class="input-field">
                             <option class="input-field">Choose a category</option>
                             @for (category of categories; track $index) {
@@ -135,7 +117,7 @@
                         <label for="subtasks" class="input-field-title">Subtasks</label>
                         <div>
                             <input id="input-subtask" type="text" class="input-field" />
-                            <button (click)="addSubtask()">add</button>
+                            <button type="button" (click)="addSubtask()">add</button>
                         </div>
                     </div>
                     <div>
@@ -160,11 +142,10 @@
 
         <section id="taskform-footer">
             <div id="disclaimer-text">
-                <p>*</p>
-                <p>This field is required</p>
+                <p><span class="red">*</span>This field is required</p>
             </div>
             <div id="create-or-clear">
-                <button>
+                <button type="button">
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>
