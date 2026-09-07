@@ -123,6 +123,21 @@
                     }
 
                     #assignees {
+                        .initials {
+                            width: 10%;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            p {
+                                height: 40px;
+                                border: solid 3px white;
+                                aspect-ratio: 1;
+                                border-radius: 50%;
+                            }
+                        }
+
                         #assignee-dropdown {
                             @include d-flex(row, center, space-between, 0px);
 
@@ -164,20 +179,7 @@
                                 width: 100%;
                                 border-radius: 10px;
                                 padding: 4px;
-                                .initials {
-                                    width: 10%;
-                                    height: 40px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
 
-                                    p {
-                                        height: 35px;
-                                        border: solid 3px white;
-                                        aspect-ratio: 1;
-                                        border-radius: 50%;
-                                    }
-                                }
                                 input {
                                     width: 5%;
                                 }
@@ -189,9 +191,14 @@
                                     text-align: left;
                                 }
                             }
-                            .assignee-box:hover{
+                            .assignee-box:hover {
                                 background-color: $grey-bright;
                             }
+                        }
+
+                        #assigned-contacts-avatars{
+                            width: 100%;
+                            @include d-flex(row, center, flex-start, 8px)
                         }
                     }
 

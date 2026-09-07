@@ -93,7 +93,11 @@
                     </div>
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
-                        <div id="assignee-dropdown" class="input-field" (click)="toggleDisplayNone()">
+                        <div
+                            id="assignee-dropdown"
+                            class="input-field"
+                            (click)="toggleDisplayNone()"
+                        >
                             <p>Select contacts to assign</p>
                             <div [class]="dropdownArrow"></div>
                         </div>
@@ -119,19 +123,25 @@
                                         type="checkbox"
                                         id="{{ contact.id }}"
                                         name="{{ contact.name }}"
-                                        value="{{ contact.name }}"
+                                        value=""
                                         (click)="assignContact(contact)"
                                     />
                                 </button>
                             }
                         </div>
+                        <div id="assigned-contacts-avatars">
+                            @for (assignee of assignees(); track $index) {
+                                <div class="initials">
+                                    <p [style.background]="assignees()[$index].profile_color">{{ assignees()[$index].name | initials }}</p>
+                                </div>
+                            }
+                        </div>
                     </div>
 
-
-
-
                     <div class="input-field-div" id="category">
-                        <label for="category" class="input-field-title">Category<span class="red">*</span></label>
+                        <label for="category" class="input-field-title"
+                            >Category<span class="red">*</span></label
+                        >
                         <select formControlName="category" class="input-field">
                             <option class="input-field">Choose a category</option>
                             @for (category of categories; track $index) {
