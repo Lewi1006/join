@@ -1,5 +1,5 @@
 import { Component, inject, signal, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
@@ -7,6 +7,7 @@ import { ContactsService } from '../../shared/services/contacts.service';
 import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
+import { DateValidator } from '../../shared/validators';
 
 @Component({
     selector: 'app-task-form',
@@ -38,10 +39,10 @@ export class TaskForm {
     closeDialog = output<void>();
 
     taskForm = new FormGroup({
-        title: new FormControl('', { validators: [Validators.required]}),
+        title: new FormControl('', [Validators.required]),
         description: new FormControl(''),
-        dueDate: new FormControl('', { validators: [Validators.required]}),
-        category: new FormControl('',{ validators: [Validators.required]}),
+        dueDate: new FormControl('', [Validators.required, DateValidator]),
+        category: new FormControl('', [Validators.required]),
         priority: new FormControl(''),
         assignees: new FormControl(''),
         subtasks: new FormControl(''),
@@ -127,6 +128,11 @@ export class TaskForm {
             }
         }
         this.saved.emit();
+        this.formReset();
+    }
+
+    formReset(){
+        this.taskForm.reset();
     }
 
     toggleSubtask(subtask: Subtask) {
@@ -146,12 +152,4 @@ export class TaskForm {
     }
 }
 
-export class DateValidator {
-    static LessThanToday(control: FormControl): ValidationErrors | null {
-        let today: Date = new Date();
 
-        if (new Date(control.value) > today) return { LessThanToday: true };
-
-        return null;
-    }
-}
