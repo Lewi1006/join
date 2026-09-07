@@ -124,18 +124,13 @@
 
                     #assignees {
                         .initials {
-                            width: 10%;
+                            width: 40px;
                             height: 40px;
                             display: flex;
                             justify-content: center;
                             align-items: center;
-
-                            p {
-                                height: 40px;
-                                border: solid 3px white;
-                                aspect-ratio: 1;
-                                border-radius: 50%;
-                            }
+                            border-radius: 50%;
+                            border: 3px solid white;
                         }
 
                         #assignee-dropdown {
@@ -196,9 +191,9 @@
                             }
                         }
 
-                        #assigned-contacts-avatars{
+                        #assigned-contacts-avatars {
                             width: 100%;
-                            @include d-flex(row, center, flex-start, 8px)
+                            @include d-flex(row, center, flex-start, 8px);
                         }
                     }
 
