@@ -59,15 +59,15 @@
                         
                         <label for="priority" class="input-field-title">Priority</label>
                         <div id="priority">
-                            <button class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
+                            <button type="button" class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
                                 <p>Urgent</p>
                                 <div class="priority-icon icon-urgent"></div>
                             </button>
-                            <button class="priority-button priority-medium" [class]="mediumSelected" (click)="getPriority('Medium')">
+                            <button type="button" class="priority-button priority-medium" [class]="mediumSelected" (click)="getPriority('Medium')">
                                 <p>Medium</p>
                                 <div class="priority-icon icon-medium"></div>
                             </button>
-                            <button class="priority-button priority-low" [class]="lowSelected" (click)="getPriority('Low')">
+                            <button type="button" class="priority-button priority-low" [class]="lowSelected" (click)="getPriority('Low')">
                                 <p>Low</p>
                                 <div class="priority-icon icon-low"></div>
                             </button>
@@ -117,7 +117,7 @@
                         <label for="subtasks" class="input-field-title">Subtasks</label>
                         <div>
                             <input id="input-subtask" type="text" class="input-field" />
-                            <button (click)="addSubtask()">add</button>
+                            <button type="button" (click)="addSubtask()">add</button>
                         </div>
                     </div>
                     <div>
@@ -145,7 +145,7 @@
                 <p><span class="red">*</span>This field is required</p>
             </div>
             <div id="create-or-clear">
-                <button>
+                <button type="button">
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>

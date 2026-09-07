@@ -23,11 +23,11 @@
                             <h2>{{ currentSelectedContact.name }}</h2>
                         </div>
                         <div class="contact-actions_wrapper" [class.open]="settingsOpen">
-                            <button class="mobile_settings" (click)="settingsOpen = !settingsOpen">
+                            <button type="button" class="mobile_settings" (click)="settingsOpen = !settingsOpen">
                                 &#5010;
                             </button>
                             <div class="contact-actions">
-                                <button
+                                <button type="button"
                                     class="contact-actions-btn edit-btn"
                                     (click)="editContact.emit()"
                                 >
