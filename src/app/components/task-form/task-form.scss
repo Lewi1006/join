@@ -107,7 +107,6 @@
                                 background-image: url(../../../../public/icons/priority-medium-white.svg);
                             }
                         }
-
                         .priority-low {
                             .icon-low {
                                 background-image: url(../../../../public/icons/priority-low.svg);
@@ -121,7 +120,6 @@
                             }
                         }
                     }
-
                     #assignees {
                         .initials {
                             width: 40px;
@@ -263,6 +261,7 @@
                         .input-field {
                             width: 100%;
                             min-height: 30px;
+                            resize: none;
                             @include d-flex(column, 16px);
                             border: 1px solid black;
                             border-radius: 8px;
