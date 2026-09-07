@@ -3,14 +3,9 @@
         <h1>Add Task</h1>
 
         @if (showCloseButton()) {
-            <button
-                class="close-btn-x"
-                type="button"
-                aria-label="Close"
-                (click)="closeDialog.emit()"
-            >
-                &times;
-            </button>
+        <button class="close-btn-x" type="button" aria-label="Close" (click)="closeDialog.emit()">
+            &times;
+        </button>
         }
     </div>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
@@ -19,34 +14,17 @@
                 <div class="input-fields-group">
                     <div class="input-field-div">
                         <label for="title" class="input-field-title">Title<span class="red">*</span></label>
-                        <textarea
-                            id="title"
-                            class="input-field"
-                            id="text"
-                            formControlName="title"
-                            rows="1"
-                            cols="50"
-                        ></textarea>
+                        <textarea id="title" class="input-field" id="text" formControlName="title" rows="1"
+                            cols="50"></textarea>
                     </div>
                     <div class="input-field-div">
                         <label for="description" class="input-field-title">Description</label>
-                        <textarea
-                            id="description"
-                            class="input-field"
-                            id="text"
-                            formControlName="description"
-                            rows="10"
-                            cols="50"
-                        ></textarea>
+                        <textarea id="description" class="input-field" id="text" formControlName="description" rows="10"
+                            cols="50"></textarea>
                     </div>
                     <div class="input-field-div">
                         <label for="due-date" class="input-field-title">Due Date<span class="red">*</span></label>
-                        <input
-                            id="due-date"
-                            type="date"
-                            formControlName="dueDate"
-                            class="input-field"
-                        />
+                        <input id="due-date" type="date" formControlName="dueDate" class="input-field" />
                     </div>
                 </div>
             </div>
@@ -56,32 +34,36 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
-                        
                         <label for="priority" class="input-field-title">Priority</label>
                         <div id="priority">
-                            <button type="button" class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
+                            <button type="button" class="priority-button priority-urgent" [class]="urgentSelected"
+                                (click)="getPriority('Urgent')">
                                 <p>Urgent</p>
                                 <div class="priority-icon icon-urgent"></div>
                             </button>
-                            <button type="button" class="priority-button priority-medium" [class]="mediumSelected" (click)="getPriority('Medium')">
+                            <button type="button" class="priority-button priority-medium" [class]="mediumSelected"
+                                (click)="getPriority('Medium')">
                                 <p>Medium</p>
                                 <div class="priority-icon icon-medium"></div>
                             </button>
-                            <button type="button" class="priority-button priority-low" [class]="lowSelected" (click)="getPriority('Low')">
+                            <button type="button" class="priority-button priority-low" [class]="lowSelected"
+                                (click)="getPriority('Low')">
                                 <p>Low</p>
                                 <div class="priority-icon icon-low"></div>
                             </button>
                         </div>
                     </div>
+
                     <div class="input-field-div">
                         <label for="category" class="input-field-title">Category<span class="red">*</span></label>
                         <select formControlName="category" class="input-field">
                             <option class="input-field">Choose a category</option>
                             @for (category of categories; track $index) {
-                                <option class="input-field">{{ category }}</option>
+                            <option class="input-field">{{ category }}</option>
                             }
                         </select>
                     </div>
+
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
                         <p class="input-field" (click)="toggleDisplayNone()">
@@ -89,51 +71,51 @@
                         </p>
                         <div id="list-of-assignees" [class]="divClassList">
                             @for (contact of dbService.contacts(); track contact.id) {
-                                <div class="assignee-box">
-                                    <div class="initials">
-                                        <p [style.background]="contact.profile_color">
-                                            {{ contact.name | initials }}
-                                        </p>
-                                    </div>
-                                    <div class="label">
-                                        <label class="label-text" for="{{ contact.name }}">{{
-                                            contact.name
-                                        }}</label>
-                                    </div>
-                                    <input
-                                        formControlName="assignees"
-                                        type="checkbox"
-                                        id="{{ contact.id }}"
-                                        name="{{ contact.name }}"
-                                        value="{{ contact.name }}"
-                                        (click)="assignContact(contact)"
-                                    />
+                            <div class="assignee-box">
+                                <div class="initials">
+                                    <p [style.background]="contact.profile_color">
+                                        {{ contact.name | initials }}
+                                    </p>
                                 </div>
+                                <div class="label">
+                                    <label class="label-text" for="{{ contact.name }}">{{
+                                        contact.name
+                                        }}</label>
+                                </div>
+                                <input formControlName="assignees" type="checkbox" id="{{ contact.id }}"
+                                    name="{{ contact.name }}" value="{{ contact.name }}"
+                                    (click)="assignContact(contact)" />
+                            </div>
                             }
                         </div>
                     </div>
 
                     <div class="input-field-div" id="subtasks">
                         <label for="subtasks" class="input-field-title">Subtasks</label>
-                        <div>
-                            <input id="input-subtask" type="text" class="input-field" />
-                            <button type="button" (click)="addSubtask()">add</button>
+                        <div class="subtasks-btn">
+                            <input id="input-subtask" type="text" class="input-field" placeholder="Add new subtask" />
+
+                            <div class="subtask-actions">
+                                <button class="subtask-delete-btn" type="button"  aria-label="Delete subtask">
+                                    <!-- <span> &times;</span> -->
+                                     <img src="icons/close-blue.svg" alt="checkmark icon" />
+                                </button>
+                                <div class="divider"></div>
+                                <button class="subtask-add-btn" type="button"  aria-label="Add subtask" (click)="addSubtask()">
+                                    <img src="icons/checkmark-blue.svg" alt="checkmark icon" />
+                                </button>
+
+                            </div>
+
                         </div>
                     </div>
                     <div>
                         @for (item of subtasks(); track $index) {
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    id="subtasks.index"
-                                    name="subtasks.index"
-                                    [checked]="item.checked"
-                                    (change)="toggleSubtask(item)"
-                                    value="{{ item.description }}"
-                                />
-                                <label for="">{{ item.description }}</label
-                                ><br />
-                            </div>
+                        <div>
+                            <input type="checkbox" id="subtasks.index" name="subtasks.index" [checked]="item.checked"
+                                (change)="toggleSubtask(item)" value="{{ item.description }}" />
+                            <label for="">{{ item.description }}</label><br />
+                        </div>
                         }
                     </div>
                 </div>

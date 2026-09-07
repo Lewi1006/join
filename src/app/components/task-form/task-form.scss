@@ -173,6 +173,43 @@
                         }
                     }
 
+                    #subtasks {
+                        .subtasks-btn {
+                            width: 100%;
+                            @include d-flex(column, flex-start, flex-start);
+
+                            .subtask-actions {
+                                position: absolute;
+                                right: 8px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                @include d-flex(row, center, center, 8px);
+
+                                .divider {
+                                    width: 1px;
+                                    height: 24px;
+                                    background: $grey-medium;
+                                }
+
+                                .subtask-add-btn,
+                                .subtask-delete-btn {
+                                    padding: 0;
+                                    cursor: pointer;
+
+                                    height: 24px;
+                                    width: 24px;
+
+                                    @include d-flex;
+
+                                    &:hover{
+                                        background: $grey-bright;
+                                        border-radius: 50%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     .input-field-div {
                         width: 100%;
                         @include d-flex(column, flex-start, flex-start, 8px);
@@ -194,6 +231,10 @@
                             border: 1px solid black;
                             border-radius: 8px;
                             padding: 4px 8px;
+
+                            &::placeholder {
+                                color: $grey-medium;
+                            }
                         }
                     }
                 }
