@@ -164,34 +164,30 @@
                                 formControlName="subtasks"
                             ></textarea>
 
-
-
-
-<div class="subtask-actions">
-        @if(taskForm.controls.subtasks.dirty === true && taskForm.controls.subtasks.value){
-        <button
-            class="subtask-delete-btn"
-            type="button"
-            aria-label="Delete subtask"
-            (click)="clearSubtaskInput()"
-        >
-            <img src="icons/close-blue.svg" alt="checkmark icon" />
-        </button>
-        <div class="divider"></div>
-        <button
-            class="subtask-add-btn"
-            type="button"
-            aria-label="Add subtask"
-            (click)="addSubtask()"
-        >
-            <img src="icons/checkmark-blue.svg" alt="checkmark icon" />
-        </button>
-    }
-    </div>
-
-
-
-
+                            <div class="subtask-actions">
+                                @if (
+                                    taskForm.controls.subtasks.dirty === true &&
+                                    taskForm.controls.subtasks.value
+                                ) {
+                                    <button
+                                        class="subtask-add-btn"
+                                        type="button"
+                                        aria-label="Add subtask"
+                                        (click)="addSubtask()"
+                                    >
+                                        <img src="icons/checkmark-blue.svg" alt="checkmark icon" />
+                                    </button>
+                                    <div class="divider"></div>
+                                    <button
+                                        class="subtask-delete-btn"
+                                        type="button"
+                                        aria-label="Delete subtask"
+                                        (click)="clearSubtaskInput()"
+                                    >
+                                        <img src="icons/close-blue.svg" alt="checkmark icon" />
+                                    </button>
+                                }
+                            </div>
                         </div>
                     </div>
                     <div class="subtask-items">
@@ -215,6 +211,7 @@
                                         class="added-subtask-delete-btn"
                                         type="button"
                                         aria-label="Delete subtask"
+                                        (click)="deleteSubtask($index)"
                                     >
                                         <img src="icons/delete-bin-blue.svg" alt="checkmark icon" />
                                     </button>
