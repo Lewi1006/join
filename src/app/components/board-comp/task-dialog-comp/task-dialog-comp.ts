@@ -17,5 +17,8 @@ export class TaskDialogComp {
     task = input<Task>();
 
     closeDialog = output<void>();
+
+    deleteRequested = output<void>();
+
     editMode = signal(false);
 }

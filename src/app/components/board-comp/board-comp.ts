@@ -6,11 +6,11 @@ import { TaskDialogComp } from './task-dialog-comp/task-dialog-comp';
 import { Task } from '../../shared/interfaces/task.interface';
 import { CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskForm } from '../task-form/task-form';
-
+import { ContactsDelete } from '../contacts-comp/contacts-delete/contacts-delete';
 
 @Component({
     selector: 'app-board-comp',
-    imports: [ColumnComp, TaskDialogComp, CdkDropListGroup, TaskForm],
+    imports: [ColumnComp, TaskDialogComp, CdkDropListGroup, TaskForm, ContactsDelete],
 
     templateUrl: './board-comp.html',
     styleUrl: './board-comp.scss',
@@ -120,4 +120,14 @@ export class BoardComp {
     closeAddTaskDialog(addTaskDialog:HTMLDialogElement){
         addTaskDialog.close();
     }
+
+    async confirmDelete(deleteDialog: HTMLDialogElement, taskDialog: HTMLDialogElement) {
+    const task = this.selectedTask();
+    if (task?.id) {
+        await this.taskService.deleteTask(task.id);
+    }
+    deleteDialog.close();
+    taskDialog.close();
+    this.selectedTaskId.set(undefined);
+}
 }

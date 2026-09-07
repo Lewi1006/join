@@ -65,7 +65,7 @@
                 <img src="icons/edit-pen-blue.svg" alt="edit pen" />
                 <span>Edit</span>
             </button>
-            <button type="button" class="task-actions-btn delete-btn">
+            <button type="button" class="task-actions-btn delete-btn" (click)="deleteRequested.emit()">
                 <img src="icons/delete-bin-blue.svg" alt="delete" />
                 <span>Delete</span>
             </button>
