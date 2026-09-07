@@ -19,7 +19,7 @@ export class TaskForm {
     dbService = inject(ContactsService);
     task = input<Task>();
     saved = output<void>();
-    priority = 'medium';
+    priority = 'Medium';
     divClassList = 'd-none';
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
