@@ -25,12 +25,15 @@ export class TaskForm {
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
+    dropdownArrow = 'arrow-down'
 
     toggleDisplayNone() {
         if (this.divClassList == '') {
+            this.dropdownArrow = 'arrow-down'
             this.divClassList = 'd-none';
         } else {
             this.divClassList = '';
+            this.dropdownArrow = 'arrow-up'
         }
     }
 
@@ -88,6 +91,7 @@ export class TaskForm {
             this.subtasks.set(task.subtasks ?? []);
         }
     }
+
 
     assignContact(contact: Contact) {
         this.assignees.update((assignees) => [...assignees, contact]);

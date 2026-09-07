@@ -18,7 +18,9 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
-                        <label for="title" class="input-field-title">Title<span class="red">*</span></label>
+                        <label for="title" class="input-field-title"
+                            >Title<span class="red">*</span></label
+                        >
                         <textarea
                             id="title"
                             class="input-field"
@@ -40,7 +42,9 @@
                         ></textarea>
                     </div>
                     <div class="input-field-div">
-                        <label for="due-date" class="input-field-title">Due Date<span class="red">*</span></label>
+                        <label for="due-date" class="input-field-title"
+                            >Due Date<span class="red">*</span></label
+                        >
                         <input
                             id="due-date"
                             type="date"
@@ -56,40 +60,56 @@
             <div class="form-column">
                 <div class="input-fields-group">
                     <div class="input-field-div">
-                        
                         <label for="priority" class="input-field-title">Priority</label>
                         <div id="priority">
-                            <button type="button" class="priority-button priority-urgent" [class]="urgentSelected" (click)="getPriority('Urgent')">
+                            <button
+                                type="button"
+                                class="priority-button priority-urgent"
+                                [class]="urgentSelected"
+                                (click)="getPriority('Urgent')"
+                            >
                                 <p>Urgent</p>
                                 <div class="priority-icon icon-urgent"></div>
                             </button>
-                            <button type="button" class="priority-button priority-medium" [class]="mediumSelected" (click)="getPriority('Medium')">
+                            <button
+                                type="button"
+                                class="priority-button priority-medium"
+                                [class]="mediumSelected"
+                                (click)="getPriority('Medium')"
+                            >
                                 <p>Medium</p>
                                 <div class="priority-icon icon-medium"></div>
                             </button>
-                            <button type="button" class="priority-button priority-low" [class]="lowSelected" (click)="getPriority('Low')">
+                            <button
+                                type="button"
+                                class="priority-button priority-low"
+                                [class]="lowSelected"
+                                (click)="getPriority('Low')"
+                            >
                                 <p>Low</p>
                                 <div class="priority-icon icon-low"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="input-field-div">
-                        <label for="category" class="input-field-title">Category<span class="red">*</span></label>
-                        <select formControlName="category" class="input-field">
-                            <option class="input-field">Choose a category</option>
-                            @for (category of categories; track $index) {
-                                <option class="input-field">{{ category }}</option>
-                            }
-                        </select>
-                    </div>
+
+
+
+
+
+
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
-                        <p class="input-field" (click)="toggleDisplayNone()">
-                            Select contacts to assign
-                        </p>
+                        <div id="assignee-dropdown" class="input-field" (click)="toggleDisplayNone()">
+                            <p>Select contacts to assign</p>
+                            <div [class]="dropdownArrow"></div>
+                        </div>
                         <div id="list-of-assignees" [class]="divClassList">
                             @for (contact of dbService.contacts(); track contact.id) {
-                                <div class="assignee-box">
+                                <button
+                                    type="button"
+                                    class="assignee-box"
+                                    (click)="assignContact(contact)"
+                                >
                                     <div class="initials">
                                         <p [style.background]="contact.profile_color">
                                             {{ contact.name | initials }}
@@ -108,11 +128,23 @@
                                         value="{{ contact.name }}"
                                         (click)="assignContact(contact)"
                                     />
-                                </div>
+                                </button>
                             }
                         </div>
                     </div>
 
+
+
+
+                    <div class="input-field-div" id="category">
+                        <label for="category" class="input-field-title">Category<span class="red">*</span></label>
+                        <select formControlName="category" class="input-field">
+                            <option class="input-field">Choose a category</option>
+                            @for (category of categories; track $index) {
+                                <option class="input-field">{{ category }}</option>
+                            }
+                        </select>
+                    </div>
                     <div class="input-field-div" id="subtasks">
                         <label for="subtasks" class="input-field-title">Subtasks</label>
                         <div>

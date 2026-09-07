@@ -123,6 +123,26 @@
                     }
 
                     #assignees {
+                        #assignee-dropdown {
+                            @include d-flex(row, center, space-between, 0px);
+
+                            .arrow-down {
+                                width: 20px;
+                                height: 20px;
+                                background-image: url(../../../../public/icons/dropdown-open.svg);
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                            }
+
+                            .arrow-up {
+                                width: 20px;
+                                height: 20px;
+                                background-image: url(../../../../public/icons/dropdown-close.svg);
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                            }
+                        }
+
                         #list-of-assignees {
                             background-color: white;
                             border: 1px solid white;
