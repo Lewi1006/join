@@ -57,7 +57,6 @@ export class TaskForm {
 
     getPriority(priority: string) {
         this.priority = priority;
-
         if (priority == 'Urgent') {
             this.urgentSelected = 'urgent-clicked';
             this.mediumSelected = '';
@@ -71,7 +70,6 @@ export class TaskForm {
             this.mediumSelected = '';
             this.lowSelected = 'low-selected';
         }
-
         return this.priority;
     }
 
@@ -139,7 +137,6 @@ export class TaskForm {
                 this.taskService.updateTask(id, task);
             } else {
                 this.taskService.createTask(task);
-                console.log('task created');
             }
         }
         this.saved.emit();
