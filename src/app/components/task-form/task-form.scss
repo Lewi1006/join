@@ -123,45 +123,61 @@
                     }
 
                     #assignees {
+                        .initials {
+                            width: 40px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+                            border: 3px solid white;
+                        }
+
+                        #assignee-dropdown {
+                            @include d-flex(row, center, space-between, 0px);
+
+                            .arrow-down {
+                                width: 20px;
+                                height: 20px;
+                                background-image: url(../../../../public/icons/dropdown-open.svg);
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                            }
+
+                            .arrow-up {
+                                width: 20px;
+                                height: 20px;
+                                background-image: url(../../../../public/icons/dropdown-close.svg);
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                            }
+                        }
+
                         #list-of-assignees {
                             background-color: white;
-                            border: 1px solid white;
+                            padding: 4px;
+                            border-radius: 10px;
+                            @include drop-shadow;
                             border-radius: 10px;
                             position: absolute;
                             top: 60px;
                             width: 100%;
-                            height: 250px;
+                            height: 300px;
                             overflow-y: scroll;
                             z-index: 1;
 
                             .assignee-box {
                                 height: 56px;
-                                border: 1px solid black;
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 width: 100%;
                                 border-radius: 10px;
-
-                                .initials {
-                                    width: 10%;
-                                    height: 40px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-
-                                    p {
-                                        height: 35px;
-                                        border: solid 3px white;
-                                        aspect-ratio: 1;
-                                        border-radius: 50%;
-                                    }
-                                }
+                                padding: 4px;
 
                                 input {
                                     width: 5%;
                                 }
-
                                 .label {
                                     width: calc(100% - 10% - 5%);
                                     overflow: hidden;
@@ -170,6 +186,14 @@
                                     text-align: left;
                                 }
                             }
+                            .assignee-box:hover {
+                                background-color: $grey-bright;
+                            }
+                        }
+
+                        #assigned-contacts-avatars {
+                            width: 100%;
+                            @include d-flex(row, center, flex-start, 8px);
                         }
                     }
 

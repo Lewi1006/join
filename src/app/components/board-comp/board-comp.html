@@ -44,10 +44,16 @@
         }
     </div>
 
-    <dialog #taskDialog class="task-dialog">
+    <dialog #taskDialog class="task-dialog" (close)="selectedTaskId.set(undefined)">
         @if (selectedTask(); as task) {
-            <app-task-dialog-comp [task]="task" (closeDialog)="closeTaskDialog(taskDialog)">
+            <app-task-dialog-comp [task]="task" (closeDialog)="closeTaskDialog(taskDialog)" (deleteRequested)="deleteDialog.showModal()">
             </app-task-dialog-comp>
+            <dialog #deleteDialog class="confirm_dialog">
+    <app-contacts-delete
+        (confirm)="confirmDelete(deleteDialog, taskDialog)"
+        (cancel)="deleteDialog.close()"
+    ></app-contacts-delete>
+</dialog>
         }
     </dialog>
 </section>

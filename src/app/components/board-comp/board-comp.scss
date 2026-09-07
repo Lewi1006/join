@@ -140,3 +140,7 @@
     max-width: calc(100dvw - 40px);
     max-height: calc(100dvh - 40px);
 }
+
+.confirm_dialog {
+    @include modal;
+}
