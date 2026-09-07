@@ -121,7 +121,9 @@ export class TaskForm {
 
     clearSubtaskInput() {
         const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
-        inputSubtaskRef.value = '';
+
+        this.taskForm.controls.subtasks.reset();
+        this.taskForm.controls.subtasks.markAsPristine;
     }
 
     async onSubmit() {
