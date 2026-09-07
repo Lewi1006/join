@@ -116,6 +116,12 @@ export class TaskForm {
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
+        this.clearSubtaskInput();
+    }
+
+    clearSubtaskInput() {
+        const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
+        inputSubtaskRef.value = '';
     }
 
     async onSubmit() {

@@ -108,7 +108,10 @@
                                     class="assignee-box"
                                     (click)="assignContact(contact)"
                                 >
-                                    <div class="initials" [style.background]="contact.profile_color">
+                                    <div
+                                        class="initials"
+                                        [style.background]="contact.profile_color"
+                                    >
                                         <p>{{ contact.name | initials }}</p>
                                     </div>
                                     <div class="label">
@@ -129,8 +132,11 @@
                         </div>
                         <div id="assigned-contacts-avatars">
                             @for (assignee of assignees(); track $index) {
-                                <div class="initials" [style.background]="assignees()[$index].profile_color">
-                                    <p >{{ assignees()[$index].name | initials }}</p>
+                                <div
+                                    class="initials"
+                                    [style.background]="assignees()[$index].profile_color"
+                                >
+                                    <p>{{ assignees()[$index].name | initials }}</p>
                                 </div>
                             }
                         </div>
@@ -149,24 +155,69 @@
                     </div>
                     <div class="input-field-div" id="subtasks">
                         <label for="subtasks" class="input-field-title">Subtasks</label>
-                        <div>
-                            <input id="input-subtask" type="text" class="input-field" />
-                            <button type="button" (click)="addSubtask()">add</button>
+                        <div class="subtasks-btn">
+                            <textarea
+                                id="input-subtask"
+                                type="text"
+                                class="input-field"
+                                placeholder="Add new subtask"
+                            ></textarea>
+
+                            <div class="subtask-actions">
+                                <button
+                                    class="subtask-delete-btn"
+                                    type="button"
+                                    aria-label="Delete subtask"
+                                    (click)="clearSubtaskInput()"
+                                >
+                                    <img src="icons/close-blue.svg" alt="checkmark icon" />
+                                </button>
+                                <div class="divider"></div>
+                                <button
+                                    class="subtask-add-btn"
+                                    type="button"
+                                    aria-label="Add subtask"
+                                    (click)="addSubtask()"
+                                >
+                                    <img src="icons/checkmark-blue.svg" alt="checkmark icon" />
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="subtask-items">
                         @for (item of subtasks(); track $index) {
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    id="subtasks.index"
-                                    name="subtasks.index"
-                                    [checked]="item.checked"
-                                    (change)="toggleSubtask(item)"
-                                    value="{{ item.description }}"
-                                />
-                                <label for="">{{ item.description }}</label
-                                ><br />
+                            <div class="subtask-item">
+                                <div class="subtask-content">
+                                    <input
+                                        type="checkbox"
+                                        id="subtasks-{{ $index }}"
+                                        name="subtasks-{{ $index }}"
+                                        [checked]="item.checked"
+                                        (change)="toggleSubtask(item)"
+                                        value="{{ item.description }}"
+                                    />
+                                    <label for="">{{ item.description }}</label
+                                    ><br />
+                                </div>
+
+                                <div class="added-subtask-actions">
+                                    <button
+                                        class="added-subtask-delete-btn"
+                                        type="button"
+                                        aria-label="Delete subtask"
+                                    >
+                                        <img src="icons/delete-bin-blue.svg" alt="checkmark icon" />
+                                    </button>
+                                    <div class="added-divider"></div>
+                                    <button
+                                        class="added-subtask-edit-btn"
+                                        type="button"
+                                        aria-label="Add subtask"
+                                        /* (click)="addSubtask()" */
+                                    >
+                                        <img src="icons/edit-pen-blue.svg" alt="checkmark icon" />
+                                    </button>
+                                </div>
                             </div>
                         }
                     </div>

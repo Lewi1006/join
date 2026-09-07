@@ -197,6 +197,55 @@
                         }
                     }
 
+                    #subtasks {
+                        .subtasks-btn {
+                            width: 100%;
+                            @include d-flex(column, flex-start, flex-start);
+
+                            #input-subtask {
+                                height: 30px;
+                                width: 100%;
+
+                                padding-right: 90px;
+
+                                @include scrollbar;
+
+                                resize: none;
+                                overflow-wrap: anywhere;
+                            }
+
+                            .subtask-actions {
+                                position: absolute;
+                                right: 10px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                @include d-flex(row, center, center, 8px);
+
+                                .divider {
+                                    width: 1px;
+                                    height: 24px;
+                                    background: $grey-medium;
+                                }
+
+                                .subtask-add-btn,
+                                .subtask-delete-btn {
+                                    padding: 0;
+                                    cursor: pointer;
+
+                                    height: 24px;
+                                    width: 24px;
+
+                                    @include d-flex;
+
+                                    &:hover {
+                                        background: $grey-bright;
+                                        border-radius: 50%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     .input-field-div {
                         width: 100%;
                         @include d-flex(column, flex-start, flex-start, 8px);
@@ -218,6 +267,70 @@
                             border: 1px solid black;
                             border-radius: 8px;
                             padding: 4px 8px;
+
+                            &::placeholder {
+                                color: $grey-medium;
+                            }
+                        }
+                    }
+
+                    .subtask-items {
+                        width: 100%;
+
+                        .subtask-item {
+                            @include d-flex(row, center, space-between);
+                            width: 100%;
+                            height: fit-content;
+                            min-height: 24px;
+                            padding: 4px 16px;
+
+                            .subtask-content {
+                                @include d-flex(row, center, flex-start, 8px);
+                                // flex: 1;
+                                // min-width: 0;
+                                width: 80%;
+
+                                label {
+                                    overflow-wrap: anywhere;
+                                }
+                            }
+
+                            .added-subtask-actions {
+                                width: fit-content;
+                                height: 24px;
+
+                                @include d-flex(row, center, center, 10px);
+
+                                visibility: hidden;
+                                opacity: 0;
+                            }
+
+                            &:hover {
+                                background: $grey-bright;
+                                border-radius: 15px;
+
+                                .added-subtask-actions {
+                                    visibility: visible;
+                                    opacity: 1;
+
+                                    .added-divider {
+                                        width: 1px;
+                                        height: 16px;
+                                        background: $grey-medium;
+                                    }
+
+                                    .added-subtask-delete-btn,
+                                    .added-subtask-edit-btn {
+                                        padding: 0;
+                                        cursor: pointer;
+
+                                        height: 16px;
+                                        width: 16px;
+
+                                        @include d-flex;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
