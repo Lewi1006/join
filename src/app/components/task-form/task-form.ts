@@ -1,5 +1,5 @@
 import { Component, inject, signal, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
@@ -7,6 +7,7 @@ import { ContactsService } from '../../shared/services/contacts.service';
 import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
+import { DateValidator } from '../../shared/validators';
 
 @Component({
     selector: 'app-task-form',
@@ -24,12 +25,15 @@ export class TaskForm {
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
+    dropdownArrow = 'arrow-down';
 
     toggleDisplayNone() {
         if (this.divClassList == '') {
+            this.dropdownArrow = 'arrow-down';
             this.divClassList = 'd-none';
         } else {
             this.divClassList = '';
+            this.dropdownArrow = 'arrow-up';
         }
     }
 
@@ -38,10 +42,10 @@ export class TaskForm {
     closeDialog = output<void>();
 
     taskForm = new FormGroup({
-        title: new FormControl('', { validators: [Validators.required]}),
+        title: new FormControl('', [Validators.required]),
         description: new FormControl(''),
-        dueDate: new FormControl('', { validators: [Validators.required]}),
-        category: new FormControl('',{ validators: [Validators.required]}),
+        dueDate: new FormControl('', [Validators.required, DateValidator]),
+        category: new FormControl('', [Validators.required]),
         priority: new FormControl(''),
         assignees: new FormControl(''),
         subtasks: new FormControl(''),
@@ -53,7 +57,6 @@ export class TaskForm {
 
     getPriority(priority: string) {
         this.priority = priority;
-
         if (priority == 'Urgent') {
             this.urgentSelected = 'urgent-clicked';
             this.mediumSelected = '';
@@ -67,7 +70,6 @@ export class TaskForm {
             this.mediumSelected = '';
             this.lowSelected = 'low-selected';
         }
-
         return this.priority;
     }
 
@@ -89,7 +91,19 @@ export class TaskForm {
     }
 
     assignContact(contact: Contact) {
-        this.assignees.update((assignees) => [...assignees, contact]);
+        this.assignees.update((assignees) => {
+            let alreadyAssigned = false;
+            for (let i = 0; i < assignees.length; i++) {
+                if (assignees[i].id === contact.id) {
+                    alreadyAssigned = true;
+                }
+            }
+            if (alreadyAssigned) {
+                return assignees.filter((a) => a.id !== contact.id);
+            } else {
+                return [...assignees, contact];
+            }
+        });
         console.log(this.assignees());
     }
 
@@ -123,10 +137,14 @@ export class TaskForm {
                 this.taskService.updateTask(id, task);
             } else {
                 this.taskService.createTask(task);
-                console.log('task created');
             }
         }
         this.saved.emit();
+        this.formReset();
+    }
+
+    formReset() {
+        this.taskForm.reset();
     }
 
     toggleSubtask(subtask: Subtask) {
@@ -143,15 +161,5 @@ export class TaskForm {
             console.log(subtasks);
             return subtasks;
         });
-    }
-}
-
-export class DateValidator {
-    static LessThanToday(control: FormControl): ValidationErrors | null {
-        let today: Date = new Date();
-
-        if (new Date(control.value) > today) return { LessThanToday: true };
-
-        return null;
     }
 }
