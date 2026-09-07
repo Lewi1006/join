@@ -261,9 +261,10 @@
                             padding: 4px 16px;
 
                             .subtask-content {
-                                @include d-flex(row, center, center, 8px);
-                                flex: 1;
-                                min-width: 0;
+                                @include d-flex(row, center, flex-start, 8px);
+                                // flex: 1;
+                                // min-width: 0;
+                                width: 80%;
 
                                 label {
                                     overflow-wrap: anywhere;
