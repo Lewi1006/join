@@ -178,9 +178,21 @@
                             width: 100%;
                             @include d-flex(column, flex-start, flex-start);
 
+                            #input-subtask {
+                                height: 30px;
+                                width: 100%;
+
+                                padding-right: 90px;
+
+                                @include scrollbar;
+
+                                resize: none;
+                                overflow-wrap: anywhere;
+                            }
+
                             .subtask-actions {
                                 position: absolute;
-                                right: 8px;
+                                right: 10px;
                                 top: 50%;
                                 transform: translateY(-50%);
                                 @include d-flex(row, center, center, 8px);
@@ -250,6 +262,12 @@
 
                             .subtask-content {
                                 @include d-flex(row, center, center, 8px);
+                                flex: 1;
+                                min-width: 0;
+
+                                label {
+                                    overflow-wrap: anywhere;
+                                }
                             }
 
                             .added-subtask-actions {
