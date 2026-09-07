@@ -25,15 +25,15 @@ export class TaskForm {
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
-    dropdownArrow = 'arrow-down'
+    dropdownArrow = 'arrow-down';
 
     toggleDisplayNone() {
         if (this.divClassList == '') {
-            this.dropdownArrow = 'arrow-down'
+            this.dropdownArrow = 'arrow-down';
             this.divClassList = 'd-none';
         } else {
             this.divClassList = '';
-            this.dropdownArrow = 'arrow-up'
+            this.dropdownArrow = 'arrow-up';
         }
     }
 
@@ -92,9 +92,20 @@ export class TaskForm {
         }
     }
 
-
     assignContact(contact: Contact) {
-        this.assignees.update((assignees) => [...assignees, contact]);
+        this.assignees.update((assignees) => {
+            let alreadyAssigned = false;
+            for (let i = 0; i < assignees.length; i++) {
+                if (assignees[i].id === contact.id) {
+                    alreadyAssigned = true;
+                }
+            }
+            if (alreadyAssigned) {
+                return assignees.filter((a) => a.id !== contact.id);
+            } else {
+                return [...assignees, contact];
+            }
+        });
         console.log(this.assignees());
     }
 
@@ -135,7 +146,7 @@ export class TaskForm {
         this.formReset();
     }
 
-    formReset(){
+    formReset() {
         this.taskForm.reset();
     }
 
@@ -155,5 +166,3 @@ export class TaskForm {
         });
     }
 }
-
-
