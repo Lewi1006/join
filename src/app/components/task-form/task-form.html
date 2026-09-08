@@ -28,7 +28,16 @@
                             formControlName="title"
                             rows="1"
                             cols="50"
+                            placeholder="Please enter a title."
                         ></textarea>
+                        @if (
+                            taskForm.get('title')?.hasError('required') &&
+                            taskForm.get('title')?.touched
+                        ) {
+                            <p class="red">This field is required.</p>
+                        } @else {
+                            <p class="hidden">.</p>
+                        }
                     </div>
                     <div class="input-field-div">
                         <label for="description" class="input-field-title">Description</label>
@@ -39,6 +48,7 @@
                             formControlName="description"
                             rows="10"
                             cols="50"
+                            placeholder="Please enter a description."
                         ></textarea>
                     </div>
                     <div class="input-field-div">
@@ -51,6 +61,13 @@
                             formControlName="dueDate"
                             class="input-field"
                         />
+                        @if (taskForm.get('dueDate')?.touched && !taskForm.get('dueDate')?.valid) {
+                            <p class="red">
+                                This field is required. Please select a due date in the future.
+                            </p>
+                        } @else {
+                            <p class="hidden">.</p>
+                        }
                     </div>
                 </div>
             </div>
@@ -108,8 +125,7 @@
                                     class="assignee-box"
                                     [class]="assigneeSelected"
                                     (click)="assignContact(contact)"
-                                    id="{{contact.id}}"
-                                    
+                                    id="{{ contact.id }}"
                                 >
                                     <div
                                         class="initials"
@@ -118,10 +134,9 @@
                                         <p>{{ contact.name | initials }}</p>
                                     </div>
                                     <div class="label">
-                                        <p class="label-text">{{contact.name}}</p>
+                                        <p class="label-text">{{ contact.name }}</p>
                                     </div>
-                                    <div class="assignee-checkbox">
-                                    </div>
+                                    <div class="assignee-checkbox"></div>
                                 </button>
                             }
                         </div>
@@ -136,7 +151,6 @@
                             }
                         </div>
                     </div>
-
                     <div class="input-field-div" id="category">
                         <label for="category" class="input-field-title"
                             >Category<span class="red">*</span></label
@@ -147,6 +161,13 @@
                                 <option class="input-field">{{ category }}</option>
                             }
                         </select>
+                        @if (taskForm.get('category')?.touched && taskForm.get('category')?.value == 'Choose a category') {
+                            <p class="red">
+                                This field is required. Please select a category..
+                            </p>
+                        } @else {
+                            <p class="hidden">.</p>
+                        }
                     </div>
                     <div class="input-field-div" id="subtasks">
                         <label for="subtasks" class="input-field-title">Subtasks</label>
@@ -231,13 +252,13 @@
                 <p><span class="red">*</span>This field is required</p>
             </div>
             <div id="create-or-clear">
-                <button type="button" (click)="formReset()">
+                <button class="blue-on-white" type="button" (click)="formReset()">
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>
-                <button type="submit" [disabled]="!taskForm.valid">
+                <button class="white-on-blue" type="submit" [disabled]="!taskForm.valid">
                     <p>Create Task</p>
-                    <img src="icons/checkmark-blue.svg" alt="" />
+                    <img src="icons/checkmark-white-create-task.svg" alt="" />
                 </button>
             </div>
         </section>
@@ -249,3 +270,4 @@
         </section>
     </form>
 </section>
+<app-confirmation-popup [hidden]="!popupVisible"></app-confirmation-popup>
