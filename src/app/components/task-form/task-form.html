@@ -106,7 +106,10 @@
                                 <button
                                     type="button"
                                     class="assignee-box"
+                                    [class]="assigneeSelected"
                                     (click)="assignContact(contact)"
+                                    id="{{contact.id}}"
+                                    
                                 >
                                     <div
                                         class="initials"
@@ -115,18 +118,10 @@
                                         <p>{{ contact.name | initials }}</p>
                                     </div>
                                     <div class="label">
-                                        <label class="label-text" for="{{ contact.name }}">{{
-                                            contact.name
-                                        }}</label>
+                                        <p class="label-text">{{contact.name}}</p>
                                     </div>
-                                    <input
-                                        formControlName="assignees"
-                                        type="checkbox"
-                                        id="{{ contact.id }}"
-                                        name="{{ contact.name }}"
-                                        value=""
-                                        (click)="assignContact(contact)"
-                                    />
+                                    <div class="assignee-checkbox">
+                                    </div>
                                 </button>
                             }
                         </div>
