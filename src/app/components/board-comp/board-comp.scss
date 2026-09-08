@@ -12,6 +12,8 @@
     overflow: hidden;
     @include respond(zero, m) {
         padding: 1rem;
+        padding-bottom: 96px;
+        overflow-y: scroll;
     }
 }
 
@@ -122,11 +124,12 @@
 
     @include respond(l, desktop) {
         @include d-flex(row, flex-start, flex-start, 20px);
+        padding-bottom: 96px;
     }
 
     @include respond(zero, m) {
         @include d-flex(column, flex-start, flex-start, 20px);
-        overflow-y: scroll;
+        // overflow-y: scroll;
         padding-bottom: 70px;
     }
 
@@ -135,6 +138,7 @@
         height: 100%;
         // equal horizontal distribution
         flex: 1;
+        min-width: 0;
     }
 }
 
