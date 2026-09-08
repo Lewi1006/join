@@ -136,7 +136,6 @@
                             }
                         </div>
                     </div>
-
                     <div class="input-field-div" id="category">
                         <label for="category" class="input-field-title"
                             >Category<span class="red">*</span></label
@@ -231,13 +230,13 @@
                 <p><span class="red">*</span>This field is required</p>
             </div>
             <div id="create-or-clear">
-                <button type="button" (click)="formReset()">
+                <button class="blue-on-white" type="button" (click)="formReset()">
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>
-                <button type="submit" [disabled]="!taskForm.valid">
+                <button class="white-on-blue" type="submit" [disabled]="!taskForm.valid">
                     <p>Create Task</p>
-                    <img src="icons/checkmark-blue.svg" alt="" />
+                    <img src="icons/checkmark-white-create-task.svg" alt="" />
                 </button>
             </div>
         </section>
