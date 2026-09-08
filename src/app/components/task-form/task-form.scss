@@ -283,6 +283,8 @@
                         max-height: 100px ;
                         overflow-y: auto;
 
+                        @include scrollbar;
+
                         .subtask-item {
                             @include d-flex(row, center, space-between);
                             width: 100%;
