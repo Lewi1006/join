@@ -280,6 +280,7 @@
                         width: 100%;
                         flex: 1;
                         min-height: 0;
+                        max-height: 100px ;
                         overflow-y: auto;
 
                         .subtask-item {
