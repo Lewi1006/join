@@ -125,8 +125,15 @@ export class TaskForm {
     }
 
     clearSubtaskInput() {
-        const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
-        inputSubtaskRef.value = '';
+        this.taskForm.controls.subtasks.reset();
+        this.taskForm.controls.subtasks.markAsPristine();
+    }
+
+    deleteSubtask(index: number) {
+        this.subtasks.update((subtasks) => {
+            subtasks.splice(index, 1);
+            return subtasks;
+        });
     }
 
     async onSubmit() {
