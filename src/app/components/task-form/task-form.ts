@@ -183,14 +183,16 @@ export class TaskForm {
         });
     }
 
-    isPopupVisible = false;
-
+    popupVisible = false;
+    
     confirmTaskCreation() {
-        this.isPopupVisible = true;
+        this.popupVisible = true;
 
         setTimeout(() => {
-            this.isPopupVisible = false;
-            console.log('is pop up visible?'+ this.isPopupVisible);
-        }, 2000);
+            this.popupVisible = false;
+            console.log('is pop up visible? '+ this.popupVisible);
+        }, 5000);
+        console.log('aline');
     }
+
 }
