@@ -90,17 +90,22 @@ export class TaskForm {
         }
     }
 
+    assigneeSelected = '';
+
     assignContact(contact: Contact) {
         this.assignees.update((assignees) => {
             let alreadyAssigned = false;
+            let contactID = contact.id;
             for (let i = 0; i < assignees.length; i++) {
                 if (assignees[i].id === contact.id) {
                     alreadyAssigned = true;
                 }
             }
             if (alreadyAssigned) {
+                document.getElementById(`${contact.id}`)?.classList.remove("assigned");
                 return assignees.filter((a) => a.id !== contact.id);
             } else {
+                document.getElementById(`${contact.id}`)?.classList.add("assigned");
                 return [...assignees, contact];
             }
         });

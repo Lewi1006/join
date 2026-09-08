@@ -109,7 +109,6 @@
                                 background-image: url(../../../../public/icons/priority-medium-white.svg);
                             }
                         }
-
                         .priority-low {
                             .icon-low {
                                 background-image: url(../../../../public/icons/priority-low.svg);
@@ -123,7 +122,6 @@
                             }
                         }
                     }
-
                     #assignees {
                         .initials {
                             width: 40px;
@@ -168,6 +166,10 @@
                             overflow-y: scroll;
                             z-index: 1;
 
+                            .assigned{
+                                background-color: yellow;
+                            }
+
                             .assignee-box {
                                 height: 56px;
                                 display: flex;
@@ -175,13 +177,11 @@
                                 align-items: center;
                                 width: 100%;
                                 border-radius: 10px;
-                                padding: 4px;
+                                padding: 8px;
+                                @include d-flex(row, center, flex-start, 8px);
 
-                                input {
-                                    width: 5%;
-                                }
                                 .label {
-                                    width: calc(100% - 10% - 5%);
+                                    width: 80%;
                                     overflow: hidden;
                                     white-space: nowrap;
                                     text-overflow: ellipsis;
@@ -265,6 +265,7 @@
                         .input-field {
                             width: 100%;
                             min-height: 30px;
+                            resize: none;
                             @include d-flex(column, 16px);
                             border: 1px solid black;
                             border-radius: 8px;
