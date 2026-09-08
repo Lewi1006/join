@@ -8,10 +8,11 @@ import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
 import { DateValidator } from '../../shared/validators';
+import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
 
 @Component({
     selector: 'app-task-form',
-    imports: [ReactiveFormsModule, InitialsPipe],
+    imports: [ReactiveFormsModule, InitialsPipe, ConfirmationPopup],
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
@@ -102,10 +103,10 @@ export class TaskForm {
                 }
             }
             if (alreadyAssigned) {
-                document.getElementById(`${contact.id}`)?.classList.remove("assigned");
+                document.getElementById(`${contact.id}`)?.classList.remove('assigned');
                 return assignees.filter((a) => a.id !== contact.id);
             } else {
-                document.getElementById(`${contact.id}`)?.classList.add("assigned");
+                document.getElementById(`${contact.id}`)?.classList.add('assigned');
                 return [...assignees, contact];
             }
         });
@@ -159,6 +160,7 @@ export class TaskForm {
         }
         this.saved.emit();
         this.formReset();
+        this.confirmTaskCreation();
     }
 
     formReset() {
@@ -179,5 +181,16 @@ export class TaskForm {
             console.log(subtasks);
             return subtasks;
         });
+    }
+
+    isPopupVisible = false;
+
+    confirmTaskCreation() {
+        this.isPopupVisible = true;
+
+        setTimeout(() => {
+            this.isPopupVisible = false;
+            console.log('is pop up visible?'+ this.isPopupVisible);
+        }, 2000);
     }
 }
