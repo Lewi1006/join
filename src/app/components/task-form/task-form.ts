@@ -30,15 +30,6 @@ export class TaskForm {
     editingSubtask: Subtask | undefined = undefined;
     editingSubtaskFormControl = new FormControl('');
 
-
-
-
-
-
-
-
-
-
     toggleDisplayNone() {
         if (this.divClassList == '') {
             this.dropdownArrow = 'arrow-down';
@@ -114,10 +105,10 @@ export class TaskForm {
                 }
             }
             if (alreadyAssigned) {
-                document.getElementById(`${contact.id}`)?.classList.remove("assigned");
+                document.getElementById(`${contact.id}`)?.classList.remove('assigned');
                 return assignees.filter((a) => a.id !== contact.id);
             } else {
-                document.getElementById(`${contact.id}`)?.classList.add("assigned");
+                document.getElementById(`${contact.id}`)?.classList.add('assigned');
                 return [...assignees, contact];
             }
         });
@@ -136,15 +127,27 @@ export class TaskForm {
         this.clearSubtaskInput();
     }
 
-    editSubtask(subtask:Subtask){
+    editSubtask(subtask: Subtask) {
         this.editingSubtask = subtask;
         this.editingSubtaskFormControl.setValue(subtask.description);
     }
 
-    saveSubtaskEdit(subtask:Subtask){
+    saveSubtaskEdit(subtask: Subtask) {
         const newSubtaskDescription = this.editingSubtaskFormControl.value;
 
         console.log(newSubtaskDescription);
+
+        if (newSubtaskDescription !== null) {
+            this.subtasks.update((subtasks) => {
+                for (const currentSubtask of subtasks) {
+                    if (currentSubtask === subtask) {
+                        currentSubtask.description = newSubtaskDescription;
+                    }
+                }
+                return subtasks;
+            });
+            this.editingSubtask = undefined;
+        }
     }
 
     clearSubtaskInput() {
