@@ -10,10 +10,14 @@
 
     @include d-flex(column, flex-start, flex-start);
     overflow: hidden;
-    @include respond(zero, m) {
+    @include respond(zero, l) {
         padding: 1rem;
-        padding-bottom: 96px;
+    }
+
+    @include respond(zero, m) {
         overflow-y: scroll;
+            height: calc(100dvh - $height-header - 80px);
+
     }
 }
 
@@ -57,6 +61,7 @@
                 #find {
                     position: absolute;
                     left: 10px;
+                    width: calc(100% - 57px);
                 }
             }
         }
@@ -124,7 +129,6 @@
 
     @include respond(l, desktop) {
         @include d-flex(row, flex-start, flex-start, 20px);
-        padding-bottom: 96px;
     }
 
     @include respond(zero, m) {
@@ -139,6 +143,9 @@
         // equal horizontal distribution
         flex: 1;
         min-width: 0;
+    }
+    @include respond(zero, l) {
+        gap: 1rem;
     }
 }
 
