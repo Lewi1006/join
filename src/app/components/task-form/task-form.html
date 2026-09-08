@@ -108,8 +108,7 @@
                                     class="assignee-box"
                                     [class]="assigneeSelected"
                                     (click)="assignContact(contact)"
-                                    id="{{contact.id}}"
-                                    
+                                    id="{{ contact.id }}"
                                 >
                                     <div
                                         class="initials"
@@ -118,10 +117,9 @@
                                         <p>{{ contact.name | initials }}</p>
                                     </div>
                                     <div class="label">
-                                        <p class="label-text">{{contact.name}}</p>
+                                        <p class="label-text">{{ contact.name }}</p>
                                     </div>
-                                    <div class="assignee-checkbox">
-                                    </div>
+                                    <div class="assignee-checkbox"></div>
                                 </button>
                             }
                         </div>
@@ -203,6 +201,15 @@
 
                                 <div class="added-subtask-actions">
                                     <button
+                                        class="added-subtask-edit-btn"
+                                        type="button"
+                                        aria-label="edit subtask"
+                                        (click)="editSubtask(item)"
+                                    >
+                                        <img src="icons/edit-pen-blue.svg" alt="checkmark icon" />
+                                    </button>
+                                    <div class="added-divider"></div>
+                                    <button
                                         class="added-subtask-delete-btn"
                                         type="button"
                                         aria-label="Delete subtask"
@@ -210,17 +217,43 @@
                                     >
                                         <img src="icons/delete-bin-blue.svg" alt="checkmark icon" />
                                     </button>
-                                    <div class="added-divider"></div>
-                                    <button
-                                        class="added-subtask-edit-btn"
-                                        type="button"
-                                        aria-label="Add subtask"
-                                        /* (click)="addSubtask()" */
-                                    >
-                                        <img src="icons/edit-pen-blue.svg" alt="checkmark icon" />
-                                    </button>
                                 </div>
                             </div>
+                            @if (editingSubtask === item) {
+                                <div class="subtask-edit">
+                                    <div class="subtask-edit-content">
+                                        <textarea
+                                            type="text"
+                                        ></textarea>
+
+                                        <div class="subtask-edit-actions">
+                                            <button
+                                                class="added-subtask-edit-btn"
+                                                type="button"
+                                                aria-label="edit subtask"
+                                                (click)="editSubtask(item)"
+                                            >
+                                                <img
+                                                    src="icons/checkmark-blue.svg"
+                                                    alt="checkmark icon"
+                                                />
+                                            </button>
+                                            <div class="added-divider"></div>
+                                            <button
+                                                class="added-subtask-delete-btn"
+                                                type="button"
+                                                aria-label="Delete subtask"
+                                                (click)="deleteSubtask($index)"
+                                            >
+                                                <img
+                                                    src="icons/delete-bin-blue.svg"
+                                                    alt="checkmark icon"
+                                                />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         }
                     </div>
                 </div>

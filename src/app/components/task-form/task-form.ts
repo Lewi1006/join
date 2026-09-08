@@ -27,6 +27,17 @@ export class TaskForm {
     assignees = signal<Contact[]>([]);
     dropdownArrow = 'arrow-down';
 
+    editingSubtask: Subtask | undefined = undefined;
+
+
+
+
+
+
+
+
+
+
     toggleDisplayNone() {
         if (this.divClassList == '') {
             this.dropdownArrow = 'arrow-down';
@@ -122,6 +133,10 @@ export class TaskForm {
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
         this.clearSubtaskInput();
+    }
+
+    editSubtask(subtask:Subtask){
+        this.editingSubtask = subtask;
     }
 
     clearSubtaskInput() {
