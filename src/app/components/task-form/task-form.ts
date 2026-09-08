@@ -28,6 +28,7 @@ export class TaskForm {
     dropdownArrow = 'arrow-down';
 
     editingSubtask: Subtask | undefined = undefined;
+    editingSubtaskFormControl = new FormControl('');
 
 
 
@@ -137,6 +138,13 @@ export class TaskForm {
 
     editSubtask(subtask:Subtask){
         this.editingSubtask = subtask;
+        this.editingSubtaskFormControl.setValue(subtask.description);
+    }
+
+    saveSubtaskEdit(subtask:Subtask){
+        const newSubtaskDescription = this.editingSubtaskFormControl.value;
+
+        console.log(newSubtaskDescription);
     }
 
     clearSubtaskInput() {

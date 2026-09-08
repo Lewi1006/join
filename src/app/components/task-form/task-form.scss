@@ -348,7 +348,7 @@
                         width: 100%;
                         height: fit-content;
                         min-height: 24px;
-                        padding: 4px 16px;
+                        // padding: 4px 16px;
 
                         .subtask-edit-content {
                             @include d-flex(row, center, space-between, 8px);
@@ -368,7 +368,7 @@
                             width: fit-content;
                             height: 24px;
                             position: absolute;
-                             right: 0px;
+                             right: 4px;
                                 top: 8px;;
 
                             @include d-flex(row, center, center, 10px);
