@@ -267,7 +267,7 @@
                             border: 1px solid black;
                             border-radius: 8px;
                             padding: 4px 8px;
-
+                            resize: none;
                             &::placeholder {
                                 color: $grey-medium;
                             }
