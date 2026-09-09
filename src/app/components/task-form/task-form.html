@@ -121,6 +121,7 @@
                             <p>Select contacts to assign</p>
                             <div [class]="dropdownArrow"></div>
                         </div>
+                        
                         <div id="list-of-assignees" [class]="divClassList">
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <button
@@ -156,7 +157,7 @@
                     </div>
 
 
-                    
+
                     <div class="input-field-div" id="category">
                         <label for="category" class="input-field-title"
                             >Category<span class="red">*</span></label

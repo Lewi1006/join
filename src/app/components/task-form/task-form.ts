@@ -1,4 +1,4 @@
-import { Component, inject, signal, input, output } from '@angular/core';
+import { Component, inject, signal, input, output, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -16,9 +16,12 @@ import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
-export class TaskForm {
+export class TaskForm implements AfterViewInit {
     taskService = inject(TasksService);
     dbService = inject(ContactsService);
+
+    changeDetector = inject(ChangeDetectorRef);
+
     task = input<Task>();
     saved = output<void>();
     priority = 'Medium';
@@ -34,6 +37,9 @@ export class TaskForm {
     // input true in the dialog so button is only visible when the dialog is open
     showCloseButton = input(false);
     closeDialog = output<void>();
+
+
+
 
     taskForm = new FormGroup({
         title: new FormControl('', [Validators.required]),
@@ -62,6 +68,27 @@ export class TaskForm {
         }
     }
 
+    // closing assignee dropdown menu on click outside
+    // change detector to detect the changed made
+    ngAfterViewInit(): void {
+        document.addEventListener('click', (event) => {
+            const assigneeDropdown = document.getElementById('list-of-assignees');
+            const assigneeInput = document.getElementById('assignee-dropdown');
+
+            // console.log(event.target);
+
+            if (
+                !assigneeDropdown?.contains(event.target as HTMLElement) &&
+                !assigneeInput?.contains(event.target as HTMLElement)
+            ) {
+                console.log('CLOSING NOW');
+                this.divClassList = 'd-none';
+                this.dropdownArrow = 'arrow-down';
+
+                this.changeDetector.detectChanges();
+            }
+        });
+    }
     // #region priority
     urgentSelected = '';
     mediumSelected = '';
