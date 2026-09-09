@@ -116,7 +116,8 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region assignees
-    toggleDisplayNone() {
+    toggleDisplayNone(event:MouseEvent) {
+        event.stopPropagation();
         if (this.divClassList() == '') {
             this.dropdownArrow = 'arrow-down';
             this.divClassList.set('d-none');
