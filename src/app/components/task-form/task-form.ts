@@ -1,4 +1,4 @@
-import { Component, inject, signal, input, output, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, signal, input, output, AfterViewInit} from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -20,12 +20,11 @@ export class TaskForm implements AfterViewInit {
     taskService = inject(TasksService);
     dbService = inject(ContactsService);
 
-    changeDetector = inject(ChangeDetectorRef);
-
     task = input<Task>();
     saved = output<void>();
     priority = 'Medium';
-    divClassList = 'd-none';
+    // divClassList = 'd-none';
+    divClassList = signal('d-none');
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
@@ -69,7 +68,10 @@ export class TaskForm implements AfterViewInit {
     }
 
     // closing assignee dropdown menu on click outside
-    // change detector to detect the changed made
+    // divClassList needs to be a signal to detect the changes
+    // contains() checks whether the clicked element is inside this element (child element).
+    // Node as datatype expected by contains
+    // ngAfterViewInit() method to handle any additional initialization tasks
     ngAfterViewInit(): void {
         document.addEventListener('click', (event) => {
             const assigneeDropdown = document.getElementById('list-of-assignees');
@@ -78,14 +80,12 @@ export class TaskForm implements AfterViewInit {
             // console.log(event.target);
 
             if (
-                !assigneeDropdown?.contains(event.target as HTMLElement) &&
-                !assigneeInput?.contains(event.target as HTMLElement)
+                !assigneeDropdown?.contains(event.target as Node) &&
+                !assigneeInput?.contains(event.target as Node)
             ) {
                 console.log('CLOSING NOW');
-                this.divClassList = 'd-none';
+                this.divClassList.set('d-none');
                 this.dropdownArrow = 'arrow-down';
-
-                this.changeDetector.detectChanges();
             }
         });
     }
@@ -116,11 +116,11 @@ export class TaskForm implements AfterViewInit {
 
     // #region assignees
     toggleDisplayNone() {
-        if (this.divClassList == '') {
+        if (this.divClassList() == '') {
             this.dropdownArrow = 'arrow-down';
-            this.divClassList = 'd-none';
+            this.divClassList.set('d-none');
         } else {
-            this.divClassList = '';
+            this.divClassList.set('');
             this.dropdownArrow = 'arrow-up';
         }
     }

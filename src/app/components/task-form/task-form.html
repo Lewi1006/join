@@ -122,7 +122,7 @@
                             <div [class]="dropdownArrow"></div>
                         </div>
                         
-                        <div id="list-of-assignees" [class]="divClassList">
+                        <div id="list-of-assignees" [class]="divClassList()">
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <button
                                     type="button"
