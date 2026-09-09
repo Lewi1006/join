@@ -108,6 +108,9 @@
                             </button>
                         </div>
                     </div>
+
+
+
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
                         <div
@@ -118,7 +121,8 @@
                             <p>Select contacts to assign</p>
                             <div [class]="dropdownArrow"></div>
                         </div>
-                        <div id="list-of-assignees" [class]="divClassList">
+                        
+                        <div id="list-of-assignees" [class]="divClassList()">
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <button
                                     type="button"
@@ -151,6 +155,9 @@
                             }
                         </div>
                     </div>
+
+
+
                     <div class="input-field-div" id="category">
                         <label for="category" class="input-field-title"
                             >Category<span class="red">*</span></label
@@ -166,7 +173,7 @@
                                 This field is required. Please select a category..
                             </p>
                         } @else {
-                            <p class="hidden">.</p>
+                            <p class="hidden"></p>
                         }
                     </div>
                     <div class="input-field-div" id="subtasks">
