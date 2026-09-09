@@ -1,11 +1,23 @@
 @use '../../../../public/styles/main' as *;
 
+/* main {
+    @include respond(zero, m) {
+        height: calc(100% - $height-header - 80px);
+        overflow-y: scroll;
+    }
+} */
+
 #add-task {
     width: 100%;
     height: 100%;
     max-height: 900px;
     @include d-flex(column, flex-start, flex-start, 32px);
     padding: 32px;
+    @include respond(zero, m) {
+        max-height: calc(100dvh - $height-header - 80px);
+        @include d-flex(column, flex-start, flex-start, 16px);
+        padding: 16px;
+    }
 
     h1 {
         height: fit-content;
@@ -31,18 +43,31 @@
             color: red;
         }
 
+        .hidden {
+            color: white;
+        }
+
         #taskform-content {
             width: 100%;
             height: 85%;
             @include d-flex(row, center, space-between, 0px);
+            @include respond(zero, m) {
+                height: 90%;
+                overflow-y: scroll;
+                @include d-flex(column, center, flex-start, 16px);
+            }
 
             #column-separation-line {
                 justify-self: center;
                 height: 100%;
                 width: fit-content;
 
+                @include respond(zero, m) {
+                    display: none;
+                }
+
                 img {
-                    height: 75%;
+                    height: 100%;
                 }
             }
 
@@ -53,7 +78,9 @@
 
                 .input-fields-group {
                     width: 100%;
-                    height: 85%;
+                    // height: 85%;
+                    height: 100%;
+                    min-height: 0;
                     @include d-flex(column, flex-start, flex-start, 24px);
 
                     #priority {
@@ -71,12 +98,20 @@
                             @include d-flex(row, center, center, 8px);
                             p {
                                 @include font(20px, 400, 120%);
+                                @include respond(zero, l) {
+                                    @include font(16px, 400, 100%);
+                                }
                             }
+
                             .priority-icon {
                                 width: 20px;
-                                height: 15px;
+                                height: 20px;
                                 background-repeat: no-repeat;
                                 background-position: center center;
+                                @include respond(zero, l) {
+                                    width: 12px;
+                                    height: 12px;
+                                }
                             }
                         }
                         .priority-button:hover {
@@ -107,7 +142,6 @@
                                 background-image: url(../../../../public/icons/priority-medium-white.svg);
                             }
                         }
-
                         .priority-low {
                             .icon-low {
                                 background-image: url(../../../../public/icons/priority-low.svg);
@@ -121,53 +155,141 @@
                             }
                         }
                     }
-
                     #assignees {
+                        .initials {
+                            width: 40px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+                            border: 3px solid white;
+                        }
+
+                        #assignee-dropdown {
+                            @include d-flex(row, center, space-between, 0px);
+
+                            .arrow-down {
+                                width: 20px;
+                                height: 20px;
+                                background-image: url(../../../../public/icons/dropdown-open.svg);
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                            }
+
+                            .arrow-up {
+                                width: 20px;
+                                height: 20px;
+                                background-image: url(../../../../public/icons/dropdown-close.svg);
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                            }
+                        }
+
                         #list-of-assignees {
                             background-color: white;
-                            border: 1px solid white;
+                            padding: 4px;
+                            border-radius: 10px;
+                            @include drop-shadow;
                             border-radius: 10px;
                             position: absolute;
                             top: 60px;
                             width: 100%;
-                            height: 250px;
+                            height: 300px;
                             overflow-y: scroll;
                             z-index: 1;
 
                             .assignee-box {
                                 height: 56px;
-                                border: 1px solid black;
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 width: 100%;
                                 border-radius: 10px;
-
-                                .initials {
-                                    width: 10%;
-                                    height: 40px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-
-                                    p {
-                                        height: 35px;
-                                        border: solid 3px white;
-                                        aspect-ratio: 1;
-                                        border-radius: 50%;
-                                    }
-                                }
-
-                                input {
-                                    width: 5%;
-                                }
+                                padding: 8px;
+                                @include d-flex(row, center, flex-start, 8px);
 
                                 .label {
-                                    width: calc(100% - 10% - 5%);
+                                    width: 80%;
                                     overflow: hidden;
                                     white-space: nowrap;
                                     text-overflow: ellipsis;
                                     text-align: left;
+                                }
+
+                                .assignee-checkbox {
+                                    height: 25px;
+                                    width: 25px;
+                                    background-image: url(../../../../public/icons/checkbox-clear.svg);
+                                    background-repeat: no-repeat;
+                                    background-position: center center;
+                                }
+                            }
+                            .assignee-box:hover {
+                                background-color: $grey-bright;
+                            }
+                            .assigned {
+                                background-color: $blue-main;
+                                color: white;
+                                .assignee-checkbox {
+                                    background-image: url(../../../../public/icons/checkbox-checked-white.svg);
+                                }
+                            }
+                            .assigned:hover {
+                                background-color: $blue-dark;
+                            }
+                        }
+
+                        #assigned-contacts-avatars {
+                            width: 100%;
+                            @include d-flex(row, center, flex-start, 8px);
+                        }
+                    }
+
+                    #subtasks {
+                        .subtasks-btn {
+                            width: 100%;
+                            @include d-flex(column, flex-start, flex-start);
+
+                            #input-subtask {
+                                height: 30px;
+                                width: 100%;
+
+                                padding-right: 90px;
+
+                                @include scrollbar;
+
+                                resize: none;
+                                overflow-wrap: anywhere;
+                            }
+
+                            .subtask-actions {
+                                position: absolute;
+                                right: 10px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                @include d-flex(row, center, center, 8px);
+
+                                .divider {
+                                    width: 1px;
+                                    height: 24px;
+                                    background: $grey-medium;
+                                }
+
+                                .subtask-add-btn,
+                                .subtask-delete-btn {
+                                    padding: 0;
+                                    cursor: pointer;
+
+                                    height: 24px;
+                                    width: 24px;
+
+                                    @include d-flex;
+
+                                    &:hover {
+                                        background: $grey-bright;
+                                        border-radius: 50%;
+                                    }
                                 }
                             }
                         }
@@ -190,10 +312,125 @@
                         .input-field {
                             width: 100%;
                             min-height: 30px;
+                            resize: none;
                             @include d-flex(column, 16px);
                             border: 1px solid black;
                             border-radius: 8px;
                             padding: 4px 8px;
+                            resize: none;
+                            &::placeholder {
+                                color: $grey-medium;
+                            }
+                        }
+                    }
+
+                    .subtask-items {
+                        width: 100%;
+                        flex: 1;
+                        min-height: 0;
+                        max-height: 100px;
+                        overflow-y: auto;
+
+                        @include scrollbar;
+
+                        .subtask-item {
+                            @include d-flex(row, center, space-between);
+                            width: 100%;
+                            height: fit-content;
+                            min-height: 24px;
+                            padding: 4px 16px;
+
+                            .subtask-content {
+                                @include d-flex(row, center, flex-start, 8px);
+                                // flex: 1;
+                                // min-width: 0;
+                                width: 80%;
+
+                                label {
+                                    overflow-wrap: anywhere;
+                                }
+                            }
+
+                            .added-subtask-actions {
+                                width: fit-content;
+                                height: 24px;
+
+                                @include d-flex(row, center, center, 10px);
+
+                                visibility: hidden;
+                                opacity: 0;
+                            }
+
+                            &:hover {
+                                background: $grey-bright;
+                                border-radius: 15px;
+
+                                .added-subtask-actions {
+                                    visibility: visible;
+                                    opacity: 1;
+
+                                    .added-divider {
+                                        width: 1px;
+                                        height: 16px;
+                                        background: $grey-medium;
+                                    }
+
+                                    .added-subtask-delete-btn,
+                                    .added-subtask-edit-btn {
+                                        padding: 0;
+                                        cursor: pointer;
+
+                                        height: 16px;
+                                        width: 16px;
+
+                                        @include d-flex;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .subtask-edit {
+                        @include d-flex(row, center, center);
+                        width: 100%;
+                        height: fit-content;
+                        min-height: 24px;
+                        // padding: 4px 16px;
+
+                        .subtask-edit-content {
+                            @include d-flex(row, center, space-between, 8px);
+                            // flex: 1;
+                            // min-width: 0;
+                            width: 100%;
+
+                            #editSubtask {
+                                border-bottom: solid 1px $blue-main;
+                                resize: none;
+                                width: 100%;
+                                height: 32px;
+                                background: $white;
+
+                                text-align: left;
+                                padding: 5px 85px 5px 5px;
+
+                                @include scrollbar;
+                            }
+                        }
+
+                        .subtask-edit-actions {
+                            width: fit-content;
+                            height: 24px;
+                            position: absolute;
+                            right: 4px;
+                            top: 8px;
+
+                            @include d-flex(row, center, center, 10px);
+
+                            .added-divider {
+                                width: 1px;
+                                height: 16px;
+                                background: $grey-medium;
+                            }
                         }
                     }
                 }
@@ -204,6 +441,10 @@
             width: 100%;
             height: 15%;
             @include d-flex(row, flex-end, space-between);
+            @include respond(zero, m){
+                height: 10%;
+                @include d-flex(row, center, space-between);
+            }
 
             #disclaimer-text {
                 width: fit-content;
@@ -218,16 +459,34 @@
                 button {
                     @include font(24px);
                     padding: 16px;
-                    border: 2px solid $blue-main;
-                    color: $blue-main;
                     border-radius: 10px;
                     @include d-flex(row, center, center, 8px);
+                }
+                .blue-on-white {
+                    border: 1px solid $blue-main;
+                    color: $blue-main;
+                }
+                .blue-on-white:hover {
+                    border: 2px solid $blue-main;
+                }
+                .white-on-blue {
+                    background-color: $blue-main;
+                    color: white;
+                }
+                .white-on-blue:hover {
+                    background-color: $blue-hover-nav;
+                    box-shadow:
+                        0px 0px 3px rgba(3, 7, 18, 0.5),
+                        0px 0px 12px rgba(3, 7, 18, 0.1),
+                        0px 0px 28px rgba(3, 7, 18, 0.1);
                 }
             }
         }
     }
+
     .edit_form_submit {
         display: none;
+        padding-bottom: 1rem;
     }
     &.edit-mode {
         h1 {
@@ -268,3 +527,4 @@
         }
     }
 }
+

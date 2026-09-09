@@ -1,5 +1,5 @@
-import { Component, inject, signal, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import { Component, inject, signal, input, output, AfterViewInit} from '@angular/core';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { TasksService } from '../../shared/services/tasks.service';
@@ -7,69 +7,49 @@ import { ContactsService } from '../../shared/services/contacts.service';
 import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
+import { DateValidator } from '../../shared/validators';
+import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-form',
-    imports: [ReactiveFormsModule, InitialsPipe],
+    imports: [ReactiveFormsModule, InitialsPipe, ConfirmationPopup],
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
-export class TaskForm {
+export class TaskForm implements AfterViewInit {
     taskService = inject(TasksService);
     dbService = inject(ContactsService);
+
     task = input<Task>();
     saved = output<void>();
     priority = 'Medium';
-    divClassList = 'd-none';
+    // divClassList = 'd-none';
+    divClassList = signal('d-none');
     categories = ['Technical task', 'User Story'];
     subtasks = signal<Subtask[]>([]);
     assignees = signal<Contact[]>([]);
+    dropdownArrow = 'arrow-down';
 
-    toggleDisplayNone() {
-        if (this.divClassList == '') {
-            this.divClassList = 'd-none';
-        } else {
-            this.divClassList = '';
-        }
-    }
+    editingSubtask: Subtask | undefined = undefined;
+    editingSubtaskFormControl = new FormControl('');
 
     // input true in the dialog so button is only visible when the dialog is open
     showCloseButton = input(false);
     closeDialog = output<void>();
 
+
+
+
     taskForm = new FormGroup({
-        title: new FormControl('', { validators: [Validators.required]}),
+        title: new FormControl('', [Validators.required]),
         description: new FormControl(''),
-        dueDate: new FormControl('', { validators: [Validators.required]}),
-        category: new FormControl('',{ validators: [Validators.required]}),
+        dueDate: new FormControl('', [Validators.required, DateValidator]),
+        category: new FormControl('', [Validators.required]),
         priority: new FormControl(''),
         assignees: new FormControl(''),
         subtasks: new FormControl(''),
     });
-
-    urgentSelected = '';
-    mediumSelected = '';
-    lowSelected = '';
-
-    getPriority(priority: string) {
-        this.priority = priority;
-
-        if (priority == 'Urgent') {
-            this.urgentSelected = 'urgent-clicked';
-            this.mediumSelected = '';
-            this.lowSelected = '';
-        } else if (priority == 'Medium') {
-            this.urgentSelected = '';
-            this.mediumSelected = 'medium-selected';
-            this.lowSelected = '';
-        } else if (priority == 'Low') {
-            this.urgentSelected = '';
-            this.mediumSelected = '';
-            this.lowSelected = 'low-selected';
-        }
-
-        return this.priority;
-    }
 
     ngOnInit() {
         this.dbService.getAllContacts();
@@ -88,11 +68,89 @@ export class TaskForm {
         }
     }
 
+    // closing assignee dropdown menu on click outside
+    // divClassList needs to be a signal to detect the changes
+    // contains() checks whether the clicked element is inside this element (child element).
+    // Node as datatype expected by contains
+    // ngAfterViewInit() method to handle any additional initialization tasks
+    ngAfterViewInit(): void {
+        document.addEventListener('click', (event) => {
+            const assigneeDropdown = document.getElementById('list-of-assignees');
+            const assigneeInput = document.getElementById('assignee-dropdown');
+
+            // console.log(event.target);
+
+            if (
+                !assigneeDropdown?.contains(event.target as Node) &&
+                !assigneeInput?.contains(event.target as Node)
+            ) {
+                console.log('CLOSING NOW');
+                this.divClassList.set('d-none');
+                this.dropdownArrow = 'arrow-down';
+            }
+        });
+    }
+    // #region priority
+    urgentSelected = '';
+    mediumSelected = '';
+    lowSelected = '';
+
+    getPriority(priority: string) {
+        this.priority = priority;
+        if (priority == 'Urgent') {
+            this.urgentSelected = 'urgent-clicked';
+            this.mediumSelected = '';
+            this.lowSelected = '';
+        } else if (priority == 'Medium') {
+            this.urgentSelected = '';
+            this.mediumSelected = 'medium-selected';
+            this.lowSelected = '';
+        } else if (priority == 'Low') {
+            this.urgentSelected = '';
+            this.mediumSelected = '';
+            this.lowSelected = 'low-selected';
+        }
+        return this.priority;
+    }
+
+    // #endregion
+
+    // #region assignees
+    toggleDisplayNone() {
+        if (this.divClassList() == '') {
+            this.dropdownArrow = 'arrow-down';
+            this.divClassList.set('d-none');
+        } else {
+            this.divClassList.set('');
+            this.dropdownArrow = 'arrow-up';
+        }
+    }
+
+    assigneeSelected = '';
+
     assignContact(contact: Contact) {
-        this.assignees.update((assignees) => [...assignees, contact]);
+        this.assignees.update((assignees) => {
+            let alreadyAssigned = false;
+            let contactID = contact.id;
+            for (let i = 0; i < assignees.length; i++) {
+                if (assignees[i].id === contact.id) {
+                    alreadyAssigned = true;
+                }
+            }
+            if (alreadyAssigned) {
+                document.getElementById(`${contact.id}`)?.classList.remove('assigned');
+                return assignees.filter((a) => a.id !== contact.id);
+            } else {
+                document.getElementById(`${contact.id}`)?.classList.add('assigned');
+                return [...assignees, contact];
+            }
+        });
         console.log(this.assignees());
     }
 
+    // #endregion
+
+    // #region subtasks
     addSubtask() {
         const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
         let newSubtaskDescription = inputSubtaskRef?.value;
@@ -102,8 +160,63 @@ export class TaskForm {
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
         console.log(newSubtask);
+        this.clearSubtaskInput();
     }
 
+    editSubtask(subtask: Subtask) {
+        this.editingSubtask = subtask;
+        this.editingSubtaskFormControl.setValue(subtask.description);
+    }
+
+    saveSubtaskEdit(subtask: Subtask) {
+        const newSubtaskDescription = this.editingSubtaskFormControl.value;
+
+        console.log(newSubtaskDescription);
+
+        if (newSubtaskDescription !== null) {
+            this.subtasks.update((subtasks) => {
+                for (const currentSubtask of subtasks) {
+                    if (currentSubtask === subtask) {
+                        currentSubtask.description = newSubtaskDescription;
+                    }
+                }
+                return subtasks;
+            });
+            this.editingSubtask = undefined;
+        }
+    }
+
+    clearSubtaskInput() {
+        this.taskForm.controls.subtasks.reset();
+        this.taskForm.controls.subtasks.markAsPristine();
+    }
+
+    deleteSubtask(index: number) {
+        this.subtasks.update((subtasks) => {
+            subtasks.splice(index, 1);
+            return subtasks;
+        });
+    }
+
+    toggleSubtask(subtask: Subtask) {
+        // Update the subtasks signal
+        this.subtasks.update((subtasks) => {
+            // Go through every subtask in the array
+            for (const currentSubtask of subtasks) {
+                // Check if this is the subtask that was clicked
+                if (currentSubtask === subtask) {
+                    // Change checked to the opposite value
+                    currentSubtask.checked = !currentSubtask.checked;
+                }
+            }
+            console.log(subtasks);
+            return subtasks;
+        });
+    }
+
+    // #endregion
+
+    // #region submit and reset form
     async onSubmit() {
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
@@ -123,35 +236,34 @@ export class TaskForm {
                 this.taskService.updateTask(id, task);
             } else {
                 this.taskService.createTask(task);
-                console.log('task created');
             }
         }
         this.saved.emit();
+        this.formReset();
+        this.confirmTaskCreation();
     }
 
-    toggleSubtask(subtask: Subtask) {
-        // Update the subtasks signal
-        this.subtasks.update((subtasks) => {
-            // Go through every subtask in the array
-            for (const currentSubtask of subtasks) {
-                // Check if this is the subtask that was clicked
-                if (currentSubtask === subtask) {
-                    // Change checked to the opposite value
-                    currentSubtask.checked = !currentSubtask.checked;
-                }
-            }
-            console.log(subtasks);
-            return subtasks;
-        });
+    formReset() {
+        this.taskForm.reset();
     }
-}
 
-export class DateValidator {
-    static LessThanToday(control: FormControl): ValidationErrors | null {
-        let today: Date = new Date();
+    // #endregion
 
-        if (new Date(control.value) > today) return { LessThanToday: true };
+    // #region alert
+    popupVisible = false;
 
-        return null;
+    confirmTaskCreation() {
+        this.popupVisible = true;
+
+        setTimeout(() => {
+            this.popupVisible = false;
+            this.redirectToBoard();
+        }, 1500);
     }
+
+    router = inject(Router);
+    redirectToBoard(){
+        this.router.navigate(['/board']);
+    }
+    // #endregion
 }

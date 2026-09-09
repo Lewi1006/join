@@ -1,7 +1,11 @@
 <section class="board">
     <div class="board-header">
-        <h1>Board</h1>
-
+        <div class="board_wrapper">
+            <h1>Board</h1>
+            <button type="button" class="add-task-btn-mobile" (click)="openAddTaskDialog(addTaskDialog)">
+                &#43;
+            </button>
+        </div>
         <div class="board-header-actions">
             <div class="search-field">
                 <label for="find"></label>
@@ -25,8 +29,9 @@
 
             <dialog #addTaskDialog class="add-task-dialog">
                 <app-task-form
-                  [showCloseButton]="true"
-                (closeDialog) = "closeAddTaskDialog(addTaskDialog)"></app-task-form>
+                    [showCloseButton]="true"
+                    (closeDialog)="closeAddTaskDialog(addTaskDialog)"
+                ></app-task-form>
             </dialog>
         </div>
     </div>
@@ -46,14 +51,18 @@
 
     <dialog #taskDialog class="task-dialog" (close)="selectedTaskId.set(undefined)">
         @if (selectedTask(); as task) {
-            <app-task-dialog-comp [task]="task" (closeDialog)="closeTaskDialog(taskDialog)" (deleteRequested)="deleteDialog.showModal()">
+            <app-task-dialog-comp
+                [task]="task"
+                (closeDialog)="closeTaskDialog(taskDialog)"
+                (deleteRequested)="deleteDialog.showModal()"
+            >
             </app-task-dialog-comp>
             <dialog #deleteDialog class="confirm_dialog">
-    <app-contacts-delete
-        (confirm)="confirmDelete(deleteDialog, taskDialog)"
-        (cancel)="deleteDialog.close()"
-    ></app-contacts-delete>
-</dialog>
+                <app-contacts-delete
+                    (confirm)="confirmDelete(deleteDialog, taskDialog)"
+                    (cancel)="deleteDialog.close()"
+                ></app-contacts-delete>
+            </dialog>
         }
     </dialog>
 </section>
