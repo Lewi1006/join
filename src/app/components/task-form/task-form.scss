@@ -166,7 +166,7 @@
                             border: 3px solid white;
                         }
 
-                        #assignee-dropdown {
+                        #assignee-dropdown, #edit-assignee-dropdown{
                             @include d-flex(row, center, space-between, 0px);
 
                             .arrow-down {
@@ -186,7 +186,7 @@
                             }
                         }
 
-                        #list-of-assignees {
+                        #list-of-assignees, #edit-list-of-assignees{
                             background-color: white;
                             padding: 4px;
                             border-radius: 10px;
