@@ -55,7 +55,7 @@ app-footer {
 }
 @include respond-max(m) {
     .navigation {
-        bottom: 0;
+        // bottom: 0;
         padding: 0;
         app-footer,
         .logo_link {
