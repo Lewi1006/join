@@ -242,7 +242,16 @@
 
                         #assigned-contacts-avatars {
                             width: 100%;
-                            @include d-flex(row, center, flex-start, 8px);
+                            // display: flex;
+                            // flex-direction: row;
+                            // align-items: flex-start;
+                            // justify-content: flex-start;
+                            // gap: 8px;
+                            max-height: 100px;
+                            height: fit-content;
+                            flex-wrap: wrap;
+                            overflow-y: auto;
+                            @include d-flex(row, flex-start, flex-start, 8px);
                         }
                     }
 
