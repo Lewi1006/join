@@ -9,6 +9,7 @@ import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
 import { DateValidator } from '../../shared/validators';
 import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-form',
@@ -216,9 +217,13 @@ export class TaskForm {
 
         setTimeout(() => {
             this.popupVisible = false;
-            console.log('is pop up visible? '+ this.popupVisible);
-        }, 5000);
-        console.log('aline');
+            this.redirectToBoard();
+        }, 1500);
+    }
+
+    router = inject(Router);
+    redirectToBoard(){
+        this.router.navigate(['/board']);
     }
 
 }
