@@ -10,6 +10,15 @@
 
     @include d-flex(column, flex-start, flex-start);
     overflow: hidden;
+    @include respond(zero, l) {
+        padding: 1rem;
+    }
+
+    @include respond(zero, m) {
+        overflow-y: scroll;
+            height: calc(100dvh - $height-header - 80px);
+
+    }
 }
 
 .board-header {
@@ -45,6 +54,16 @@
                 width: 18px;
                 height: auto;
             }
+            @include respond(zero, m) {
+                width: 100%;
+                justify-content: flex-end;
+                gap: 15px;
+                #find {
+                    position: absolute;
+                    left: 10px;
+                    width: calc(100% - 57px);
+                }
+            }
         }
 
         .add-task-btn {
@@ -58,7 +77,41 @@
 
             @include d-flex(row, center, space-between);
             @include font(22px, 700, 120%);
+            @include respond(zero, m) {
+                display: none;
+            }
         }
+        @include respond(zero, m) {
+            @include d-flex(column-reverse, flex-start);
+            width: 100%;
+        }
+    }
+
+    .add-task-btn-mobile {
+        color: $white;
+        background-color: $blue-main;
+        border-radius: 10px;
+        padding: 8px 16px;
+        @include d-flex(row, center, space-between);
+        @include font(22px, 700, 120%);
+        @include respond(zero, m) {
+            align-self: flex-end;
+        }
+
+        display: none;
+        @include respond(zero, m) {
+            display: inline;
+        }
+    }
+    .board_wrapper {
+        @include d-flex(row, center, space-between);
+        width: 100%;
+        @include respond(zero, m) {
+            margin-bottom: 2rem;
+        }
+    }
+    @include respond(zero, m) {
+        @include d-flex(column, flex-start, column);
     }
 }
 
@@ -78,9 +131,9 @@
         @include d-flex(row, flex-start, flex-start, 20px);
     }
 
-        @include respond(zero, m) {
+    @include respond(zero, m) {
         @include d-flex(column, flex-start, flex-start, 20px);
-        overflow-y: scroll;
+        // overflow-y: scroll;
         padding-bottom: 70px;
     }
 
@@ -89,6 +142,10 @@
         height: 100%;
         // equal horizontal distribution
         flex: 1;
+        min-width: 0;
+    }
+    @include respond(zero, l) {
+        gap: 1rem;
     }
 }
 

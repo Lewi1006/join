@@ -360,6 +360,44 @@
                             }
                         }
                     }
+
+                    .subtask-edit {
+                        @include d-flex(row, center, center);
+                        width: 100%;
+                        height: fit-content;
+                        min-height: 24px;
+                        // padding: 4px 16px;
+
+                        .subtask-edit-content {
+                            @include d-flex(row, center, space-between, 8px);
+                            // flex: 1;
+                            // min-width: 0;
+                            width: 100%;
+
+                            textarea {
+                                border-bottom: solid 1px $blue-main;
+                                resize: none;
+                                width: 100%;
+                               
+                            }
+                        }
+
+                        .subtask-edit-actions {
+                            width: fit-content;
+                            height: 24px;
+                            position: absolute;
+                             right: 4px;
+                                top: 8px;;
+
+                            @include d-flex(row, center, center, 10px);
+
+                               .added-divider {
+                                        width: 1px;
+                                        height: 16px;
+                                        background: $grey-medium;
+                                    }
+                        }
+                    }
                 }
             }
         }
