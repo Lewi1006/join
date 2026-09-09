@@ -31,16 +31,6 @@ export class TaskForm {
     editingSubtask: Subtask | undefined = undefined;
     editingSubtaskFormControl = new FormControl('');
 
-    toggleDisplayNone() {
-        if (this.divClassList == '') {
-            this.dropdownArrow = 'arrow-down';
-            this.divClassList = 'd-none';
-        } else {
-            this.divClassList = '';
-            this.dropdownArrow = 'arrow-up';
-        }
-    }
-
     // input true in the dialog so button is only visible when the dialog is open
     showCloseButton = input(false);
     closeDialog = output<void>();
@@ -55,6 +45,24 @@ export class TaskForm {
         subtasks: new FormControl(''),
     });
 
+    ngOnInit() {
+        this.dbService.getAllContacts();
+        this.dbService.cloneArray();
+        const task = this.task();
+        if (task) {
+            this.taskForm.patchValue({
+                title: task.title,
+                description: task.description,
+                dueDate: task.dueDate,
+                category: task.category,
+                priority: task.priority,
+            });
+            this.assignees.set(task.assignees ?? []);
+            this.subtasks.set(task.subtasks ?? []);
+        }
+    }
+
+    // #region priority
     urgentSelected = '';
     mediumSelected = '';
     lowSelected = '';
@@ -77,20 +85,16 @@ export class TaskForm {
         return this.priority;
     }
 
-    ngOnInit() {
-        this.dbService.getAllContacts();
-        this.dbService.cloneArray();
-        const task = this.task();
-        if (task) {
-            this.taskForm.patchValue({
-                title: task.title,
-                description: task.description,
-                dueDate: task.dueDate,
-                category: task.category,
-                priority: task.priority,
-            });
-            this.assignees.set(task.assignees ?? []);
-            this.subtasks.set(task.subtasks ?? []);
+    // #endregion
+
+    // #region assignees
+    toggleDisplayNone() {
+        if (this.divClassList == '') {
+            this.dropdownArrow = 'arrow-down';
+            this.divClassList = 'd-none';
+        } else {
+            this.divClassList = '';
+            this.dropdownArrow = 'arrow-up';
         }
     }
 
@@ -116,6 +120,9 @@ export class TaskForm {
         console.log(this.assignees());
     }
 
+    // #endregion
+
+    // #region subtasks
     addSubtask() {
         const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
         let newSubtaskDescription = inputSubtaskRef?.value;
@@ -163,6 +170,25 @@ export class TaskForm {
         });
     }
 
+    toggleSubtask(subtask: Subtask) {
+        // Update the subtasks signal
+        this.subtasks.update((subtasks) => {
+            // Go through every subtask in the array
+            for (const currentSubtask of subtasks) {
+                // Check if this is the subtask that was clicked
+                if (currentSubtask === subtask) {
+                    // Change checked to the opposite value
+                    currentSubtask.checked = !currentSubtask.checked;
+                }
+            }
+            console.log(subtasks);
+            return subtasks;
+        });
+    }
+
+    // #endregion
+
+    // #region submit and reset form
     async onSubmit() {
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
@@ -193,32 +219,19 @@ export class TaskForm {
         this.taskForm.reset();
     }
 
-    toggleSubtask(subtask: Subtask) {
-        // Update the subtasks signal
-        this.subtasks.update((subtasks) => {
-            // Go through every subtask in the array
-            for (const currentSubtask of subtasks) {
-                // Check if this is the subtask that was clicked
-                if (currentSubtask === subtask) {
-                    // Change checked to the opposite value
-                    currentSubtask.checked = !currentSubtask.checked;
-                }
-            }
-            console.log(subtasks);
-            return subtasks;
-        });
-    }
+    // #endregion
 
+    // #region alert
     popupVisible = false;
-    
+
     confirmTaskCreation() {
         this.popupVisible = true;
 
         setTimeout(() => {
             this.popupVisible = false;
-            console.log('is pop up visible? '+ this.popupVisible);
+            console.log('is pop up visible? ' + this.popupVisible);
         }, 5000);
         console.log('aline');
     }
-
+    // #endregion
 }
