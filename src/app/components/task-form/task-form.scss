@@ -317,7 +317,7 @@
                             border: 1px solid black;
                             border-radius: 8px;
                             padding: 4px 8px;
-
+                            resize: none;
                             &::placeholder {
                                 color: $grey-medium;
                             }
@@ -486,6 +486,7 @@
 
     .edit_form_submit {
         display: none;
+        padding-bottom: 1rem;
     }
     &.edit-mode {
         h1 {
