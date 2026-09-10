@@ -166,7 +166,7 @@ export class TaskForm implements AfterViewInit {
     // #region subtasks
     addSubtask() {
         const inputSubtaskRef = this.taskForm.controls.subtasks.value;
-        if (!inputSubtaskRef) return;
+        if (!inputSubtaskRef || inputSubtaskRef.length < 1) return;
         // let newSubtaskDescription = inputSubtaskRef?.value;
         const newSubtask: Subtask = {
             description: inputSubtaskRef,
