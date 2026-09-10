@@ -1,4 +1,4 @@
-import { Component, inject, signal, input, output, AfterViewInit} from '@angular/core';
+import { Component, inject, signal, input, output, AfterViewInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -9,6 +9,7 @@ import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
 import { DateValidator } from '../../shared/validators';
 import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-form',
@@ -37,9 +38,6 @@ export class TaskForm implements AfterViewInit {
     showCloseButton = input(false);
     closeDialog = output<void>();
 
-
-
-
     taskForm = new FormGroup({
         title: new FormControl('', [Validators.required]),
         description: new FormControl(''),
@@ -64,6 +62,7 @@ export class TaskForm implements AfterViewInit {
             });
             this.assignees.set(task.assignees ?? []);
             this.subtasks.set(task.subtasks ?? []);
+            this.getPriority(task.priority ?? 'Medium')
         }
     }
 
@@ -74,10 +73,13 @@ export class TaskForm implements AfterViewInit {
     // ngAfterViewInit() method to handle any additional initialization tasks
     ngAfterViewInit(): void {
         document.addEventListener('click', (event) => {
-            const assigneeDropdown = document.getElementById('list-of-assignees');
-            const assigneeInput = document.getElementById('assignee-dropdown');
+            const assigneeDropdown = document.getElementById(
+                this.task() ? 'edit-list-of-assignees' : 'list-of-assignees',
+            );
 
-            // console.log(event.target);
+            const assigneeInput = document.getElementById(
+                this.task() ? 'edit-assignee-dropdown' : 'assignee-dropdown',
+            );
 
             if (
                 !assigneeDropdown?.contains(event.target as Node) &&
@@ -89,12 +91,13 @@ export class TaskForm implements AfterViewInit {
             }
         });
     }
+
     // #region priority
     urgentSelected = '';
-    mediumSelected = '';
+    mediumSelected = 'medium-selected';
     lowSelected = '';
 
-    getPriority(priority: string) {
+    getPriority(priority: string ) {
         this.priority = priority;
         if (priority == 'Urgent') {
             this.urgentSelected = 'urgent-clicked';
@@ -115,7 +118,8 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region assignees
-    toggleDisplayNone() {
+    toggleDisplayNone(event: MouseEvent) {
+        event.stopPropagation();
         if (this.divClassList() == '') {
             this.dropdownArrow = 'arrow-down';
             this.divClassList.set('d-none');
@@ -147,14 +151,25 @@ export class TaskForm implements AfterViewInit {
         console.log(this.assignees());
     }
 
+    isAssigned(contact: Contact): boolean {
+        for (let assignee of this.assignees()) {
+            if (assignee.id === contact.id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // #endregion
 
     // #region subtasks
     addSubtask() {
-        const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
-        let newSubtaskDescription = inputSubtaskRef?.value;
+        const inputSubtaskRef = this.taskForm.controls.subtasks.value;
+        if (!inputSubtaskRef) return;
+        // let newSubtaskDescription = inputSubtaskRef?.value;
         const newSubtask: Subtask = {
-            description: newSubtaskDescription,
+            description: inputSubtaskRef,
             checked: false,
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
@@ -217,6 +232,10 @@ export class TaskForm implements AfterViewInit {
 
     // #region submit and reset form
     async onSubmit() {
+        if (this.taskForm.invalid) {
+        this.taskForm.markAllAsTouched();
+        return;
+    }
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
@@ -256,9 +275,13 @@ export class TaskForm implements AfterViewInit {
 
         setTimeout(() => {
             this.popupVisible = false;
-            console.log('is pop up visible? ' + this.popupVisible);
-        }, 5000);
-        console.log('aline');
+            this.redirectToBoard();
+        }, 1500);
+    }
+
+    router = inject(Router);
+    redirectToBoard() {
+        this.router.navigate(['/board']);
     }
     // #endregion
 }

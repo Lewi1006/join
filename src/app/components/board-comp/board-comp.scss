@@ -53,14 +53,24 @@
             img {
                 width: 18px;
                 height: auto;
+                margin-left: 10px;
             }
+            #find {
+    width: 100%;
+    height: 100%;
+    padding-left:1rem;
+    border-radius: 8px;
+    
+    // outline: none;
+    // background: transparent;
+}
             @include respond(zero, m) {
                 width: 100%;
                 justify-content: flex-end;
                 gap: 15px;
                 #find {
                     position: absolute;
-                    left: 10px;
+                    left: 0;
                     width: calc(100% - 57px);
                 }
             }
@@ -207,3 +217,4 @@
 .confirm_dialog {
     @include modal;
 }
+
