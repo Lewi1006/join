@@ -109,25 +109,28 @@
                         </div>
                     </div>
 
-
-
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
                         <div
-                            id="assignee-dropdown"
+                            [id]="task() ? 'edit-assignee-dropdown' : 'assignee-dropdown'"
+                            /* id="assignee-dropdown" */
                             class="input-field"
-                            (click)="toggleDisplayNone()"
+                            (click)="toggleDisplayNone($event)"
                         >
                             <p>Select contacts to assign</p>
                             <div [class]="dropdownArrow"></div>
                         </div>
-                        
-                        <div id="list-of-assignees" [class]="divClassList()">
+
+                        <div 
+                         [id]="task() ? 'edit-list-of-assignees' : 'list-of-assignees'"
+                        /* id="list-of-assignees"  */
+                        [class]="divClassList()">
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <button
                                     type="button"
                                     class="assignee-box"
-                                    [class]="assigneeSelected"
+                                    [class.assigned]="isAssigned(contact)"
+                                    /* [class]="assigneeSelected" */
                                     (click)="assignContact(contact)"
                                     id="{{ contact.id }}"
                                 >
@@ -155,8 +158,6 @@
                             }
                         </div>
                     </div>
-
-
 
                     <div class="input-field-div" id="category">
                         <label for="category" class="input-field-title"
@@ -219,7 +220,11 @@
                             @if (editingSubtask === item) {
                                 <div class="subtask-edit">
                                     <div class="subtask-edit-content">
-                                        <textarea type="text" id="editSubtask" [formControl]="editingSubtaskFormControl"></textarea>
+                                        <textarea
+                                            type="text"
+                                            id="editSubtask"
+                                            [formControl]="editingSubtaskFormControl"
+                                        ></textarea>
 
                                         <div class="subtask-edit-actions">
                                             <button

@@ -1,4 +1,4 @@
-import { Component, inject, signal, input, output, AfterViewInit} from '@angular/core';
+import { Component, inject, signal, input, output, AfterViewInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
@@ -38,9 +38,6 @@ export class TaskForm implements AfterViewInit {
     showCloseButton = input(false);
     closeDialog = output<void>();
 
-
-
-
     taskForm = new FormGroup({
         title: new FormControl('', [Validators.required]),
         description: new FormControl(''),
@@ -76,10 +73,13 @@ export class TaskForm implements AfterViewInit {
     // ngAfterViewInit() method to handle any additional initialization tasks
     ngAfterViewInit(): void {
         document.addEventListener('click', (event) => {
-            const assigneeDropdown = document.getElementById('list-of-assignees');
-            const assigneeInput = document.getElementById('assignee-dropdown');
+            const assigneeDropdown = document.getElementById(
+                this.task() ? 'edit-list-of-assignees' : 'list-of-assignees',
+            );
 
-            // console.log(event.target);
+            const assigneeInput = document.getElementById(
+                this.task() ? 'edit-assignee-dropdown' : 'assignee-dropdown',
+            );
 
             if (
                 !assigneeDropdown?.contains(event.target as Node) &&
@@ -91,6 +91,7 @@ export class TaskForm implements AfterViewInit {
             }
         });
     }
+
     // #region priority
     urgentSelected = '';
     mediumSelected = 'medium-selected';
@@ -117,7 +118,8 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region assignees
-    toggleDisplayNone() {
+    toggleDisplayNone(event: MouseEvent) {
+        event.stopPropagation();
         if (this.divClassList() == '') {
             this.dropdownArrow = 'arrow-down';
             this.divClassList.set('d-none');
@@ -147,6 +149,16 @@ export class TaskForm implements AfterViewInit {
             }
         });
         console.log(this.assignees());
+    }
+
+    isAssigned(contact: Contact): boolean {
+        for (let assignee of this.assignees()) {
+            if (assignee.id === contact.id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // #endregion
@@ -268,7 +280,7 @@ export class TaskForm implements AfterViewInit {
     }
 
     router = inject(Router);
-    redirectToBoard(){
+    redirectToBoard() {
         this.router.navigate(['/board']);
     }
     // #endregion
