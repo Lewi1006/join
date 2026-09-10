@@ -10,10 +10,11 @@ import { Subtask } from '../../shared/interfaces/subtask.interface';
 import { DateValidator } from '../../shared/validators';
 import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
 import { Router } from '@angular/router';
+import { BoardComp } from '../board-comp/board-comp';
 
 @Component({
     selector: 'app-task-form',
-    imports: [ReactiveFormsModule, InitialsPipe, ConfirmationPopup],
+    imports: [ReactiveFormsModule, InitialsPipe, ConfirmationPopup, BoardComp],
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
@@ -160,7 +161,6 @@ export class TaskForm implements AfterViewInit {
 
         return false;
     }
-
     // #endregion
 
     // #region subtasks
@@ -268,15 +268,17 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region alert
-    popupVisible = false;
+    popupVisible = signal(false);
 
     confirmTaskCreation() {
-        this.popupVisible = true;
+        this.popupVisible.set(true);
 
         setTimeout(() => {
-            this.popupVisible = false;
+            this.popupVisible.set(false);
             this.redirectToBoard();
         }, 1500);
+
+        BoardComp.closeAddTaskDialog();
     }
 
     router = inject(Router);
