@@ -7,7 +7,7 @@ import { ContactsService } from '../../shared/services/contacts.service';
 import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
-import { DateValidator } from '../../shared/validators';
+import { DateValidator, SubtaskValidator } from '../../shared/validators';
 import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
 import { Router } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class TaskForm implements AfterViewInit {
         category: new FormControl('', [Validators.required]),
         priority: new FormControl(''),
         assignees: new FormControl(''),
-        subtasks: new FormControl(''),
+        subtasks: new FormControl('', [SubtaskValidator]),
     });
 
     ngOnInit() {
@@ -165,11 +165,14 @@ export class TaskForm implements AfterViewInit {
 
     // #region subtasks
     addSubtask() {
-        const inputSubtaskRef = this.taskForm.controls.subtasks.value;
-        if (!inputSubtaskRef || inputSubtaskRef.length < 1) return;
+        const inputSubtaskRef = this.taskForm.controls.subtasks;
+
+        inputSubtaskRef.markAsTouched();
+
+        if (!inputSubtaskRef.value || inputSubtaskRef.invalid) return;
         // let newSubtaskDescription = inputSubtaskRef?.value;
         const newSubtask: Subtask = {
-            description: inputSubtaskRef,
+            description: inputSubtaskRef.value,
             checked: false,
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
