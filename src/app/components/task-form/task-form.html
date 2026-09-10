@@ -23,7 +23,7 @@
                         >
                         <textarea
                             id="title"
-                            class="input-field"
+                            class="input-field cursor"
                             id="text"
                             formControlName="title"
                             rows="2"
@@ -59,7 +59,7 @@
                             id="due-date"
                             type="date"
                             formControlName="dueDate"
-                            class="input-field"
+                            class="input-field cursor"
                         />
                         @if (taskForm.get('dueDate')?.touched && !taskForm.get('dueDate')?.valid) {
                             <p class="red">
