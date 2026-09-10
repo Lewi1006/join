@@ -10,11 +10,10 @@ import { Subtask } from '../../shared/interfaces/subtask.interface';
 import { DateValidator } from '../../shared/validators';
 import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
 import { Router } from '@angular/router';
-import { BoardComp } from '../board-comp/board-comp';
 
 @Component({
     selector: 'app-task-form',
-    imports: [ReactiveFormsModule, InitialsPipe, ConfirmationPopup, BoardComp],
+    imports: [ReactiveFormsModule, InitialsPipe, ConfirmationPopup],
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
