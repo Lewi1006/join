@@ -57,7 +57,8 @@ export class BoardComp {
     filteredTasks = computed(() => {
         const term = this.searchTerm().toLowerCase().trim();
         return term.length >= 3
-            ? this.taskService.tasks().filter((t) => t.title?.toLowerCase().includes(term))
+            ? this.taskService.tasks().filter((t) => t.title?.toLowerCase().includes(term) ||
+            t.description?.toLowerCase().includes(term))
             : this.taskService.tasks();
     });
 
@@ -129,5 +130,11 @@ export class BoardComp {
     deleteDialog.close();
     taskDialog.close();
     this.selectedTaskId.set(undefined);
+}
+backdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
+    if (event.target === dialog) {
+        dialog.close();
+        // this.selectedTaskId.set(undefined);
+    }
 }
 }

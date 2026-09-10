@@ -168,7 +168,7 @@
                                 <option class="input-field">{{ category }}</option>
                             }
                         </select>
-                        @if (taskForm.get('category')?.touched && taskForm.get('category')?.value == 'Choose a category') {
+                        @if (taskForm.get('category')?.touched && taskForm.get('category')?.value == '') {
                             <p class="red">
                                 This field is required. Please select a category..
                             </p>
@@ -304,7 +304,7 @@
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>
-                <button class="white-on-blue" type="submit" [disabled]="!taskForm.valid">
+                <button class="white-on-blue" type="submit">
                     <p>Create Task</p>
                     <img src="icons/checkmark-white-create-task.svg" alt="" />
                 </button>

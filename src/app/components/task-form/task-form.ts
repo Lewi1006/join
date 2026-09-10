@@ -65,6 +65,7 @@ export class TaskForm implements AfterViewInit {
             });
             this.assignees.set(task.assignees ?? []);
             this.subtasks.set(task.subtasks ?? []);
+            this.getPriority(task.priority ?? 'Medium')
         }
     }
 
@@ -92,10 +93,10 @@ export class TaskForm implements AfterViewInit {
     }
     // #region priority
     urgentSelected = '';
-    mediumSelected = '';
+    mediumSelected = 'medium-selected';
     lowSelected = '';
 
-    getPriority(priority: string) {
+    getPriority(priority: string ) {
         this.priority = priority;
         if (priority == 'Urgent') {
             this.urgentSelected = 'urgent-clicked';
@@ -152,10 +153,11 @@ export class TaskForm implements AfterViewInit {
 
     // #region subtasks
     addSubtask() {
-        const inputSubtaskRef = <HTMLInputElement>document.getElementById('input-subtask');
-        let newSubtaskDescription = inputSubtaskRef?.value;
+        const inputSubtaskRef = this.taskForm.controls.subtasks.value;
+        if (!inputSubtaskRef) return;
+        // let newSubtaskDescription = inputSubtaskRef?.value;
         const newSubtask: Subtask = {
-            description: newSubtaskDescription,
+            description: inputSubtaskRef,
             checked: false,
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
@@ -218,6 +220,10 @@ export class TaskForm implements AfterViewInit {
 
     // #region submit and reset form
     async onSubmit() {
+        if (this.taskForm.invalid) {
+        this.taskForm.markAllAsTouched();
+        return;
+    }
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;

@@ -489,6 +489,8 @@
         padding-bottom: 1rem;
     }
     &.edit-mode {
+        padding-top:0;
+        margin-top: -1rem;
         h1 {
             display: none;
         }
