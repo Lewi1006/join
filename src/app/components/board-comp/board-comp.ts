@@ -120,7 +120,6 @@ export class BoardComp {
 
     closeAddTaskDialog(addTaskDialog:HTMLDialogElement){
         addTaskDialog.close();
-        console.log('yes it is me mario');
     }
 
     async confirmDelete(deleteDialog: HTMLDialogElement, taskDialog: HTMLDialogElement) {

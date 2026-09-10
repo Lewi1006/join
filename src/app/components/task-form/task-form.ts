@@ -277,8 +277,6 @@ export class TaskForm implements AfterViewInit {
             this.popupVisible.set(false);
             this.redirectToBoard();
         }, 1500);
-
-        BoardComp.closeAddTaskDialog();
     }
 
     router = inject(Router);
