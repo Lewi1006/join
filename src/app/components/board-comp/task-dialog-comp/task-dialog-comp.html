@@ -1,11 +1,7 @@
 <!-- <dialog class="task-dialog"> -->
 <div class="task-dialog-wrapper">
     @if (!editMode()) {
-        <header class="task-dialog-header">
-            <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
-                <p>{{ task()?.category }}</p>
-            </div>
-            <button
+                    <button
                 class="close-btn-x"
                 type="button"
                 aria-label="Close"
@@ -13,6 +9,11 @@
             >
                 &times;
             </button>
+        <header class="task-dialog-header">
+            <div class="card-category" [class]="taskDetailService.getCategory(task()?.category)">
+                <p>{{ task()?.category }}</p>
+            </div>
+
         </header>
 
         <section class="task-dialog-content">
@@ -57,7 +58,7 @@
                     @if (task()?.subtasks; as subtasks) {
                         @for (subtask of subtasks; track $index) {
                             <label>
-                                <input type="checkbox" [checked]="subtask.checked" />
+                                <input type="checkbox" [checked]="subtask.checked" (change)="toggleSubtask($index)" />
 
                                 {{ subtask.description }}
                             </label>
@@ -81,10 +82,7 @@
                 <span>Delete</span>
             </button>
         </section>
-    } @else {
-        <div class="edit-mode-wrapper">
-            <header class="edit-task-header">
-                <button
+    } @else { <button
                     class="close-btn-x"
                     type="button"
                     aria-label="Close"
@@ -92,6 +90,9 @@
                 >
                     &times;
                 </button>
+        <div class="edit-mode-wrapper">               
+            <header class="edit-task-header">
+
             </header>
             <app-task-form [task]="task()" (saved)="editMode.set(false)"></app-task-form>
         </div>
