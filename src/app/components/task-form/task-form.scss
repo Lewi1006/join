@@ -16,17 +16,23 @@
     @include respond(zero, m) {
         max-height: calc(100dvh - $height-header - 80px);
         @include d-flex(column, flex-start, flex-start, 16px);
-        padding: 16px;
-    }
-
-    h1 {
-        height: fit-content;
-        width: 100%;
+        padding: 4px 16px 0px 16px;
     }
 
     .add-task-header {
+        h1 {
+            height: 100%;
+            width: 100%;
+            @include respond(zero, sm) {
+                @include font(2rem);
+            }
+        }
+        height: 60px;
         width: 100%;
         @include d-flex(row, center, space-between);
+        @include respond(zero, sm) {
+            height: 40px;
+        }
 
         .close-btn-x {
             font-size: 24px;
@@ -36,7 +42,7 @@
 
     #taskform {
         width: 100%;
-        height: 100%;
+        height: calc(100% - 60px);
         @include d-flex(column, center, center, 0px);
 
         .red {
@@ -75,10 +81,14 @@
                 width: 45%;
                 height: 100%;
                 @include d-flex(column, flex-start, space-between);
+                @include respond(zero, m) {
+                    width: 100%;
+                    padding: 4px;
+                    height: fit-content;
+                }
 
                 .input-fields-group {
                     width: 100%;
-                    // height: 85%;
                     height: 100%;
                     min-height: 0;
                     @include d-flex(column, flex-start, flex-start, 16px);
@@ -167,7 +177,8 @@
                             border: 3px solid white;
                         }
 
-                        #assignee-dropdown, #edit-assignee-dropdown{
+                        #assignee-dropdown,
+                        #edit-assignee-dropdown {
                             @include d-flex(row, center, space-between, 0px);
                             cursor: pointer;
 
@@ -188,7 +199,8 @@
                             }
                         }
 
-                        #list-of-assignees, #edit-list-of-assignees{
+                        #list-of-assignees,
+                        #edit-list-of-assignees {
                             background-color: white;
                             padding: 4px;
                             border-radius: 10px;
@@ -452,9 +464,10 @@
             width: 100%;
             height: 15%;
             @include d-flex(row, flex-end, space-between);
-            @include respond(zero, m){
-                height: 10%;
-                @include d-flex(row, center, space-between);
+            @include respond(zero, m) {
+                height: 15%;
+                @include d-flex(column, center, center, 4px);
+                flex-direction: column-reverse;
             }
 
             #disclaimer-text {
@@ -472,7 +485,12 @@
                     padding: 16px;
                     border-radius: 10px;
                     @include d-flex(row, center, center, 8px);
+                    @include respond(zero, m) {
+                        @include font(1rem);
+                        padding: 4px 8px;
+                    }
                 }
+
                 .blue-on-white {
                     border: 1px solid $blue-main;
                     color: $blue-main;
@@ -500,7 +518,7 @@
         padding-bottom: 1rem;
     }
     &.edit-mode {
-        padding-top:0;
+        padding-top: 0;
         margin-top: -1rem;
         h1 {
             display: none;
@@ -540,4 +558,3 @@
         }
     }
 }
-

@@ -276,9 +276,6 @@ export class TaskForm implements AfterViewInit {
         this.saved.emit();
         this.formReset();
         this.confirmTaskCreation();
-
-
-
     }
 
     formReset() {
