@@ -1,0 +1,130 @@
+@use '../../../../public/styles/main' as *;
+
+#summary {
+    border: 2px solid green;
+    height: 100%;
+    width: 100%;
+    padding: 100px 3rem;
+    @include respond-max(l) {
+        padding: 3rem 1.25rem;
+    }
+    @include d-flex(column, flex-start, flex-start, 40px);
+
+    .headline_area {
+        button {
+            display: none;
+        }
+        @include respond-max(sm) {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            button {
+                display: block;
+            }
+        }
+    }
+
+    .summary-heading {
+        @include d-flex(row, center, flex-start, 25px);
+
+        // h1 {
+        //     @include font(60px, 700);
+        // }
+
+        .heading-line {
+            height: 60px;
+            width: 3px;
+            background: $blue-bright;
+        }
+
+        p {
+            @include font(28px, 400, 120%);
+            color: $blue-main;
+        }
+        @include respond-max(l) {
+            flex-direction: column;
+            gap: 0.25rem;
+            align-items: flex-start;
+            p {
+                font-size: 1.25rem;
+            }
+            .heading-line {
+                width: 60px;
+                height: 3px;
+            }
+        }
+        @include respond-max(sm) {
+            width: 100%;
+        }
+    }
+    overflow-x: hidden;
+
+    .row {
+        display: flex;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .summary-content {
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+        max-height: 560px;
+
+        .metrics {
+            width: 560px;
+            max-width: 60%;
+            aspect-ratio: 1;
+
+            .metrics-wrapper {
+                width: 100%;
+                height: 100%;
+                max-width: 560px;
+                gap: 28px;
+
+                .one {
+                    background-color: yellow;
+                    border: 1px solid black;
+                    border-radius: 30px;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .card-wrapper {
+                    width: 100%;
+                    height: 100%;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 28px;
+
+                    .two {
+                        background-color: blue;
+                        width: 50%;
+                    }
+
+                    .three {
+                        background-color: green;
+                        width: 30%;
+                    }
+
+                    .metrics-box {
+                        border: 1px solid black;
+                        border-radius: 30px;
+                        height: 100%;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        .welcome-message {
+            width: 100%;
+            height: 100%;
+            background-color: pink;
+        }
+    }
+}
