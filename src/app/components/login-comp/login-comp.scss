@@ -90,8 +90,7 @@ main {
                 width: 100%;
                 // display: flex;
                 // gap: 10px;
-                
-
+                @include d-flex(column, flex flex-start, center, 20px);
 
                 .input-fields {
                     @include d-flex(column, center, center, 20px);
@@ -104,7 +103,7 @@ main {
                             width: 100%;
                             height: 100%;
                             min-height: 48px;
-                            
+
                             border: solid $blue-main 1px;
                             @include d-flex(row, center, space-between, 4px);
 
@@ -116,12 +115,12 @@ main {
                                 height: 100%;
                                 min-height: 48px;
 
-                                &::placeholder{
+                                &::placeholder {
                                     @include font(20px);
                                 }
                             }
 
-                            img{
+                            img {
                                 height: 24px;
                                 width: 24px;
                             }
@@ -129,27 +128,26 @@ main {
                     }
                 }
 
-
-                .login-actions{
+                .login-actions {
                     width: 100%;
                     height: fit-content;
 
                     @include d-flex(row, center, center, 20px);
 
+                    .login-btn {
+                        color: $blue-main;
+                        width: 120px;
+                        height: 48px;
+                        border: solid 1px $blue-main;
+                        border-radius: 8px;
 
-                    .login-btn{
-            color: $blue-main;
-            width: 100px;
-            height: 48px;
-            border: solid 1px $blue-main;
-            border-radius: 8px;
+                        &:hover{
+                            background: $blue-main;
+                            color: $white;
+                        }
                     }
-
                 }
             }
-
-
-
         }
     }
 }
