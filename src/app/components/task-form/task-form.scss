@@ -81,7 +81,7 @@
                     // height: 85%;
                     height: 100%;
                     min-height: 0;
-                    @include d-flex(column, flex-start, flex-start, 24px);
+                    @include d-flex(column, flex-start, flex-start, 16px);
 
                     #priority {
                         width: 100%;
@@ -276,7 +276,7 @@
                             .subtask-actions {
                                 position: absolute;
                                 right: 10px;
-                                top: 50%;
+                                top: 30%;
                                 transform: translateY(-50%);
                                 @include d-flex(row, center, center, 8px);
 

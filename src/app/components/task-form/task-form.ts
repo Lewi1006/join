@@ -7,9 +7,11 @@ import { ContactsService } from '../../shared/services/contacts.service';
 import { InitialsPipe } from '../../shared/pipes.pipe';
 import { Contact } from '../../shared/interfaces/contact.interface';
 import { Subtask } from '../../shared/interfaces/subtask.interface';
-import { DateValidator } from '../../shared/validators';
+import { DateValidator, SubtaskValidator } from '../../shared/validators';
 import { ConfirmationPopup } from '../task-comp/confirmation-popup/confirmation-popup';
 import { Router } from '@angular/router';
+import { AlertService } from '../../shared/services/alert.service';
+import { AlertType } from '../../shared/interfaces/alert.interface';
 
 @Component({
     selector: 'app-task-form',
@@ -20,6 +22,7 @@ import { Router } from '@angular/router';
 export class TaskForm implements AfterViewInit {
     taskService = inject(TasksService);
     dbService = inject(ContactsService);
+    alertService = inject(AlertService);
 
     task = input<Task>();
     saved = output<void>();
@@ -45,7 +48,7 @@ export class TaskForm implements AfterViewInit {
         category: new FormControl('', [Validators.required]),
         priority: new FormControl(''),
         assignees: new FormControl(''),
-        subtasks: new FormControl(''),
+        subtasks: new FormControl('', [SubtaskValidator]),
     });
 
     ngOnInit() {
@@ -62,7 +65,7 @@ export class TaskForm implements AfterViewInit {
             });
             this.assignees.set(task.assignees ?? []);
             this.subtasks.set(task.subtasks ?? []);
-            this.getPriority(task.priority ?? 'Medium')
+            this.getPriority(task.priority ?? 'Medium');
         }
     }
 
@@ -97,7 +100,7 @@ export class TaskForm implements AfterViewInit {
     mediumSelected = 'medium-selected';
     lowSelected = '';
 
-    getPriority(priority: string ) {
+    getPriority(priority: string) {
         this.priority = priority;
         if (priority == 'Urgent') {
             this.urgentSelected = 'urgent-clicked';
@@ -165,11 +168,14 @@ export class TaskForm implements AfterViewInit {
 
     // #region subtasks
     addSubtask() {
-        const inputSubtaskRef = this.taskForm.controls.subtasks.value;
-        if (!inputSubtaskRef) return;
+        const inputSubtaskRef = this.taskForm.controls.subtasks;
+
+        inputSubtaskRef.markAsTouched();
+
+        if (!inputSubtaskRef.value || inputSubtaskRef.invalid) return;
         // let newSubtaskDescription = inputSubtaskRef?.value;
         const newSubtask: Subtask = {
-            description: inputSubtaskRef,
+            description: inputSubtaskRef.value,
             checked: false,
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
@@ -231,14 +237,17 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region submit and reset form
+
+    
     async onSubmit() {
         if (this.taskForm.invalid) {
-        this.taskForm.markAllAsTouched();
-        return;
-    }
+            this.taskForm.markAllAsTouched();
+            return;
+        }
         console.log(this.taskForm.value);
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
+
             const task: Task = {
                 description: this.taskForm.value.description!,
                 title: this.taskForm.value.title!,
@@ -249,16 +258,23 @@ export class TaskForm implements AfterViewInit {
                 assignees: this.assignees()!,
                 subtasks: this.subtasks()!,
             };
+
             const id = this.task()?.id;
+
             if (id) {
                 this.taskService.updateTask(id, task);
+                this.alertService.success('Task was edited successfully', 1500);
             } else {
                 this.taskService.createTask(task);
+                // this.alertService.success('Task was created successfully', 1500);
             }
         }
         this.saved.emit();
         this.formReset();
         this.confirmTaskCreation();
+
+
+
     }
 
     formReset() {

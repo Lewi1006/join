@@ -121,10 +121,11 @@
                             <div [class]="dropdownArrow"></div>
                         </div>
 
-                        <div 
-                         [id]="task() ? 'edit-list-of-assignees' : 'list-of-assignees'"
-                        /* id="list-of-assignees"  */
-                        [class]="divClassList()">
+                        <div
+                            [id]="task() ? 'edit-list-of-assignees' : 'list-of-assignees'"
+                            /* id="list-of-assignees"  */
+                            [class]="divClassList()"
+                        >
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <button
                                     type="button"
@@ -212,6 +213,15 @@
                                     </button>
                                 }
                             </div>
+                            
+                            @if (
+                                taskForm.controls.subtasks.touched &&
+                                !taskForm.controls.subtasks.valid
+                            ) {
+                                <p class="red">Please enter a valid subtask.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
                         </div>
                     </div>
 
