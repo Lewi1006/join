@@ -15,8 +15,12 @@
 }
 @include respond-max(sm) {
     .contacts.contact-selected {
-        .contact_list { display: none; }
-        .contact_card { display: block; }
+        .contact_list {
+            display: none;
+        }
+        .contact_card {
+            display: block;
+        }
     }
 }
 .contact_list {
@@ -39,15 +43,15 @@
         animation: dialogIn 0.4s ease-out;
     }
 
+    @keyframes dialogIn {
+        from {
+            transform: translate(50vw, -50%);
+        }
+        to {
+            transform: translate(-50%, -50%);
+        }
+    }
 
-@keyframes dialogIn {
-    from {
-        transform: translate(50vw, -50%);
-    }
-    to {
-        transform: translate(-50%, -50%);
-    }
-}
     width: 1210px;
     height: 590px;
 
@@ -62,7 +66,7 @@
     }
 
     @include respond(zero, sm) {
-        position: fixed;
+        // position: fixed;
         top: 0;
         left: 0;
         // inset: 0;
@@ -79,6 +83,19 @@
         border-radius: 0;
 
         transform: none;
+
+        &[open] {
+            animation: dialogInMobile 0.4s ease-out;
+        }
+
+        @keyframes dialogInMobile {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
     }
 }
 .confirm_dialog {
