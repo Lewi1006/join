@@ -1,0 +1,80 @@
+@use '../../../../public/styles/main' as *;
+
+.content-restriction {
+    width: 100%;
+    height: 100%;
+    max-width: 1440px;
+    @include d-flex(column, center, space-between);
+}
+
+:host {
+    height: 100dvh;
+    padding: 80px 120px;
+    @include d-flex;
+}
+
+.login-header {
+    width: 100%;
+    height: 120px;
+
+    @include d-flex(row, flex-start, space-between);
+
+    img {
+        height: 120px;
+        width: auto;
+    }
+
+    .login-header-actions {
+        width: fit-content;
+        height: fit-content;
+        @include d-flex(row, center, center, 36px);
+        @include font(20px);
+
+        p {
+            color: $blue-main;
+        }
+
+        .signup-btn {
+            background: $blue-main;
+            color: $white;
+            width: 100px;
+            height: 48px;
+            border-radius: 8px;
+
+            &:hover {
+                @include drop-shadow;
+
+                background: $blue-light;
+            }
+        }
+    }
+}
+
+main {
+    width: 100%;
+    @include d-flex;
+
+    .login-box {
+        width: 50%;
+        height: 420px;
+        background: pink;
+        border-radius: 30px;
+        @include drop-shadow;
+    }
+}
+
+footer {
+    width: 100%;
+    height: fit-content;
+    @include d-flex(row, center, center, 28px);
+    color: $grey-medium;
+
+    a {
+        width: 120px;
+        text-align: center;
+        &:hover {
+            @include font(16px, 800, 120%);
+            color: $blue-main;
+        }
+    }
+}
