@@ -130,7 +130,7 @@ export class BoardComp {
         const task = this.selectedTask();
         if (task?.id) {
             await this.taskService.deleteTask(task.id);
-            this.alertService.success('Task was deleted successfully', 1500);
+            this.alertService.success('Task was deleted successfully', 2000);
         }
         deleteDialog.close();
         taskDialog.close();
