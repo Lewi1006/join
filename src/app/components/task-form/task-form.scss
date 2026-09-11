@@ -155,6 +155,7 @@
                             }
                         }
                     }
+
                     #assignees {
                         .initials {
                             width: 40px;
@@ -168,6 +169,7 @@
 
                         #assignee-dropdown, #edit-assignee-dropdown{
                             @include d-flex(row, center, space-between, 0px);
+                            cursor: pointer;
 
                             .arrow-down {
                                 width: 20px;
@@ -198,6 +200,7 @@
                             height: 300px;
                             overflow-y: scroll;
                             z-index: 1;
+                            cursor: pointer;
 
                             .assignee-box {
                                 height: 56px;
@@ -227,6 +230,7 @@
                             }
                             .assignee-box:hover {
                                 background-color: $grey-bright;
+                                cursor: pointer;
                             }
                             .assigned {
                                 background-color: $blue-main;
@@ -237,6 +241,7 @@
                             }
                             .assigned:hover {
                                 background-color: $blue-dark;
+                                cursor: pointer;
                             }
                         }
 
@@ -258,6 +263,7 @@
                             #input-subtask {
                                 height: 30px;
                                 width: 100%;
+                                cursor: pointer;
 
                                 padding-right: 90px;
 
@@ -322,6 +328,7 @@
                             border-radius: 8px;
                             padding: 4px 8px;
                             resize: none;
+                            cursor: pointer;
                             &::placeholder {
                                 color: $grey-medium;
                             }

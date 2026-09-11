@@ -23,7 +23,7 @@
                         >
                         <textarea
                             id="title"
-                            class="input-field"
+                            class="input-field cursor"
                             id="text"
                             formControlName="title"
                             rows="2"
@@ -59,7 +59,7 @@
                             id="due-date"
                             type="date"
                             formControlName="dueDate"
-                            class="input-field"
+                            class="input-field cursor"
                         />
                         @if (taskForm.get('dueDate')?.touched && !taskForm.get('dueDate')?.valid) {
                             <p class="red">
@@ -165,16 +165,15 @@
                             >Category<span class="red">*</span></label
                         >
                         <select formControlName="category" class="input-field">
-                            <option class="input-field">Choose a category</option>
+                            <option value = '' hidden >Choose a category</option>
                             @for (category of categories; track $index) {
                                 <option class="input-field">{{ category }}</option>
                             }
                         </select>
-                        @if (
-                            taskForm.get('category')?.touched &&
-                            taskForm.get('category')?.value == ''
-                        ) {
-                            <p class="red">This field is required. Please select a category..</p>
+                        @if (taskForm.get('category')?.touched && taskForm.get('category')?.value == '') {
+                            <p class="red">
+                                This field is required. Please select a category.
+                            </p>
                         } @else {
                             <p class="hidden"></p>
                         }
@@ -320,7 +319,7 @@
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>
-                <button class="white-on-blue" type="submit">
+                <button class="white-on-blue" type="submit" (click)="emitTaskCreated()">
                     <p>Create Task</p>
                     <img src="icons/checkmark-white-create-task.svg" alt="" />
                 </button>
@@ -334,4 +333,4 @@
         </section>
     </form>
 </section>
-<app-confirmation-popup [hidden]="!popupVisible"></app-confirmation-popup>
+<app-confirmation-popup [hidden]="!popupVisible()"></app-confirmation-popup>
