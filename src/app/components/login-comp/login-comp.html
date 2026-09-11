@@ -8,7 +8,53 @@
     </header>
 
     <main>
-        <div class="login-box"></div>
+        <section class="login-box">
+            <div class="login-wrapper">
+                <div class="login-header">
+                    <h1>Log in</h1>
+                    <div class="divider"></div>
+                </div>
+
+                <form class="login-form login">
+                    <div class="input-fields">
+                        <div class="input-field-div">
+                            <label for="email"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="email"
+                                    class="input-field cursor"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                />
+                                <img src="icons/mail.svg" alt="join logo" />
+                            </div>
+                        </div>
+
+                        <div class="input-field-div">
+                            <label for="password"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="password"
+                                    class="input-field cursor"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                />
+                                <img src="icons/lock.svg" alt="join logo" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="login-actions">
+                        <button class="login-btn" type="submit"><span>Log in</span></button>
+                        <button class="login-btn guest" type="submit">
+                            <span>Guest log in </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
 
     <footer>
