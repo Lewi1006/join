@@ -237,6 +237,8 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region submit and reset form
+
+    
     async onSubmit() {
         if (this.taskForm.invalid) {
             this.taskForm.markAllAsTouched();
@@ -270,6 +272,9 @@ export class TaskForm implements AfterViewInit {
         this.saved.emit();
         this.formReset();
         this.confirmTaskCreation();
+
+
+
     }
 
     formReset() {
