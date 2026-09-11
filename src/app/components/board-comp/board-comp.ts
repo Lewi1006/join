@@ -23,8 +23,6 @@ export class BoardComp {
         this.taskService.tasks().find((task) => task.id === this.selectedTaskId()),
     );
 
-
-
     // store the task status in a signal and set it to to do as default
     selectedTaskStatus = signal<TaskStatus>(TaskStatus.Todo);
 
@@ -57,8 +55,13 @@ export class BoardComp {
     filteredTasks = computed(() => {
         const term = this.searchTerm().toLowerCase().trim();
         return term.length >= 3
-            ? this.taskService.tasks().filter((t) => t.title?.toLowerCase().includes(term) ||
-            t.description?.toLowerCase().includes(term))
+            ? this.taskService
+                  .tasks()
+                  .filter(
+                      (t) =>
+                          t.title?.toLowerCase().includes(term) ||
+                          t.description?.toLowerCase().includes(term),
+                  )
             : this.taskService.tasks();
     });
 
@@ -101,7 +104,6 @@ export class BoardComp {
         this.selectedTaskId.set(undefined);
     }
 
-
     // opens add task on big button (default status is todo)
     openAddTaskDialog(addTaskDialog: HTMLDialogElement) {
         // this.selectedTaskStatus.set(TaskStatus.Todo);
@@ -118,23 +120,24 @@ export class BoardComp {
         console.log(this.selectedTaskStatus());
     }
 
-    closeAddTaskDialog(addTaskDialog:HTMLDialogElement){
+    closeAddTaskDialog(addTaskDialog: HTMLDialogElement) {
         addTaskDialog.close();
+        console.log('it is a me mario');
     }
 
     async confirmDelete(deleteDialog: HTMLDialogElement, taskDialog: HTMLDialogElement) {
-    const task = this.selectedTask();
-    if (task?.id) {
-        await this.taskService.deleteTask(task.id);
+        const task = this.selectedTask();
+        if (task?.id) {
+            await this.taskService.deleteTask(task.id);
+        }
+        deleteDialog.close();
+        taskDialog.close();
+        this.selectedTaskId.set(undefined);
     }
-    deleteDialog.close();
-    taskDialog.close();
-    this.selectedTaskId.set(undefined);
-}
-backdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
-    if (event.target === dialog) {
-        dialog.close();
-        // this.selectedTaskId.set(undefined);
+    backdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
+        if (event.target === dialog) {
+            dialog.close();
+            // this.selectedTaskId.set(undefined);
+        }
     }
-}
 }

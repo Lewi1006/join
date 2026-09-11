@@ -230,6 +230,13 @@ export class TaskForm implements AfterViewInit {
     // #endregion
 
     // #region submit and reset form
+    taskCreated = output<void>();
+
+    emitTaskCreated(){
+        this.taskCreated.emit();
+        console.log('create task emited');
+    }
+
     async onSubmit() {
         if (this.taskForm.invalid) {
         this.taskForm.markAllAsTouched();
@@ -275,6 +282,7 @@ export class TaskForm implements AfterViewInit {
         setTimeout(() => {
             this.popupVisible.set(false);
             this.redirectToBoard();
+            this.taskCreated.emit();
         }, 1500);
     }
 

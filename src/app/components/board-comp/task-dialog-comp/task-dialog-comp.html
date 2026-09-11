@@ -94,7 +94,7 @@
             <header class="edit-task-header">
 
             </header>
-            <app-task-form [task]="task()" (saved)="editMode.set(false)"></app-task-form>
+            <app-task-form (taskCreated)="closeDialog.emit()" [task]="task()" (saved)="editMode.set(false)"></app-task-form>
         </div>
     }
 </div>
