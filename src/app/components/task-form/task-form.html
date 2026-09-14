@@ -23,12 +23,21 @@
                         >
                         <textarea
                             id="title"
-                            class="input-field"
+                            class="input-field cursor"
                             id="text"
                             formControlName="title"
                             rows="2"
                             cols="50"
+                            placeholder="Please enter a title."
                         ></textarea>
+                        @if (
+                            taskForm.get('title')?.hasError('required') &&
+                            taskForm.get('title')?.touched
+                        ) {
+                            <p class="red">This field is required.</p>
+                        } @else {
+                            <p class="hidden">.</p>
+                        }
                     </div>
                     <div class="input-field-div">
                         <label for="description" class="input-field-title">Description</label>
@@ -39,6 +48,7 @@
                             formControlName="description"
                             rows="10"
                             cols="50"
+                            placeholder="Please enter a description."
                         ></textarea>
                     </div>
                     <div class="input-field-div">
@@ -49,8 +59,15 @@
                             id="due-date"
                             type="date"
                             formControlName="dueDate"
-                            class="input-field"
+                            class="input-field cursor"
                         />
+                        @if (taskForm.get('dueDate')?.touched && !taskForm.get('dueDate')?.valid) {
+                            <p class="red">
+                                This field is required. Please select a due date in the future.
+                            </p>
+                        } @else {
+                            <p class="hidden">.</p>
+                        }
                     </div>
                 </div>
             </div>
@@ -91,22 +108,32 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="input-field-div" id="assignees">
                         <label for="assignees" class="input-field-title">Assigned to</label>
                         <div
-                            id="assignee-dropdown"
+                            [id]="task() ? 'edit-assignee-dropdown' : 'assignee-dropdown'"
+                            /* id="assignee-dropdown" */
                             class="input-field"
-                            (click)="toggleDisplayNone()"
+                            (click)="toggleDisplayNone($event)"
                         >
                             <p>Select contacts to assign</p>
                             <div [class]="dropdownArrow"></div>
                         </div>
-                        <div id="list-of-assignees" [class]="divClassList">
+
+                        <div
+                            [id]="task() ? 'edit-list-of-assignees' : 'list-of-assignees'"
+                            /* id="list-of-assignees"  */
+                            [class]="divClassList()"
+                        >
                             @for (contact of dbService.contacts(); track contact.id) {
                                 <button
                                     type="button"
                                     class="assignee-box"
+                                    [class.assigned]="isAssigned(contact)"
+                                    /* [class]="assigneeSelected" */
                                     (click)="assignContact(contact)"
+                                    id="{{ contact.id }}"
                                 >
                                     <div
                                         class="initials"
@@ -115,18 +142,9 @@
                                         <p>{{ contact.name | initials }}</p>
                                     </div>
                                     <div class="label">
-                                        <label class="label-text" for="{{ contact.name }}">{{
-                                            contact.name
-                                        }}</label>
+                                        <p class="label-text">{{ contact.name }}</p>
                                     </div>
-                                    <input
-                                        formControlName="assignees"
-                                        type="checkbox"
-                                        id="{{ contact.id }}"
-                                        name="{{ contact.name }}"
-                                        value=""
-                                        (click)="assignContact(contact)"
-                                    />
+                                    <div class="assignee-checkbox"></div>
                                 </button>
                             }
                         </div>
@@ -147,11 +165,18 @@
                             >Category<span class="red">*</span></label
                         >
                         <select formControlName="category" class="input-field">
-                            <option class="input-field">Choose a category</option>
+                            <option value = '' hidden >Choose a category</option>
                             @for (category of categories; track $index) {
                                 <option class="input-field">{{ category }}</option>
                             }
                         </select>
+                        @if (taskForm.get('category')?.touched && taskForm.get('category')?.value == '') {
+                            <p class="red">
+                                This field is required. Please select a category.
+                            </p>
+                        } @else {
+                            <p class="hidden"></p>
+                        }
                     </div>
                     <div class="input-field-div" id="subtasks">
                         <label for="subtasks" class="input-field-title">Subtasks</label>
@@ -161,64 +186,125 @@
                                 type="text"
                                 class="input-field"
                                 placeholder="Add new subtask"
+                                formControlName="subtasks"
                             ></textarea>
 
                             <div class="subtask-actions">
-                                <button
-                                    class="subtask-delete-btn"
-                                    type="button"
-                                    aria-label="Delete subtask"
-                                    (click)="clearSubtaskInput()"
-                                >
-                                    <img src="icons/close-blue.svg" alt="checkmark icon" />
-                                </button>
-                                <div class="divider"></div>
-                                <button
-                                    class="subtask-add-btn"
-                                    type="button"
-                                    aria-label="Add subtask"
-                                    (click)="addSubtask()"
-                                >
-                                    <img src="icons/checkmark-blue.svg" alt="checkmark icon" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subtask-items">
-                        @for (item of subtasks(); track $index) {
-                            <div class="subtask-item">
-                                <div class="subtask-content">
-                                    <input
-                                        type="checkbox"
-                                        id="subtasks-{{ $index }}"
-                                        name="subtasks-{{ $index }}"
-                                        [checked]="item.checked"
-                                        (change)="toggleSubtask(item)"
-                                        value="{{ item.description }}"
-                                    />
-                                    <label for="">{{ item.description }}</label
-                                    ><br />
-                                </div>
-
-                                <div class="added-subtask-actions">
+                                @if (
+                                    taskForm.controls.subtasks.dirty === true &&
+                                    taskForm.controls.subtasks.value
+                                ) {
                                     <button
-                                        class="added-subtask-delete-btn"
-                                        type="button"
-                                        aria-label="Delete subtask"
-                                    >
-                                        <img src="icons/delete-bin-blue.svg" alt="checkmark icon" />
-                                    </button>
-                                    <div class="added-divider"></div>
-                                    <button
-                                        class="added-subtask-edit-btn"
+                                        class="subtask-add-btn"
                                         type="button"
                                         aria-label="Add subtask"
-                                        /* (click)="addSubtask()" */
+                                        (click)="addSubtask()"
                                     >
-                                        <img src="icons/edit-pen-blue.svg" alt="checkmark icon" />
+                                        <img src="icons/checkmark-blue.svg" alt="checkmark icon" />
                                     </button>
-                                </div>
+                                    <div class="divider"></div>
+                                    <button
+                                        class="subtask-delete-btn"
+                                        type="button"
+                                        aria-label="Delete subtask"
+                                        (click)="clearSubtaskInput()"
+                                    >
+                                        <img src="icons/close-blue.svg" alt="checkmark icon" />
+                                    </button>
+                                }
                             </div>
+                            
+                            @if (
+                                taskForm.controls.subtasks.touched &&
+                                !taskForm.controls.subtasks.valid
+                            ) {
+                                <p class="red">Please enter a valid subtask.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="subtask-items">
+                        @for (item of subtasks(); track $index) {
+                            @if (editingSubtask === item) {
+                                <div class="subtask-edit">
+                                    <div class="subtask-edit-content">
+                                        <textarea
+                                            type="text"
+                                            id="editSubtask"
+                                            [formControl]="editingSubtaskFormControl"
+                                        ></textarea>
+
+                                        <div class="subtask-edit-actions">
+                                            <button
+                                                class="added-subtask-edit-btn"
+                                                type="button"
+                                                aria-label="edit subtask"
+                                                (click)="saveSubtaskEdit(item)"
+                                            >
+                                                <img
+                                                    src="icons/checkmark-blue.svg"
+                                                    alt="checkmark icon"
+                                                />
+                                            </button>
+                                            <div class="added-divider"></div>
+                                            <button
+                                                class="added-subtask-delete-btn"
+                                                type="button"
+                                                aria-label="Delete subtask"
+                                                (click)="deleteSubtask($index)"
+                                            >
+                                                <img
+                                                    src="icons/delete-bin-blue.svg"
+                                                    alt="checkmark icon"
+                                                />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            } @else {
+                                <div class="subtask-item">
+                                    <div class="subtask-content">
+                                        <input
+                                            type="checkbox"
+                                            id="subtasks-{{ $index }}"
+                                            name="subtasks-{{ $index }}"
+                                            [checked]="item.checked"
+                                            (change)="toggleSubtask(item)"
+                                            value="{{ item.description }}"
+                                        />
+                                        <label for="">{{ item.description }}</label
+                                        ><br />
+                                    </div>
+
+                                    <div class="added-subtask-actions">
+                                        <button
+                                            class="added-subtask-edit-btn"
+                                            type="button"
+                                            aria-label="edit subtask"
+                                            (click)="editSubtask(item)"
+                                        >
+                                            <img
+                                                src="icons/edit-pen-blue.svg"
+                                                alt="checkmark icon"
+                                            />
+                                        </button>
+                                        <div class="added-divider"></div>
+                                        <button
+                                            class="added-subtask-delete-btn"
+                                            type="button"
+                                            aria-label="Delete subtask"
+                                            (click)="deleteSubtask($index)"
+                                        >
+                                            <img
+                                                src="icons/delete-bin-blue.svg"
+                                                alt="checkmark icon"
+                                            />
+                                        </button>
+                                    </div>
+                                </div>
+                            }
                         }
                     </div>
                 </div>
@@ -229,13 +315,13 @@
                 <p><span class="red">*</span>This field is required</p>
             </div>
             <div id="create-or-clear">
-                <button type="button" (click)="formReset()">
+                <button class="blue-on-white" type="button" (click)="formReset()">
                     <p>Clear</p>
                     <img src="icons/close-blue.svg" alt="" />
                 </button>
-                <button type="submit" [disabled]="!taskForm.valid">
+                <button class="white-on-blue" type="submit">
                     <p>Create Task</p>
-                    <img src="icons/checkmark-blue.svg" alt="" />
+                    <img src="icons/checkmark-white-create-task.svg" alt="" />
                 </button>
             </div>
         </section>
@@ -247,3 +333,4 @@
         </section>
     </form>
 </section>
+<app-confirmation-popup [hidden]="!popupVisible()"></app-confirmation-popup>

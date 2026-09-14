@@ -18,7 +18,7 @@
         @if (columnTasks()?.length) {
             @for (task of columnTasks(); track task.id) {
                 <article
-                    class="task-card"
+                    class="task-card cursor"
                     (click)="selectTask(task)"
                     cdkDrag
                     [cdkDragData]="task"

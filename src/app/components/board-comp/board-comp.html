@@ -27,10 +27,11 @@
                 <span>&#43;</span>
             </button>
 
-            <dialog #addTaskDialog class="add-task-dialog">
+            <dialog #addTaskDialog class="add-task-dialog"     >
                 <app-task-form
                     [showCloseButton]="true"
                     (closeDialog)="closeAddTaskDialog(addTaskDialog)"
+                    (taskCreated)="closeAddTaskDialog(addTaskDialog)"
                 ></app-task-form>
             </dialog>
         </div>
@@ -49,7 +50,8 @@
         }
     </div>
 
-    <dialog #taskDialog class="task-dialog" (close)="selectedTaskId.set(undefined)">
+    <dialog #taskDialog class="task-dialog" (close)="selectedTaskId.set(undefined)"
+    (click)="backdropClick($event, taskDialog)">
         @if (selectedTask(); as task) {
             <app-task-dialog-comp
                 [task]="task"

@@ -25,13 +25,13 @@
     max-width: 100%;
     height: 100%;
 
-    padding: 36px 40px;
+    padding: 0 2rem;
 
     @include d-flex(column, center, center, 30px);
 
     @include respond(zero, sm) {
-        padding: 32px 24px;
-         @include d-flex(column, center, center, 20px);
+        padding: 0 1rem;
+        gap: 20px;
     }
 
     .task-dialog-header {
@@ -59,15 +59,6 @@
                 background: $green-category;
             }
         }
-
-        .close-btn-x {
-            font-size: 24px;
-            color: $blue-main;
-
-            @include respond(zero, sm) {
-                font-size: 16px;
-            }
-        }
     }
 
     .task-dialog-content {
@@ -76,6 +67,8 @@
 
         h1 {
             @include font(60px, 700, 100%);
+            width: 100%;
+            overflow-wrap: break-word;
 
             @include respond(zero, sm) {
                 @include font(36px, 700, 100%);
@@ -136,6 +129,8 @@
 
         .assigned-to {
             @include d-flex(column, flex-start, flex-start, 10px);
+            max-height: 180px;
+            overflow-y: auto;
 
             .detail-label {
                 width: 120px;
@@ -170,10 +165,14 @@
 
         .subtasks {
             @include d-flex(column, flex-start, flex-start, 10px);
-
+            padding-bottom: 2rem;
+            width: 100%;
             .subtasks-list {
                 @include d-flex(column, flex-start, flex-start, 10px);
                 @include font(16px, 400, 120%);
+                max-height: 180px;
+                overflow-y: auto;
+                width: 100%;
             }
         }
     }
@@ -190,5 +189,69 @@
                 height: 24px;
             }
         }
+    }
+    .close-btn-x {
+        font-size: 24px;
+        color: $blue-main;
+        position: sticky;
+        align-self: flex-end;
+        right: 0;
+        top: 0;
+        padding-top: 2rem;
+        @include respond(zero, sm) {
+            font-size: 16px;
+        }
+    }
+}
+
+.edit-mode-wrapper {
+    width: 100%;
+    height: 100%;
+
+    .edit-task-header {
+        width: 100%;
+        height: fit-content;
+        @include d-flex(row, center, flex-end);
+    }
+
+    app-task-form {
+        width: 100%;
+        height: 100%;
+    }
+}
+.close-btn-x {
+    font-size: 24px;
+    color: $blue-main;
+    position: sticky;
+    // align-self: flex-start;
+    margin-left: auto;
+    margin-bottom: -4rem;
+    right: 0;
+    top: 0;
+    padding-top: 2rem;
+    z-index: 20000000000000;
+    @include respond(zero, sm) {
+        font-size: 16px;
+        padding-top: 1rem;
+        margin-bottom: -1rem;
+    }
+}
+.task-actions {
+    color: $blue-main;
+    position: sticky;
+    // align-self: flex-start;
+    margin-left: auto;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 2rem;
+    margin-top: -4rem;
+    z-index: 20000000000000;
+    @include respond(zero, sm) {
+        padding-bottom: 1rem;
+        margin-top: -1rem;
+    }
+    img {
+        width: 24px;
+        height: 24px;
     }
 }

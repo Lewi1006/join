@@ -7,29 +7,33 @@ import { PrivacyComp } from './components/privacy-comp/privacy-comp';
 import { LegalComp } from './components/legal-comp/legal-comp';
 import { HelpComp } from './components/help-comp/help-comp';
 import { LoginComp } from './components/login-comp/login-comp';
+import { MainContentComp } from './components/main-content-comp/main-content-comp';
 
 export const routes: Routes = [
-    { path: 'summary', component: SummaryComp },
-    { path: 'task', component: TaskComp },
-    { path: 'board', component: BoardComp },
+    { path: 'login', component: LoginComp },
     {
-        path: 'contacts',
-        component: ContactsComp,
-    },
-    {
-        path: 'privacy',
-        component: PrivacyComp,
-    },
-    {
-        path: 'legal',
-        component: LegalComp,
-    },
-    {
-        path: 'help',
-        component: HelpComp,
-    },
-    {
-        path: 'logout',
-        component: LoginComp,
+        path: '',
+        component: MainContentComp,
+        children: [
+            { path: 'summary', component: SummaryComp },
+            { path: 'task', component: TaskComp },
+            { path: 'board', component: BoardComp },
+            {
+                path: 'contacts',
+                component: ContactsComp,
+            },
+            {
+                path: 'privacy',
+                component: PrivacyComp,
+            },
+            {
+                path: 'legal',
+                component: LegalComp,
+            },
+            {
+                path: 'help',
+                component: HelpComp,
+            },
+        ],
     },
 ];

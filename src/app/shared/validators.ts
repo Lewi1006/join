@@ -16,5 +16,21 @@ export function DateValidator(control: AbstractControl) {
 }
 
 
+export function SubtaskValidator(control: AbstractControl){
+    const value = control.value;
+
+     if (value == null || value == '') {
+        return null;
+    }
+
+    if(value.startsWith(' ') || value.trim() == ''){
+        return { required: true };
+    } else {
+        return null;
+    }
+
+
+}
+
 
 

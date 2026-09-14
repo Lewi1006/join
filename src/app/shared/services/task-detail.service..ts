@@ -75,8 +75,8 @@ export class TaskDetailService {
             case 'medium':
                 return 'icons/priority-medium.svg';
 
-            case 'high':
-                return 'icons/priority-high.svg';
+case 'urgent':
+            return 'icons/priority-high.svg';
 
             default:
                 return '';
