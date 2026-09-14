@@ -269,7 +269,7 @@ export class TaskForm implements AfterViewInit {
 
             if (id) {
                 this.taskService.updateTask(id, task);
-                this.alertService.success('Task was edited successfully', 1500);
+                this.alertService.success('Task was edited successfully', 2000);
             } else {
                 this.taskService.createTask(task);
                 // this.alertService.success('Task was created successfully', 1500);
@@ -278,9 +278,6 @@ export class TaskForm implements AfterViewInit {
         this.saved.emit();
         this.formReset();
         this.confirmTaskCreation();
-
-
-
     }
 
     formReset() {

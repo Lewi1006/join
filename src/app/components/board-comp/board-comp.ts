@@ -124,20 +124,18 @@ export class BoardComp {
 
     closeAddTaskDialog(addTaskDialog: HTMLDialogElement) {
         addTaskDialog.close();
-        console.log('it is a me mario');
     }
 
     async confirmDelete(deleteDialog: HTMLDialogElement, taskDialog: HTMLDialogElement) {
         const task = this.selectedTask();
         if (task?.id) {
             await this.taskService.deleteTask(task.id);
-            this.alertService.success('Task was deleted successfully', 1500);
+            this.alertService.success('Task was deleted successfully', 2000);
         }
         deleteDialog.close();
         taskDialog.close();
         this.selectedTaskId.set(undefined);
     }
-
 
     backdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
         if (event.target === dialog) {

@@ -16,6 +16,7 @@
     z-index: 30000000000000;
 
     color: $white;
+    text-align: center;
 
     @include respond(sm, m) {
         position: fixed;
