@@ -26,14 +26,9 @@ export class SignupComp {
     
     
     signUp(){
-       if (this.signupForm.invalid) {
-        this.signupForm.markAllAsTouched();
-        return;
-    }
-
-    if (this.signupForm.valid) {
+   
         console.log(this.signupForm.value);
-    }
+
     }
 
 }
