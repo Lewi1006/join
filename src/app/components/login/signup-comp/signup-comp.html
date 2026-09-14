@@ -30,10 +30,12 @@
                                     formControlName="name"
                                 />
                                 <img src="icons/person.svg" alt="person icon" />
-
                             </div>
 
-                            @if(signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched){
+                            @if (
+                                signupForm.get('name')?.hasError('required') &&
+                                signupForm.get('name')?.touched
+                            ) {
                                 <p class="red">This field is required.</p>
                             } @else {
                                 <p class="hidden">.</p>
@@ -54,7 +56,10 @@
                                 <img src="icons/mail.svg" alt="join logo" />
                             </div>
 
-                             @if(signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched){
+                            @if (
+                                signupForm.get('email')?.hasError('required') &&
+                                signupForm.get('email')?.touched
+                            ) {
                                 <p class="red">This field is required.</p>
                             } @else {
                                 <p class="hidden">.</p>
@@ -74,7 +79,10 @@
                                 />
                                 <img src="icons/call.svg" alt="phone icon" />
                             </div>
-                             @if(signupForm.get('phone')?.hasError('required') && signupForm.get('phone')?.touched){
+                            @if (
+                                signupForm.get('phone')?.hasError('required') &&
+                                signupForm.get('phone')?.touched
+                            ) {
                                 <p class="red">This field is required.</p>
                             } @else {
                                 <p class="hidden">.</p>
@@ -95,8 +103,19 @@
                                 <img src="icons/lock.svg" alt="join logo" />
                             </div>
 
-                             @if(signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched){
+                            @if (
+                                signupForm.get('password')?.hasError('required') &&
+                                signupForm.get('password')?.touched
+                            ) {
                                 <p class="red">This field is required.</p>
+                            } @else if (
+                                signupForm.get('password')?.hasError('pattern') &&
+                                signupForm.get('password')?.touched
+                            ) {
+                                <p class="red">
+                                    Min. 8 characters, including uppercase, lowercase, number (0-9)
+                                    and special character.
+                                </p>
                             } @else {
                                 <p class="hidden">.</p>
                             }
@@ -115,21 +134,36 @@
                                 />
                                 <img src="icons/lock.svg" alt="join logo" />
                             </div>
-                             @if(signupForm.get('confirmPassword')?.hasError('required') && signupForm.get('confirmPassword')?.touched){
+                            @if (
+                                signupForm.get('confirmPassword')?.hasError('required') &&
+                                signupForm.get('confirmPassword')?.touched
+                            ) {
                                 <p class="red">This field is required.</p>
+                            } @else if (
+                                signupForm.hasError('passwordMismatch') &&
+                                signupForm.get('confirmPassword')?.touched
+                            ) {
+                                <p class="red">Passwords do not match.</p>
                             } @else {
                                 <p class="hidden">.</p>
                             }
                         </div>
 
                         <div class="accept-privacy">
-                            <input type="checkbox" id="accept-privacy" name="accept-privacy" formControlName="acceptPrivacy" />
+                            <input
+                                type="checkbox"
+                                id="accept-privacy"
+                                name="accept-privacy"
+                                formControlName="acceptPrivacy"
+                            />
                             <label for="accept-privacy">I accept the Privacy policy</label>
                         </div>
                     </div>
 
                     <div class="signup-actions">
-                        <button class="signup-btn" type="submit" [disabled]="signupForm.invalid"><span>Sign up</span></button>
+                        <button class="signup-btn" type="submit" [disabled]="signupForm.invalid">
+                            <span>Sign up</span>
+                        </button>
                     </div>
                 </form>
             </div>

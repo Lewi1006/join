@@ -2,11 +2,7 @@ import { FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@an
 
 export function DateValidator(control: AbstractControl) {
     const value = control.value;
-    if (
-        value == null ||
-        value == '' ||
-        value < new Date().toISOString().split('T')[0]
-    ) {
+    if (value == null || value == '' || value < new Date().toISOString().split('T')[0]) {
         //console.log('in the past')
         return { required: true };
     } else {
@@ -15,22 +11,27 @@ export function DateValidator(control: AbstractControl) {
     }
 }
 
-
-export function SubtaskValidator(control: AbstractControl){
+export function SubtaskValidator(control: AbstractControl) {
     const value = control.value;
 
-     if (value == null || value == '') {
+    if (value == null || value == '') {
         return null;
     }
 
-    if(value.startsWith(' ') || value.trim() == ''){
+    if (value.startsWith(' ') || value.trim() == '') {
         return { required: true };
     } else {
         return null;
     }
-
-
 }
 
+export function passwordMustMatch(control: AbstractControl) {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
 
-
+    if (password !== confirmPassword) {
+        return { passwordMismatch: true };
+    } else {
+        return null;
+    }
+}
