@@ -54,11 +54,18 @@ main {
 
                 .back-to-login-btn {
                     position: absolute;
-                    left: 0;
+                    left: -8px;
+                    height: 40px;
+                    width: 40px;
 
                     img {
                         height: 24px;
                         width: 24px;
+                    }
+
+                    &:hover {
+                        background: $grey-bright;
+                        border-radius: 50%;
                     }
                 }
 
@@ -86,7 +93,7 @@ main {
                 @include d-flex(column, center, center, 20px);
 
                 .input-fields {
-                    @include d-flex(column, center, center, 20px);
+                    @include d-flex(column, center, center, 4px);
                     width: 100%;
 
                     .input-field-div {
@@ -119,9 +126,19 @@ main {
                                 width: 24px;
                             }
                         }
+
+                        .red {
+                            color: red;
+                            padding-top: 2px;
+                        }
+
+                        .hidden {
+                            padding-top: 2px;
+                            color: white;
+                        }
                     }
 
-                    .accept-privacy{
+                    .accept-privacy {
                         @include d-flex(row, center, center, 20px);
                     }
                 }
@@ -145,8 +162,6 @@ main {
                         }
                     }
                 }
-
-
             }
         }
     }

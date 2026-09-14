@@ -249,6 +249,8 @@ export class TaskForm implements AfterViewInit {
             return;
         }
         console.log(this.taskForm.value);
+
+        
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
 

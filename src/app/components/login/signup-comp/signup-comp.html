@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <form class="signup-form signup">
+                <form class="signup-form signup" [formGroup]="signupForm" (ngSubmit)="signUp()">
                     <div class="input-fields">
                         <div class="input-field-div">
                             <label for="name"></label>
@@ -27,9 +27,17 @@
                                     type="text"
                                     name="name"
                                     placeholder="Name"
+                                    formControlName="name"
                                 />
                                 <img src="icons/person.svg" alt="person icon" />
+
                             </div>
+
+                            @if(signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched){
+                                <p class="red">This field is required.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
                         </div>
 
                         <div class="input-field-div">
@@ -41,9 +49,16 @@
                                     type="email"
                                     name="email"
                                     placeholder="Email"
+                                    formControlName="email"
                                 />
                                 <img src="icons/mail.svg" alt="join logo" />
                             </div>
+
+                             @if(signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched){
+                                <p class="red">This field is required.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
                         </div>
 
                         <div class="input-field-div">
@@ -55,9 +70,15 @@
                                     type="tel"
                                     name="phone"
                                     placeholder="Phone"
+                                    formControlName="phone"
                                 />
                                 <img src="icons/call.svg" alt="phone icon" />
                             </div>
+                             @if(signupForm.get('phone')?.hasError('required') && signupForm.get('phone')?.touched){
+                                <p class="red">This field is required.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
                         </div>
 
                         <div class="input-field-div">
@@ -69,9 +90,16 @@
                                     type="password"
                                     name="password"
                                     placeholder="Password"
+                                    formControlName="password"
                                 />
                                 <img src="icons/lock.svg" alt="join logo" />
                             </div>
+
+                             @if(signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched){
+                                <p class="red">This field is required.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
                         </div>
 
                         <div class="input-field-div">
@@ -83,19 +111,25 @@
                                     type="password"
                                     name="confirm-password"
                                     placeholder="Confirm password"
+                                    formControlName="confirmPassword"
                                 />
                                 <img src="icons/lock.svg" alt="join logo" />
                             </div>
+                             @if(signupForm.get('confirmPassword')?.hasError('required') && signupForm.get('confirmPassword')?.touched){
+                                <p class="red">This field is required.</p>
+                            } @else {
+                                <p class="hidden">.</p>
+                            }
                         </div>
 
                         <div class="accept-privacy">
-                            <input type="checkbox" id="accept-privacy" name="accept-privacy" />
+                            <input type="checkbox" id="accept-privacy" name="accept-privacy" formControlName="acceptPrivacy" />
                             <label for="accept-privacy">I accept the Privacy policy</label>
                         </div>
                     </div>
 
                     <div class="signup-actions">
-                        <button class="signup-btn" type="submit"><span>Sign up</span></button>
+                        <button class="signup-btn" type="submit" [disabled]="signupForm.invalid"><span>Sign up</span></button>
                     </div>
                 </form>
             </div>
