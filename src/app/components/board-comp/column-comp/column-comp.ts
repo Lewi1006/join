@@ -1,4 +1,4 @@
-import { Component, input, computed, output, inject } from '@angular/core';
+import { Component, input, computed, output, inject, signal } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
 import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -93,4 +93,6 @@ export class ColumnComp {
     addTask(){
         this.addColumnTask.emit(this.status()!);
     }
+        isMobile = signal(window.matchMedia('(max-width: 768px)').matches);
+
 }

@@ -23,6 +23,7 @@
                     cdkDrag
                     [cdkDragData]="task"
                     cdkDragPreviewContainer="parent"
+                    [cdkDragDisabled]="isMobile()"
                 >
                     <div
                         class="card-category"

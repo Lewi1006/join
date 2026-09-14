@@ -261,6 +261,7 @@ export class TaskForm implements AfterViewInit {
                 priority: this.priority,
                 assignees: this.assignees()!,
                 subtasks: this.subtasks()!,
+                updated_at: new Date().toString(),
             };
 
             const id = this.task()?.id;
