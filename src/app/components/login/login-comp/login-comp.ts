@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Contact } from '../../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-login-comp',
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
 export class LoginComp {
     router = inject(Router);
 
+
+    currentUser = signal<Contact | undefined>(undefined);
+
     goToSignUp() {
         this.router.navigate(['/signup']);
     }
@@ -20,7 +24,17 @@ export class LoginComp {
     }
 
     guestLogin(){
-          console.log('guest login clicked');
+      const guest: Contact = {
+        name: 'Guest',
+        email: '',
+        phone: '',
+        status: 'guest',
+      }
+
+      this.currentUser.set(guest);
+
+
+          console.log(this.currentUser());
            this.router.navigate(['/summary']);
 
     }
