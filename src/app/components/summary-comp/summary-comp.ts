@@ -3,6 +3,7 @@ import { TasksService } from '../../shared/services/tasks.service';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { Task } from '../../shared/interfaces/task.interface';
 import { BoardColumn } from '../../shared/interfaces/column.interface';
+import { CrudService } from '../../shared/services/crud.service';
 
 @Component({
     selector: 'app-summary-comp',
@@ -21,17 +22,16 @@ export class SummaryComp {
     ngOnInit() {
         this.taskService.getAllTasks();
     }
+    
+    totalNumberOfTasks(){
+      let totalNumberOfTasks: number = this.taskService.tasks().length;
+      return totalNumberOfTasks;
+    }
 
     tasksByStatus(status: TaskStatus) {
-      let numberOfTasksInStatus: number = this.taskService.tasks().filter((t) => t.status === status).length;
-        /* return this.taskService.tasks().filter((t) => t.status === status); */
-        /* return numberOfTasksInStatus; */
-        console.log(numberOfTasksInStatus);
+        let numberOfTasksInStatus: number = this.taskService
+            .tasks()
+            .filter((t) => t.status === status).length;
+        return numberOfTasksInStatus;
     }
-
-    log(status: TaskStatus){
-      console.log(this.tasksByStatus(status));
-    }
-
-    
 }

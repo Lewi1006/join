@@ -10,8 +10,8 @@
         <div class="metrics column">
             <div class="metrics-wrapper column">
                 <div class="metrics-box card-wrapper row">
-                    <div class="metrics-box two row">1 todo</div>
-                    <div class="metrics-box two row">1 done</div>
+                    <div class="metrics-box two row">{{tasksByStatus(todo)}} todo</div>
+                    <div class="metrics-box two row">{{tasksByStatus(done)}} done</div>
                 </div>
                 <div class="card-wrapper row one">
                     <div>1 urgent</div>
@@ -19,22 +19,22 @@
                 </div>
                 <div class="metrics-box card-wrapper row three">
                     <div class="metrics-box three column">
-                        <p class="number">NUMBER</p>
+                        <p class="number">{{totalNumberOfTasks()}}</p>
                         <p class="text">Tasks in board</p>
                     </div>
                     <div class="metrics-box three column">
-                        <p class="number">NUMBER</p>
+                        <p class="number">{{tasksByStatus(inProgress)}}</p>
                         <p class="text">Tasks in board</p>
                     </div>
                     <div class="metrics-box three column">
-                        <p class="number">NUMBER</p>
+                        <p class="number">{{tasksByStatus(awaitFeedback)}}</p>
                         <p class="text">Tasks in board</p>
                     </div>
                 </div>
             </div>
-            <button (click)="log(todo)">TODO:</button>
+<!--             <button (click)="log(todo)">TODO:</button>
             <button (click)="log(inProgress)">INPROGRESS</button>
-            <button>DONE</button>
+            <button>DONE</button> -->
 
         </div>
         <div class="welcome-message">
