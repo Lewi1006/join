@@ -1,0 +1,184 @@
+@use '../../../../../public/styles/main' as *;
+
+.content-restriction {
+    width: 100%;
+    height: 100%;
+    max-width: 1440px;
+    @include d-flex(column, center, space-between);
+}
+
+:host {
+    height: 100dvh;
+    padding: 40px 120px;
+    @include d-flex;
+    background: $grey-bg;
+}
+
+.signup-header {
+    width: 100%;
+    height: 120px;
+
+    @include d-flex(row, flex-start, space-between);
+
+    img {
+        height: 120px;
+        width: auto;
+    }
+}
+
+main {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    @include d-flex;
+
+    .signup-box {
+        width: 60%;
+        // min-height: 420px;
+        height: fit-content;
+        background: $white;
+        border-radius: 30px;
+        @include drop-shadow;
+
+        .signup-wrapper {
+            height: 100%;
+            width: 100%;
+            padding: 48px 120px;
+
+            @include d-flex(column, center, center, 40px);
+
+            .signup-header {
+                height: fit-content;
+                width: 100%;
+                @include d-flex(row, center, center);
+
+                .back-to-login-btn {
+                    position: absolute;
+                    left: -8px;
+                    height: 40px;
+                    width: 40px;
+
+                    img {
+                        height: 24px;
+                        width: 24px;
+                    }
+
+                    &:hover {
+                        background: $grey-bright;
+                        border-radius: 50%;
+                    }
+                }
+
+                .signup-heading {
+                    @include d-flex(column, center, center, 10px);
+                    height: fit-content;
+
+                    h1 {
+                        @include font(60px, 700, 120%);
+                    }
+
+                    .divider {
+                        width: 120px;
+                        height: 3px;
+                        background: $blue-bright;
+                    }
+                }
+            }
+
+            .signup-form {
+                height: 100%;
+                width: 400px;
+                // display: flex;
+                // gap: 10px;
+                @include d-flex(column, center, center, 20px);
+
+                .input-fields {
+                    @include d-flex(column, center, center, 4px);
+                    width: 100%;
+
+                    .input-field-div {
+                        width: 100%;
+                        // min-height: 48px;
+
+                        .input-wrapper {
+                            width: 100%;
+                            height: 100%;
+                            min-height: 48px;
+
+                            border: solid $blue-main 1px;
+                            @include d-flex(row, center, space-between, 4px);
+
+                            border-radius: 10px;
+                            padding: 0 10px;
+
+                            .input-field {
+                                width: 100%;
+                                height: 100%;
+                                min-height: 48px;
+
+                                &::placeholder {
+                                    @include font(20px);
+                                }
+                            }
+
+                            img {
+                                height: 24px;
+                                width: 24px;
+                            }
+                        }
+
+                        .red {
+                            color: red;
+                            padding-top: 2px;
+                        }
+
+                        .hidden {
+                            padding-top: 2px;
+                            color: white;
+                        }
+                    }
+
+                    .accept-privacy {
+                        @include d-flex(row, center, center, 20px);
+                    }
+                }
+
+                .signup-actions {
+                    width: 100%;
+                    height: fit-content;
+
+                    @include d-flex(row, center, center, 20px);
+
+                    .signup-btn {
+                        color: $blue-main;
+                        width: 120px;
+                        height: 48px;
+                        border: solid 1px $blue-main;
+                        border-radius: 8px;
+
+                        &:hover {
+                            background: $blue-main;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    height: fit-content;
+    @include d-flex(row, center, center, 28px);
+    color: $grey-medium;
+
+    a {
+        width: 120px;
+        text-align: center;
+        &:hover {
+            @include font(16px, 800, 120%);
+            color: $blue-main;
+        }
+    }
+}

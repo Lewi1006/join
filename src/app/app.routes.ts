@@ -6,11 +6,13 @@ import { SummaryComp } from './components/summary-comp/summary-comp';
 import { PrivacyComp } from './components/privacy-comp/privacy-comp';
 import { LegalComp } from './components/legal-comp/legal-comp';
 import { HelpComp } from './components/help-comp/help-comp';
-import { LoginComp } from './components/login-comp/login-comp';
+import { LoginComp } from './components/login/login-comp/login-comp';
 import { MainContentComp } from './components/main-content-comp/main-content-comp';
+import { SignupComp } from './components/login/signup-comp/signup-comp';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComp },
+    {path: 'signup', component: SignupComp},
     {
         path: '',
         component: MainContentComp,
