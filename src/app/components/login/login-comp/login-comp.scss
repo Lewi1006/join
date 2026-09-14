@@ -1,4 +1,4 @@
-@use '../../../../public/styles/main' as *;
+@use '../../../../../public/styles/main' as *;
 
 .content-restriction {
     width: 100%;
@@ -9,7 +9,7 @@
 
 :host {
     height: 100dvh;
-    padding: 80px 120px;
+    padding: 40px 120px;
     @include d-flex;
     background: $grey-bg;
 }

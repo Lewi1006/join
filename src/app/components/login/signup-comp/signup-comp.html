@@ -1,0 +1,110 @@
+<div class="content-restriction">
+    <header class="signup-header">
+        <img src="img/join-logo.svg" alt="join logo" />
+    </header>
+
+    <main>
+        <section class="signup-box">
+            <div class="signup-wrapper">
+                <div class="signup-header">
+                    <button class="back-to-login-btn" (click)="goBackToLogin()">
+                        <img src="icons/arrow-back-blue.svg" />
+                    </button>
+                    <div class="signup-heading">
+                        <h1>Sign up</h1>
+                        <div class="divider"></div>
+                    </div>
+                </div>
+
+                <form class="signup-form signup">
+                    <div class="input-fields">
+                        <div class="input-field-div">
+                            <label for="name"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="name"
+                                    class="input-field cursor"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                />
+                                <img src="icons/person.svg" alt="person icon" />
+                            </div>
+                        </div>
+
+                        <div class="input-field-div">
+                            <label for="email"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="email"
+                                    class="input-field cursor"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                />
+                                <img src="icons/mail.svg" alt="join logo" />
+                            </div>
+                        </div>
+
+                        <div class="input-field-div">
+                            <label for="phone"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="phone"
+                                    class="input-field cursor"
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Phone"
+                                />
+                                <img src="icons/call.svg" alt="phone icon" />
+                            </div>
+                        </div>
+
+                        <div class="input-field-div">
+                            <label for="password"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="password"
+                                    class="input-field cursor"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                />
+                                <img src="icons/lock.svg" alt="join logo" />
+                            </div>
+                        </div>
+
+                        <div class="input-field-div">
+                            <label for="confirm-password"></label>
+                            <div class="input-wrapper">
+                                <input
+                                    id="confirm-password"
+                                    class="input-field cursor"
+                                    type="password"
+                                    name="confirm-password"
+                                    placeholder="Confirm password"
+                                />
+                                <img src="icons/lock.svg" alt="join logo" />
+                            </div>
+                        </div>
+
+                        <div class="accept-privacy">
+                            <input type="checkbox" id="accept-privacy" name="accept-privacy" />
+                            <label for="accept-privacy">I accept the Privacy policy</label>
+                        </div>
+                    </div>
+
+                    <div class="signup-actions">
+                        <button class="signup-btn" type="submit"><span>Sign up</span></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="/privacy">Privacy Policy</a>
+
+        <a href="/legal">Legal Notice</a>
+    </footer>
+</div>
