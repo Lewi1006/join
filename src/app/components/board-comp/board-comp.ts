@@ -137,7 +137,6 @@ export class BoardComp {
         this.selectedTaskId.set(undefined);
     }
 
-
     backdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
         if (event.target === dialog) {
             dialog.close();
