@@ -19,6 +19,11 @@ export class LoginComp {
       console.log('login clicked');
     }
 
+    guestLogin(){
+          console.log('guest login clicked');
+
+    }
+
     loginForm = new FormGroup({
         email: new FormControl('', {
             validators: [
