@@ -15,7 +15,7 @@
                     <div class="divider"></div>
                 </div>
 
-                <form class="login-form login">
+                <form class="login-form login" [formGroup]="loginForm" (ngSubmit)="login()">
                     <div class="input-fields">
                         <div class="input-field-div">
                             <label for="email"></label>
@@ -26,6 +26,7 @@
                                     type="email"
                                     name="email"
                                     placeholder="Email"
+                                    formControlName="email"
                                 />
                                 <img src="icons/mail.svg" alt="join logo" />
                             </div>
@@ -40,6 +41,7 @@
                                     type="password"
                                     name="password"
                                     placeholder="Password"
+                                    formControlName="password"
                                 />
                                 <img src="icons/lock.svg" alt="join logo" />
                             </div>
@@ -48,7 +50,7 @@
 
                     <div class="login-actions">
                         <button class="login-btn" type="submit"><span>Log in</span></button>
-                        <button class="login-btn guest" type="submit">
+                        <button class="login-btn guest" type="button">
                             <span>Guest log in </span>
                         </button>
                     </div>
