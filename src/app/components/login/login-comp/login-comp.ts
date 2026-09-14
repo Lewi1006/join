@@ -21,6 +21,7 @@ export class LoginComp {
 
     guestLogin(){
           console.log('guest login clicked');
+           this.router.navigate(['/summary']);
 
     }
 
