@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Contact } from '../../../shared/interfaces/contact.interface';
+import { ContactsService } from '../../../shared/services/contacts.service';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -13,23 +13,49 @@ import { AuthService } from '../../../shared/services/auth.service';
 export class LoginComp {
     router = inject(Router);
     authService = inject(AuthService);
-
-    // currentUser = signal<Contact | undefined>(undefined);
+    contactsService = inject(ContactsService);
 
     goToSignUp() {
         this.router.navigate(['/signup']);
     }
 
-    login() {
-        if(this.loginForm.invalid){
+    async login() {
+        this.loginForm.setErrors(null);
+
+        if (this.loginForm.invalid) {
             this.loginForm.markAllAsTouched();
-            return
+            return;
         }
+
+        const contact = await this.checkLogin();
+
+        if (!contact) {
+            return;
+        }
+
+        this.authService.login(contact);
+        this.router.navigate(['/summary']);
+    }
+
+    async checkLogin() {
+        await this.contactsService.getAllContacts();
 
         const email = this.loginForm.value.email;
         const password = this.loginForm.value.password;
 
-        console.log(email,password);
+        const contact = this.contactsService.contacts().find((contact) => contact.email === email);
+
+        if (!contact) {
+            this.loginForm.setErrors({ wrongEmail: true });
+            return;
+        }
+
+        if (contact.password !== password) {
+            this.loginForm.setErrors({ wrongPassword: true });
+            return;
+        }
+
+        return contact;
     }
 
     guestLogin() {
@@ -47,10 +73,7 @@ export class LoginComp {
             ],
         }),
         password: new FormControl('', {
-            validators: [
-                Validators.required,
-                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$/),
-            ],
+            validators: [Validators.required],
         }),
     });
 }
