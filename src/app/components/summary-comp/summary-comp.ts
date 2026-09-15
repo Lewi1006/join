@@ -41,4 +41,14 @@ export class SummaryComp {
             .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
         return numberOfUndoneTasksInPriority;
     }
+
+    upcomingDueDate = computed(() => {
+        const upcomingDueDate = this.taskService.tasks()
+        .filter((t) => t.status != this.done)
+        .filter((t) => t.dueDate)
+        .map((t) => t.dueDate!)
+        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+        return upcomingDueDate[0] ?? null;
+    });
 }
