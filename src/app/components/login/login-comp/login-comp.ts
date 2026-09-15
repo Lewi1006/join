@@ -27,12 +27,15 @@ export class LoginComp {
             return;
         }
 
+        // gets contact that matches the data in the database
         const contact = await this.checkLogin();
 
         if (!contact) {
             return;
         }
 
+        // hand over contact to auth service so current user signal knows
+        // that a user is logged in and isLoggedIn() returns true
         this.authService.login(contact);
         this.router.navigate(['/summary']);
     }
@@ -40,16 +43,21 @@ export class LoginComp {
     async checkLogin() {
         await this.contactsService.getAllContacts();
 
+        // values from the form that the user types in to log in
         const email = this.loginForm.value.email;
         const password = this.loginForm.value.password;
 
+        // search contacts array and match the entered email
+        // with an existing contact in the database
         const contact = this.contactsService.contacts().find((contact) => contact.email === email);
 
+        // if no contact is found -> show error message
         if (!contact) {
             this.loginForm.setErrors({ wrongEmail: true });
             return;
         }
 
+        // if the password does not match -> show error message
         if (contact.password !== password) {
             this.loginForm.setErrors({ wrongPassword: true });
             return;
