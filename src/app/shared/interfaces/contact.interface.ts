@@ -5,4 +5,6 @@ export interface Contact {
     email: string;
     phone: string;
     profile_color?: string;
+    password?: string;
+    status?: 'registered' | 'guest';
 }
