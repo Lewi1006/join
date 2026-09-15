@@ -199,4 +199,38 @@
             @include d-flex(row, flex-start, flex-start, 20px);
         }
     }
+        .card_edit_btn {
+            display: none;
+        @include respond(zero, m) {
+display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }}
+
+    .status-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: 24px;
+    background: white;
+    padding: 16px;
+    @include d-flex(column, stretch, center, 8px);
+
+    .status-overlay-title {
+        text-align: center;
+    }
+
+    .status-option {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid $blue-main;
+        color: $blue-main;
+
+        &.active {
+            background: $blue-main;
+            color: white;
+        }
+    }
+}
 }
