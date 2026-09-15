@@ -6,16 +6,24 @@ import { SummaryComp } from './components/summary-comp/summary-comp';
 import { PrivacyComp } from './components/privacy-comp/privacy-comp';
 import { LegalComp } from './components/legal-comp/legal-comp';
 import { HelpComp } from './components/help-comp/help-comp';
-import { LoginComp } from './components/login/login-comp/login-comp';
 import { MainContentComp } from './components/main-content-comp/main-content-comp';
-import { SignupComp } from './components/login/signup-comp/signup-comp';
+import { AuthGuard } from './shared/auth.guard';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComp },
-    {path: 'signup', component: SignupComp},
+    {
+        path: 'login',
+        loadComponent: () =>
+            import('./components/login/login-comp/login-comp').then((m) => m.LoginComp),
+    },
+    {
+        path: 'signup',
+        loadComponent: () =>
+            import('./components/login/signup-comp/signup-comp').then((m) => m.SignupComp),
+    },
     {
         path: '',
         component: MainContentComp,
+        canActivate: [AuthGuard],
         children: [
             { path: 'summary', component: SummaryComp },
             { path: 'task', component: TaskComp },
@@ -38,4 +46,5 @@ export const routes: Routes = [
             },
         ],
     },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

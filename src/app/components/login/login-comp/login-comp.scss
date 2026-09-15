@@ -57,7 +57,7 @@ main {
 
     .login-box {
         width: 60%;
-        height: 420px;
+        height: fit-content;
         background: $white;
         border-radius: 30px;
         @include drop-shadow;
@@ -65,7 +65,7 @@ main {
         .login-wrapper {
             height: 100%;
             width: 100%;
-            padding: 48px 120px;
+            padding: 36px 120px;
 
             @include d-flex(column, center, center, 40px);
 
@@ -93,7 +93,7 @@ main {
                 @include d-flex(column, flex flex-start, center, 20px);
 
                 .input-fields {
-                    @include d-flex(column, center, center, 20px);
+                    @include d-flex(column, center, center, 10px);
 
                     .input-field-div {
                         width: 100%;
@@ -125,6 +125,16 @@ main {
                                 width: 24px;
                             }
                         }
+
+                        .red {
+                            color: red;
+                            padding-top: 2px;
+                        }
+
+                        .hidden {
+                            padding-top: 2px;
+                            color: white;
+                        }
                     }
                 }
 
@@ -141,7 +151,7 @@ main {
                         border: solid 1px $blue-main;
                         border-radius: 8px;
 
-                        &:hover{
+                        &:hover {
                             background: $blue-main;
                             color: $white;
                         }
