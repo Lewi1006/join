@@ -1,9 +1,10 @@
-import { Component, input, computed, output, inject } from '@angular/core';
+import { Component, input, computed, output, inject, signal } from '@angular/core';
 import { TaskStatus } from '../../../shared/interfaces/column.interface';
 import { Task } from '../../../shared/interfaces/task.interface';
 import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskDetailService } from '../../../shared/services/task-detail.service.';
 import { InitialsPipe } from '../../../shared/pipes.pipe';
+import { TasksService } from '../../../shared/services/tasks.service';
 
 @Component({
     selector: 'app-column-comp',
@@ -12,8 +13,7 @@ import { InitialsPipe } from '../../../shared/pipes.pipe';
     styleUrl: './column-comp.scss',
 })
 export class ColumnComp {
-    taskDetailService = inject(TaskDetailService)
-
+    taskDetailService = inject(TaskDetailService);
 
     title = input<string>();
     status = input<TaskStatus>();
@@ -35,7 +35,9 @@ export class ColumnComp {
     // so each column only displays the tasks belonging to it.
     // item is a variable that stores each item in the array
     // compares and matches items status to column status
-    columnTasks = computed(() => this.task()?.filter((item) => item.status === this.status()) ?? []);
+    columnTasks = computed(
+        () => this.task()?.filter((item) => item.status === this.status()) ?? [],
+    );
 
     getEmptyMessage(): string {
         switch (this.status()) {
@@ -60,10 +62,33 @@ export class ColumnComp {
         this.taskSelected.emit(task);
     }
 
-
     // add task emits the output signal with the status of the column
     // hands over signal to board comp (addColumnTask)="openAddTaskDialogFromColumn($event, addTaskDialog)"
-    addTask(){
+    addTask() {
         this.addColumnTask.emit(this.status()!);
     }
+    isMobile = signal(window.matchMedia('(max-width: 768px)').matches);
+
+    openStatusTaskId = signal<number | undefined>(undefined);
+
+    toggleStatusOverlay(event: MouseEvent, task: Task) {
+        event.stopPropagation();
+        this.openStatusTaskId.set(this.openStatusTaskId() === task.id ? undefined : task.id);
+    }
+    taskService = inject(TasksService);
+
+statusOptions = [
+    { label: 'To do', status: TaskStatus.Todo },
+    { label: 'In progress', status: TaskStatus.InProgress },
+    { label: 'Await feedback', status: TaskStatus.AwaitFeedback },
+    { label: 'Done', status: TaskStatus.Done },
+];
+
+changeStatus(event: MouseEvent, task: Task, status: TaskStatus) {
+    event.stopPropagation();
+    if (task.id && task.status !== status) {
+        this.taskService.updateTask(task.id, { status });
+    }
+    this.openStatusTaskId.set(undefined);
+}
 }

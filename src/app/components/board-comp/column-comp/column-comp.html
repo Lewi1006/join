@@ -23,6 +23,7 @@
                     cdkDrag
                     [cdkDragData]="task"
                     cdkDragPreviewContainer="parent"
+                    [cdkDragDisabled]="isMobile()"
                 >
                     <div
                         class="card-category"
@@ -30,7 +31,54 @@
                     >
                         <p>{{ task.category }}</p>
                     </div>
+<button
+    type="button"
+    class="card_edit_btn"
+    (click)="toggleStatusOverlay($event, task)"
+>
+    &#9881;
+</button>
+@if (openStatusTaskId() === task.id) {
+    <div class="status-overlay" (click)="$event.stopPropagation()">
+        <h3 class="status-overlay-title">Move to</h3>
 
+                <!-- <button type="button" class="status-option"
+            [class.active]="task.status === TaskStatus.Todo"
+            (click)="changeStatus($event, task, TaskStatus.Todo)">
+            To do
+        </button>
+
+        <button type="button" class="status-option"
+            [class.active]="task.status === TaskStatus.InProgress"
+            (click)="changeStatus($event, task, TaskStatus.InProgress)">
+            In progress
+        </button>
+
+        <button type="button" class="status-option"
+            [class.active]="task.status === TaskStatus.AwaitFeedback"
+            (click)="changeStatus($event, task, TaskStatus.AwaitFeedback)">
+            Await feedback
+        </button>
+
+        <button type="button" class="status-option"
+            [class.active]="task.status === TaskStatus.Done"
+            (click)="changeStatus($event, task, TaskStatus.Done)">
+            Done
+        </button> -->
+    
+        
+        @for (option of statusOptions; track option.status) {
+            <button
+                type="button"
+                class="status-option"
+                [class.active]="task.status === option.status"
+                (click)="changeStatus($event, task, option.status)"
+            >
+                {{ option.label }}
+            </button>
+        }
+    </div>
+}
                     <div class="card-content">
                         <h3>{{ task.title }}</h3>
                         <p class="task-description">{{ task.description }}</p>
