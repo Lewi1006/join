@@ -4,10 +4,11 @@ import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { Task } from '../../shared/interfaces/task.interface';
 import { BoardColumn } from '../../shared/interfaces/column.interface';
 import { CrudService } from '../../shared/services/crud.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-summary-comp',
-    imports: [],
+    imports: [DatePipe],
     templateUrl: './summary-comp.html',
     styleUrl: './summary-comp.scss',
 })
