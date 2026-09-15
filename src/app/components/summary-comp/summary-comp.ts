@@ -22,7 +22,7 @@ export class SummaryComp {
     ngOnInit() {
         this.taskService.getAllTasks();
     }
-    
+
     totalNumberOfTasks(){
       let totalNumberOfTasks: number = this.taskService.tasks().length;
       return totalNumberOfTasks;
@@ -33,5 +33,11 @@ export class SummaryComp {
             .tasks()
             .filter((t) => t.status === status).length;
         return numberOfTasksInStatus;
+    }
+
+    tasksByPriority(priority: string){
+      let numberOfTasksInPriority: number = this.taskService
+      .tasks()
+      .filter((t) => t.priority === priority).length;
     }
 }
