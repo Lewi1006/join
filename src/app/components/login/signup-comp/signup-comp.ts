@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { passwordMustMatch } from '../../../shared/validators';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-signup-comp',
@@ -14,6 +15,7 @@ import { passwordMustMatch } from '../../../shared/validators';
 export class SignupComp {
     router = inject(Router);
     contactService = inject(ContactsService);
+    authService = inject(AuthService)
 
     goBackToLogin() {
         this.router.navigate(['/login']);
@@ -38,9 +40,11 @@ export class SignupComp {
                     ),
                 ],
             }),
+
             phone: new FormControl('', {
                 validators: [Validators.required, Validators.pattern('^[- +()0-9]+$')],
             }),
+
             password: new FormControl('', {
                 validators: [
                     Validators.required,
@@ -83,6 +87,9 @@ export class SignupComp {
             };
 
             this.contactService.createContact(contact);
+            console.log(contact);
+
+            this.authService.currentUser.set(contact);
 
             this.router.navigate(['/summary']);
         }

@@ -5,6 +5,7 @@ import { Contact } from '../interfaces/contact.interface';
     providedIn: 'root',
 })
 export class AuthService {
+    // is User logged in or not (Contact with status guest or registered or undefined)
     currentUser = signal<Contact | undefined>(undefined);
 
     login(user: Contact): void {
