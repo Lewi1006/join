@@ -9,44 +9,55 @@
     <div class="summary-content row">
         <div class="metrics column">
             <div class="metrics-wrapper column">
-
-
-
                 <div class="metrics-box card-wrapper row">
                     <div class="metrics-box two row">
                         <div class="centered">
-                            <img src="icons/summary-todo-white.svg" alt="">
+                            <img src="icons/summary-todo-white.svg" alt="" />
                         </div>
                         <div class="column centered">
-                            <p class="row big-number">{{tasksByStatus(todo)}}</p>
+                            <p class="row big-number">{{ tasksByStatus(todo) }}</p>
                             <p class="status-text">To do</p>
                         </div>
                     </div>
 
                     <div class="metrics-box two row">
                         <div>
-                            <img class="metrics-icon" src="icons/summary-done-white.svg" alt="">
+                            <img class="metrics-icon" src="icons/summary-done-white.svg" alt="" />
                         </div>
                         <div class="column centered">
-                            <p class="row big-number">{{tasksByStatus(done)}}</p>
+                            <p class="row big-number">{{ tasksByStatus(done) }}</p>
                             <p class="status-text">Done</p>
                         </div>
                     </div>
                 </div>
 
-
                 <div class="card-wrapper row one">
-                    <div class="row two centered">
-                        <div>
-                            <img class="metrics-icon" src="icons/summary-urgent-red.svg" alt="">
+                    @if (getUrgentUndoneTasks() > 0) {
+                        <div class="row two centered">
+                            <div>
+                                <img
+                                    class="metrics-icon"
+                                    src="icons/summary-urgent-red.svg"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="column centered">
+                                <p class="big-number">{{ getUrgentUndoneTasks() }}</p>
+                                <p class="status-text">Urgent</p>
+                            </div>
                         </div>
-                        <div class="column centered">
-                            <p class="big-number">XX</p>
-                            <p class="status-text">Urgent</p>
+                    } @else if (getUrgentUndoneTasks() == 0) {
+                        <div class="centered two">
+                            <p class="no-task-text">There is currently no uncompleted 'Urgent' task. 🥳</p>
                         </div>
-                    </div>
+                    }
+
+
+
+
+
                     <div class="centered">
-                        <img src="icons/summary-metrics-vertical-grey-line.svg" alt="">
+                        <img src="icons/summary-metrics-vertical-grey-line.svg" alt="" />
                     </div>
                     <div class="column two">
                         <p>DATE</p>
@@ -54,19 +65,18 @@
                     </div>
                 </div>
 
-
                 <div class="metrics-box card-wrapper row three">
                     <div class="metrics-box three column centered">
-                        <p class="big-number">{{totalNumberOfTasks()}}</p>
+                        <p class="big-number">{{ totalNumberOfTasks() }}</p>
                         <p class="status-text">Tasks in board</p>
                     </div>
                     <div class="metrics-box three column centered">
-                        <p class="big-number">{{tasksByStatus(inProgress)}}</p>
-                        <p class="status-text">Tasks in board</p>
+                        <p class="big-number">{{ tasksByStatus(inProgress) }}</p>
+                        <p class="status-text">Tasks in progress</p>
                     </div>
                     <div class="metrics-box three column centered">
-                        <p class="big-number">{{tasksByStatus(awaitFeedback)}}</p>
-                        <p class="status-text">Tasks in board</p>
+                        <p class="big-number">{{ tasksByStatus(awaitFeedback) }}</p>
+                        <p class="status-text">Awaiting feedback</p>
                     </div>
                 </div>
             </div>

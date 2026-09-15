@@ -23,9 +23,9 @@ export class SummaryComp {
         this.taskService.getAllTasks();
     }
 
-    totalNumberOfTasks(){
-      let totalNumberOfTasks: number = this.taskService.tasks().length;
-      return totalNumberOfTasks;
+    totalNumberOfTasks() {
+        let totalNumberOfTasks: number = this.taskService.tasks().length;
+        return totalNumberOfTasks;
     }
 
     tasksByStatus(status: TaskStatus) {
@@ -35,9 +35,10 @@ export class SummaryComp {
         return numberOfTasksInStatus;
     }
 
-    tasksByPriority(priority: string){
-      let numberOfTasksInPriority: number = this.taskService
-      .tasks()
-      .filter((t) => t.priority === priority).length;
+    getUrgentUndoneTasks() {
+        let numberOfUndoneTasksInPriority: number = this.taskService
+            .tasks()
+            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
+        return numberOfUndoneTasksInPriority;
     }
 }
