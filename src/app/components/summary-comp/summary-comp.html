@@ -84,8 +84,20 @@
                 </div>
             </div>
         </div>
-        <div class="welcome-message">
-            <p>HELLO!!! {{ authService.currentUser()!.name }}</p>
+        <div class="welcome-section column centered">
+            @switch (true) {
+                @case (getTimeOfDay() < 12) {
+                    <p class="welcome-message">Good morning,</p>
+                }
+                @case (12 <= getTimeOfDay() &&  getTimeOfDay() < 18) {
+                    <p class="welcome-message">Good afternoon,</p>
+                }
+                @case (18 <= getTimeOfDay()) {
+                    <p class="welcome-message">Good evening,</p>
+                }
+            }
+            <p class="username">{{ authService.currentUser()!.name }}</p>
         </div>
     </div>
+
 </section>
