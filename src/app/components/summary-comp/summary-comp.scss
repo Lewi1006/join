@@ -86,15 +86,17 @@
             aspect-ratio: 1;
 
             .one {
-                border: 1px solid black;
                 border-radius: 30px;
                 align-items: center;
                 justify-content: center;
+                padding: 8px 16px;
+                border: 1px solid black;
             }
 
             .two {
                 width: 50%;
                 gap: 16px;
+                
             }
 
             .three {
@@ -136,6 +138,11 @@
                         align-items: center;
                         justify-content: center;
                         padding: 8px;
+                    }
+
+                    .no-task-text{
+                        @include font(18px, 400, 120%);
+                        text-align: center;
                     }
                 }
             }

@@ -4,10 +4,11 @@ import { TaskStatus } from '../../shared/interfaces/column.interface';
 import { Task } from '../../shared/interfaces/task.interface';
 import { BoardColumn } from '../../shared/interfaces/column.interface';
 import { CrudService } from '../../shared/services/crud.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-summary-comp',
-    imports: [],
+    imports: [DatePipe],
     templateUrl: './summary-comp.html',
     styleUrl: './summary-comp.scss',
 })
@@ -23,9 +24,9 @@ export class SummaryComp {
         this.taskService.getAllTasks();
     }
 
-    totalNumberOfTasks(){
-      let totalNumberOfTasks: number = this.taskService.tasks().length;
-      return totalNumberOfTasks;
+    totalNumberOfTasks() {
+        let totalNumberOfTasks: number = this.taskService.tasks().length;
+        return totalNumberOfTasks;
     }
 
     tasksByStatus(status: TaskStatus) {
@@ -35,9 +36,20 @@ export class SummaryComp {
         return numberOfTasksInStatus;
     }
 
-    tasksByPriority(priority: string){
-      let numberOfTasksInPriority: number = this.taskService
-      .tasks()
-      .filter((t) => t.priority === priority).length;
+    getUrgentUndoneTasks() {
+        let numberOfUndoneTasksInPriority: number = this.taskService
+            .tasks()
+            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
+        return numberOfUndoneTasksInPriority;
     }
+
+    upcomingDueDate = computed(() => {
+        const upcomingDueDate = this.taskService.tasks()
+        .filter((t) => t.status != this.done)
+        .filter((t) => t.dueDate)
+        .map((t) => t.dueDate!)
+        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+        return upcomingDueDate[0] ?? null;
+    });
 }
