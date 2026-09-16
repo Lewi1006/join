@@ -3,6 +3,7 @@ import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angula
 import { Router } from '@angular/router';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { AuthService } from '../../../shared/services/auth.service';
+import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
     selector: 'app-login-comp',
@@ -14,6 +15,7 @@ export class LoginComp {
     router = inject(Router);
     authService = inject(AuthService);
     contactsService = inject(ContactsService);
+    alertService = inject(AlertService);
 
     goToSignUp() {
         this.router.navigate(['/signup']);
@@ -37,6 +39,8 @@ export class LoginComp {
         // hand over contact to auth service so current user signal knows
         // that a user is logged in and isLoggedIn() returns true
         this.authService.login(contact);
+
+        this.alertService.success('Log in was successful', 2000);
         this.router.navigate(['/summary']);
     }
 
@@ -68,6 +72,7 @@ export class LoginComp {
 
     guestLogin() {
         this.authService.guestLogin();
+         this.alertService.success('Log in was successful', 2000);
         this.router.navigate(['/summary']);
     }
 
