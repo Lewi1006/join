@@ -70,8 +70,8 @@
         align-items: center;
     }
 
-    .red{
-        color: #FF3D00;
+    .red {
+        color: #ff3d00;
     }
 
     .summary-content {
@@ -91,11 +91,14 @@
                 padding: 8px 16px;
                 border: 1px solid black;
             }
+            .one:hover {
+                color: white;
+                background-color: $blue-main;
+            }
 
             .two {
                 width: 50%;
                 gap: 16px;
-                
             }
 
             .three {
@@ -130,12 +133,12 @@
                     align-items: center;
                     gap: 28px;
 
-
-                    .due-date{
+                    .due-date {
                         @include font(20px, 700, 120%);
                         font-weight: bold;
                     }
-                    .deadline-text{
+
+                    .deadline-text {
                         @include font(16px, 400, 120%);
                     }
 
@@ -146,11 +149,36 @@
                         align-items: center;
                         justify-content: center;
                         padding: 8px;
-                    }
 
-                    .no-task-text{
+                        #todo-icon {
+                            height: 69px;
+                            width: 69px;
+                            background-image: url(../../../../public/icons/summary-todo-white.svg);
+                        }
+
+                        #done-icon {
+                            height: 69px;
+                            width: 69px;
+                            background-image: url(../../../../public/icons/summary-done-white.svg);
+                        }
+                    }
+                    .metrics-box:hover {
+                        color: white;
+                        background-color: $blue-main;
+
+                        #todo-icon {
+                            background-image: url(../../../../public/icons/summary-todo-hover.svg);
+                        }
+                        #done-icon {
+                            background-image: url(../../../../public/icons/summary-done-hover.svg);
+                        }
+                    }
+                    .no-task-text {
                         @include font(18px, 400, 120%);
                         text-align: center;
+                    }
+                    .no-task-text:hover{
+                        color: white;
                     }
                 }
             }
@@ -161,12 +189,12 @@
             height: 100%;
             color: $blue-main;
 
-            .welcome-message{
+            .welcome-message {
                 @include font(44px, 500, 120%);
                 font-weight: bold;
             }
 
-            .username{
+            .username {
                 @include font(64px, 700, 120%);
                 font-weight: bold;
             }
