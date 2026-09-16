@@ -5,13 +5,35 @@
     height: 100%;
     padding: 60px;
     overflow-y: auto;
-        @include respond-max(sm) {
+    @include respond-max(sm) {
         padding: 30px 16px;
     }
 
     .privacy-wrapper {
         @include d-flex(column, flex-start, center, 30px);
-    
+
+        .privacy-heading {
+            width: 100%;
+
+            @include d-flex(row, center, space-between);
+
+            .back-btn-privacy {
+                width: fit-content;
+                height: fit-content;
+                cursor: pointer;
+                display: none;
+
+                @include respond(zero, m) {
+                    display: block;
+                }
+
+                img {
+                    width: 22px;
+                    height: auto;
+                }
+            }
+        }
+
         .privacy-content {
             @include d-flex(column, flex-start, center, 30px);
             .privacy-paragraph {
@@ -22,5 +44,4 @@
             }
         }
     }
-
 }

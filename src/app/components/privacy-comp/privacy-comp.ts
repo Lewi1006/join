@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-privacy-comp',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './privacy-comp.html',
   styleUrl: './privacy-comp.scss',
 })
-export class PrivacyComp {}
+export class PrivacyComp {
+   constructor(private location: Location) {}
+
+    back(): void {
+        this.location.back();
+    }
+
+}
