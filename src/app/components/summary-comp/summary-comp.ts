@@ -1,12 +1,10 @@
 import { Component, inject, computed, signal } from '@angular/core';
 import { TasksService } from '../../shared/services/tasks.service';
 import { TaskStatus } from '../../shared/interfaces/column.interface';
-import { Task } from '../../shared/interfaces/task.interface';
-import { BoardColumn } from '../../shared/interfaces/column.interface';
-import { CrudService } from '../../shared/services/crud.service';
 import { DatePipe } from '@angular/common';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
+import { Contact } from '../../shared/interfaces/contact.interface';
 
 @Component({
     selector: 'app-summary-comp',
@@ -16,16 +14,23 @@ import { RouterLink } from '@angular/router';
 })
 export class SummaryComp {
     taskService = inject(TasksService);
+    authService = inject(AuthService);
 
-    todo = TaskStatus.Todo;
-    inProgress = TaskStatus.InProgress;
-    awaitFeedback = TaskStatus.AwaitFeedback;
-    done = TaskStatus.Done;
-
+    //#regionstart
+    status = {
+        todo: TaskStatus.Todo,
+        inProgress: TaskStatus.InProgress,
+        awaitFeedback: TaskStatus.AwaitFeedback,
+        done: TaskStatus.Done,
+    };
     dueDate = '';
     dueDateUpcoming = signal(true);
-
     private interval: any;
+//#endregion
+
+currentUserName = '';
+
+    currentUser = signal<Contact | undefined>(undefined);
 
     ngOnInit() {
         this.taskService.getAllTasks();
@@ -34,6 +39,7 @@ export class SummaryComp {
         }, 50);
     }
 
+
     ngOnDestroy() {
         clearInterval(this.interval);
     }
@@ -41,7 +47,7 @@ export class SummaryComp {
     getDueDate() {
         const dueDates = this.taskService
             .tasks()
-            .filter((t) => t.status != this.done)
+            .filter((t) => t.status != this.status.done)
             .filter((t) => t.dueDate)
             .map((t) => t.dueDate!)
             .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
@@ -69,14 +75,14 @@ export class SummaryComp {
     urgentUndoneTasks = computed(() => {
         const numberOfUndoneTasksInPriority: number = this.taskService
             .tasks()
-            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
+            .filter((t) => t.priority === 'Urgent' && t.status != this.status.done).length;
         return numberOfUndoneTasksInPriority;
     });
 
     displayedDueDate = computed(() => {
         const dueDates = this.taskService
             .tasks()
-            .filter((t) => t.status != this.done)
+            .filter((t) => t.status != this.status.done)
             .filter((t) => t.dueDate)
             .map((t) => t.dueDate!)
             .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
@@ -92,16 +98,4 @@ export class SummaryComp {
             .filter((t) => t.status === status).length;
         return numberOfTasksInStatus;
     }
-
-    /*     totalNumberOfTasks() {
-        let totalNumberOfTasks: number = this.taskService.tasks().length;
-        return totalNumberOfTasks;
-    } */
-
-    /* getUrgentUndoneTasks() {
-        let numberOfUndoneTasksInPriority: number = this.taskService
-            .tasks()
-            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
-        return numberOfUndoneTasksInPriority;
-    } */
 }
