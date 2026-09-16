@@ -36,7 +36,7 @@
         height: 120px;
         width: auto;
 
-        @include respond(zero, sm) {
+        @include respond(zero, m) {
             height: 60px;
         }
 
@@ -54,11 +54,16 @@ main {
 
     .signup-box {
         width: 60%;
-        // min-height: 420px;
         height: fit-content;
+        max-height: calc(100dvh - 220px);
+
         background: $white;
         border-radius: 30px;
+
         @include drop-shadow;
+        @include scrollbar(30px);
+
+        overflow-y: auto;
 
         @include respond(zero, sm) {
             width: 100%;
