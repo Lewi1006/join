@@ -12,17 +12,37 @@
     padding: 40px 120px;
     @include d-flex;
     background: $grey-bg;
+
+    @include respond(zero, sm) {
+        padding: 16px;
+    }
+
+    @include respond(sm, l) {
+        padding: 36px;
+    }
+
+    @include respond(nesthub, l) {
+        padding: 16px;
+    }
 }
 
 .signup-header {
     width: 100%;
-    height: 120px;
+    height: fit-content;
 
     @include d-flex(row, flex-start, space-between);
 
     img {
         height: 120px;
         width: auto;
+
+        @include respond(zero, sm) {
+            height: 60px;
+        }
+
+        @include respond(nesthub, l) {
+            height: 100px;
+        }
     }
 }
 
@@ -40,12 +60,33 @@ main {
         border-radius: 30px;
         @include drop-shadow;
 
+        @include respond(zero, sm) {
+            width: 100%;
+        }
+
+        @include respond(sm, nesthub) {
+            width: 90%;
+        }
+
         .signup-wrapper {
             height: 100%;
             width: 100%;
             padding: 48px 120px;
 
             @include d-flex(column, center, center, 40px);
+
+            @include respond(zero, m) {
+                padding: 16px;
+            }
+
+            @include respond(nesthub, l) {
+                width: fit-content;
+                @include d-flex(column, center, center, 20px);
+            }
+
+            @include respond(l, desktop) {
+                padding: 16px 100px;
+            }
 
             .signup-header {
                 height: fit-content;
@@ -75,6 +116,14 @@ main {
 
                     h1 {
                         @include font(60px, 700, 120%);
+
+                        @include respond(zero, sm) {
+                            font-size: 42px;
+                        }
+
+                        @include respond(nesthub, l) {
+                            font-size: 48px;
+                        }
                     }
 
                     .divider {
@@ -91,6 +140,15 @@ main {
                 // display: flex;
                 // gap: 10px;
                 @include d-flex(column, center, center, 20px);
+
+                @include respond(zero, sm) {
+                    width: 100%;
+                    gap: 10px;
+                }
+
+                @include respond(nesthub, l) {
+                    @include d-flex(column, center, center, 10px);
+                }
 
                 .input-fields {
                     @include d-flex(column, center, center, 4px);
@@ -111,10 +169,18 @@ main {
                             border-radius: 10px;
                             padding: 0 10px;
 
+                            @include respond(nesthub, l) {
+                                min-height: 32px;
+                            }
+
                             .input-field {
                                 width: 100%;
                                 height: 100%;
                                 min-height: 48px;
+
+                                @include respond(nesthub, l) {
+                                    min-height: 28px;
+                                }
 
                                 &::placeholder {
                                     @include font(20px);
@@ -155,6 +221,11 @@ main {
                         height: 48px;
                         border: solid 1px $blue-main;
                         border-radius: 8px;
+
+                        @include respond(zero, sm) {
+                            width: 180px;
+                            height: 40px;
+                        }
 
                         &:hover {
                             background: $blue-main;
