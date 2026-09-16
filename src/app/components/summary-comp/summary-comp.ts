@@ -5,6 +5,7 @@ import { Task } from '../../shared/interfaces/task.interface';
 import { BoardColumn } from '../../shared/interfaces/column.interface';
 import { CrudService } from '../../shared/services/crud.service';
 import { DatePipe } from '@angular/common';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-summary-comp',
@@ -20,8 +21,20 @@ export class SummaryComp {
     awaitFeedback = TaskStatus.AwaitFeedback;
     done = TaskStatus.Done;
 
+    dueDate = '';
+    dueDateUpcoming = signal(true);
+
+    private interval: any;
+
     ngOnInit() {
         this.taskService.getAllTasks();
+        this.interval = setInterval(() => {
+            this.getDueDate();
+        }, 100);
+    }
+
+    ngOnDestroy() {
+        clearInterval(this.interval);
     }
 
     totalNumberOfTasks() {
@@ -43,13 +56,39 @@ export class SummaryComp {
         return numberOfUndoneTasksInPriority;
     }
 
-    upcomingDueDate = computed(() => {
-        const upcomingDueDate = this.taskService.tasks()
-        .filter((t) => t.status != this.done)
-        .filter((t) => t.dueDate)
-        .map((t) => t.dueDate!)
-        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+    displayedDueDate = computed(() => {
+        const dueDates = this.taskService
+            .tasks()
+            .filter((t) => t.status != this.done)
+            .filter((t) => t.dueDate)
+            .map((t) => t.dueDate!)
+            .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
-        return upcomingDueDate[0] ?? null;
+        const displayedDueDate = dueDates[0];
+
+        return displayedDueDate ?? null;
     });
+
+    getDueDate() {
+        const dueDates = this.taskService
+            .tasks()
+            .filter((t) => t.status != this.done)
+            .filter((t) => t.dueDate)
+            .map((t) => t.dueDate!)
+            .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+        this.dueDate = dueDates[0];
+        this.isDueDateUpcoming();
+        return this.dueDate ?? null;
+    }
+
+    isDueDateUpcoming() {
+        const today = new Date();
+        const dueDate = new Date(this.dueDate);
+        if (today.getDate() <= dueDate.getDate()) {
+            this.dueDateUpcoming.set(true);
+        } else {
+            this.dueDateUpcoming.set(false);
+        }
+    }
 }
