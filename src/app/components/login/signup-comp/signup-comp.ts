@@ -5,6 +5,7 @@ import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { passwordMustMatch } from '../../../shared/validators';
 import { AuthService } from '../../../shared/services/auth.service';
+import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
     selector: 'app-signup-comp',
@@ -15,7 +16,8 @@ import { AuthService } from '../../../shared/services/auth.service';
 export class SignupComp {
     router = inject(Router);
     contactService = inject(ContactsService);
-    authService = inject(AuthService)
+    authService = inject(AuthService);
+    alertService = inject(AlertService);
 
     goBackToLogin() {
         this.router.navigate(['/login']);
@@ -90,7 +92,7 @@ export class SignupComp {
             console.log(contact);
 
             this.authService.currentUser.set(contact);
-
+            this.alertService.success('Sign up was successful', 2000);
             this.router.navigate(['/summary']);
         }
     }

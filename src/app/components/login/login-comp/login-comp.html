@@ -37,6 +37,8 @@
                                 loginForm.get('email')?.touched
                             ) {
                                 <p class="red">This field is required.</p>
+                            } @else if (loginForm.hasError('wrongEmail')) {
+                                <p class="red">Email address not found.</p>
                             } @else {
                                 <p class="hidden">.</p>
                             }
@@ -60,6 +62,8 @@
                                 loginForm.get('password')?.touched
                             ) {
                                 <p class="red">This field is required.</p>
+                            } @else if (loginForm.hasError('wrongPassword')) {
+                                <p class="red">Wrong password.</p>
                             } @else {
                                 <p class="hidden">.</p>
                             }
