@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="card-wrapper row one">
-                    @if (getUrgentUndoneTasks() > 0) {
+                    @if (urgentUndoneTasks() > 0) {
                         <div class="row two centered">
                             <div>
                                 <img
@@ -42,18 +42,15 @@
                                 />
                             </div>
                             <div class="column centered">
-                                <p class="big-number">{{ getUrgentUndoneTasks() }}</p>
+                                <p class="big-number">{{ urgentUndoneTasks() }}</p>
                                 <p class="status-text">Urgent</p>
                             </div>
                         </div>
-                    } @else if (getUrgentUndoneTasks() == 0) {
+                    } @else if (urgentUndoneTasks() == 0) {
                         <div class="centered two">
                             <p class="no-task-text">There is currently no uncompleted 'Urgent' task. 🥳</p>
                         </div>
                     }
-
-
-
 
 
                     <div class="centered">
@@ -90,5 +87,3 @@
         </div>
     </div>
 </section>
-
-<button (click)="isDueDateUpcoming()">DUEDATE</button>

@@ -37,38 +37,6 @@ export class SummaryComp {
         clearInterval(this.interval);
     }
 
-    totalNumberOfTasks() {
-        let totalNumberOfTasks: number = this.taskService.tasks().length;
-        return totalNumberOfTasks;
-    }
-
-    tasksByStatus(status: TaskStatus) {
-        let numberOfTasksInStatus: number = this.taskService
-            .tasks()
-            .filter((t) => t.status === status).length;
-        return numberOfTasksInStatus;
-    }
-
-    getUrgentUndoneTasks() {
-        let numberOfUndoneTasksInPriority: number = this.taskService
-            .tasks()
-            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
-        return numberOfUndoneTasksInPriority;
-    }
-
-    displayedDueDate = computed(() => {
-        const dueDates = this.taskService
-            .tasks()
-            .filter((t) => t.status != this.done)
-            .filter((t) => t.dueDate)
-            .map((t) => t.dueDate!)
-            .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-
-        const displayedDueDate = dueDates[0];
-
-        return displayedDueDate ?? null;
-    });
-
     getDueDate() {
         const dueDates = this.taskService
             .tasks()
@@ -91,4 +59,48 @@ export class SummaryComp {
             this.dueDateUpcoming.set(false);
         }
     }
+
+    totalNumberOfTasks = computed(() => {
+        const totalNumberOfTasks: number = this.taskService.tasks().length;
+        return totalNumberOfTasks;
+    });
+
+    urgentUndoneTasks = computed(() => {
+        const numberOfUndoneTasksInPriority: number = this.taskService
+            .tasks()
+            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
+        return numberOfUndoneTasksInPriority;
+    });
+
+    displayedDueDate = computed(() => {
+        const dueDates = this.taskService
+            .tasks()
+            .filter((t) => t.status != this.done)
+            .filter((t) => t.dueDate)
+            .map((t) => t.dueDate!)
+            .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+        const displayedDueDate = dueDates[0];
+
+        return displayedDueDate ?? null;
+    });
+
+    tasksByStatus(status: TaskStatus) {
+        let numberOfTasksInStatus: number = this.taskService
+            .tasks()
+            .filter((t) => t.status === status).length;
+        return numberOfTasksInStatus;
+    }
+
+    /*     totalNumberOfTasks() {
+        let totalNumberOfTasks: number = this.taskService.tasks().length;
+        return totalNumberOfTasks;
+    } */
+
+    /* getUrgentUndoneTasks() {
+        let numberOfUndoneTasksInPriority: number = this.taskService
+            .tasks()
+            .filter((t) => t.priority === 'Urgent' && t.status != this.done).length;
+        return numberOfUndoneTasksInPriority;
+    } */
 }
