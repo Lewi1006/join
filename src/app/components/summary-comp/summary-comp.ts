@@ -6,10 +6,11 @@ import { BoardColumn } from '../../shared/interfaces/column.interface';
 import { CrudService } from '../../shared/services/crud.service';
 import { DatePipe } from '@angular/common';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-summary-comp',
-    imports: [DatePipe],
+    imports: [DatePipe, RouterLink],
     templateUrl: './summary-comp.html',
     styleUrl: './summary-comp.scss',
 })
@@ -30,7 +31,7 @@ export class SummaryComp {
         this.taskService.getAllTasks();
         this.interval = setInterval(() => {
             this.getDueDate();
-        }, 100);
+        }, 50);
     }
 
     ngOnDestroy() {

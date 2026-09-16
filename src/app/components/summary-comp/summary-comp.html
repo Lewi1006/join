@@ -10,7 +10,7 @@
         <div class="metrics column">
             <div class="metrics-wrapper column">
                 <div class="metrics-box card-wrapper row">
-                    <div class="metrics-box two row">
+                    <button [routerLink]="['/board']" class="metrics-box two row">
                         <div class="centered">
                             <img src="icons/summary-todo-white.svg" alt="" />
                         </div>
@@ -18,9 +18,9 @@
                             <p class="row big-number">{{ tasksByStatus(todo) }}</p>
                             <p class="status-text">To do</p>
                         </div>
-                    </div>
+                    </button>
 
-                    <div class="metrics-box two row">
+                    <button [routerLink]="['/board']" class="metrics-box two row">
                         <div>
                             <img class="metrics-icon" src="icons/summary-done-white.svg" alt="" />
                         </div>
@@ -28,10 +28,10 @@
                             <p class="row big-number">{{ tasksByStatus(done) }}</p>
                             <p class="status-text">Done</p>
                         </div>
-                    </div>
+                    </button>
                 </div>
 
-                <div class="card-wrapper row one">
+                <button [routerLink]="['/board']" class="card-wrapper row one">
                     @if (urgentUndoneTasks() > 0) {
                         <div class="row two centered">
                             <div>
@@ -48,37 +48,39 @@
                         </div>
                     } @else if (urgentUndoneTasks() == 0) {
                         <div class="centered two">
-                            <p class="no-task-text">There is currently no uncompleted 'Urgent' task. 🥳</p>
+                            <p class="no-task-text">
+                                There is currently no uncompleted 'Urgent' task. 🥳
+                            </p>
                         </div>
                     }
-
 
                     <div class="centered">
                         <img src="icons/summary-metrics-vertical-grey-line.svg" alt="" />
                     </div>
                     <div class="column two">
-                        <p>{{displayedDueDate() | date:'longDate'}}</p>
                         @if (dueDateUpcoming()) {
-                            <p>Upcoming Deadline</p>
+                            <p class="due-date">{{ displayedDueDate() | date: 'longDate' }}</p>
+                            <p class="deadline-text">Upcoming Deadline</p>
                         } @else {
-                            <p class="red">Missed Deadline</p>
+                            <p class="due-date red">{{ displayedDueDate() | date: 'longDate' }}</p>
+                            <p class="deadline-text red">Missed Deadline</p>
                         }
                     </div>
-                </div>
+                </button>
 
                 <div class="metrics-box card-wrapper row three">
-                    <div class="metrics-box three column centered">
+                    <button [routerLink]="['/board']" class="metrics-box three column centered">
                         <p class="big-number">{{ totalNumberOfTasks() }}</p>
                         <p class="status-text">Tasks in board</p>
-                    </div>
-                    <div class="metrics-box three column centered">
+                    </button>
+                    <button [routerLink]="['/board']" class="metrics-box three column centered">
                         <p class="big-number">{{ tasksByStatus(inProgress) }}</p>
                         <p class="status-text">Tasks in progress</p>
-                    </div>
-                    <div class="metrics-box three column centered">
+                    </button>
+                    <button [routerLink]="['/board']" class="metrics-box three column centered">
                         <p class="big-number">{{ tasksByStatus(awaitFeedback) }}</p>
                         <p class="status-text">Awaiting feedback</p>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

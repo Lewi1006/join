@@ -74,6 +74,10 @@
         align-items: center;
     }
 
+    .red{
+        color: #FF3D00;
+    }
+
     .summary-content {
         border: 1px solid black;
         width: 100%;
@@ -130,6 +134,15 @@
                     justify-content: center;
                     align-items: center;
                     gap: 28px;
+
+
+                    .due-date{
+                        @include font(20px, 700, 120%);
+                        font-weight: bold;
+                    }
+                    .deadline-text{
+                        @include font(16px, 400, 120%);
+                    }
 
                     .metrics-box {
                         border: 1px solid black;
