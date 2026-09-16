@@ -17,6 +17,12 @@
 
             @include d-flex(row, center, space-between);
 
+            @include respond(zero, galaxy9) {
+                h1 {
+                    font-size: 36px;
+                }
+            }
+
             .back-btn-privacy {
                 width: fit-content;
                 height: fit-content;

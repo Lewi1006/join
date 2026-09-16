@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 4rem 0;
-    // padding: 16px;
     background: $blue-main;
     width: 100%;
     height: 100%;
@@ -18,7 +17,7 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        
+
         img {
             width: 100px;
 
@@ -51,17 +50,88 @@
         }
     }
 
-    .nav-wrapper-login{
+    .nav-wrapper-login {
         color: $white;
         width: 100%;
-        @include d-flex(row, center, space-between);
+        height: 100%;
 
+        @include respond-max(m) {
+            padding: 0 16px;
+
+            .join-logo {
+                display: none;
+            }
+        }
+
+        @include respond(ipadmini, desktop) {
+            height: 100%;
+            @include d-flex(column, center, space-between, 40px);
+        }
+
+        nav {
+            width: 100%;
+            height: 100%;
+            @include d-flex(row, center, space-between);
+
+            @include respond(ipadmini, desktop) {
+                max-height: 80%;
+                @include d-flex(column, center, space-between);
+            }
+
+            .return-to-login {
+                @include d-flex(column, center, center);
+                flex-shrink: 0;
+
+                @include respond(ipadmini, desktop) {
+                    @include d-flex(row, center, center, 10px);
+                }
+            }
+
+            .footer-links {
+                @include d-flex(row, center, flex-end);
+                gap: 10px;
+                width: 100%;
+                height: fit-content;
+
+                @include respond(ipadmini, desktop) {
+                    @include d-flex(column, center, center, 10px);
+                }
+
+                a {
+                    width: 120px;
+                    border-radius: 8px;
+                    color: $white;
+                    text-align: center;
+
+                    @include respond(zero, galaxy9) {
+                        width: 100px;
+                        font-size: 14px;
+                    }
+
+                    @include respond(ipadmini, desktop) {
+                        width: 100%;
+                        border-radius: 0;
+                    }
+
+                    &.active {
+                        background: $blue-dark;
+                        padding: 30px 0px;
+
+                        @include respond(ipadmini, desktop) {
+                            padding: 6px 0px;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 app-footer {
     --footer-link-color: white;
 }
+
 @include respond-max(m) {
     .navigation {
         // bottom: 0;

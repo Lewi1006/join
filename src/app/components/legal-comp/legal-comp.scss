@@ -13,6 +13,12 @@
 .legal-wrapper {
     @include d-flex(column, flex-start, center, 30px);
 
+    @include respond(zero, galaxy9) {
+        h1{
+            font-size: 36px;
+        }
+    }
+
     .highlight {
         color: $blue-light;
     }
