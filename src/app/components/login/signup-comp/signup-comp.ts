@@ -15,7 +15,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 export class SignupComp {
     router = inject(Router);
     contactService = inject(ContactsService);
-    authService = inject(AuthService)
+    authService = inject(AuthService);
 
     goBackToLogin() {
         this.router.navigate(['/login']);
@@ -84,6 +84,7 @@ export class SignupComp {
                 phone: this.signupForm.value.phone!,
                 password: this.signupForm.value.password!,
                 status: 'registered',
+                user: true,
             };
 
             this.contactService.createContact(contact);

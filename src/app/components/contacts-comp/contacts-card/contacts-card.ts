@@ -2,6 +2,7 @@ import { Component, inject, input, output } from '@angular/core';
 import { Contact } from '../../../shared/interfaces/contact.interface';
 import { ContactsService } from '../../../shared/services/contacts.service';
 import { InitialsPipe } from '../../../shared/pipes.pipe';
+import { AuthService } from '../../../shared/services/auth.service'; 
 
 @Component({
     selector: 'app-contacts-card',
@@ -23,4 +24,9 @@ export class ContactsCard {
 
     back = output<void>();
     dbService = inject(ContactsService);
+
+    authService = inject(AuthService);
+    canEdit(contact: Contact): boolean {
+    return !contact.user || contact.id === this.authService.currentUser()?.id;
+}
 }
