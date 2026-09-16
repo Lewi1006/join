@@ -20,3 +20,4 @@ export class InitialsPipe implements PipeTransform {
         return (first + last).toUpperCase();
     }
 }
+

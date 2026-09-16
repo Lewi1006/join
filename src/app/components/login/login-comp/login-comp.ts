@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Contact } from '../../../shared/interfaces/contact.interface';
+import { ContactsService } from '../../../shared/services/contacts.service';
 import { AuthService } from '../../../shared/services/auth.service';
+import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
     selector: 'app-login-comp',
@@ -13,27 +14,65 @@ import { AuthService } from '../../../shared/services/auth.service';
 export class LoginComp {
     router = inject(Router);
     authService = inject(AuthService);
-
-    // currentUser = signal<Contact | undefined>(undefined);
+    contactsService = inject(ContactsService);
+    alertService = inject(AlertService);
 
     goToSignUp() {
         this.router.navigate(['/signup']);
     }
 
-    login() {
-        if(this.loginForm.invalid){
+    async login() {
+        this.loginForm.setErrors(null);
+
+        if (this.loginForm.invalid) {
             this.loginForm.markAllAsTouched();
-            return
+            return;
         }
 
+        // gets contact that matches the data in the database
+        const contact = await this.checkLogin();
+
+        if (!contact) {
+            return;
+        }
+
+        // hand over contact to auth service so current user signal knows
+        // that a user is logged in and isLoggedIn() returns true
+        this.authService.login(contact);
+
+        this.alertService.success('Log in was successful', 2000);
+        this.router.navigate(['/summary']);
+    }
+
+    async checkLogin() {
+        await this.contactsService.getAllContacts();
+
+        // values from the form that the user types in to log in
         const email = this.loginForm.value.email;
         const password = this.loginForm.value.password;
 
-        console.log(email,password);
+        // search contacts array and match the entered email
+        // with an existing contact in the database
+        const contact = this.contactsService.contacts().find((contact) => contact.email === email);
+
+        // if no contact is found -> show error message
+        if (!contact) {
+            this.loginForm.setErrors({ wrongEmail: true });
+            return;
+        }
+
+        // if the password does not match -> show error message
+        if (contact.password !== password) {
+            this.loginForm.setErrors({ wrongPassword: true });
+            return;
+        }
+
+        return contact;
     }
 
     guestLogin() {
         this.authService.guestLogin();
+         this.alertService.success('Log in was successful', 2000);
         this.router.navigate(['/summary']);
     }
 
@@ -47,10 +86,7 @@ export class LoginComp {
             ],
         }),
         password: new FormControl('', {
-            validators: [
-                Validators.required,
-                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$/),
-            ],
+            validators: [Validators.required],
         }),
     });
 }
