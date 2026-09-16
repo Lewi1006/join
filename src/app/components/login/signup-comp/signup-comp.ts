@@ -17,6 +17,7 @@ export class SignupComp {
     router = inject(Router);
     contactService = inject(ContactsService);
     authService = inject(AuthService);
+    alertService = inject(AlertService);
 
     goBackToLogin() {
         this.router.navigate(['/login']);
@@ -96,4 +97,6 @@ export class SignupComp {
             this.router.navigate(['/summary']);
         }
     }
+
+    
 }

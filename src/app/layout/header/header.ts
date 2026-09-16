@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import {Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { AlertService } from '../../shared/services/alert.service';
+import { InitialsPipe } from '../../shared/pipes.pipe';
 
 @Component({
     selector: 'app-header',
-    imports: [RouterLink, RouterLinkActive],
+    imports: [RouterLink, RouterLinkActive, InitialsPipe],
     templateUrl: './header.html',
     styleUrl: './header.scss',
 })

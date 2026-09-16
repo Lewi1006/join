@@ -28,5 +28,6 @@ export class ContactsCard {
     authService = inject(AuthService);
     canEdit(contact: Contact): boolean {
     return !contact.user || contact.id === this.authService.currentUser()?.id;
+
 }
 }
