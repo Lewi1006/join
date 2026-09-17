@@ -22,6 +22,7 @@
                         <div class="contact-card-htwo">
                             <h2>{{ currentSelectedContact.name }}</h2>
                         </div>
+                        @if (canEdit(currentSelectedContact)) {
                         <div class="contact-actions_wrapper" [class.open]="settingsOpen">
                             <button type="button" class="mobile_settings" (click)="settingsOpen = !settingsOpen">
                                 &#5010;
@@ -43,6 +44,7 @@
                                 </button>
                             </div>
                         </div>
+                    }
                         @if (settingsOpen) {
                             <div
                                 class="contact-actions_backdrop"

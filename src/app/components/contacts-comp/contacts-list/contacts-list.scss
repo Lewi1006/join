@@ -97,7 +97,6 @@
                 cursor: pointer;
 
                 .profile-picture {
-                    @include bg-color;
                     border: solid 4px white;
                     height: 42px;
                     width: 42px;
