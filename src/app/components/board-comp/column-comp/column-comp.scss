@@ -60,6 +60,9 @@
 
             padding: 16px;
             border-radius: 24px;
+            @media screen AND (min-width: 769px) and (max-width: 950px) {
+                padding: 16px 8px;
+            }
 
             @include drop-shadow-task-card;
             @include d-flex(column, flex-start, flex, 15px);
@@ -89,13 +92,13 @@
 
                 h3 {
                     @include font(16px, 700, 120%);
-                                            overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 4;
-                        line-clamp: 4;
-                        -webkit-box-orient: vertical;
-                        word-break: break-word;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                    word-break: break-word;
                     @include respond(zero, m) {
                         -webkit-line-clamp: 2;
                         line-clamp: 2;
@@ -152,6 +155,11 @@
                     .assignee {
                         width: 36px;
                         height: 36px;
+                        @media screen AND (min-width: 769px) and (max-width: 950px) {
+                            width: 28px;
+                            height: 28px;
+                            font-size: 16px;
+                        }
 
                         border-radius: 50%;
                         border: 2px solid $white;
@@ -169,7 +177,8 @@
                     }
 
                     .remaining-assignees {
-                        margin-left: 6px;
+                        margin-left: 2px;
+                        font-size: 16px;
                     }
 
                     .card-priority {
@@ -199,38 +208,39 @@
             @include d-flex(row, flex-start, flex-start, 20px);
         }
     }
-        .card_edit_btn {
-            display: none;
+    .card_edit_btn {
+        display: none;
         @include respond(zero, m) {
-display: block;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    }}
-
-    .status-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: 24px;
-    background: white;
-    padding: 16px;
-    @include d-flex(column, stretch, center, 8px);
-
-    .status-overlay-title {
-        text-align: center;
-    }
-
-    .status-option {
-        padding: 8px 12px;
-        border-radius: 8px;
-        border: 1px solid $blue-main;
-        color: $blue-main;
-
-        &.active {
-            background: $blue-main;
-            color: white;
+            display: block;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
         }
     }
-}
+
+    .status-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        border-radius: 24px;
+        background: white;
+        padding: 16px;
+        @include d-flex(column, stretch, center, 8px);
+
+        .status-overlay-title {
+            text-align: center;
+        }
+
+        .status-option {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid $blue-main;
+            color: $blue-main;
+
+            &.active {
+                background: $blue-main;
+                color: white;
+            }
+        }
+    }
 }
