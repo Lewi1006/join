@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-legal-comp',
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
   templateUrl: './legal-comp.html',
   styleUrl: './legal-comp.scss',
 })
-export class LegalComp {}
+export class LegalComp {
+
+ constructor(private location: Location) {}
+
+    back(): void {
+        this.location.back();
+    }
+
+}

@@ -82,8 +82,17 @@
     </main>
 
     <footer>
-        <a href="/privacy">Privacy Policy</a>
+        <div class="login-footer-actions-mobile">
+            <p>Not a Join user?</p>
+            <button class="signup-btn" type="button" (click)="goToSignUp()">
+                <span>Sign up</span>
+            </button>
+        </div>
 
-        <a href="/legal">Legal Notice</a>
+        <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+
+            <a href="/legal">Legal Notice</a>
+        </div>
     </footer>
 </div>

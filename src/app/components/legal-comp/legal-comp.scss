@@ -5,7 +5,7 @@
     height: 100%;
     padding: 60px;
     overflow-y: auto;
-        @include respond-max(sm) {
+    @include respond-max(sm) {
         padding: 30px 16px;
     }
 }
@@ -13,8 +13,35 @@
 .legal-wrapper {
     @include d-flex(column, flex-start, center, 30px);
 
+    @include respond(zero, galaxy9) {
+        h1{
+            font-size: 36px;
+        }
+    }
+
     .highlight {
         color: $blue-light;
+    }
+
+    .legal-heading {
+        width: 100%;
+        @include d-flex(row, center, space-between);
+
+        .back-btn-legal {
+            width: fit-content;
+            height: fit-content;
+            cursor: pointer;
+            display: none;
+
+            @include respond(zero, m) {
+                display: block;
+            }
+
+            img {
+                width: 22px;
+                height: auto;
+            }
+        }
     }
 
     .legal-content {

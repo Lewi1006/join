@@ -118,8 +118,11 @@
 //#region responsive
 $breakpoints: (
     zero: 0px,
+    galaxy9: 321px,
     sm: 480px,
     m: 768px,
+    ipadmini: 769px,
+    nesthub: 1023px,
     l: 1024px,
     desktop: 1439px,
 );

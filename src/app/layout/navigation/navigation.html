@@ -1,13 +1,44 @@
 <section class="navigation">
-    <div class="nav_wrapper">
-        <a routerLink="/summary" class="logo_link">
-        <img src="img/logo-white.svg" alt="logo" /></a>
-        <nav>
-            <a routerLink="/summary" routerLinkActive="active"><img src="icons/summary-white.svg" alt="Summary"/><p>Summary</p></a>
-            <a routerLink="/task" routerLinkActive="active"><img src="icons/add-task-white.svg" alt="Add Task"/><p>Add Task</p></a>
-            <a routerLink="/board" routerLinkActive="active"><img src="icons/kanban-board-white.svg" alt="Board"/><p>Board</p></a>
-            <a routerLink="/contacts" routerLinkActive="active"><img src="icons/contacts-white.svg" alt="Contacts"/><p>Contact</p></a>
-        </nav>
-    </div>
-    <app-footer></app-footer>
+    @if (authService.isLoggedIn()) {
+        <div class="nav_wrapper">
+            <a routerLink="/summary" class="logo_link">
+                <img src="img/logo-white.svg" alt="logo"
+            /></a>
+            <nav>
+                <a routerLink="/summary" routerLinkActive="active"
+                    ><img src="icons/summary-white.svg" alt="Summary" />
+                    <p>Summary</p></a
+                >
+                <a routerLink="/task" routerLinkActive="active"
+                    ><img src="icons/add-task-white.svg" alt="Add Task" />
+                    <p>Add Task</p></a
+                >
+                <a routerLink="/board" routerLinkActive="active"
+                    ><img src="icons/kanban-board-white.svg" alt="Board" />
+                    <p>Board</p></a
+                >
+                <a routerLink="/contacts" routerLinkActive="active"
+                    ><img src="icons/contacts-white.svg" alt="Contacts" />
+                    <p>Contact</p></a
+                >
+            </nav>
+        </div>
+        <app-footer></app-footer>
+    } @else {
+        <div class="nav-wrapper-login">
+            <img class="join-logo" src="img/logo-white.svg" alt="logo" />
+            <nav>
+                <button class="return-to-login" routerLink="/login">
+                    <img src="icons/login.svg" alt="login" />
+                    <p>Log in</p>
+                </button>
+
+                <div class="footer-links">
+                    <a routerLink="/privacy" routerLinkActive="active">Privacy Policy</a>
+
+                    <a routerLink="/legal" routerLinkActive="active">Legal Notice</a>
+                </div>
+            </nav>
+        </div>
+    }
 </section>

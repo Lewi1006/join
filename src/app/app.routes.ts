@@ -23,14 +23,15 @@ export const routes: Routes = [
     {
         path: '',
         component: MainContentComp,
-        canActivate: [AuthGuard],
+
         children: [
-            { path: 'summary', component: SummaryComp },
-            { path: 'task', component: TaskComp },
-            { path: 'board', component: BoardComp },
+            { path: 'summary', component: SummaryComp, canActivate: [AuthGuard] },
+            { path: 'task', component: TaskComp, canActivate: [AuthGuard] },
+            { path: 'board', component: BoardComp, canActivate: [AuthGuard] },
             {
                 path: 'contacts',
                 component: ContactsComp,
+                canActivate: [AuthGuard],
             },
             {
                 path: 'privacy',
@@ -43,6 +44,7 @@ export const routes: Routes = [
             {
                 path: 'help',
                 component: HelpComp,
+                canActivate: [AuthGuard],
             },
         ],
     },

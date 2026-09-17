@@ -12,17 +12,33 @@
     padding: 40px 120px;
     @include d-flex;
     background: $grey-bg;
+
+    @include respond(zero, sm) {
+        padding: 16px;
+    }
+
+    @include respond(sm, l) {
+        padding: 36px;
+    }
 }
 
 .login-header {
     width: 100%;
-    height: 120px;
+    height: fit-content;
 
     @include d-flex(row, flex-start, space-between);
 
     img {
         height: 120px;
         width: auto;
+
+        @include respond(zero, sm) {
+            height: 60px;
+        }
+
+        @include respond(nesthub, l) {
+            height: 100px;
+        }
     }
 
     .login-header-actions {
@@ -30,6 +46,10 @@
         height: fit-content;
         @include d-flex(row, center, center, 36px);
         @include font(20px);
+
+        @include respond(zero, sm) {
+            display: none;
+        }
 
         p {
             color: $blue-main;
@@ -62,12 +82,28 @@ main {
         border-radius: 30px;
         @include drop-shadow;
 
+        @include respond(zero, sm) {
+            width: 100%;
+        }
+
+        @include respond(sm, nesthub) {
+            width: 90%;
+        }
+
         .login-wrapper {
             height: 100%;
             width: 100%;
             padding: 36px 120px;
 
             @include d-flex(column, center, center, 40px);
+
+            @include respond(zero, m) {
+                padding: 16px;
+            }
+
+            @include respond(nesthub, l) {
+                padding: 16px 100px;
+            }
 
             .login-header {
                 height: fit-content;
@@ -76,6 +112,10 @@ main {
 
                 h1 {
                     @include font(60px, 700, 120%);
+
+                    @include respond(zero, sm) {
+                        font-size: 48px;
+                    }
                 }
 
                 .divider {
@@ -91,6 +131,10 @@ main {
                 // display: flex;
                 // gap: 10px;
                 @include d-flex(column, flex flex-start, center, 20px);
+
+                @include respond(zero, sm) {
+                    gap: 10px;
+                }
 
                 .input-fields {
                     @include d-flex(column, center, center, 10px);
@@ -144,12 +188,21 @@ main {
 
                     @include d-flex(row, center, center, 20px);
 
+                    @include respond(zero, sm) {
+                        @include d-flex(column, center, center, 10px);
+                    }
+
                     .login-btn {
                         color: $blue-main;
                         width: 120px;
                         height: 48px;
                         border: solid 1px $blue-main;
                         border-radius: 8px;
+
+                        @include respond(zero, sm) {
+                            width: 180px;
+                            height: 40px;
+                        }
 
                         &:hover {
                             background: $blue-main;
@@ -165,15 +218,42 @@ main {
 footer {
     width: 100%;
     height: fit-content;
-    @include d-flex(row, center, center, 28px);
+    @include d-flex(column, center, center, 40px);
     color: $grey-medium;
 
-    a {
-        width: 120px;
-        text-align: center;
-        &:hover {
-            @include font(16px, 800, 120%);
+    .login-footer-actions-mobile {
+        width: fit-content;
+        height: fit-content;
+        @include font(16px);
+        display: none;
+
+        @include respond(zero, sm) {
+            @include d-flex(row, center, center, 30px);
+        }
+
+        p {
             color: $blue-main;
+        }
+
+        .signup-btn {
+            background: $blue-main;
+            color: $white;
+            width: 120px;
+            height: 48px;
+            border-radius: 8px;
+        }
+    }
+
+    .footer-links {
+        @include d-flex(row, center, center, 28px);
+
+        a {
+            width: 120px;
+            text-align: center;
+            &:hover {
+                @include font(16px, 800, 120%);
+                color: $blue-main;
+            }
         }
     }
 }

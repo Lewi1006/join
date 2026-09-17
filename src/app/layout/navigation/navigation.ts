@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Footer } from '../footer/footer';
 // import { BoardComp } from "../../components/board-comp/board-comp";
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,4 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss',
 })
-export class Navigation {}
+export class Navigation {
+
+  authService = inject(AuthService)
+}
