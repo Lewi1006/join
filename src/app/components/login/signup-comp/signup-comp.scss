@@ -55,7 +55,7 @@ main {
     .signup-box {
         width: 60%;
         height: fit-content;
-        max-height: calc(100dvh - 220px);
+        max-height: calc(100dvh - 180px);
 
         background: $white;
         border-radius: 30px;
@@ -63,7 +63,7 @@ main {
         @include drop-shadow;
         @include scrollbar(30px);
 
-        overflow-y: auto;
+        overflow-y: scroll;
 
         @include respond(zero, sm) {
             width: 100%;
@@ -71,6 +71,10 @@ main {
 
         @include respond(sm, nesthub) {
             width: 90%;
+        }
+
+         @include respond(nesthub, l) {
+            width: fit-content;
         }
 
         .signup-wrapper {
