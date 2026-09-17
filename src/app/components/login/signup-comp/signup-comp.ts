@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Contact } from '../../../shared/interfaces/contact.interface';
@@ -6,6 +6,7 @@ import { ContactsService } from '../../../shared/services/contacts.service';
 import { passwordMustMatch } from '../../../shared/validators';
 import { AuthService } from '../../../shared/services/auth.service';
 import { AlertService } from '../../../shared/services/alert.service';
+import { StorageService } from '../../../shared/services/storage.service';
 
 @Component({
     selector: 'app-signup-comp',
@@ -18,6 +19,25 @@ export class SignupComp {
     contactService = inject(ContactsService);
     authService = inject(AuthService);
     alertService = inject(AlertService);
+    storageService = inject(StorageService);
+
+    ngOnInit(): void {
+        const storedData = this.storageService.getSessionData('signupForm');
+
+        if (storedData) {
+            this.signupForm.patchValue(storedData);
+        }
+    }
+
+    saveForm() {
+        const formData = {
+            name: this.signupForm.value.name,
+            email: this.signupForm.value.email,
+            phone: this.signupForm.value.phone,
+        };
+
+        this.storageService.setSessionData('signupForm', formData);
+    }
 
     goBackToLogin() {
         this.router.navigate(['/login']);
@@ -72,8 +92,6 @@ export class SignupComp {
         },
     );
 
-
-
     signUp() {
         if (this.signupForm.invalid) {
             return;
@@ -99,22 +117,4 @@ export class SignupComp {
             this.router.navigate(['/summary']);
         }
     }
-
-// async signUp(email: string, password: string) {
-// const { data, error } = await supabase.auth.signUp({
-// email: email,
-// password: password,
-// });
-// if (error) console.error('Error signing up:', error.message);
-// return data;
-// }
-
-// const contact: Contact = {
-// name: this.signupForm.value.name!,
-// email: this.signupForm.value.email!,
-// phone: this.signupForm.value.phone!,
-// status: 'registered',
-// user: true,
-// };
-    
 }
