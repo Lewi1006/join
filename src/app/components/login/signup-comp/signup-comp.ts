@@ -72,6 +72,8 @@ export class SignupComp {
         },
     );
 
+
+
     signUp() {
         if (this.signupForm.invalid) {
             return;
@@ -98,5 +100,21 @@ export class SignupComp {
         }
     }
 
+// async signUp(email: string, password: string) {
+// const { data, error } = await supabase.auth.signUp({
+// email: email,
+// password: password,
+// });
+// if (error) console.error('Error signing up:', error.message);
+// return data;
+// }
+
+// const contact: Contact = {
+// name: this.signupForm.value.name!,
+// email: this.signupForm.value.email!,
+// phone: this.signupForm.value.phone!,
+// status: 'registered',
+// user: true,
+// };
     
 }

@@ -77,19 +77,7 @@ $yellow-two: #ffe62b;
 $red: #ff4646;
 $orange-four: #ffbb2b;
 
-/*Step 2: Add the colors to a list*/
-$profileColors:
-    $orange-one, $pink-one, $blue-one, $purple, $light-blue, $light-teal, $orange-two,
-    $orange-three, $pink-two, $yellow-one, $blue-two, $lime, $yellow-two, $red, $orange-four;
 
-/*Step 3: Create a mixin to grab a random color from the list*/
-@mixin bg-color() {
-    /*generate a random number between 1 and the length of the list*/
-    $random-color: random(length($profileColors));
-
-    /*return an item from the list based on the random number*/
-    background: nth($profileColors, $random-color);
-}
 
 //Example:
 .column {
@@ -102,14 +90,5 @@ $profileColors:
     }
 }
 
-@for $i from 1 through 3 {
-    .column:nth-child(#{$i}) {
-        @for $i from 1 through 20 {
-            .item:nth-child(#{$i}) {
-                /*use the mixin to generate a random background color*/
-                @include bg-color;
-            }
-        }
-    }
-}
+
 //#endregion
