@@ -7,4 +7,5 @@ export interface Contact {
     profile_color?: string;
     password?: string;
     status?: 'registered' | 'guest';
+    user?: boolean;
 }

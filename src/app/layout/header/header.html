@@ -2,10 +2,30 @@
     <p class="header-title">Kanban Project Management Tool</p>
     <a routerLink="/summary"><img src="img/logo.png" alt="Logo" class="logo" /></a>
     <div class="header-actions">
-        <button type="button" class="help-btn" aria-label="Help" routerLink="/help" routerLinkActive="active">
+        <button
+            type="button"
+            class="help-btn"
+            aria-label="Help"
+            routerLink="/help"
+            routerLinkActive="active"
+        >
             &#63;
         </button>
-        <button type="button" class="profile-btn" aria-label="Open menu" (click)="toggleMenu()">WM</button>
+        <button
+            type="button"
+            class="profile-btn"
+            aria-label="Open menu"
+            (click)="toggleMenu()"
+            [style.background]="authService.currentUser()?.profile_color"
+        >
+            @if (authService.currentUser()?.status === 'registered') {
+                <p style="color: white">
+                    {{ authService.currentUser()!.name | initials }}
+                </p>
+            } @else {
+                GG
+            }
+        </button>
     </div>
 </header>
 
