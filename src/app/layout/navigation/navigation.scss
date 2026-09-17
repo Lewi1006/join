@@ -63,7 +63,7 @@
             }
         }
 
-        @include respond(ipadmini, desktop) {
+        @include respond-min(ipadmini) {
             height: 100%;
             @include d-flex(column, center, space-between, 40px);
         }
@@ -73,7 +73,7 @@
             height: 100%;
             @include d-flex(row, center, space-between);
 
-            @include respond(ipadmini, desktop) {
+            @include respond-min(ipadmini) {
                 max-height: 80%;
                 @include d-flex(column, center, space-between);
             }
@@ -82,7 +82,7 @@
                 @include d-flex(column, center, center);
                 flex-shrink: 0;
 
-                @include respond(ipadmini, desktop) {
+                @include respond-min(ipadmini) {
                     @include d-flex(row, center, center, 10px);
                 }
             }
@@ -93,7 +93,7 @@
                 width: 100%;
                 height: fit-content;
 
-                @include respond(ipadmini, desktop) {
+                @include respond-min(ipadmini) {
                     @include d-flex(column, center, center, 10px);
                 }
 
@@ -108,7 +108,7 @@
                         font-size: 14px;
                     }
 
-                    @include respond(ipadmini, desktop) {
+                    @include respond-min(ipadmini) {
                         width: 100%;
                         border-radius: 0;
                     }
@@ -117,7 +117,7 @@
                         background: $blue-dark;
                         padding: 30px 0px;
 
-                        @include respond(ipadmini, desktop) {
+                        @include respond-min(ipadmini) {
                             padding: 6px 0px;
                             width: 100%;
                         }
