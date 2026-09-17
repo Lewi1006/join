@@ -1,12 +1,11 @@
 import { Service } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
-import { enviroment } from '../../../enviroments/enviroments';
 
 @Service()
 export class CrudService {
     supabase = createClient(
-        enviroment.supabaseUrl,
-        enviroment.supabaseKey,
+        'https://rkjgcmzrhlmpbfapwvza.supabase.co',
+        'sb_publishable_V4B66HpLZWJy9CzHT3Licg_WhntLnHS',
     );
 
     async getAll<T>(table: string, orderBy?: string): Promise<T[]> {
