@@ -3,7 +3,7 @@ export interface Contact {
     created_at?: string;
     name: string;
     email: string;
-    phone: string;
+    phone?: string;
     profile_color?: string;
     password?: string;
     status?: 'registered' | 'guest';

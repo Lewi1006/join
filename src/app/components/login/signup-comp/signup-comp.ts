@@ -64,7 +64,7 @@ export class SignupComp {
             }),
 
             phone: new FormControl('', {
-                validators: [Validators.required, Validators.pattern('^[- +()0-9]+$')],
+                validators: [Validators.pattern('^[- +()0-9]+$')],
             }),
 
             password: new FormControl('', {
@@ -103,7 +103,7 @@ export class SignupComp {
             const contact: Contact = {
                 name: this.signupForm.value.name!,
                 email: this.signupForm.value.email!,
-                phone: this.signupForm.value.phone!,
+                phone:  this.signupForm.value.phone || undefined,
                 password: this.signupForm.value.password!,
                 status: 'registered',
                 user: true,
