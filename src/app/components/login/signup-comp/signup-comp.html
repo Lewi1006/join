@@ -75,7 +75,7 @@
                                     class="input-field cursor"
                                     type="tel"
                                     name="phone"
-                                    placeholder="Phone"
+                                    placeholder="Phone (optional)"
                                     formControlName="phone"
                                 />
                                 <img src="icons/call.svg" alt="phone icon" />
@@ -106,8 +106,7 @@
                                 signupForm.get('password')?.touched
                             ) {
                                 <p class="red">
-                                    Min. 8 characters, including uppercase, lowercase, number (0-9)
-                                    and special character.
+                                    > 8 char. (upper & lowercase, number, special)
                                 </p>
                             }
                         </div>
