@@ -29,7 +29,7 @@
     @include d-flex(row, flex-start, space-between);
 
     img {
-                z-index: 3;
+        z-index: 3;
         height: 120px;
         width: auto;
 
@@ -40,7 +40,7 @@
         @include respond(nesthub, l) {
             height: 100px;
         }
-                animation: logo-intro 2s ease-in-out;
+        animation: logo-intro 2s ease-in-out;
         @keyframes logo-intro {
             0% {
                 transform: translate(calc(50vw - 50% - 120px), calc(50vh - 50% - 40px)) scale(3);
@@ -276,6 +276,8 @@ footer {
     animation: bg-fade 2s ease-in-out forwards;
     pointer-events: none;
     @keyframes bg-fade {
-    to { background: transparent; }
-}
+        to {
+            background: transparent;
+        }
+    }
 }
