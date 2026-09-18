@@ -20,26 +20,36 @@ import { AlertType } from '../../shared/interfaces/alert.interface';
     styleUrl: './task-form.scss',
 })
 export class TaskForm implements AfterViewInit {
+    // #region properties
     taskService = inject(TasksService);
     dbService = inject(ContactsService);
     alertService = inject(AlertService);
+    router = inject(Router);
 
     task = input<Task>();
     saved = output<void>();
-    priority = 'Medium';
-    // divClassList = 'd-none';
-    divClassList = signal('d-none');
-    categories = ['Technical task', 'User Story'];
-    subtasks = signal<Subtask[]>([]);
-    assignees = signal<Contact[]>([]);
-    dropdownArrow = 'arrow-down';
-
-    editingSubtask: Subtask | undefined = undefined;
-    editingSubtaskFormControl = new FormControl('');
-
     // input true in the dialog so button is only visible when the dialog is open
     showCloseButton = input(false);
     closeDialog = output<void>();
+
+    divClassList = signal('d-none');
+    subtasks = signal<Subtask[]>([]);
+    assignees = signal<Contact[]>([]);
+    popupVisible = signal(false);
+
+    priority = 'Medium';
+    urgentSelected = '';
+    mediumSelected = 'medium-selected';
+    lowSelected = '';
+
+    assigneeSelected = '';
+
+    dropdownArrow = 'arrow-down';
+
+    categories = ['Technical task', 'User Story'];
+
+    editingSubtaskFormControl = new FormControl('');
+    editingSubtask: Subtask | undefined = undefined;
 
     taskForm = new FormGroup({
         title: new FormControl('', [Validators.required]),
@@ -50,6 +60,8 @@ export class TaskForm implements AfterViewInit {
         assignees: new FormControl(''),
         subtasks: new FormControl('', [SubtaskValidator]),
     });
+
+    // #endregion
 
     ngOnInit() {
         this.dbService.getAllContacts();
@@ -96,10 +108,6 @@ export class TaskForm implements AfterViewInit {
     }
 
     // #region priority
-    urgentSelected = '';
-    mediumSelected = 'medium-selected';
-    lowSelected = '';
-
     getPriority(priority: string) {
         this.priority = priority;
         if (priority == 'Urgent') {
@@ -131,8 +139,6 @@ export class TaskForm implements AfterViewInit {
             this.dropdownArrow = 'arrow-up';
         }
     }
-
-    assigneeSelected = '';
 
     assignContact(contact: Contact) {
         this.assignees.update((assignees) => {
@@ -238,7 +244,7 @@ export class TaskForm implements AfterViewInit {
     // #region submit and reset form
     taskCreated = output<void>();
 
-    emitTaskCreated(){
+    emitTaskCreated() {
         this.taskCreated.emit();
         console.log('create task emited');
     }
@@ -250,7 +256,6 @@ export class TaskForm implements AfterViewInit {
         }
         console.log(this.taskForm.value);
 
-        
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
 
@@ -283,13 +288,13 @@ export class TaskForm implements AfterViewInit {
 
     formReset() {
         this.taskForm.reset();
+        this.assignees.set([]);
+        this.subtasks.set([]);
     }
 
     // #endregion
 
     // #region alert
-    popupVisible = signal(false);
-
     confirmTaskCreation() {
         this.popupVisible.set(true);
 
@@ -300,7 +305,6 @@ export class TaskForm implements AfterViewInit {
         }, 1500);
     }
 
-    router = inject(Router);
     redirectToBoard() {
         this.router.navigate(['/board']);
     }

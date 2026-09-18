@@ -37,9 +37,12 @@
                                 signupForm.get('name')?.touched
                             ) {
                                 <p class="red">This field is required.</p>
-                            } @else {
-                                <p class="hidden">.</p>
-                            }
+                            } @else if (
+                                signupForm.get('name')?.hasError('pattern') &&
+                                signupForm.get('name')?.touched
+                            ) {
+                                <p class="red">Please enter your first and last name.</p>
+                            } 
                         </div>
 
                         <div class="input-field-div">
@@ -61,8 +64,6 @@
                                 signupForm.get('email')?.touched
                             ) {
                                 <p class="red">This field is required.</p>
-                            } @else {
-                                <p class="hidden">.</p>
                             }
                         </div>
 
@@ -74,19 +75,11 @@
                                     class="input-field cursor"
                                     type="tel"
                                     name="phone"
-                                    placeholder="Phone"
+                                    placeholder="Phone (optional)"
                                     formControlName="phone"
                                 />
                                 <img src="icons/call.svg" alt="phone icon" />
                             </div>
-                            @if (
-                                signupForm.get('phone')?.hasError('required') &&
-                                signupForm.get('phone')?.touched
-                            ) {
-                                <p class="red">This field is required.</p>
-                            } @else {
-                                <p class="hidden">.</p>
-                            }
                         </div>
 
                         <div class="input-field-div">
@@ -108,16 +101,13 @@
                                 signupForm.get('password')?.touched
                             ) {
                                 <p class="red">This field is required.</p>
-                            } @else if (
+                            } @else if(
                                 signupForm.get('password')?.hasError('pattern') &&
                                 signupForm.get('password')?.touched
                             ) {
                                 <p class="red">
-                                    Min. 8 characters, including uppercase, lowercase, number (0-9)
-                                    and special character.
+                                    > 8 char. (upper & lowercase, number, special)
                                 </p>
-                            } @else {
-                                <p class="hidden">.</p>
                             }
                         </div>
 
@@ -144,9 +134,7 @@
                                 signupForm.get('confirmPassword')?.touched
                             ) {
                                 <p class="red">Passwords do not match.</p>
-                            } @else {
-                                <p class="hidden">.</p>
-                            }
+                            } 
                         </div>
 
                         <div class="accept-privacy">
