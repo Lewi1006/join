@@ -44,3 +44,6 @@ h1 {
 .d-none{
     display: none;
 }
+input:focus {
+    outline: none;
+}
