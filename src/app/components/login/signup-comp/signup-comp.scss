@@ -69,17 +69,17 @@ main {
             width: 100%;
         }
 
-         @include respond(zero, surfaceduo) {
+        @include respond(zero, surfaceduo) {
             width: 90%;
             max-height: calc(100dvh - 175px);
         }
 
-          @include respond( surfaceduo, m) {
+        @include respond(surfaceduo, m) {
             width: 90%;
             max-height: calc(100dvh - 250px);
         }
 
-           @include respond(m, l) {
+        @include respond(m, l) {
             width: 90%;
             max-height: calc(100dvh - 175px);
         }
@@ -88,7 +88,7 @@ main {
             width: 90%;
         }
 
-         @include respond(nesthub, l) {
+        @include respond(nesthub, l) {
             width: fit-content;
         }
 
@@ -231,6 +231,13 @@ main {
 
                     .accept-privacy {
                         @include d-flex(row, center, center, 20px);
+
+                        .privacy-text {
+                            @include d-flex(row, center, center, 5px);
+                            a {
+                                color: $blue-main;
+                            }
+                        }
                     }
                 }
 

@@ -39,6 +39,16 @@ export class SignupComp {
         this.storageService.setSessionData('signupForm', formData);
     }
 
+    goToPrivacy(){
+        this.saveForm();
+        this.router.navigate(['/privacy']);
+    }
+
+    goToLegal(){
+         this.saveForm();
+        this.router.navigate(['/legal']);
+    }
+
     goBackToLogin() {
         this.storageService.removeSessionData('signupForm');
         this.router.navigate(['/login']);

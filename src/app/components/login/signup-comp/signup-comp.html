@@ -42,7 +42,7 @@
                                 signupForm.get('name')?.touched
                             ) {
                                 <p class="red">Please enter your first and last name.</p>
-                            } 
+                            }
                         </div>
 
                         <div class="input-field-div">
@@ -101,13 +101,11 @@
                                 signupForm.get('password')?.touched
                             ) {
                                 <p class="red">This field is required.</p>
-                            } @else if(
+                            } @else if (
                                 signupForm.get('password')?.hasError('pattern') &&
                                 signupForm.get('password')?.touched
                             ) {
-                                <p class="red">
-                                    > 8 char. (upper & lowercase, number, special)
-                                </p>
+                                <p class="red">> 8 char. (upper & lowercase, number, special)</p>
                             }
                         </div>
 
@@ -134,7 +132,7 @@
                                 signupForm.get('confirmPassword')?.touched
                             ) {
                                 <p class="red">Passwords do not match.</p>
-                            } 
+                            }
                         </div>
 
                         <div class="accept-privacy">
@@ -144,7 +142,10 @@
                                 name="accept-privacy"
                                 formControlName="acceptPrivacy"
                             />
-                            <label for="accept-privacy">I accept the Privacy policy</label>
+                            <div class="privacy-text">
+                                <label for="accept-privacy">I accept the</label
+                                ><a (click)="goToPrivacy()">Privacy Policy</a>
+                            </div>
                         </div>
                     </div>
 
@@ -159,8 +160,8 @@
     </main>
 
     <footer>
-        <a (click)="saveForm()" href="/privacy">Privacy Policy</a>
+        <a (click)="goToPrivacy()">Privacy Policy</a>
 
-        <a (click)="saveForm()" href="/legal">Legal Notice</a>
+        <a (click)="goToLegal()">Legal Notice</a>
     </footer>
 </div>
