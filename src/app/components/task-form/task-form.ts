@@ -63,10 +63,18 @@ export class TaskForm implements AfterViewInit {
 
     // #endregion
 
+    // #region initialization
     ngOnInit() {
         this.dbService.getAllContacts();
         this.dbService.cloneArray();
+        this.loadTask();
+    }
+
+    loadTask() {
         const task = this.task();
+
+        if (!task) return;
+
         if (task) {
             this.taskForm.patchValue({
                 title: task.title,
@@ -88,23 +96,29 @@ export class TaskForm implements AfterViewInit {
     // ngAfterViewInit() method to handle any additional initialization tasks
     ngAfterViewInit(): void {
         document.addEventListener('click', (event) => {
-            const assigneeDropdown = document.getElementById(
-                this.task() ? 'edit-list-of-assignees' : 'list-of-assignees',
-            );
-
-            const assigneeInput = document.getElementById(
-                this.task() ? 'edit-assignee-dropdown' : 'assignee-dropdown',
-            );
-
-            if (
-                !assigneeDropdown?.contains(event.target as Node) &&
-                !assigneeInput?.contains(event.target as Node)
-            ) {
-                this.divClassList.set('d-none');
-                this.dropdownArrow = 'arrow-down';
-            }
+            this.closeAssigneesDropdown(event);
         });
     }
+
+    closeAssigneesDropdown(event: MouseEvent) {
+        const assigneeDropdown = document.getElementById(
+            this.task() ? 'edit-list-of-assignees' : 'list-of-assignees',
+        );
+
+        const assigneeInput = document.getElementById(
+            this.task() ? 'edit-assignee-dropdown' : 'assignee-dropdown',
+        );
+
+        if (
+            !assigneeDropdown?.contains(event.target as Node) &&
+            !assigneeInput?.contains(event.target as Node)
+        ) {
+            this.divClassList.set('d-none');
+            this.dropdownArrow = 'arrow-down';
+        }
+    }
+
+    // #endregion
 
     // #region priority
     getPriority(priority: string) {
@@ -142,12 +156,13 @@ export class TaskForm implements AfterViewInit {
     assignContact(contact: Contact) {
         this.assignees.update((assignees) => {
             let alreadyAssigned = false;
-            let contactID = contact.id;
+
             for (let i = 0; i < assignees.length; i++) {
                 if (assignees[i].id === contact.id) {
                     alreadyAssigned = true;
                 }
             }
+
             if (alreadyAssigned) {
                 document.getElementById(`${contact.id}`)?.classList.remove('assigned');
                 return assignees.filter((a) => a.id !== contact.id);
@@ -235,7 +250,7 @@ export class TaskForm implements AfterViewInit {
 
     // #endregion
 
-    // #region submit and reset form
+    // #region submit task and reset form
     taskCreated = output<void>();
 
     emitTaskCreated() {
@@ -248,34 +263,39 @@ export class TaskForm implements AfterViewInit {
             return;
         }
 
-        if (this.taskForm.valid) {
-            const dueDate = this.taskForm.value.dueDate;
+        const task = this.createTask();
+        const id = this.task()?.id;
 
-            const task: Task = {
-                description: this.taskForm.value.description!,
-                title: this.taskForm.value.title!,
-                status: TaskStatus.Todo,
-                dueDate: dueDate || undefined,
-                category: this.taskForm.value.category!,
-                priority: this.priority,
-                assignees: this.assignees()!,
-                subtasks: this.subtasks()!,
-                updated_at: new Date().toISOString(),
-            };
-
-            const id = this.task()?.id;
-
-            if (id) {
-                this.taskService.updateTask(id, task);
-                this.alertService.success('Task was edited successfully', 2000);
-            } else {
-                this.taskService.createTask(task);
-                // this.alertService.success('Task was created successfully', 1500);
-            }
+        if (id) {
+            this.updateTask(id, task);
+        } else {
+            this.taskService.createTask(task);
         }
+
         this.saved.emit();
         this.formReset();
         this.confirmTaskCreation();
+    }
+
+    createTask(): Task {
+        const dueDate = this.taskForm.value.dueDate;
+
+        return {
+            description: this.taskForm.value.description!,
+            title: this.taskForm.value.title!,
+            status: TaskStatus.Todo,
+            dueDate: dueDate || undefined,
+            category: this.taskForm.value.category!,
+            priority: this.priority,
+            assignees: this.assignees()!,
+            subtasks: this.subtasks()!,
+            updated_at: new Date().toISOString(),
+        };
+    }
+
+    updateTask(id: number, task: Task) {
+        this.taskService.updateTask(id, task);
+        this.alertService.success('Task was edited successfully', 2000);
     }
 
     formReset() {

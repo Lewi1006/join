@@ -17,20 +17,19 @@ import { AlertService } from '../../shared/services/alert.service';
     styleUrl: './board-comp.scss',
 })
 export class BoardComp {
+    // #region properties
     taskService = inject(TasksService);
     alertService = inject(AlertService);
 
+    // store the task status in a signal and set it to to do as default
+    selectedTaskStatus = signal<TaskStatus>(TaskStatus.Todo);
     selectedTaskId = signal<number | undefined>(undefined);
+
     selectedTask = computed(() =>
         this.taskService.tasks().find((task) => task.id === this.selectedTaskId()),
     );
 
-    // store the task status in a signal and set it to to do as default
-    selectedTaskStatus = signal<TaskStatus>(TaskStatus.Todo);
-
-    ngOnInit() {
-        this.taskService.getAllTasks();
-    }
+    searchTerm = signal('');
 
     // array for columns
     columns: BoardColumn[] = [
@@ -51,8 +50,16 @@ export class BoardComp {
             status: TaskStatus.Done,
         },
     ];
+    // #endregion
 
-    searchTerm = signal('');
+    // #region initialization
+    ngOnInit() {
+        this.taskService.getAllTasks();
+    }
+
+    // #endregion
+
+    // #region filtering
 
     filteredTasks = computed(() => {
         const term = this.searchTerm().toLowerCase().trim();
@@ -75,6 +82,9 @@ export class BoardComp {
                     new Date(b.updated_at ?? 0).getTime() - new Date(a.updated_at ?? 0).getTime(),
             );
     }
+    // #endregion
+
+    // #region drag and drop
 
     /**
      * Moves a task to another column by updating its status.
@@ -87,6 +97,9 @@ export class BoardComp {
         this.taskService.updateTask(task.id, { status: newStatus });
     }
 
+    // #endregion
+
+    // #region task dialog
     // column-comp has (click) onto a task (Task) this emits
     // an output signal (taskSelected) with the selected task through method openTaskDialog
     // (taskSelected)="openTaskDialog($event)" --> child(column) hands over event(task) to parent(board)
@@ -105,6 +118,9 @@ export class BoardComp {
         this.selectedTaskId.set(undefined);
     }
 
+    // #endregion
+
+    // #region add task dialog
     // opens add task on big button (default status is todo)
     openAddTaskDialog(addTaskDialog: HTMLDialogElement) {
         // this.selectedTaskStatus.set(TaskStatus.Todo);
@@ -122,6 +138,9 @@ export class BoardComp {
         addTaskDialog.close();
     }
 
+    // #endregion
+
+    // #region delete task
     async confirmDelete(deleteDialog: HTMLDialogElement, taskDialog: HTMLDialogElement) {
         const task = this.selectedTask();
         if (task?.id) {
@@ -132,6 +151,7 @@ export class BoardComp {
         taskDialog.close();
         this.selectedTaskId.set(undefined);
     }
+    // #endregion
 
     backdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
         if (event.target === dialog) {
@@ -139,5 +159,4 @@ export class BoardComp {
             // this.selectedTaskId.set(undefined);
         }
     }
-
 }
