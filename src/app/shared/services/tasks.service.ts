@@ -11,10 +11,7 @@ export class TasksService {
     tasks = signal<Task[]>([]);
 
     async getAllTasks() {
-        // is "status" correct?
         const tasks = await this.crud.getAll<Task>(this.table);
-        console.log(tasks);
-        console.log(tasks.length);
         this.tasks.set(tasks);
     }
 

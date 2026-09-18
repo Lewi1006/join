@@ -97,7 +97,6 @@ export class BoardComp {
     // opens task card
     openTaskDialog(task: Task, taskDialog: HTMLDialogElement) {
         this.selectedTaskId.set(task.id);
-        console.log(this.selectedTaskId());
         taskDialog.showModal();
     }
 
@@ -110,7 +109,6 @@ export class BoardComp {
     openAddTaskDialog(addTaskDialog: HTMLDialogElement) {
         // this.selectedTaskStatus.set(TaskStatus.Todo);
         addTaskDialog.showModal();
-        console.log(this.selectedTaskStatus());
     }
 
     // opens add task on + button for column (status gets assigned)
@@ -118,8 +116,6 @@ export class BoardComp {
     openAddTaskDialogFromColumn(status: TaskStatus, addTaskDialog: HTMLDialogElement) {
         this.selectedTaskStatus.set(status);
         addTaskDialog.showModal();
-
-        console.log(this.selectedTaskStatus());
     }
 
     closeAddTaskDialog(addTaskDialog: HTMLDialogElement) {

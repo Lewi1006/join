@@ -10,7 +10,6 @@ export class AuthService {
 
     login(user: Contact): void {
         this.currentUser.set(user);
-        console.log(user);
     }
 
     guestLogin(): void {
@@ -22,8 +21,6 @@ export class AuthService {
         };
 
         this.currentUser.set(guest);
-
-        console.log(guest);
     }
 
     logout(): void {

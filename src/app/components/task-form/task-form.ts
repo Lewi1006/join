@@ -100,7 +100,6 @@ export class TaskForm implements AfterViewInit {
                 !assigneeDropdown?.contains(event.target as Node) &&
                 !assigneeInput?.contains(event.target as Node)
             ) {
-                console.log('CLOSING NOW');
                 this.divClassList.set('d-none');
                 this.dropdownArrow = 'arrow-down';
             }
@@ -157,7 +156,6 @@ export class TaskForm implements AfterViewInit {
                 return [...assignees, contact];
             }
         });
-        console.log(this.assignees());
     }
 
     isAssigned(contact: Contact): boolean {
@@ -184,7 +182,6 @@ export class TaskForm implements AfterViewInit {
             checked: false,
         };
         this.subtasks.update((subtasks) => [...subtasks, newSubtask]);
-        console.log(newSubtask);
         this.clearSubtaskInput();
     }
 
@@ -195,8 +192,6 @@ export class TaskForm implements AfterViewInit {
 
     saveSubtaskEdit(subtask: Subtask) {
         const newSubtaskDescription = this.editingSubtaskFormControl.value;
-
-        console.log(newSubtaskDescription);
 
         if (newSubtaskDescription !== null) {
             this.subtasks.update((subtasks) => {
@@ -234,7 +229,6 @@ export class TaskForm implements AfterViewInit {
                     currentSubtask.checked = !currentSubtask.checked;
                 }
             }
-            console.log(subtasks);
             return subtasks;
         });
     }
@@ -246,7 +240,6 @@ export class TaskForm implements AfterViewInit {
 
     emitTaskCreated() {
         this.taskCreated.emit();
-        console.log('create task emited');
     }
 
     async onSubmit() {
@@ -254,7 +247,6 @@ export class TaskForm implements AfterViewInit {
             this.taskForm.markAllAsTouched();
             return;
         }
-        console.log(this.taskForm.value);
 
         if (this.taskForm.valid) {
             const dueDate = this.taskForm.value.dueDate;
