@@ -39,7 +39,6 @@ export class ContactsComp {
     // #endregion
 
     // #region methods
-
     // Stores the id of the contact currently selected in the contact list.
     // The contact behind that id is displayed in the contact card.
     contactWasSelected(clickedContact: Contact) {
@@ -81,10 +80,7 @@ export class ContactsComp {
     // knows which contact should be patched into the input fields.
     openEditForm(contactsDialog: HTMLDialogElement) {
         this.isEditMode = true;
-
         this.contactToEdit.set(this.selectedContact());
-
-       
         contactsDialog.showModal();
     }
 
@@ -95,8 +91,6 @@ export class ContactsComp {
         contactsDialog.close();
         this.contactToEdit.set(undefined);
     }
-
-    
     // #endregion
 }
 
