@@ -97,8 +97,6 @@ export class SignupComp {
             return;
         }
 
-        console.log(this.signupForm.value);
-
         if (this.signupForm.valid) {
             const contact: Contact = {
                 name: this.signupForm.value.name!,
@@ -110,7 +108,6 @@ export class SignupComp {
             };
 
             this.contactService.createContact(contact);
-            console.log(contact);
 
             this.authService.currentUser.set(contact);
             this.alertService.success('Sign up was successful', 2000);
