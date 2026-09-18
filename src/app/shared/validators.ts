@@ -11,11 +11,9 @@ export function DateValidator(control: AbstractControl) {
 
 export function SubtaskValidator(control: AbstractControl) {
     const value = control.value;
-
     if (value == null || value == '') {
         return null;
     }
-
     if (value.startsWith(' ') || value.trim() == '') {
         return { required: true };
     } else {
@@ -26,7 +24,6 @@ export function SubtaskValidator(control: AbstractControl) {
 export function passwordMustMatch(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-
     if (password !== confirmPassword) {
         return { passwordMismatch: true };
     } else {

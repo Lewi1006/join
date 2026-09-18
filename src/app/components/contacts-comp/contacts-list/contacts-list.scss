@@ -30,7 +30,6 @@
         }
         @include respond-max(sm) {
             position: fixed;
-
             bottom: 100px;
             right: 30px;
             width: auto;
@@ -40,7 +39,6 @@
                 height: 48px;
                 border-radius: 50%;
             }
-
             z-index: 1;
             .button_text {
                 display: none;

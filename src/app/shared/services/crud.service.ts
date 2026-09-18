@@ -8,6 +8,7 @@ export class CrudService {
         'sb_publishable_V4B66HpLZWJy9CzHT3Licg_WhntLnHS',
     );
 
+    // #region Methods
     async getAll<T>(table: string, orderBy?: string): Promise<T[]> {
         let query = this.supabase.from(table).select('*');
         if (orderBy) {
@@ -54,4 +55,5 @@ export class CrudService {
             console.error(`delete(${table}, ${id}) failed:`, error.message);
         }
     }
+    // #endregion
 }

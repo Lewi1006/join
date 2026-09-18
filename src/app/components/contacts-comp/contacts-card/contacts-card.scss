@@ -27,10 +27,6 @@
     .contact-card-heading {
         @include d-flex(row, center, flex-start, 25px);
 
-        // h1 {
-        //     @include font(60px, 700);
-        // }
-
         .heading-line {
             height: 60px;
             width: 3px;
@@ -41,6 +37,7 @@
             @include font(28px, 400, 120%);
             color: $blue-main;
         }
+
         @include respond-max(l) {
             flex-direction: column;
             gap: 0.25rem;
@@ -58,27 +55,25 @@
         }
     }
     overflow-x: hidden;
+
     .contact-card-content {
         width: 100%;
         @include d-flex(column, flex-start, flex-start, 50px);
         @include slide-in();
-        
         @include respond-max(sm) {
             animation: none;
         }
+
         .contact-profile {
             width: 100%;
             @include d-flex(row, center, flex-start, 24px);
 
             .profile-picture {
-                // background: #ff13f0;
                 border: solid 4px white;
                 height: 120px;
                 width: 120px;
-
                 border-radius: 50%;
                 @include drop-shadow;
-
                 @include d-flex;
 
                 .initials {
@@ -110,9 +105,6 @@
                         @include respond-max(l) {
                             font-size: 2rem;
                         }
-                        // @media screen and (min-width: 550px) {
-                        //     font-size: 1rem;
-                        // }
                     }
                 }
 
@@ -137,6 +129,7 @@
                         }
                     }
                 }
+
                 .contact-actions_wrapper {
                     z-index: 2;
                     .mobile_settings {
@@ -145,6 +138,7 @@
                         width: 48px;
                         height: 48px;
                     }
+                    
                     @include respond-max(sm) {
                         .mobile_settings {
                             display: block;

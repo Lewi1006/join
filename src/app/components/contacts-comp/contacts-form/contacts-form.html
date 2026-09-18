@@ -2,9 +2,7 @@
 @if (receivedModeIsEdit() && contactToEdit(); as contact) {
     <section class="dialog edit-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
-            <!-- <img src="icons/close-blue.svg" alt="" /> -->
-            <!-- <p>&#128473;</p>-->
-             <p>&times;</p>
+            <p>&times;</p>
         </button>
 
         <div class="dialog-header">
@@ -42,7 +40,7 @@
                             <input id="email" name="email" type="email" placeholder="Email" formControlName="email"/>
                             <img src="icons/mail.svg" alt="profile icon" />
                         </div>
-                         <div class="form-error-wrapper">
+                        <div class="form-error-wrapper">
                             @if (email?.touched && email?.invalid) {
                                 <p class="form-error">Please enter a valid email!</p>
                             }
@@ -56,7 +54,7 @@
                             <img src="icons/call.svg" alt="profile icon" />
                         </div>
 
-                          <div class="form-error-wrapper">
+                        <div class="form-error-wrapper">
                             @if (phone?.touched && phone?.invalid) {
                                 <p class="form-error">Please enter a valid phone number!</p>
                             }
@@ -69,14 +67,12 @@
                         <span>Save</span> <img src="icons/checkmark-white.svg" />
                     </button>
                 </div>
-                <!-- <button type="button" (click)="patchForm()">patchForm</button> -->
             </form>
         </div>
     </section>
 } @else {
     <section class="dialog add-dialog">
         <button class="close-btn" type="button" aria-label="Close" (click)="closeClick()">
-            <!-- <img src="icons/close-blue.svg" alt="" /> -->
             <p>&times;</p>
         </button>
 

@@ -73,7 +73,7 @@ main {
             width: 90%;
         }
 
-         @include respond(nesthub, l) {
+        @include respond(nesthub, l) {
             width: fit-content;
         }
 

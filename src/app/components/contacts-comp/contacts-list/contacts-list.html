@@ -2,7 +2,6 @@
     <div id="add-contact">
         <button type="button" (click)="addContact.emit()">
             <p class="button_text">Add Contact</p>
-            <!-- <p>&#128100;</p> -->
             <img src="icons/add-contact-white.svg" alt="">
         </button>
     </div>
@@ -11,7 +10,6 @@
             <div class="contact-group">
                 <h3>{{ item[0] }}</h3>
             </div>
-
             @for (contact of item[1]; track contact.id) {
                 <button type="button" [class.active]="contact.id === selectedId()">
                     <div class="contact-preview-card" (click)="selectedContact.emit(contact)">

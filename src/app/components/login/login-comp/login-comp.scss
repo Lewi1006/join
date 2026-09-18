@@ -138,8 +138,6 @@ main {
             .login-form {
                 height: 100%;
                 width: 100%;
-                // display: flex;
-                // gap: 10px;
                 @include d-flex(column, flex flex-start, center, 20px);
 
                 @include respond(zero, sm) {
@@ -151,7 +149,6 @@ main {
 
                     .input-field-div {
                         width: 100%;
-                        // min-height: 48px;
 
                         .input-wrapper {
                             width: 100%;
