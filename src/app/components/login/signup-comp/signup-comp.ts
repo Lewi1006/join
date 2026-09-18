@@ -40,6 +40,7 @@ export class SignupComp {
     }
 
     goBackToLogin() {
+        this.storageService.removeSessionData('signupForm');
         this.router.navigate(['/login']);
     }
 
