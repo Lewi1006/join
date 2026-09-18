@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { AlertComp } from "./shared/components/alert-comp/alert-comp";
 
 
@@ -11,4 +11,10 @@ import { AlertComp } from "./shared/components/alert-comp/alert-comp";
 })
 export class App {
   protected readonly title = signal('join');
+
+  router = inject(Router);
+
+  ngOnInit(){
+    this.router.navigate(['/login']);
+  }
 }
