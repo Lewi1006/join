@@ -18,10 +18,9 @@
                 class="profile-btn"
                 aria-label="Open menu"
                 (click)="toggleMenu()"
-                [style.background]="authService.currentUser()?.profile_color"
             >
                 @if (authService.currentUser()?.status === 'registered') {
-                    <p style="color: white">
+                    <p>
                         {{ authService.currentUser()!.name | initials }}
                     </p>
                 } @else {
