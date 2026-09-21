@@ -283,7 +283,7 @@ export class TaskForm implements AfterViewInit {
         return {
             description: this.taskForm.value.description!,
             title: this.taskForm.value.title!,
-            status: TaskStatus.Todo,
+            status: this.task()?.status ?? TaskStatus.Todo,
             dueDate: dueDate || undefined,
             category: this.taskForm.value.category!,
             priority: this.priority,
