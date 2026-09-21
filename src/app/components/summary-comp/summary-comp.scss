@@ -41,9 +41,11 @@
             flex-direction: column;
             gap: 0.25rem;
             align-items: flex-start;
+
             p {
                 font-size: 1.25rem;
             }
+
             .heading-line {
                 width: 60px;
                 height: 3px;
@@ -79,7 +81,6 @@
         height: 100%;
         max-height: 560px;
         display: flex;
-
         @include respond(zero, l) {
             flex-direction: column;
             align-items: center;
@@ -90,13 +91,13 @@
             width: 560px;
             max-width: 60%;
             aspect-ratio: 1;
-
             @include respond(zero, l) {
                 width: 100%;
                 max-width: 100%;
                 height: 100%;
                 max-height: 50dvh;
             }
+
             .one {
                 border-radius: 30px;
                 align-items: center;
@@ -104,6 +105,7 @@
                 padding: 8px 16px;
                 border: 1px solid black;
             }
+
             .one:hover {
                 color: white;
                 background-color: $blue-main;
@@ -117,10 +119,10 @@
             .three {
                 width: 30%;
             }
+
             .metrics-icon {
                 height: 69px;
                 width: 69px;
-
                 @include respond(zero, m) {
                     height: 40px;
                     width: 40px;
@@ -130,7 +132,6 @@
             .big-number {
                 @include font(48px, 600, 120%);
                 width: fit-content;
-
                 @include respond(zero, m) {
                     font-size: 32px;
                 }
@@ -139,7 +140,6 @@
             .status-text {
                 @include font(20px, 400, 120%);
                 text-align: center;
-
                 @include respond(zero, m) {
                     font-size: 16px;
                 }
@@ -150,7 +150,6 @@
                 height: 100%;
                 max-width: 560px;
                 gap: 28px;
-
                 @include respond(zero, l) {
                     max-width: 1000px;
                     gap: 16px;
@@ -162,11 +161,10 @@
                     justify-content: center;
                     align-items: center;
                     gap: 28px;
-
                     @include respond(zero, l) {
-                    gap: 20px;
-                    justify-content: space-between;
-                }
+                        gap: 20px;
+                        justify-content: space-between;
+                    }
 
                     .due-date {
                         @include font(20px, 700, 120%);
@@ -184,7 +182,6 @@
                         align-items: center;
                         justify-content: center;
                         padding: 8px;
-
                         @include respond(zero, m) {
                             padding: 0px;
                         }
@@ -215,6 +212,7 @@
                             }
                         }
                     }
+
                     .metrics-box:hover {
                         color: white;
                         background-color: $blue-main;
@@ -222,14 +220,17 @@
                         #todo-icon {
                             background-image: url(../../../../public/icons/summary-todo-hover.svg);
                         }
+
                         #done-icon {
                             background-image: url(../../../../public/icons/summary-done-hover.svg);
                         }
                     }
+
                     .no-task-text {
                         @include font(18px, 400, 120%);
                         text-align: center;
                     }
+
                     .no-task-text:hover {
                         color: white;
                     }
@@ -251,7 +252,6 @@
                 @include font(64px, 700, 120%);
                 font-weight: bold;
             }
-
             @include respond(zero, l) {
                 display: none;
             }

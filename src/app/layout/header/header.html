@@ -1,7 +1,6 @@
 <header>
     <p class="header-title">Kanban Project Management Tool</p>
     <a routerLink="/summary"><img src="img/logo.png" alt="Logo" class="logo" /></a>
-
     @if (authService.isLoggedIn()) {
         <div class="header-actions">
             <button
@@ -13,12 +12,7 @@
             >
                 &#63;
             </button>
-            <button
-                type="button"
-                class="profile-btn"
-                aria-label="Open menu"
-                (click)="toggleMenu()"
-            >
+            <button type="button" class="profile-btn" aria-label="Open menu" (click)="toggleMenu()">
                 @if (authService.currentUser()?.status === 'registered') {
                     <p>
                         {{ authService.currentUser()!.name | initials }}
@@ -30,7 +24,6 @@
         </div>
     }
 </header>
-
 @if (menuOpen) {
     <div class="menu-backdrop" (click)="closeMenuOnBackdrop($event)">
         <div class="overlay-menu">

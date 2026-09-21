@@ -23,7 +23,6 @@ export const routes: Routes = [
     {
         path: '',
         component: MainContentComp,
-
         children: [
             { path: 'summary', component: SummaryComp, canActivate: [AuthGuard] },
             { path: 'task', component: TaskComp, canActivate: [AuthGuard] },

@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
 }
+
 footer {
     display: flex;
     align-items: center;
@@ -14,6 +15,7 @@ footer {
     gap: 1rem;
     padding: 0 2rem;
     color: var(--footer-link-color, inherit);
+    
     a:hover {
         color: $blue-light;
     }

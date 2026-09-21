@@ -9,6 +9,7 @@ header {
         padding: 0 30px;
     }
     @include d-flex(row, center, space-between);
+
     a {
         display: none;
     }
@@ -18,22 +19,22 @@ header {
         a {
             display: block;
             height: 56px;
+
             img {
                 height: 100%;
                 object-fit: cover;
             }
         }
     }
+
     .header-title {
         @include font(20px, 400, 120%);
-                @include respond-max(m) {
+        @include respond-max(m) {
             font-size: 1rem;
         }
         @include respond-max(sm) {
             display: none;
         }
-        // font-size: 20px;
-        // line-height: 120%;
     }
 
     .header-actions {
@@ -45,8 +46,6 @@ header {
                 display: none;
             }
             @include font(16px, 600);
-            // font-size: 16px;
-            // font-weight: 600;
             width: 25px;
             height: 25px;
             color: $grey-medium;
@@ -57,6 +56,7 @@ header {
             &:hover {
                 transform: scale(1.15);
             }
+
             &.active {
                 display: none;
             }
@@ -106,15 +106,18 @@ header {
         .overlay-nav ul {
             @include d-flex(column, flex-start, center, 15px);
             list-style: none;
+
             .mobile-link {
                 display: none;
             }
             @include respond-max(sm) {
                 gap: 10px;
+
                 .mobile-link {
                     display: block;
                 }
             }
+            
             li {
                 width: 100%;
                 padding: 5px 10px;

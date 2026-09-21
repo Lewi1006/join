@@ -10,7 +10,6 @@
         <div class="metrics column">
             <div class="metrics-wrapper column">
                 <div class="metrics-box card-wrapper row">
-
                     <button [routerLink]="['/board']" class="metrics-box two row">
                         <div class="centered" id="todo-icon"></div>
                         <div class="column centered">
@@ -18,7 +17,6 @@
                             <p class="status-text">To do</p>
                         </div>
                     </button>
-
                     <button [routerLink]="['/board']" class="metrics-box two row">
                         <div class="centered" id="done-icon"></div>
                         <div class="column centered">
@@ -27,7 +25,6 @@
                         </div>
                     </button>
                 </div>
-
                 <button [routerLink]="['/board']" class="card-wrapper row one">
                     @if (urgentUndoneTasks() > 0) {
                         <div class="row two centered">
@@ -63,7 +60,6 @@
                         }
                     </div>
                 </button>
-
                 <div class="metrics-box card-wrapper row three">
                     <button [routerLink]="['/board']" class="metrics-box three column centered">
                         <p class="big-number">{{ totalNumberOfTasks() }}</p>
@@ -85,7 +81,7 @@
                 @case (getTimeOfDay() < 12) {
                     <p class="welcome-message">Good morning,</p>
                 }
-                @case (12 <= getTimeOfDay() &&  getTimeOfDay() < 18) {
+                @case (12 <= getTimeOfDay() && getTimeOfDay() < 18) {
                     <p class="welcome-message">Good afternoon,</p>
                 }
                 @case (18 <= getTimeOfDay()) {
@@ -95,5 +91,4 @@
             <p class="username">{{ authService.currentUser()!.name }}</p>
         </div>
     </div>
-
 </section>

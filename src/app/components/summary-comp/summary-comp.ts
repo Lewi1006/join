@@ -21,10 +21,10 @@ export class SummaryComp {
         awaitFeedback: TaskStatus.AwaitFeedback,
         done: TaskStatus.Done,
     };
+
     dueDate = '';
     dueDateUpcoming = signal(true);
     private interval: any;
-
     totalNumberOfTasks = computed(() => {
         const totalNumberOfTasks: number = this.taskService.tasks().length;
         return totalNumberOfTasks;
@@ -44,9 +44,7 @@ export class SummaryComp {
             .filter((t) => t.dueDate)
             .map((t) => t.dueDate!)
             .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-
         const displayedDueDate = dueDates[0];
-
         return displayedDueDate ?? null;
     });
 
@@ -68,7 +66,6 @@ export class SummaryComp {
             .filter((t) => t.dueDate)
             .map((t) => t.dueDate!)
             .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-
         this.dueDate = dueDates[0];
         this.isDueDateUpcoming();
         return this.dueDate ?? null;
