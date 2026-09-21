@@ -72,7 +72,7 @@ export class LoginComp {
 
     guestLogin() {
         this.authService.guestLogin();
-         this.alertService.success('Log in was successful', 2000);
+        this.alertService.success('Log in was successful', 2000);
         this.router.navigate(['/summary']);
     }
 
