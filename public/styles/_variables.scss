@@ -21,7 +21,6 @@ $green-category: #1FD7C1;
 
 
 $height-header: 100px;
-// --width-aside: 230px;
 $content-rest: 1440px;
 
 :root {
@@ -35,30 +34,9 @@ $content-rest: 1440px;
         --width-aside: 0px;
         --height-navbar-res: 80px;
     }
-    // @each $color in $profileColors {
-    //     --profile-#{index($profileColors, $color)}: #{$color};
-    // }
 }
 
 //#region Profile Colors - WIP
-/* $profileColors: (
-    orange-one: #ff7a00,
-    pink-one: #ff5eb3,
-    blue-one: #6e52ff,
-    purple: #9327ff,
-    light-blue: #00bee8,
-    light-teal: #1fd7c1,
-    orange-two: #ff745e,
-    orange-three: #ffa35e,
-    pink-two: #fc71ff,
-    yellow-one: #ffc701,
-    blue-two: #0038ff,
-    lime: #c3ff2b,
-    yellow-two: #ffe62b,
-    red: #ff4646,
-    orange-four: #ffbb2b,
-); */
-
 // https://codepen.io/DeptofJeffAyer/pen/dYaBdN
 /*Step 1: Make some colors*/
 $orange-one: #ff7a00;
@@ -80,15 +58,15 @@ $orange-four: #ffbb2b;
 
 
 //Example:
-.column {
-    float: left;
-    width: 33%;
+// .column {
+//     float: left;
+//     width: 33%;
 
-    .item {
-        width: 100%;
-        min-height: 100px;
-    }
-}
+//     .item {
+//         width: 100%;
+//         min-height: 100px;
+//     }
+// }
 
 
 //#endregion

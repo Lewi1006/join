@@ -21,9 +21,40 @@ export class SignupComp {
     authService = inject(AuthService);
     alertService = inject(AlertService);
     storageService = inject(StorageService);
-    // #endregion
 
-    // #region Form
+    ngOnInit(): void {
+        const storedData = this.storageService.getSessionData('signupForm');
+
+        if (storedData) {
+            this.signupForm.patchValue(storedData);
+        }
+    }
+
+    saveForm() {
+        const formData = {
+            name: this.signupForm.value.name,
+            email: this.signupForm.value.email,
+            phone: this.signupForm.value.phone,
+        };
+
+        this.storageService.setSessionData('signupForm', formData);
+    }
+
+    goToPrivacy(){
+        this.saveForm();
+        this.router.navigate(['/privacy']);
+    }
+
+    goToLegal(){
+        this.saveForm();
+        this.router.navigate(['/legal']);
+    }
+
+    goBackToLogin() {
+        this.storageService.removeSessionData('signupForm');
+        this.router.navigate(['/login']);
+    }
+
     signupForm = new FormGroup(
         {
             name: new FormControl('', {
