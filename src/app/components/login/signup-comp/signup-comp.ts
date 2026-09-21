@@ -15,34 +15,15 @@ import { StorageService } from '../../../shared/services/storage.service';
     styleUrl: './signup-comp.scss',
 })
 export class SignupComp {
+    // #region Properties
     router = inject(Router);
     contactService = inject(ContactsService);
     authService = inject(AuthService);
     alertService = inject(AlertService);
     storageService = inject(StorageService);
+    // #endregion
 
-    ngOnInit(): void {
-        const storedData = this.storageService.getSessionData('signupForm');
-
-        if (storedData) {
-            this.signupForm.patchValue(storedData);
-        }
-    }
-
-    saveForm() {
-        const formData = {
-            name: this.signupForm.value.name,
-            email: this.signupForm.value.email,
-            phone: this.signupForm.value.phone,
-        };
-
-        this.storageService.setSessionData('signupForm', formData);
-    }
-
-    goBackToLogin() {
-        this.router.navigate(['/login']);
-    }
-
+    // #region Form
     signupForm = new FormGroup(
         {
             name: new FormControl('', {
@@ -91,6 +72,28 @@ export class SignupComp {
             validators: passwordMustMatch,
         },
     );
+    // #endregion
+
+    // #region Methods
+    ngOnInit(): void {
+        const storedData = this.storageService.getSessionData('signupForm');
+        if (storedData) {
+            this.signupForm.patchValue(storedData);
+        }
+    }
+
+    saveForm() {
+        const formData = {
+            name: this.signupForm.value.name,
+            email: this.signupForm.value.email,
+            phone: this.signupForm.value.phone,
+        };
+        this.storageService.setSessionData('signupForm', formData);
+    }
+
+    goBackToLogin() {
+        this.router.navigate(['/login']);
+    }
 
     signUp() {
         if (this.signupForm.invalid) {
@@ -108,10 +111,10 @@ export class SignupComp {
             };
 
             this.contactService.createContact(contact);
-
             this.authService.currentUser.set(contact);
             this.alertService.success('Sign up was successful', 2000);
             this.router.navigate(['/summary']);
         }
     }
+    // #endregion
 }

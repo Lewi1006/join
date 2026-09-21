@@ -4,59 +4,10 @@ import { CrudService } from './crud.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContactsService {
+    // #region Properties
     crud = inject(CrudService);
-
     table = 'contacts';
-
     contacts = signal<Contact[]>([]);
-
-    cloneArray() {
-        const clonedContacts = [...this.contacts()];
-        return clonedContacts;
-    }
-
-    // computed signal reacts to contacts (--> supabase data)
-    readonly groupedContacts = computed(() => {
-        // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
-        // we only work with
-        // const clonedContacts = [...this.contacts()];
-        const clonedContacts = this.cloneArray();
-
-        clonedContacts.sort((a, b) => a.name.localeCompare(b.name));
-
-        const letterGroups = this.groupContactsByLetter(clonedContacts);
-
-        // https://dev.to/askyt/how-to-sort-a-map-in-javascript-324a
-        return Array.from(letterGroups);
-    });
-
-    groupContactsByLetter(clonedContacts: Contact[]) {
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
-        // <> = TypeScript generics --> tells the Type so string (A), ContactsArray[]
-        const letterGroups = new Map<string, Contact[]>();
-
-        for (const currentContact of clonedContacts) {
-            const letter = currentContact.name.charAt(0).toUpperCase();
-
-            const contactWithLetterX = letterGroups.get(letter) ?? [];
-
-            contactWithLetterX.push(currentContact);
-            letterGroups.set(letter, contactWithLetterX);
-        }
-
-        return letterGroups;
-    }
-
-    // readonly groupedContacts = computed(() => {
-    //     // clone array https://www.geeksforgeeks.org/typescript/how-to-clone-an-array-in-typescript/
-    //     const clonedContacts = [...this.contacts()];
-    // });
-
-    async getAllContacts() {
-        const contacts = await this.crud.getAll<Contact>(this.table, 'name');
-        this.contacts.set(contacts);
-    }
-
     colors = [
         '#ff7a00',
         '#ff5eb3',
@@ -73,6 +24,39 @@ export class ContactsService {
         '#ff4646',
         '#ffbb2b',
     ];
+    // #endregion
+
+    // #region Methods
+    cloneArray() {
+        const clonedContacts = [...this.contacts()];
+        return clonedContacts;
+    }
+
+    readonly groupedContacts = computed(() => {
+        const clonedContacts = this.cloneArray();
+        clonedContacts.sort((a, b) => a.name.localeCompare(b.name));
+        const letterGroups = this.groupContactsByLetter(clonedContacts);
+        return Array.from(letterGroups);
+    });
+
+    groupContactsByLetter(clonedContacts: Contact[]) {
+        const letterGroups = new Map<string, Contact[]>();
+
+        for (const currentContact of clonedContacts) {
+            const letter = currentContact.name.charAt(0).toUpperCase();
+            const contactWithLetterX = letterGroups.get(letter) ?? [];
+            contactWithLetterX.push(currentContact);
+            letterGroups.set(letter, contactWithLetterX);
+        }
+
+        return letterGroups;
+    }
+
+    async getAllContacts() {
+        const contacts = await this.crud.getAll<Contact>(this.table, 'name');
+        this.contacts.set(contacts);
+    }
+
     randomColor(): string {
         return this.colors[Math.floor(Math.random() * this.colors.length)];
     }
@@ -80,7 +64,6 @@ export class ContactsService {
     async createContact(contact: Contact) {
         const contactWithColor = { ...contact, profile_color: this.randomColor() };
         const createdContact = await this.crud.create<Contact>(this.table, contactWithColor);
-
         await this.getAllContacts();
         return createdContact;
     }
@@ -96,7 +79,7 @@ export class ContactsService {
             email: contact.email,
             phone: contact.phone,
         });
-
         await this.getAllContacts();
     }
+    // #endregion
 }

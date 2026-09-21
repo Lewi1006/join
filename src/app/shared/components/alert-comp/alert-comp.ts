@@ -8,8 +8,6 @@ import { AlertType } from '../../interfaces/alert.interface';
     templateUrl: './alert-comp.html',
     styleUrl: './alert-comp.scss',
 })
-
-
 export class AlertComp {
     alertService = inject(AlertService);
     alertType = AlertType;

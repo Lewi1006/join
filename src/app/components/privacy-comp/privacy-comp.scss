@@ -1,11 +1,11 @@
 @use '../../../../public/styles/main' as *;
 
-p{
+p {
     padding-bottom: 8px;
 }
 
-ul{
-    li{
+ul {
+    li {
         margin-left: 30px;
     }
 }
@@ -24,9 +24,7 @@ ul{
 
         .privacy-heading {
             width: 100%;
-
             @include d-flex(row, center, space-between);
-
             @include respond(zero, galaxy9) {
                 h1 {
                     font-size: 36px;
@@ -38,7 +36,6 @@ ul{
                 height: fit-content;
                 cursor: pointer;
                 display: none;
-
                 @include respond(zero, m) {
                     display: block;
                 }

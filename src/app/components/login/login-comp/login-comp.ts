@@ -12,11 +12,30 @@ import { AlertService } from '../../../shared/services/alert.service';
     styleUrl: './login-comp.scss',
 })
 export class LoginComp {
+    // #region Properties
     router = inject(Router);
     authService = inject(AuthService);
     contactsService = inject(ContactsService);
     alertService = inject(AlertService);
+    // #endregion
 
+    // #region Form
+    loginForm = new FormGroup({
+        email: new FormControl('', {
+            validators: [
+                Validators.required,
+                Validators.pattern(
+                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                ),
+            ],
+        }),
+        password: new FormControl('', {
+            validators: [Validators.required],
+        }),
+    });
+    // #endregion
+
+    // #region Methods
     goToSignUp() {
         this.router.navigate(['/signup']);
     }
@@ -66,7 +85,6 @@ export class LoginComp {
             this.loginForm.setErrors({ wrongPassword: true });
             return;
         }
-
         return contact;
     }
 
@@ -75,18 +93,5 @@ export class LoginComp {
         this.alertService.success('Log in was successful', 2000);
         this.router.navigate(['/summary']);
     }
-
-    loginForm = new FormGroup({
-        email: new FormControl('', {
-            validators: [
-                Validators.required,
-                Validators.pattern(
-                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                ),
-            ],
-        }),
-        password: new FormControl('', {
-            validators: [Validators.required],
-        }),
-    });
+    // #endregion
 }

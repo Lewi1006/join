@@ -14,7 +14,10 @@
         @for (currentSelectedContact of [selectedContact]; track currentSelectedContact.id) {
             <div class="contact-card-content">
                 <div class="contact-profile">
-                    <div class="profile-picture" [style.background]="currentSelectedContact.profile_color">
+                    <div
+                        class="profile-picture"
+                        [style.background]="currentSelectedContact.profile_color"
+                    >
                         <p class="initials">{{ currentSelectedContact.name | initials }}</p>
                     </div>
 
@@ -23,28 +26,33 @@
                             <h2>{{ currentSelectedContact.name }}</h2>
                         </div>
                         @if (canEdit(currentSelectedContact)) {
-                        <div class="contact-actions_wrapper" [class.open]="settingsOpen">
-                            <button type="button" class="mobile_settings" (click)="settingsOpen = !settingsOpen">
-                                &#5010;
-                            </button>
-                            <div class="contact-actions">
-                                <button type="button"
-                                    class="contact-actions-btn edit-btn"
-                                    (click)="editContact.emit()"
-                                >
-                                    <img src="icons/edit-pen-blue.svg" alt="edit pen" />
-                                    <span>Edit</span>
-                                </button>
+                            <div class="contact-actions_wrapper" [class.open]="settingsOpen">
                                 <button
-                                    class="contact-actions-btn delete-btn"
-                                    (click)="deleteRequested.emit()"
+                                    type="button"
+                                    class="mobile_settings"
+                                    (click)="settingsOpen = !settingsOpen"
                                 >
-                                    <img src="icons/delete-bin-blue.svg" alt="delete" />
-                                    <span>Delete</span>
+                                    &#5010;
                                 </button>
+                                <div class="contact-actions">
+                                    <button
+                                        type="button"
+                                        class="contact-actions-btn edit-btn"
+                                        (click)="editContact.emit()"
+                                    >
+                                        <img src="icons/edit-pen-blue.svg" alt="edit pen" />
+                                        <span>Edit</span>
+                                    </button>
+                                    <button
+                                        class="contact-actions-btn delete-btn"
+                                        (click)="deleteRequested.emit()"
+                                    >
+                                        <img src="icons/delete-bin-blue.svg" alt="delete" />
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
                         @if (settingsOpen) {
                             <div
                                 class="contact-actions_backdrop"

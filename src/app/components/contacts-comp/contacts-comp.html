@@ -16,7 +16,6 @@
     </div>
 </section>
 
-<!-- https://blog.angulartraining.com/how-to-create-a-simple-modal-dialog-with-angular-277ea7f96da1 -->
 <dialog #contactsDialog class="contact_form">
     <app-contacts-form
         (closeForm)="closeForm(contactsDialog)"
@@ -33,6 +32,3 @@
         (cancel)="deleteDialog.close()"
     ></app-contacts-delete>
 </dialog>
-
-
-<!-- (deleteRequested)="deleteDialog.showModal()" -> opens deleteDialog via inline code in html template -->

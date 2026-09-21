@@ -8,6 +8,7 @@ export class AuthService {
     // is User logged in or not (Contact with status guest or registered or undefined)
     currentUser = signal<Contact | undefined>(undefined);
 
+    // #region
     login(user: Contact): void {
         this.currentUser.set(user);
     }
@@ -19,7 +20,6 @@ export class AuthService {
             phone: '',
             status: 'guest',
         };
-
         this.currentUser.set(guest);
     }
 
@@ -30,4 +30,5 @@ export class AuthService {
     isLoggedIn(): boolean {
         return this.currentUser() !== undefined;
     }
+    // #endregion
 }

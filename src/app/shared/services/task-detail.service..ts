@@ -6,17 +6,16 @@ import { Contact } from '../interfaces/contact.interface';
     providedIn: 'root',
 })
 export class TaskDetailService {
+    // #region Methods
     getSubtaskCount(task: Task): number {
         if (task.subtasks?.length) {
             return task.subtasks.length;
         }
-
         return 0;
     }
 
     getCompletedSubtaskCount(task: Task): number {
         let completedCount = 0;
-
         if (task.subtasks) {
             for (const subtask of task.subtasks) {
                 if (subtask.checked) {
@@ -24,20 +23,16 @@ export class TaskDetailService {
                 }
             }
         }
-
         return completedCount;
     }
 
     calculateSubtaskPercentage(task: Task): number {
         const totalSubtasks = this.getSubtaskCount(task);
         const completedSubtasks = this.getCompletedSubtaskCount(task);
-
         if (totalSubtasks === 0) {
             return 0;
         }
-
         const percentage = (completedSubtasks / totalSubtasks) * 100;
-
         return percentage;
     }
 
@@ -45,25 +40,20 @@ export class TaskDetailService {
         if (task.assignees) {
             return task.assignees;
         }
-
         return [];
     }
 
     getDisplayedAssignees(task: Task): Contact[] {
         const assignees = this.getAssignees(task);
-
         const displayed = assignees.slice(0, 3);
-
         return displayed;
     }
 
     getRemainingAssigneeCount(task: Task): number {
         const assignees = this.getAssignees(task);
-
         if (assignees.length > 3) {
             return assignees.length - 3;
         }
-
         return 0;
     }
 
@@ -71,13 +61,10 @@ export class TaskDetailService {
         switch (priority?.toLowerCase()) {
             case 'low':
                 return 'icons/priority-low.svg';
-
             case 'medium':
                 return 'icons/priority-medium.svg';
-
-case 'urgent':
-            return 'icons/priority-high.svg';
-
+            case 'urgent':
+                return 'icons/priority-high.svg';
             default:
                 return '';
         }
@@ -87,12 +74,11 @@ case 'urgent':
         switch (category?.toLowerCase()) {
             case 'user story':
                 return 'user-story';
-
             case 'technical task':
                 return 'technical-task';
-
             default:
                 return '';
         }
     }
+    // #endregion
 }
