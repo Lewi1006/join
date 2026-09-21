@@ -1,11 +1,5 @@
 @use '../../../../public/styles/main' as *;
 
-/* main {
-    @include respond(zero, m) {
-        height: calc(100% - $height-header - 80px);
-        overflow-y: scroll;
-    }
-} */
 
 #add-task {
     width: 100%;
@@ -545,6 +539,12 @@
                 width: 100%;
                 align-items: center;
                 justify-content: flex-end;
+                position: sticky;
+                padding-top: 32px;
+                bottom: 0px;
+                right: 0px;
+                margin-right: -64px;
+
                 button {
                     @include font(24px);
                     padding: 16px;

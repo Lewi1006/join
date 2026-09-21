@@ -13,7 +13,9 @@
             </button>
         }
     </div>
+
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskform">
+
         <section id="taskform-content">
             <div class="form-column">
                 <div class="input-fields-group">
@@ -310,6 +312,7 @@
                 </div>
             </div>
         </section>
+        
         <section id="taskform-footer">
             <div id="disclaimer-text">
                 <p><span class="red">*</span>This field is required</p>
@@ -325,12 +328,14 @@
                 </button>
             </div>
         </section>
+
         <section class="edit_form_submit">
-            <button type="submit" [disabled]="!taskForm.valid" class="submit">
+            <button type="submit" [disabled]="!taskForm.valid" class="submit" id="button-ok">
                 <p>Ok</p>
                 <img src="icons/checkmark-white.svg" alt="" />
             </button>
         </section>
+
     </form>
 </section>
 <app-confirmation-popup [hidden]="!popupVisible()"></app-confirmation-popup>
