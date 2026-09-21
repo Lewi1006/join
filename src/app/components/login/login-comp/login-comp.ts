@@ -93,5 +93,13 @@ export class LoginComp {
         this.alertService.success('Log in was successful', 2000);
         this.router.navigate(['/summary']);
     }
+
+    goToPrivacy() {
+        this.router.navigate(['/privacy']);
+    }
+
+    goToLegal() {
+        this.router.navigate(['/legal']);
+    }
     // #endregion
 }

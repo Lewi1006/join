@@ -27,24 +27,10 @@ export const routes: Routes = [
             { path: 'summary', component: SummaryComp, canActivate: [AuthGuard] },
             { path: 'task', component: TaskComp, canActivate: [AuthGuard] },
             { path: 'board', component: BoardComp, canActivate: [AuthGuard] },
-            {
-                path: 'contacts',
-                component: ContactsComp,
-                canActivate: [AuthGuard],
-            },
-            {
-                path: 'privacy',
-                component: PrivacyComp,
-            },
-            {
-                path: 'legal',
-                component: LegalComp,
-            },
-            {
-                path: 'help',
-                component: HelpComp,
-                canActivate: [AuthGuard],
-            },
+            { path: 'contacts', component: ContactsComp, canActivate: [AuthGuard] },
+            { path: 'help', component: HelpComp, canActivate: [AuthGuard]},
+            { path: 'privacy', component: PrivacyComp },
+            { path: 'legal', component: LegalComp },
         ],
     },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
