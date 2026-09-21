@@ -22,39 +22,6 @@ export class SignupComp {
     alertService = inject(AlertService);
     storageService = inject(StorageService);
 
-    ngOnInit(): void {
-        const storedData = this.storageService.getSessionData('signupForm');
-
-        if (storedData) {
-            this.signupForm.patchValue(storedData);
-        }
-    }
-
-    saveForm() {
-        const formData = {
-            name: this.signupForm.value.name,
-            email: this.signupForm.value.email,
-            phone: this.signupForm.value.phone,
-        };
-
-        this.storageService.setSessionData('signupForm', formData);
-    }
-
-    goToPrivacy(){
-        this.saveForm();
-        this.router.navigate(['/privacy']);
-    }
-
-    goToLegal(){
-        this.saveForm();
-        this.router.navigate(['/legal']);
-    }
-
-    goBackToLogin() {
-        this.storageService.removeSessionData('signupForm');
-        this.router.navigate(['/login']);
-    }
-
     signupForm = new FormGroup(
         {
             name: new FormControl('', {
@@ -123,6 +90,7 @@ export class SignupComp {
     }
 
     goBackToLogin() {
+        this.storageService.removeSessionData('signupForm');
         this.router.navigate(['/login']);
     }
 
@@ -135,7 +103,7 @@ export class SignupComp {
             const contact: Contact = {
                 name: this.signupForm.value.name!,
                 email: this.signupForm.value.email!,
-                phone:  this.signupForm.value.phone || undefined,
+                phone: this.signupForm.value.phone || undefined,
                 password: this.signupForm.value.password!,
                 status: 'registered',
                 user: true,
@@ -146,6 +114,16 @@ export class SignupComp {
             this.alertService.success('Sign up was successful', 2000);
             this.router.navigate(['/summary']);
         }
+    }
+
+    goToPrivacy() {
+        this.saveForm();
+        this.router.navigate(['/privacy']);
+    }
+
+    goToLegal() {
+        this.saveForm();
+        this.router.navigate(['/legal']);
     }
     // #endregion
 }
