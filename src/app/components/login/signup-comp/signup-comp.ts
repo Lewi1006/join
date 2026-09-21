@@ -45,7 +45,7 @@ export class SignupComp {
     }
 
     goToLegal(){
-         this.saveForm();
+        this.saveForm();
         this.router.navigate(['/legal']);
     }
 
